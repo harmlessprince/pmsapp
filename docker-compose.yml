@@ -1,0 +1,41 @@
+version: '3'
+services:
+    #PHP Service
+    pmsapp:
+        build:
+            args:
+                user: pmsapp-api-user
+                uid: 1000
+            context: ./
+            dockerfile: Dockerfile
+        image: pmsapp-api-app
+        container_name: pmsapp
+        restart: unless-stopped
+        tty: true
+        environment:
+            SERVICE_NAME: pmsapp
+            SERVICE_TAGS: dev
+        working_dir: /var/www
+        volumes:
+            - ./:/var/www
+            - ./docker-compose/php/local.ini:/usr/local/etc/php/conf.d/local.ini
+        networks:
+            - pmsapp-api-app-network
+
+    #Nginx Service
+    webserver:
+        image: nginx:alpine
+        container_name: pmsapp_api-server
+        restart: unless-stopped
+        tty: true
+        ports:
+            - "5454:80"
+        volumes:
+            - ./:/var/www
+            - ./docker-compose/nginx/conf.d/:/etc/nginx/conf.d/
+        networks:
+            - pmsapp-api-app-network
+#Docker Networks
+networks:
+    pmsapp-api-app-network:
+        driver: bridge
