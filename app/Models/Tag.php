@@ -21,6 +21,11 @@ class Tag extends Model
         return $this->belongsTo(Company::class);
     }
 
+    public function scans()
+    {
+        return $this->hasMany(Scan::class);
+    }
+
     public function site()
     {
         return $this->belongsTo(Site::class);

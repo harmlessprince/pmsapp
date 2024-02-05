@@ -6,16 +6,23 @@ COPY composer.lock composer.json /var/www/
 # Set working directory
 WORKDIR /var/www
 
-# Install dependencies
-RUN docker-php-ext-install bcmath pdo_mysql
-
 RUN apt-get update && apt-get install -y \
     git \
+    libpng-dev \
+    libonig-dev \
+    libxml2-dev \
     zip \
     unzip \
     curl \
+    zlib1g-dev \
+    libpq-dev \
+    libzip-dev \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
+
+# Install dependencies
+RUN docker-php-ext-configure pgsql -with-pgsql=/usr/local/pgsql \
+    && docker-php-ext-install pdo pdo_pgsql pgsql zip bcmath gd
 
 # Install Node.js 16 and npm
 RUN curl -fsSL https://deb.nodesource.com/setup_16.x | bash - \

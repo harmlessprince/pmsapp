@@ -16,7 +16,8 @@ class ScanSeeder extends Seeder
      */
     public function run(): void
     {
-        $tags = Tag::with('site')->get();
+//        TAG5519
+        $tags = Tag::with('site')->doesntHave('scans')->get();
         $start = Carbon::parse("2023-09-01");
         $end = Carbon::parse("2024-01-31");
         $totalTags = $tags->count();
@@ -39,6 +40,7 @@ class ScanSeeder extends Seeder
                     rand(0, 59)  // Second
                 );
                 $combinedDateTime = $date->format('Y-m-d') . ' ' . $randomTime->format('H:i:s');
+                $this->command->info('Generating data for: ' . $combinedDateTime);
                 Scan::factory(rand(8, $tag->site->maximum_number_of_rounds))->create([
                     'company_id' => $tag->company_id,
                     'site_id' => $tag->site->id,
