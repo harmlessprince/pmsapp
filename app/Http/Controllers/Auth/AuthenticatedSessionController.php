@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Enums\RoleEnum;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
 use App\Providers\RouteServiceProvider;
@@ -29,7 +30,14 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
-        return redirect()->intended(RouteServiceProvider::HOME);
+
+        if ($request->user()->hasRole(RoleEnum::COMPANY_OWNER->value)){
+            return redirect()->intended(route('company-dashboard'));
+        }
+        if ($request->user()->hasRole(RoleEnum::ADMIN->name)){
+            return redirect()->intended(route('admin-dashboard'));
+        }
+        return $this->destroy($request);
     }
 
     /**
@@ -43,6 +51,6 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerateToken();
 
-        return redirect('/');
+        return redirect(route('login'));
     }
 }

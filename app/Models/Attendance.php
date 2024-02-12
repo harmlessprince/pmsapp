@@ -12,7 +12,9 @@ class Attendance extends Model
 {
     use HasFactory, SearchableTrait;
     protected  $guarded = [];
-
+    protected $casts = [
+        'attendance_date' => 'datetime:Y/m/d',
+    ];
     public array $searchable = ['site.name', 'user.first_name', 'user.last_name', 'company.name', 'address'];
 
     public  function site(){

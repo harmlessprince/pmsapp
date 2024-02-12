@@ -46,7 +46,7 @@ class ScanSeeder extends Seeder
                     'site_id' => $tag->site->id,
                     'tag_id' => $tag->id,
                     'scanned_by' => $tag->site->inspector_id,
-                    'proximity' => fake()->randomElement(['close', 'not close', 'far']),
+                    'proximity' => deriveProximity($distance),
                     'distance' => $distance,
                     'scan_date' => $date,
                     'scan_time' => $randomTime->format('H:i:s'),

@@ -3,6 +3,7 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Enums\RoleEnum;
 use App\Scopes\FilterByCompanyIdScope;
 use App\Traits\SearchableTrait;
 use Illuminate\Database\Eloquent\Builder;
@@ -57,10 +58,31 @@ class User extends Authenticatable
     {
         return $this->belongsTo(Site::class, 'site_id');
     }
+
     public function scopeSite(Builder $query, int $siteID): void
     {
         $query->where('site_id', $siteID);
     }
+
+    public function isAdministrator(): bool
+    {
+       return $this->hasRole(RoleEnum::ADMIN->value) || $this->hasRole(RoleEnum::SUPER_ADMIN->value);
+    }
+
+    public function isCompanyOwner(): bool
+    {
+        return $this->hasRole(RoleEnum::COMPANY_OWNER->value);
+    }
+    public function isSiteInspector(): bool
+    {
+        return $this->hasRole(RoleEnum::SITE_INSPECTOR->value);
+    }
+
+    public function isSecurity(): bool
+    {
+        return $this->hasRole(RoleEnum::SECURITY->value);
+    }
+
     protected static function booted(): void
     {
         parent::boot();

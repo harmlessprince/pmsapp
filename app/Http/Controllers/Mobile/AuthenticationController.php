@@ -25,7 +25,7 @@ class AuthenticationController extends Controller
                 return sendError('The provided credentials are incorrect.', 401);
             }
             if (!$user->status) {
-                return sendError('Your account has been deactivated, kindly contact the admin.', 403);
+                return sendError('Your account has been deactivated, kindly contact the dashboard.', 403);
             }
             $token = $user->createToken('Access Token')->plainTextToken;
             return sendSuccess(['token' => $token, 'user' => $user], 'Logged in successfully');

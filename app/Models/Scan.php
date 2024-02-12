@@ -14,6 +14,10 @@ class Scan extends Model
     use HasFactory, SearchableTrait;
     protected  $guarded = [];
 
+    protected $casts = [
+        'scan_date' => 'datetime:Y/m/d',
+    ];
+
     public array $searchable = ['site.name', 'company.name', 'tag.name'];
     public function company(): BelongsTo
     {

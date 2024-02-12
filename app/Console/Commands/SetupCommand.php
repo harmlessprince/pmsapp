@@ -73,7 +73,7 @@ class SetupCommand extends Command
             ]
         );
         $admin->assignRole(RoleEnum::ADMIN->value);
-//        $admin->a
+//        $dashboard->a
         $company_owner = User::query()->updateOrCreate(
             [
                 "username" => env('COMPANY_OWNER_EMAIL'),
@@ -119,6 +119,10 @@ class SetupCommand extends Command
             $this->info('Seeding Scans');
             $this->call("db:seed", [
                 '--class' => 'ScanSeeder',
+            ]);
+            $this->info('Seeding Attendance');
+            $this->call("db:seed", [
+                '--class' => 'AttendanceSeeder',
             ]);
         }
 
