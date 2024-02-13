@@ -13,7 +13,7 @@
                     Transactions</a>
             </li>
             <li>
-                <a href="/pages/attendancetransaction.html"
+                <a  href="{{route('attendance.transactions')}}"
                    class="block  pl-[16%] pt-2 text-natural font-headerWeight text-normal hover:text-primary_color">Attendance
                     Transactions</a>
             </li>

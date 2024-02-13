@@ -1,7 +1,9 @@
 <?php
 
+use App\Http\Controllers\AttendanceAnalyticsController;
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\Attendancecontroller;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ScanAnalyticsController;
 use App\Http\Controllers\ScanController;
@@ -35,6 +37,10 @@ Route::get('company/dashboard', [DashboardController::class, 'company'])->middle
 Route::prefix('scans')->middleware('auth')->name('scans.')->group(function (){
     Route::get('analytics', ScanAnalyticsController::class)->name('analytics');
     Route::get('transactions', [ScanController::class, 'index'])->name('transactions');
+});
+Route::prefix('attendance')->middleware('auth')->name('attendance.')->group(function (){
+    Route::get('analytics', AttendanceAnalyticsController::class)->name('analytics');
+    Route::get('transactions', [Attendancecontroller::class, 'index'])->name('transactions');
 });
 Route::resource('companies', CompanyController::class);
 Route::resource('sites', SiteController::class);

@@ -18,6 +18,7 @@ class DateFilter extends BaseFilter
     {
         $fromDate = request()->query($this->column.'_from_date', Carbon::now()->startOfMonth()->toDateString());
         $toDate = request()->query($this->column.'_to_date', Carbon::now()->endOfMonth()->toDateString());
-        return $builder->whereBetween($this->column, [$fromDate, $toDate]);
+//dd(Carbon::parse($fromDate)->startOfDay(), Carbon::parse($toDate)->endOfDay());
+        return $builder->whereBetween($this->column, [Carbon::parse($fromDate)->startOfDay(), Carbon::parse($toDate)->endOfDay()]);
     }
 }

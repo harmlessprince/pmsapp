@@ -12,7 +12,29 @@
     @stack('header-links')
     <!-- Scripts -->
 {{--    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.1/datepicker.min.js"></script>--}}
+    <style>
+        .select2-container--default .select2-selection--single {
+            padding-top: 0.25rem;
+            padding-bottom: 0.25rem;
+            height: 2.75rem;
+            width: 100%;
+            position: relative;
+            cursor: pointer;
+            background-color: transparent;
+            border-radius: 0.5rem;
+            border-width: 1px;
 
+            color: rgb(254 255 254 / var(--tw-text-opacity));
+            font-size: 14px;
+            --tw-border-opacity: 1;
+            border-color: rgb(254 255 254 / var(--tw-border-opacity));
+        }
+
+        .select2-container--default .select2-selection--single .select2-selection__rendered {
+            --tw-text-opacity: 1;
+            color: rgb(254 255 254 / var(--tw-text-opacity));
+        }
+    </style>
     @vite(['resources/js/app.js', 'resources/css/app.css'])
     @stack('header-scripts')
 </head>

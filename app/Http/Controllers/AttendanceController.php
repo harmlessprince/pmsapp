@@ -8,16 +8,19 @@ use App\Models\Attendance;
 use App\QueryFilters\AttendanceActionTypeFilter;
 use App\QueryFilters\CompanyIdFilter;
 use App\QueryFilters\CreatedAtFilter;
+use App\QueryFilters\DateFilter;
 use App\QueryFilters\SiteIdFilter;
 use App\QueryFilters\StatusFilter;
 use App\Repositories\Eloquent\Repository\AttendanceRepository;
 use App\Repositories\Eloquent\Repository\CompanyRepository;
+use App\Repositories\Eloquent\Repository\SiteRepository;
 
 class AttendanceController extends Controller
 {
     public function __construct(
         private readonly AttendanceRepository $attendanceRepository,
         private readonly CompanyRepository $companyRepository,
+        private readonly SiteRepository $siteRepository,
     )
     {
     }
@@ -27,17 +30,18 @@ class AttendanceController extends Controller
     public function index()
     {
         $pipes = [
-            CreatedAtFilter::class,
+            new DateFilter('attendance_date'),
             CompanyIdFilter::class,
             SiteIdFilter::class,
             StatusFilter::class,
             AttendanceActionTypeFilter::class,
         ];
-        $companies =  $this->companyRepository->all();
+//        $companies =  $this->companyRepository->all();
+        $sites =  $this->siteRepository->all();
         $attendanceQuery = $this->attendanceRepository->modelQuery()->search();
         $attendanceQuery = constructPipes($attendanceQuery, $pipes);
-        $attendances = $attendanceQuery->with(['company', 'site', 'user'])->paginate();
-        return view('attendance.index', compact('attendances', 'companies'));
+        $attendances = $attendanceQuery->latest('attendance_date_time')->with(['company', 'site', 'user'])->paginate();
+        return view('attendance.index', compact('attendances', 'sites'));
     }
 
     /**

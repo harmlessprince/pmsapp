@@ -15,6 +15,7 @@ abstract class BaseFilter
 
     public function handle(mixed $builder, \Closure $next)
     {
+
         $builder = $next($builder);
         if (!\request()->has($this->filterName())  && !$this->getFilterValueDefault()) return $builder;
         if (!\request()->query($this->filterName()) && !$this->getFilterValueDefault()) return $builder;

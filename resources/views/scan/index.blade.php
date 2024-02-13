@@ -5,30 +5,7 @@
 @endsection
 @push('header-links')
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet"/>
-    <style>
-        .select2-container--default .select2-selection--single {
-            padding-top: 0.25rem;
-            padding-bottom: 0.25rem;
-            height: 2.75rem;
-            width: 100%;
-            position: relative;
-            cursor: pointer;
-            background-color: transparent;
-            border-radius: 0.5rem;
-            border-width: 1px;
 
-            color: rgb(254 255 254 / var(--tw-text-opacity));
-            font-size: 14px;
-            --tw-border-opacity: 1;
-            border-color: rgb(254 255 254 / var(--tw-border-opacity));
-        }
-
-        .select2-container--default .select2-selection--single .select2-selection__rendered {
-            --tw-text-opacity: 1;
-            color: rgb(254 255 254 / var(--tw-text-opacity));
-        }
-
-    </style>
 @endpush
 @push('header-scripts')
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"
@@ -44,7 +21,7 @@
     <section class="">
         <!-- filter searches -->
         <form method="GET" action="{{route('scans.transactions')}}" id="search-form">
-
+            <input value="yes" name="date" hidden/>
             <div class="flex flex-row justify-between items-center max-lg:flex-col">
                 <div class="w-[75%] flex flex-row justify-between max-lg:w-[100%] max-lg:flex-col">
                     <div class="w-[15%] max-lg:w-[100%]">
@@ -73,13 +50,15 @@
                         </div>
                         <input
                             datepicker
+                            datepicker-autohide
+                            datepicker-format="dd-mm-yyyy"
                             type="text"
                             class="w-full border border-natural bg-transparent h-11 pl-[21%] max-lg:pl-[12%] py-1 rounded-lg text-natural
                       placeholder-color font-normal text-normal
                       focus:outline-none focus:border-primary_color focus:ring-1 focus:ring-background_color"
                             placeholder="select start date"
-                            name="start_date"
-                            value="{{request()->query('start_date')}}"
+                            name="scan_date_from_date"
+                            value="{{request()->query('scan_date_from_date')}}"
                         />
                     </div>
 
@@ -94,13 +73,15 @@
                         </div>
                         <input
                             datepicker
+                            datepicker-autohide
+                            datepicker-format="dd-mm-yyyy"
                             type="text"
                             class="w-full border border-natural bg-transparent h-11 pl-[21%] max-lg:pl-[12%] py-1 rounded-lg text-natural
                     placeholder-color font-normal text-normal
                     focus:outline-none focus:border-primary_color focus:ring-1 focus:ring-background_color"
                             placeholder="select end date"
-                            name="end_date"
-                            value="{{request()->query('end_date')}}"
+                            name="scan_date_to_date"
+                            value="{{request()->query('scan_date_to_date')}}"
                         />
                     </div>
 
@@ -148,9 +129,9 @@
                 <table class="table-auto w-[100%] max-lg:w-[1000px] bg-background_color">
                     <thead>
                     <tr class="overflow-x-auto">
-                        <th class="text-left text-small text-natural font-big  px-small py-smaller">Scan Date</th>
-                        <th class="text-left text-small text-natural font-big  px-small py-smaller">Scan Time</th>
-                        <th class="text-left text-small text-natural font-big px-small py-smaller">Tags</th>
+                        <th class="text-left text-small text-natural font-big  px-small py-smaller">Scan Date/Time</th>
+{{--                        <th class="text-left text-small text-natural font-big  px-small py-smaller">Scan Time</th>--}}
+                        <th class="text-left text-small text-natural font-big px-small py-smaller">Tag</th>
                         <th class="text-left text-small text-natural font-big px-small py-smaller">Site</th>
                         <th class="text-left text-small text-natural font-big px-small py-smaller">Longitude</th>
                         <th class="text-left text-small text-natural font-big px-small py-smaller">Latitude</th>
@@ -165,10 +146,11 @@
                         <tr class="border border-table border-x-0 text-natural hover:bg-db">
                             <td class="text-normal font-normal px-small">
                                 <div>{{$scan->scan_date->format('d/m/Y')}}</div>
-                            </td>
-                            <td class="text-normal font-normal px-small">
                                 <div>{{Carbon\Carbon::parse($scan->scan_time)->format('g:i A')}}</div>
                             </td>
+{{--                            <td class="text-normal font-normal px-small">--}}
+{{--                                <div>{{Carbon\Carbon::parse($scan->scan_time)->format('g:i A')}}</div>--}}
+{{--                            </td>--}}
                             <td class="text-normal font-normal px-small">{{$scan->tag->name}}</td>
                             <td class="text-normal font-normal px-small">{{$scan->site->name}}</td>
                             <td class="text-normal font-normal p-small">{{$scan->longitude ?? '-'}}</td>
@@ -178,6 +160,9 @@
                             {{--                            <td class="text-normal font-normal px-small">00h00</td>--}}
                         </tr>
                     @empty
+                        <tr class="border border-table border-x-0 text-natural hover:bg-db">
+                            <td colspan="7" class="text-center">No Data</td>
+                        </tr>
                     @endforelse
                     </tbody>
                 </table>

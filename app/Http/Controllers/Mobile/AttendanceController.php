@@ -10,7 +10,7 @@ use App\Repositories\Eloquent\Repository\UserRepository;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
-class Attendancecontroller extends Controller
+class AttendanceController extends Controller
 {
     public function __construct(
         private readonly AttendanceRepository $attendanceRepository,

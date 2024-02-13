@@ -13,9 +13,9 @@
                     Analytics</a>
             </li>
             <li>
-                <a href="/pages/attendanceanalytics.html"
+                <a href="{{route('attendance.analytics')}}"
                    class="block  pl-[16%] pt-2 text-natural font-headerWeight text-normal hover:text-primary_color">Attendance
-                    Anaytics</a>
+                    Analytics</a>
             </li>
         </ul>
     </div>

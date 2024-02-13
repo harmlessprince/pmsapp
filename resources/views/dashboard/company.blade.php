@@ -82,7 +82,7 @@
                 <thead>
                 <tr class="">
                     <th class="text-left text-small text-natural font-big  px-small py-smaller">
-                        Guard Name
+                         Name
                     </th>
                     <th class="text-left text-small text-natural font-big  px-small py-smaller">Time/Date</th>
                     <th class="text-left text-small text-natural font-big  px-small py-smaller">Action Type</th>

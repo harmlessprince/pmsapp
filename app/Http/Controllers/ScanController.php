@@ -7,6 +7,7 @@ use App\Http\Requests\UpdateScanRequest;
 use App\Models\Scan;
 use App\QueryFilters\CompanyIdFilter;
 use App\QueryFilters\CreatedAtFilter;
+use App\QueryFilters\DateFilter;
 use App\QueryFilters\SiteIdFilter;
 use App\Repositories\Eloquent\Repository\CompanyRepository;
 use App\Repositories\Eloquent\Repository\ScanRepository;
@@ -28,10 +29,12 @@ class ScanController extends Controller
     public function index()
     {
         $pipes = [
-            CreatedAtFilter::class,
+            new DateFilter('scan_date'),
             CompanyIdFilter::class,
             SiteIdFilter::class,
         ];
+
+
 
 //        $companies =  $this->companyRepository->all();
         $sites =  $this->siteRepository->all();
