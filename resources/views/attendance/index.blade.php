@@ -20,7 +20,7 @@
     <!-- Dashboard content -->
     <section class="">
         <!-- filter searches -->
-        <form method="GET" action="{{route('attendance.transactions')}}" id="search-form">
+        <form method="GET" action="{{route('company.attendance.transactions')}}" id="search-form">
             <input value="yes" name="date" hidden/>
             <div class="flex flex-row justify-between items-center max-lg:flex-col">
                 <div class="w-[75%] flex flex-row justify-between max-lg:w-[100%] max-lg:flex-col">

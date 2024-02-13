@@ -20,7 +20,7 @@
     <!-- Dashboard content -->
     <section class="">
         <!-- filter searches -->
-        <form method="GET" action="{{route('scans.transactions')}}" id="search-form">
+        <form method="GET" action="{{route('company.scans.transactions')}}" id="search-form">
             <input value="yes" name="date" hidden/>
             <div class="flex flex-row justify-between items-center max-lg:flex-col">
                 <div class="w-[75%] flex flex-row justify-between max-lg:w-[100%] max-lg:flex-col">
@@ -31,9 +31,14 @@
                                 class="cursor-pointer w-full border border-natural bg-db h-[44px] px-2 py-1 rounded-lg text-normal font-normal text-natural"
                                 name="per_page"
                             >
-                                <option class="" value="15" {{ request()->query('per_page') == 15 ? "selected" : '' }}> 15 rows</option>
+                                <option class="" value="15" {{ request()->query('per_page') == 15 ? "selected" : '' }}>
+                                    15 rows
+                                </option>
                                 @for ($i = 10; $i <= 50; $i += 10)
-                                    <option class="" value="{{$i}}"  {{ request()->query('per_page') == $i ? "selected" : '' }}> {{$i}} rows</option>
+                                    <option class=""
+                                            value="{{$i}}" {{ request()->query('per_page') == $i ? "selected" : '' }}> {{$i}}
+                                        rows
+                                    </option>
                                 @endfor
 
                             </select>
@@ -107,10 +112,11 @@
                             class="cursor-pointer w-[45%] h-[44px] outline-none bg-transparent text-natural text-normal rounded-lg font-semibold px-[16px] py-[10px] border border-primary_color"
                             onclick="resetForm()">
                             Reset
-                            <button
-                                class="cursor-pointer w-[45%] h-[44px] outline-none bg-primary_color text-natural text-normal rounded-lg font-big px-[16px] py-[10px]">
-                                Search
-                            </button>
+                        </button>
+                        <button
+                            class="cursor-pointer w-[45%] h-[44px] outline-none bg-primary_color text-natural text-normal rounded-lg font-big px-[16px] py-[10px]">
+                            Search
+                        </button>
                     </div>
                 </div>
 
@@ -130,7 +136,7 @@
                     <thead>
                     <tr class="overflow-x-auto">
                         <th class="text-left text-small text-natural font-big  px-small py-smaller">Scan Date/Time</th>
-{{--                        <th class="text-left text-small text-natural font-big  px-small py-smaller">Scan Time</th>--}}
+                        {{--                        <th class="text-left text-small text-natural font-big  px-small py-smaller">Scan Time</th>--}}
                         <th class="text-left text-small text-natural font-big px-small py-smaller">Tag</th>
                         <th class="text-left text-small text-natural font-big px-small py-smaller">Site</th>
                         <th class="text-left text-small text-natural font-big px-small py-smaller">Longitude</th>
@@ -148,9 +154,9 @@
                                 <div>{{$scan->scan_date->format('d/m/Y')}}</div>
                                 <div>{{Carbon\Carbon::parse($scan->scan_time)->format('g:i A')}}</div>
                             </td>
-{{--                            <td class="text-normal font-normal px-small">--}}
-{{--                                <div>{{Carbon\Carbon::parse($scan->scan_time)->format('g:i A')}}</div>--}}
-{{--                            </td>--}}
+                            {{--                            <td class="text-normal font-normal px-small">--}}
+                            {{--                                <div>{{Carbon\Carbon::parse($scan->scan_time)->format('g:i A')}}</div>--}}
+                            {{--                            </td>--}}
                             <td class="text-normal font-normal px-small">{{$scan->tag->name}}</td>
                             <td class="text-normal font-normal px-small">{{$scan->site->name}}</td>
                             <td class="text-normal font-normal p-small">{{$scan->longitude ?? '-'}}</td>

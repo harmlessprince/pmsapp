@@ -17,6 +17,9 @@ return new class extends Migration
             $table->string('last_name')->nullable();
             $table->string('email')->nullable()->unique();
             $table->string('username')->nullable()->unique();
+            $table->string('phone_number')->nullable()->unique();
+            $table->string('address')->nullable();
+            $table->foreignId('state_id')->nullable()->constrained('states');
             $table->boolean('status')->default(true);
             $table->string('password')->nullable();
             $table->foreignId("created_by")->nullable()->constrained('users');

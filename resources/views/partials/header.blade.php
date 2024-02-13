@@ -23,8 +23,10 @@
 
     <div class="relative max-lg:hidden">
         <div onclick="toggleProfile()" class="flex flex-row items-center cursor-pointer">
-            <img src="{{asset('assets/images/avatar.png')}}" alt="dashboard" class="mr-4"/>
-            <img src="{{asset('assets/images/chevron.png')}}" alt="dashboard" class="w-[12px] h-[6px]"/>
+
+            <img src="{{auth()->user()->profile_image ?? asset('assets/images/avatar.png')}}" alt="dashboard" class="mr-4 rounded-full w-[40px] h-[40px] "/>
+            <img src="{{asset('assets/images/chevron.png')}}" alt="dashboard" class="w-[12px] h-[6px] mr-2"/>
+            <span class="text-sm">{{strtoupper(str_replace('_', ' ', auth()->user()->roles[0]->name))}}</span>
         </div>
         <form id="frm-logout" action="{{ route('logout') }}" method="POST" style="display: none;">
             {{ csrf_field() }}
@@ -56,5 +58,6 @@
         src="https://img.icons8.com/ios/18/ffffff/menu--v1.png"
         alt="menu--v1"
         onclick="toggleMObileSideBar()"
-        class="lg:hidden"/>
+        class="lg:hidden"
+    />
 </nav>

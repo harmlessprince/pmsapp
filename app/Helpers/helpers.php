@@ -63,3 +63,31 @@ function sendSuccess(mixed $data, string $message = 'Success', int $statusCode =
         'data' => $data
     ], $statusCode);
 }
+
+
+function generateMonths()
+{
+    $currentDate = Carbon::now();
+
+    $sixMonthsFromNow = [];
+    for ($i = 0; $i < 12; $i++) {
+        $currentDate->addMonth();
+        $sixMonthsFromNow[] = ['value' => (clone $currentDate)->endOfMonth()->format('Y-m-d'), 'name' => (clone $currentDate)->format('F Y')];
+    }
+
+
+    $sixMonthsFromNow[] = ['value' => Carbon::now()->endOfMonth()->format('Y-m-d'), 'name' => Carbon::now()->format('F Y')];
+
+    $currentDate = Carbon::now();
+    $sixMonthsBeforeNow = [];
+    for ($i = 0; $i < 6; $i++) {
+        $currentDate->subMonth();
+
+        $sixMonthsBeforeNow[] = ['value' => (clone $currentDate)->endOfMonth()->format('Y-m-d'), 'name' => (clone $currentDate)->format('F Y')];
+    }
+
+    $months = array_merge($sixMonthsBeforeNow, $sixMonthsFromNow);
+    sort($months);
+
+    return $months;
+}

@@ -9,17 +9,17 @@
     <div id="dropdownManagements" class="hidden">
         <ul class="">
             <li>
-                <a href="/pages/usermanagement.html"
+                <a href="{{route('company.users.index')}}"
                    class="block pl-[16%] pt-2 text-natural font-headerWeight text-normal hover:text-primary_color">Users
                     management</a>
             </li>
             <li>
-                <a href="/pages/tagsmanagement.html"
+                <a href="{{route('company.tags.index')}}"
                    class="block pl-[16%] pt-2 text-natural font-headerWeight text-normal hover:text-primary_color">Tags
                     management</a>
             </li>
             <li>
-                <a href="/pages/sitemanagement.html"
+                <a href="{{route('company.sites.index')}}"
                    class="block pl-[16%] pt-2 text-natural font-headerWeight text-normal hover:text-primary_color">Sites
                     management</a>
             </li>

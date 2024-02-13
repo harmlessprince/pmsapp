@@ -23,7 +23,7 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $guarded = [];
-    public array $searchable = ['first_name', 'last_name'];
+    public array $searchable = ['first_name', 'last_name', 'phone_number'];
     /**
      * The attributes that should be hidden for serialization.
      *
@@ -57,6 +57,16 @@ class User extends Authenticatable
     public function site()
     {
         return $this->belongsTo(Site::class, 'site_id');
+    }
+
+    public function state()
+    {
+        return $this->belongsTo(State::class, 'state_id');
+    }
+
+    public function country()
+    {
+        return $this->belongsTo(Country::class, 'state_id');
     }
 
     public function scopeSite(Builder $query, int $siteID): void

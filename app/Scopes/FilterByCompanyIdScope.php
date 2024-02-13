@@ -16,11 +16,13 @@ class FilterByCompanyIdScope implements Scope
      */
     public function apply(Builder $builder, Model $model): void
     {
+
         /** @var User $user */
         if (Auth::hasUser()) {
             $user = \auth()->user();
             if (!$user->hasRole(RoleEnum::ADMIN->value) || !$user->hasRole(RoleEnum::SUPER_ADMIN->value)) {
-                $builder->where('company_id', $user->company_id);
+                $column =  $model->getTable() . ".company_id";
+                $builder->where($column, $user->company_id);
             }
         }
     }

@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Repositories\Eloquent\Repository;
+
 use App\Models\Scan;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
@@ -26,10 +27,25 @@ class ScanRepository extends BaseRepository
             $monthName = getMonthName(Carbon::parse($data->month)->month, 'F');
             $stats[$monthName] = [
                 'name' => $monthName,
+                'month' => $data->month,
                 'total' => $data->total
             ];
         });
         return $stats;
+    }
+
+
+
+    public function weeklyAnalytics($scanQuery)
+    {
+        $analytics = $scanQuery
+            ->select(DB::raw('DATE_TRUNC(\'week\', created_at) as week'), DB::raw('COUNT(*) as scan_count'))
+            ->groupBy(DB::raw('DATE_TRUNC(\'week\', created_at)'))
+            ->get();
+        //            ->select('sites.name as site_name', DB::raw('DATE_TRUNC(\'month\', scans.created_at) as month'), DB::raw('COUNT(*) as scan_count'))
+//            ->groupBy('sites.name', DB::raw('DATE_TRUNC(\'month\', scans.created_at)'))
+//            ->get()
+        return $analytics;
     }
 }
 

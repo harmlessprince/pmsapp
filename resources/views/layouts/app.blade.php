@@ -35,8 +35,9 @@
             color: rgb(254 255 254 / var(--tw-text-opacity));
         }
     </style>
-    @vite(['resources/js/app.js', 'resources/css/app.css'])
+
     @stack('header-scripts')
+    @vite(['resources/js/app.js', 'resources/css/app.css'])
 </head>
 <body class="bg-db">
 <main class="font-primary relative">
@@ -65,6 +66,11 @@
     }
 
     const toggledropdown = () => {
+        managementDropdown.classList.add("hidden")
+        transactionDropdown.classList.add('hidden')
+        analyticsDropdown.classList.toggle("hidden")
+    }
+    const toggleAnalytics = () => {
         managementDropdown.classList.add("hidden")
         transactionDropdown.classList.add('hidden')
         analyticsDropdown.classList.toggle("hidden")
@@ -105,6 +111,8 @@
     }
 
 </script>
+
 @stack('scripts')
+
 </body>
 </html>

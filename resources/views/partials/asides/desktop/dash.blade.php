@@ -1,7 +1,7 @@
 @auth
     @if(auth()->user()->isCompanyOwner())
 
-        <a class="flex flex-row mb-8 cursor-pointer" href="{{route('company-dashboard')}}">
+        <a class="flex flex-row mb-8 cursor-pointer" href="{{route('company.dashboard')}}">
             <img
                 src="{{asset('assets/images/colored_dashboard.png')}}"
                 alt="dashboard"

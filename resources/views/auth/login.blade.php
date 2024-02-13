@@ -21,7 +21,7 @@
             focus:outline-none focus:border-primary_color focus:ring-1 focus:ring-background_color
             focus:invalid:error focus:invalid:error
             "
-                placeholder="Enter your email" name="email" value="clotilde35@example.com"/>
+                placeholder="Enter your email" name="email" value="habbott@example.com"/>
             <x-input-error :messages="$errors->get('email')" class="mt-2"/>
         </div>
 

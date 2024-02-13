@@ -8,12 +8,12 @@
     <div id="dropdownTransaction" class="hidden">
         <ul class="">
             <li>
-                <a href="{{route('scans.transactions')}}"
+                <a href="{{route('company.scans.transactions')}}"
                    class="block pl-[16%] pt-2 text-natural font-headerWeight text-normal hover:text-primary_color">Scan
                     Transactions</a>
             </li>
             <li>
-                <a  href="{{route('attendance.transactions')}}"
+                <a  href="{{route('company.attendance.transactions')}}"
                    class="block  pl-[16%] pt-2 text-natural font-headerWeight text-normal hover:text-primary_color">Attendance
                     Transactions</a>
             </li>
