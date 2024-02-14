@@ -3,16 +3,32 @@
 namespace App\Http\Controllers\Company;
 
 use App\Http\Controllers\Controller;
+use App\QueryFilters\CreatedAtFilter;
+use App\QueryFilters\SiteIdFilter;
+use App\Repositories\Eloquent\Repository\SiteRepository;
+use App\Repositories\Eloquent\Repository\TagRepository;
 use Illuminate\Http\Request;
 
 class SiteController extends Controller
 {
+    public function __construct(
+        private readonly SiteRepository $siteRepository,
+    )
+    {
+    }
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        return view('company.site.index');
+        $siteQuery = $this->siteRepository->modelQuery();
+
+        $pipes = [
+            CreatedAtFilter::class,
+        ];
+        $countOfSites =  $this->siteRepository->modelQuery()->count();
+        $sites =  $siteQuery->with(['inspector', 'state', 'state.country'])->latest()->paginate(\request('per_page', 15));
+        return view('company.site.index', compact('sites', 'countOfSites'));
     }
 
     /**
@@ -20,7 +36,7 @@ class SiteController extends Controller
      */
     public function create()
     {
-        //
+        return view('company.site.create');
     }
 
     /**
@@ -28,7 +44,7 @@ class SiteController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
     }
 
     /**
@@ -44,7 +60,7 @@ class SiteController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        return view('company.site.edit');
     }
 
     /**

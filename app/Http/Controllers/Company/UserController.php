@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Company;
 
 use App\Enums\RoleEnum;
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use App\QueryFilters\CreatedAtFilter;
 use App\QueryFilters\SiteIdFilter;
 use App\Repositories\Eloquent\Repository\SiteRepository;
@@ -66,9 +67,9 @@ class UserController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(User $user)
     {
-        //
+        return view('company.user.edit', compact('user'));
     }
 
     /**

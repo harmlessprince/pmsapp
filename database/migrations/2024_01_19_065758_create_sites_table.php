@@ -16,6 +16,7 @@ return new class extends Migration
             $table->foreignId('company_id')->constrained('companies');
             $table->foreignId("created_by")->constrained('users');
             $table->foreignId('inspector_id')->constrained('users');
+            $table->foreignId("state_id")->constrained('states');
             $table->string('name');
             $table->string('photo')->nullable();
             $table->string('address');

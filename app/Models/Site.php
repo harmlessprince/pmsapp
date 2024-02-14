@@ -16,6 +16,11 @@ class Site extends Model
     {
         return $this->belongsTo(Company::class);
     }
+
+    public function state(): BelongsTo
+    {
+        return $this->belongsTo(State::class);
+    }
     public function createdBy(): BelongsTo
     {
         return $this->belongsTo(User::class, 'created_by');

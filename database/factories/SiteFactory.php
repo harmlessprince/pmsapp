@@ -22,6 +22,7 @@ class SiteFactory extends Factory
             "name" => $this->faker->city(),
             "photo" => $this->faker->imageUrl,
             "address" => $this->faker->address(),
+            'state_id' => rand(2955, 2991),
             "logout_pin" => Hash::make(1234),
             "number_of_tags" => 12,
             "maximum_number_of_rounds" => 24,

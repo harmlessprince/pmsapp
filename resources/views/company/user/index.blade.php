@@ -153,14 +153,17 @@
 
                                 <td class="px-small">
                                     <div class="flex flex-row justify-center">
-                                        <img src="{{asset('assets/images/edit.png')}}" alt="edit"
-                                             class="w-[16px] h-[16px] ml-3 cursor-pointer"/>
+                                        <a href="{{route('company.users.edit', ['user' => $user->id])}}">
+                                            <img src="{{asset('assets/images/edit.png')}}" alt="edit"
+                                                 class="w-[16px] h-[16px] ml-3 cursor-pointer"/>
+                                        </a>
+
                                     </div>
                                 </td>
                             </tr>
                         @empty
                             <tr class="text-normal font-normal border border-table border-collapse text-natural hover:bg-db">
-                                <td class="" rowspan="6">No Data</td>
+                                <td class="text-center" rowspan="6">No Data</td>
                             </tr>
                         @endforelse
 
