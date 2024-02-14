@@ -38,7 +38,9 @@ class UserController extends Controller
             $query->where('name', RoleEnum::SECURITY->value);
         })->count();
         $sites = $this->siteRepository->modelQuery()->get();
-        $userQuery = $this->userRepository->modelQuery()->search();
+        $userQuery = $this->userRepository->modelQuery()->whereHas('roles', function ($query) {
+            $query->where('name', RoleEnum::SECURITY->value);
+        })->search();
         $userQuery = constructPipes($userQuery, $pipes);
         $users = $userQuery->with(['tenant', 'site', 'state', 'state.country'])->paginate(request('per_page', 15));
         return view('company.user.index', compact('users', 'countOfGuards', 'sites'));
