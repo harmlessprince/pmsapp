@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreAttendanceRequest;
 use App\Repositories\Eloquent\Repository\AttendanceRepository;
 use App\Repositories\Eloquent\Repository\UserRepository;
+use App\Services\FileUploadService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
@@ -43,10 +44,15 @@ class AttendanceController extends Controller
 
         $distance = calculateDistance($user->site->latitude, $user->site->longitude, $request->input('latitude'), $request->input('longitude'));
         $proximity = deriveProximity($distance);
+        $image = null;
+        if ($request->hasFile('image')){
+            $response = FileUploadService::uploadToS3($request->file('image'), 'profile_images');
+            $image  = $response->path;
+        }
 
         $attendance = $this->attendanceRepository->create([
             'action_type' => $request->input('action_type'),
-            'image' => null,
+            'image' => $image,
             'attendance_date' => $request->input('attendance_date'),
             'attendance_time' => $request->input('attendance_time'),
             'longitude' => $request->input('longitude'),

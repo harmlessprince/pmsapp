@@ -25,6 +25,14 @@ return new class extends Migration
             $table->foreignId("created_by")->nullable()->constrained('users');
             $table->unsignedInteger("company_id")->nullable()->index('company_id_index');
             $table->unsignedInteger("site_id")->nullable()->index('site_id_index');
+
+            $table->time('shift_start_time')->nullable();
+            $table->time('shift_end_time')->nullable();
+            $table->float('normal_rate_per_hour')->nullable();
+            $table->float('sunday_rate_per_hour')->nullable();
+            $table->float('holiday_rate_per_hour')->nullable();
+            $table->integer('number_of_night_shift')->nullable();
+            $table->float('night_shift_allowance')->nullable();
             $table->string("profile_image")->nullable();
             $table->timestamp('last_login')->nullable();
             $table->timestamp('email_verified_at')->nullable();

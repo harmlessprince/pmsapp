@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Casts\Attribute;
+
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use App\Enums\RoleEnum;
 use App\Scopes\FilterByCompanyIdScope;
@@ -10,6 +12,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Storage;
 use Laravel\Sanctum\HasApiTokens;
 use Spatie\Permission\Traits\HasRoles;
 
@@ -76,13 +79,14 @@ class User extends Authenticatable
 
     public function isAdministrator(): bool
     {
-       return $this->hasRole(RoleEnum::ADMIN->value) || $this->hasRole(RoleEnum::SUPER_ADMIN->value);
+        return $this->hasRole(RoleEnum::ADMIN->value) || $this->hasRole(RoleEnum::SUPER_ADMIN->value);
     }
 
     public function isCompanyOwner(): bool
     {
         return $this->hasRole(RoleEnum::COMPANY_OWNER->value);
     }
+
     public function isSiteInspector(): bool
     {
         return $this->hasRole(RoleEnum::SITE_INSPECTOR->value);
@@ -91,6 +95,18 @@ class User extends Authenticatable
     public function isSecurity(): bool
     {
         return $this->hasRole(RoleEnum::SECURITY->value);
+    }
+
+    protected function profileImage(): Attribute
+    {
+        return Attribute::make(
+            get: function ($value) {
+                if (!str_contains($value, 'profile_images')) {
+                    return $value;
+                }
+                return Storage::url($value);
+            },
+        );
     }
 
     protected static function booted(): void

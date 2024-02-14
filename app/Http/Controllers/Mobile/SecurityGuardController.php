@@ -3,10 +3,12 @@
 namespace App\Http\Controllers\Mobile;
 
 use App\Enums\RoleEnum;
+use App\Exceptions\CustomException;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreSecurityGuard;
 use App\Models\User;
 use App\Repositories\Eloquent\Repository\UserRepository;
+use App\Services\FileUploadService;
 use App\Services\UserService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -36,6 +38,9 @@ class SecurityGuardController extends Controller
         return sendSuccess(['guards' => $securityGuards], 'Security guards retrieved');
     }
 
+    /**
+     * @throws CustomException
+     */
     public function store(StoreSecurityGuard $request): JsonResponse
     {
         $user = $request->user();
@@ -44,9 +49,14 @@ class SecurityGuardController extends Controller
             $request->input('first_name'),
             Str::random(4)
         );
+        $photo = null;
+        if ($request->hasFile('photo')){
+            $response = FileUploadService::uploadToS3($request->file('photo'), 'profile_images');
+            $photo  = $response->path;
+        }
         $createdUser->company_id = $user->company_id;
         $createdUser->site_id = $user->site_id;
-        $createdUser->profile_image = null;
+        $createdUser->profile_image = $photo;
         $createdUser->save();
         $this->userService->associateUserToRole($createdUser, RoleEnum::SECURITY->value);
         return sendSuccess(['user' => $createdUser], 'Security guard created successfully');

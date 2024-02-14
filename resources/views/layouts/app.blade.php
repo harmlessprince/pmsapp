@@ -47,6 +47,7 @@
     <section class="relative bg-db w-[85%] ml-[15%] h-screen border-natural max-lg:w-[100%] max-lg:ml-0">
         @include('partials.header')
         <section class="px-basic_padding pt-10% pb-5%">
+            @include('flash-message')
             @yield('content')
         </section>
     </section>

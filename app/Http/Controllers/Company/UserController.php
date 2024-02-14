@@ -3,12 +3,16 @@
 namespace App\Http\Controllers\Company;
 
 use App\Enums\RoleEnum;
+use App\Exceptions\CustomException;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Company\UpdateUserRequest;
 use App\Models\User;
 use App\QueryFilters\CreatedAtFilter;
 use App\QueryFilters\SiteIdFilter;
 use App\Repositories\Eloquent\Repository\SiteRepository;
 use App\Repositories\Eloquent\Repository\UserRepository;
+use App\Services\FileUploadService;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -69,22 +73,45 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
-        return view('company.user.edit', compact('user'));
+        $sites = $this->siteRepository->modelQuery()->get();
+        return view('company.user.edit', compact('user', 'sites'));
     }
 
     /**
      * Update the specified resource in storage.
+     * @throws CustomException
      */
-    public function update(Request $request, string $id)
+    public function update(UpdateUserRequest $request, User $user)
     {
-        //
+        $validated_data = $request->validated();
+        if ($request->input('shift_start_time')){
+            $shift_start_time  = $validated_data['shift_start_time'];
+            $time = Carbon::parse($shift_start_time)->toTimeString();
+            $validated_data['shift_start_time'] = $time;
+        }
+        if ($request->input('shift_end_time')){
+            $shift_start_time  = $validated_data['shift_end_time'];
+            $time = Carbon::parse($shift_start_time)->toTimeString();
+            $validated_data['shift_end_time'] = $time;
+        }
+
+        if ($request->hasfile('profile_image')){
+            $response = FileUploadService::uploadToS3($request->file('profile_image'), 'profile_images');
+            $validated_data['profile_image'] = $response->path;
+        }else{
+            unset($validated_data['profile_image']);
+        }
+
+        $user->update($validated_data);
+
+        return redirect(route('company.users.index'))->with('success', 'User Profile updated successfully');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(User $user)
     {
-        //
+
     }
 }
