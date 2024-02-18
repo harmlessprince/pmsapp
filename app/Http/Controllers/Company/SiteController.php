@@ -10,6 +10,8 @@ use App\Http\Requests\UpdateSiteRequest;
 use App\Models\Site;
 use App\QueryFilters\CreatedAtFilter;
 use App\QueryFilters\SiteIdFilter;
+use App\QueryFilters\StateIdFilter;
+use App\QueryFilters\StatusFilter;
 use App\Repositories\Eloquent\Repository\SiteRepository;
 use App\Repositories\Eloquent\Repository\StateRepository;
 use App\Repositories\Eloquent\Repository\TagRepository;
@@ -39,12 +41,16 @@ class SiteController extends Controller
 
         $pipes = [
             CreatedAtFilter::class,
+            StatusFilter::class,
+            StateIdFilter::class,
         ];
         $countOfSites = $this->siteRepository->modelQuery()->count();
 
-        $sites = $siteQuery->with(['inspector', 'state', 'state.country'])->latest()->paginate(\request('per_page', 15));
-//        dd($sites->items());
-        return view('company.site.index', compact('sites', 'countOfSites'));
+        $states = $this->stateRepository->fetchByCountryID();
+        $siteQuery = $siteQuery->with(['inspector', 'state', 'state.country']);
+        $siteQuery = constructPipes($siteQuery, $pipes);
+        $sites = $siteQuery->latest()->paginate(\request('per_page', 15));
+        return view('company.site.index', compact('sites', 'countOfSites', 'states'));
     }
 
     /**

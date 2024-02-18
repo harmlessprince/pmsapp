@@ -40,79 +40,79 @@
                 <div class="relative max-lg:mb-2 max-lg:w-[70%]">
                     <div onclick="toggleFilter()"
                          class="rounded-lg border border-natural flex flex-row items-center px-[16px] py-[10px] cursor-pointer">
-                        <img src="../assets/images/filters.png" class="w-[20px] h-[20px]" alt="plus"/>
+                        <img src="{{asset('assets/images/filters.png')}}" class="w-[20px] h-[20px]" alt="plus"/>
                         <span class="text-natural font-big text-normal ml-2"> More filters</span>
                     </div>
                     <div id="filter"
                          class="z-20 absolute hidden bottom-[-1000%] w-[420px] bg-white rounded-lg p-[10%] max-lg:p-[5%] max-lg:w-[100%] max-lg:mb-3 max-lg:bottom-[-1000%]">
                         <div class="flex flex-row items-center justify-between mb-2">
                             <span class="font-big text-eighteen text-filter">Filter Sites</span>
-                            <img onclick="toggleFilter()" src="../assets/images/close.png"
+                            <img onclick="toggleFilter()" src="{{asset('assets/images/close.png')}}"
                                  class="w-[12px] h-[12px] cursor-pointer" alt="plus"/>
                         </div>
 
-                        <form>
+                        <form method="GET" action="{{route('company.sites.index')}}" id="search-form-2">
                             <div class="w-full mb-3">
-                                <label class="font-big text-normal text-filter_text">Filter by Site</label>
-                                <select
-                                    class="outline-none w-full border border-filterInput bg-transparent h-[44px] px-2 py-1 rounded-lg text-normal font-normal text-filter_text">
-                                    <option>Select Site</option>
-                                    <option>Site type</option>
-                                    <option>Site type</option>
-                                </select>
+                                <x-input-label for="state_id" :value="__('Select State')"/>
+                                <x-select-input id="state_id" class="block mt-1 w-full" name="state_id">
+                                    <option value="">Select State</option>
+                                    @foreach($states as $state)
+                                        <option
+                                            value="{{$state->id}}" {{ request()->query('state_id') == $state->id ? "selected" : '' }}>{{$state->name}}</option>
+                                    @endforeach
+                                </x-select-input>
+                                <x-input-error :messages="$errors->get('site')" class="mt-2"/>
                             </div>
-
-                            <div class="w-full mb-3">
-                                <label class="font-big text-normal text-filter_text">Filter by Tag</label>
-                                <select
-                                    class="outline-none w-full border border-filterInput bg-transparent h-[44px] px-2 py-1 rounded-lg text-normal font-normal text-filter_text">
-                                    <option>Buildin</option>
-                                    <option>Road</option>
-                                    <option>Mall</option>
-                                </select>
-                            </div>
-
-                            <div class="w-full mb-3">
-                                <label class="font-big text-normal text-filter_text">Filter by Country</label>
-                                <select
-                                    class="outline-none w-full border border-filterInput bg-transparent h-[44px] px-2 py-1 rounded-lg text-normal font-normal text-filter_text">
-                                    <option>Nigeria</option>
-                                    <option>Cape Verde</option>
-                                </select>
-                            </div>
-
                             <div class="w-full mb-3">
                                 <label class="font-big text-normal text-filter_text">Filter by Status</label>
                                 <select
-                                    class="outline-none w-full border border-filterInput bg-transparent h-[44px] px-2 py-1 rounded-lg text-normal font-normal text-filter_text">
-                                    <option>Active</option>
-                                    <option>Inactive</option>
+                                    class="outline-none w-full border border-filterInput bg-transparent h-[44px] px-2 py-1 rounded-lg text-normal font-normal text-filter_text"
+                                    name="status" id="status">
+                                    <option value="">Select Status</option>
+                                    <option value="yes" {{ request()->query('status') == 'yes' ? "selected" : '' }}>Active
+                                    </option>
+                                    <option value="no" {{ request()->query('status') == 'no' ? "selected" : '' }}>Inactive
+                                    </option>
                                 </select>
                             </div>
+
                             <button
-                                class="mt-[1%] w-[67px] h-[40px] bg-transparent rounded-lg text-normal text-primary_color font-big border border-primary_color">
+                                type="reset"
+                                class="mt-[1%] w-[67px] h-[40px] bg-transparent rounded-lg text-normal text-primary_color font-big border border-primary_color"
+                                onclick="resetForm()"
+                            >
                                 Clear
                             </button>
                             <button
-                                class="mt-[1%] w-[67px] h-[40px] bg-primary_color rounded-lg text-normal text-natural font-big ml-3">
+                                type="submit"
+                                class="mt-[1%] w-[67px] h-[40px] bg-primary_color rounded-lg text-normal text-natural font-big ml-3"
+                            >
                                 Filter
                             </button>
                         </form>
                     </div>
                 </div>
+                <form method="GET" action="{{route('company.sites.index')}}" id="search-form-1">
+                    <div class="flex flex-row items-center max-lg:flex-col max-lg:items-start max-lg:w-full">
+                        <div class="relative max-lg:w-full">
+                            <img src="{{asset('assets/images/search.png')}}" alt="search"
+                                 class="absolute w-[15px] h-[15px] left-[5%] bottom-[32%]"/>
+                            <input type="search" placeholder="Search by site name, email"
+                                   class="font-normal text-natural text-medium placeholder-natural outline-none  w-[400px] max-lg:w-[100%]  h-[46px] rounded-lg bg-transparent border border-natural px-[10%]"/>
+                        </div>
+                        <button
 
-                <div class="flex flex-row items-center max-lg:flex-col max-lg:items-start max-lg:w-full">
-                    <div class="relative max-lg:w-full">
-                        <img src="../assets/images/search.png" alt="search"
-                             class="absolute w-[15px] h-[15px] left-[5%] bottom-[32%]"/>
-                        <input type="search" placeholder="search"
-                               class="font-normal text-natural text-medium placeholder-natural outline-none  w-[400px] max-lg:w-[100%]  h-[46px] rounded-lg bg-transparent border border-natural px-[10%]"/>
+                            class="w-[80px] h-[40px] outline-none bg-primary_color text-natural text-normal rounded-lg font-big ml-[25px] max-lg:ml-0 max-lg:mt-2">
+                            Search
+                        </button>
+                        <button
+                            type="reset"
+                            class="mt-[1%] w-[67px] h-[40px] bg-transparent rounded-lg text-normal text-primary_color font-big border border-primary_color"
+                            onclick="resetForm()">
+                            Clear
+                        </button>
                     </div>
-                    <button
-                        class="w-[80px] h-[40px] outline-none bg-primary_color text-natural text-normal rounded-lg font-big ml-[25px] max-lg:ml-0 max-lg:mt-2">
-                        Search
-                    </button>
-                </div>
+                </form>
             </div>
 
             <!-- table 2 section -->
@@ -153,7 +153,8 @@
                                     @else
                                         <button
                                             class="bg-inactive W-[78px] h-[22px] px-[8px] py-[2px] rounded-full flex flex-row items-center justify-between">
-                                            <img src="../assets/images/white_dot.png" alt="dashboard" class="mr-2"/>
+                                            <img src="{{asset('assets/images/white_dot.png')}}" alt="dashboard"
+                                                 class="mr-2"/>
                                             <span class="text-natural font-big text-small">Inactive</span>
                                         </button>
                                     @endif
@@ -170,7 +171,7 @@
                             </tr>
                         @empty
                             <tr class="text-normal text-basic font-normal text-natural border border-table border-collapse hover:bg-db">
-                                <td rowspan="7" class="text-center"> No Data</td>
+                                <td colspan="7" class="text-center"> No Data</td>
                             </tr>
                         @endforelse
                         </tbody>
@@ -191,7 +192,9 @@
         }
 
         function resetForm() {
-            $(".site").val('').trigger('change')
+            $("#state_id").val('').trigger('change')
+            $("#status").val('').trigger('change')
+
             document.getElementById("search-form-1").reset();
             document.getElementById("search-form-2").reset();
             window.location.replace(location.pathname);

@@ -9,6 +9,8 @@ class StatusFilter extends BaseFilter
 
     protected function applyFilter(Builder $builder): Builder
     {
-        return $builder->where('status', request()->query($this->filterName()));
+        $status = request()->query($this->filterName()) == 'yes';
+
+        return $builder->where('status', $status);
     }
 }
