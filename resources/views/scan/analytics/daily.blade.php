@@ -1,12 +1,7 @@
 @extends('layouts.app')
 @section('title', 'Scan Analytics')
 @push('header-scripts')
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
-            integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.1/datepicker.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 @endpush
 @section('content')
     <!-- Dashboard content -->
@@ -65,11 +60,12 @@
                             value="{{request()->query('scan_date_to_date', $defaultEndMonth)}}"
                         />
                     </div>
-                    <div class="w-[37%] max-lg:w-[100%] relative mt-[3%]">
+                    <div class="w-[37%] max-lg:w-[100%] relative">
+                        <label class="font-big text-normal text-natural">Frequency</label>
                         <select class="w-full border border-natural bg-transparent h-11 pl-[5%] py-1 rounded-lg text-natural
                     placeholder-color font-normal text-normal
                     focus:outline-none focus:border-primary_color focus:ring-1 focus:ring-background_color
-                    focus:invalid:border-error focus:invalid:ring-error" name="frequency">
+                    " name="frequency" id="frequency">
                             @foreach($frequencies as $frequency)
                                 <option class="bg-background_color"
                                         value="{{$frequency}}">{{strtoupper($frequency)}}</option>
@@ -110,7 +106,7 @@
         <section class="bg-background_color p-[2%] my-[5%]">
             <div id="accordion-collapse" data-accordion="collapse" ck>
                 @forelse($analytics['dailyScanCountPerSiteAndActualVsExpected'] as $key => $items)
-                    <h2 id="accordion-collapse-heading-{{$loop->index+1}}"  class="collapsible">
+                    <h2 id="accordion-collapse-heading-{{$loop->index+1}}" class="collapsible">
                         <button type="button"
                                 class="flex items-center justify-between w-full p-5 font-medium rtl:text-right text-gray-500 border border-b-0 border-gray-200 rounded-t-x focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-800 dark:border-gray-700 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 gap-3"
                                 data-accordion-target="#accordion-collapse-body-{{$loop->index+1}}" aria-expanded="true"
@@ -157,8 +153,12 @@
     </section>
 @endsection
 @push('scripts')
-
-
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+            integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.1/datepicker.min.js"></script>
+    <script src="{{asset('assets/js/transaction.js')}}"></script>
     <script>
 
 
@@ -247,11 +247,12 @@
             document.getElementById("search-form").reset();
             window.location.replace(location.pathname);
         }
+
         var coll = document.getElementsByClassName("collapsible");
         var i;
 
         for (i = 0; i < coll.length; i++) {
-            coll[i].addEventListener("click", function() {
+            coll[i].addEventListener("click", function () {
                 this.classList.toggle("active");
                 var content = this.nextElementSibling;
                 if (content.style.display === "block") {

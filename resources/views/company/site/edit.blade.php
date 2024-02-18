@@ -16,16 +16,16 @@
         <button
             class="font-big text-normal text-white rounded-lg border-none bg-red-700 px-[16px] py-[10px] cursor-pointer focus:outline-none text-white"
             id="show_change_password_dialog"
-            data-modal-target="changePasswordModal"
-            data-modal-toggle="changePasswordModal"
+            data-custom-target="changePasswordModal"
+            data-custom-toggle="changePasswordModal"
             {{--            onclick="showChangePasswordModal()"--}}
         >
             Change Site Password
         </button>
         <button
             class="font-big text-normal text-white rounded-lg px-[16px] py-[10px] cursor-pointer bg-yellow-500"
-            data-modal-target="changeLogoutModal"
-            data-modal-toggle="changeLogoutModal"
+            data-custom-target="changeLogoutModal"
+            data-custom-toggle="changeLogoutModal"
         >
             Change Site Logout Pin
         </button>

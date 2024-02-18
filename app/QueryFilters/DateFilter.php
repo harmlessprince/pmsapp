@@ -23,8 +23,11 @@ class DateFilter extends BaseFilter
 
         $fromDate = request()->query($this->column . '_from_date', $this->defaultStartMonth);
         $toDate = request()->query($this->column . '_to_date', $this->defaultEndMonth);
-
         if (!$fromDate || !$toDate) return $builder;
         return $builder->whereBetween($this->column, [Carbon::parse($fromDate)->startOfDay(), Carbon::parse($toDate)->endOfDay()]);
+    }
+    protected function getFilterValueDefault():mixed
+    {
+        return true;
     }
 }

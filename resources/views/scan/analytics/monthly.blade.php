@@ -2,8 +2,7 @@
 @section('title', 'Scan Analytics')
 @push('header-scripts')
 
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.1/datepicker.min.js"></script>
+
 
 @endpush
 @section('content')
@@ -47,11 +46,12 @@
                             </select>
                         </label>
                     </div>
-                    <div class="w-[37%] max-lg:w-[100%] relative mt-[3%]">
+                    <div class="w-[37%] max-lg:w-[100%] relative">
+                        <label class="font-big text-normal text-natural">Frequency</label>
                         <select class="w-full border border-natural bg-transparent h-11 pl-[5%] py-1 rounded-lg text-natural
                     placeholder-color font-normal text-normal
                     focus:outline-none focus:border-primary_color focus:ring-1 focus:ring-background_color
-                    focus:invalid:border-error focus:invalid:ring-error" name="frequency">
+                    focus:invalid:border-error focus:invalid:ring-error" name="frequency" id="frequency">
                             @foreach($frequencies as $frequency)
                                 <option class="bg-background_color"
                                         value="{{$frequency}}" {{ request()->query('frequency') == $frequency ? "selected" : '' }}>{{strtoupper($frequency)}}</option>
@@ -143,6 +143,7 @@
             integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous" defer></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js" defer></script>
+    <script src="{{asset('assets/js/transaction.js')}}"></script>
     <script>
 
         const barColors = "#3DC9B7";
