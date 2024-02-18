@@ -11,7 +11,7 @@ class UpdateTagRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -21,8 +21,18 @@ class UpdateTagRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [
-            //
+        $data = [
+            'tag_name' => ['required', 'string'],
+            'site' => ['required', 'integer', 'exists:sites,id'],
+            'longitude' => ['nullable', 'numeric'],
+            'latitude' => ['nullable', 'numeric'],
+            'comment' => ['nullable', 'string', 'max:200']
         ];
+        if (request()->user()->isCompanyOwner()) {
+            return $data;
+        }
+        return [
+                'company_id' => ['required', 'integer', 'exists:companies,id'],
+            ] + $data;
     }
 }

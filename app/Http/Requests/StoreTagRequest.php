@@ -21,13 +21,18 @@ class StoreTagRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [
-            'company_id' => ['required', 'integer', 'exists:companies,id'],
-            'site_id' => ['required', 'integer', 'exists:sites,id'],
-            'tag_type' => ['nullable', 'string'],
-            'longitude' => ['required', 'numeric'],
-            'latitude' => ['required', 'numeric'],
+        $data = [
+            'tag_name' => ['required', 'string'],
+            'site' => ['required', 'integer', 'exists:sites,id'],
+            'longitude' => ['nullable', 'numeric'],
+            'latitude' => ['nullable', 'numeric'],
             'comment' => ['nullable', 'string', 'max:200']
         ];
+        if (request()->user()->isCompanyOwner()){
+            return $data;
+        }
+        return [
+                'company_id' => ['required', 'integer', 'exists:companies,id'],
+            ] + $data;
     }
 }

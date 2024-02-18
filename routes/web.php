@@ -9,6 +9,7 @@ use App\Http\Controllers\AttendanceController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ScanAnalyticsController;
 use App\Http\Controllers\ScanController;
+use App\Http\Controllers\SiteCredentialController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -41,6 +42,11 @@ Route::prefix('company')->middleware('auth')->name('company.')->group(function (
     Route::prefix('scans')->name('scans.')->group(function (){
         Route::get('analytics', ScanAnalyticsController::class)->name('analytics');
         Route::get('transactions', [ScanController::class, 'index'])->name('transactions');
+    });
+
+    Route::prefix('credentials')->name('credentials.')->group(function (){
+        Route::patch('password/change/{site}', [SiteCredentialController::class, 'changeSitePassword'])->name('password.change');
+        Route::patch('logout/pin/change/{site}',[SiteCredentialController::class, 'changeSiteLogoutPin'])->name('logout.pin.change');
     });
     Route::resource('users', UserController::class);
     Route::resource('tags', TagController::class);

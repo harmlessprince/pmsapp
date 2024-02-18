@@ -3,10 +3,12 @@
 namespace App\Models;
 
 use App\Scopes\FilterByCompanyIdScope;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Support\Facades\Storage;
 
 class Site extends Model
 {
@@ -29,6 +31,17 @@ class Site extends Model
     public function inspector()
     {
         return $this->belongsTo(User::class, 'inspector_id');
+    }
+    protected function photo(): Attribute
+    {
+        return Attribute::make(
+            get: function ($value) {
+                if (!str_contains($value, 'sites')) {
+                    return $value;
+                }
+                return Storage::url($value);
+            },
+        );
     }
     protected static function booted(): void
     {

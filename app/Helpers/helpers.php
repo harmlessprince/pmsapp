@@ -91,3 +91,9 @@ function generateMonths()
 
     return $months;
 }
+
+
+function generateTagCode($site_id, $company_id)
+{
+    return 'TAG/' . rand(111, 999) . '/' . 'S' . $site_id . 'C' . $company_id;
+}

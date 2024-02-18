@@ -21,26 +21,29 @@ class StoreSiteRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [
-            'company_id' => ['required', 'integer', 'exists:companies,id'],
-            'longitude' => ['required', 'numeric'],
-            'latitude' => ['required', 'numeric'],
-            'first_name' => ['required', 'string', 'max:200'],
-            'last_name' => ['required', 'string', 'max:200'],
-            'status' => ['required', 'boolean'],
-            'number_of_tags' => ['required', 'boolean'],
-            'maximum_number_of_rounds' => ['required', 'boolean'],
-            'logout_pin' => ['required', 'string', 'min:4'],
-            'email' => ['required', 'email', 'max:200'],
-            'username' => ['required', 'string', 'max:200'],
-            'site_name' => ['required', 'string', 'max:200'],
+        $data = [
+            'name' => ['required', 'string', 'max:200'],
             'password' => ['required', 'string', 'min:4'],
             'password_confirm' => ['same:password'],
+            'email' => ['required', 'email', 'max:200', 'unique:users,email'],
+            'state' => ['required', 'integer', 'exists:states,id'],
             'address' => ['required', 'string', 'max:200'],
-            'photo' => ['required', 'string', 'min:4'],
-            'attendance_date' => ['required', 'date_format:Y-m-d'],
-            'shift_start_time' => ['required', 'date_format:H:i:s'],
-            'shift_end_time' => ['required', 'date_format:H:i:s'],
+            'photo' => ['nullable', 'image'],
+            'shift_start_time' => ['nullable', 'string'],
+            'shift_end_time' => ['nullable', 'string'],
+            'number_of_tags' => ['required', 'numeric'],
+            'maximum_number_of_rounds' => ['required', 'numeric'],
+            'logout_pin' => ['required', 'string', 'min:4'],
+            'longitude' => ['nullable', 'numeric'],
+            'latitude' => ['nullable', 'numeric'],
         ];
+        if (request()->user()->isCompanyOwner()){
+            return $data;
+        }
+        return [
+            'company_id' => ['required', 'integer', 'exists:companies,id'],
+            'first_name' => ['nullable', 'string', 'max:200'],
+            'last_name' => ['nullable', 'string', 'max:200'],
+        ] + $data;
     }
 }

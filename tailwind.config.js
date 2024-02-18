@@ -1,6 +1,6 @@
 import defaultTheme from 'tailwindcss/defaultTheme';
 import forms from '@tailwindcss/forms';
-
+const colors = require('tailwindcss/colors')
 /** @type {import('tailwindcss').Config} */
 export default {
     mode: "jit",
@@ -10,6 +10,8 @@ export default {
         "./resources/views/**/*.blade.php",
         "./resources/views/*.blade.php",
         "./resources/js/**/*.vue",
+        "./resources/**/*.js",
+        "./resources/**/*.css",
     ],
     theme: {
         extend: {
@@ -24,7 +26,7 @@ export default {
                 site: "#6C0CE9",
                 tags: "#108C1E",
                 guards: "#C5A816",
-                green: "#00FF00",
+                green: colors.green,
                 table: "#EAECF0",
                 checkin: "#E8F9EA",
                 checkInText: '#0C6C17',

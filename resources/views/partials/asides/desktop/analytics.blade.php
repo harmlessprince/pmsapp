@@ -1,5 +1,5 @@
 <div class="mb-8 cursor-pointer">
-    <div onclick="toggleAnalytics()"  class="flex flex-row relative">
+    <div onclick="toggleAnalytics()"  class="flex flex-row relative"  id="dropdownNavbarLink" >
         <img src="{{asset('assets/images/chart.png')}}" alt="dashboard" class="mr-4"/>
         <span class="text-natural text-base font-medium">Analytics</span>
         <img src="{{asset('assets/images/dropdown.png')}}" alt="dashboard"

@@ -9,7 +9,9 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Cabin:ital,wght@0,500;0,600;0,700;1,400&family=Inter:wght@400;500;600;700&display=swap"
         rel="stylesheet">
+
     @stack('header-links')
+
     <!-- Scripts -->
 {{--    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.1/datepicker.min.js"></script>--}}
     <style>
@@ -35,9 +37,8 @@
             color: rgb(254 255 254 / var(--tw-text-opacity));
         }
     </style>
-
-    @stack('header-scripts')
     @vite(['resources/js/app.js', 'resources/css/app.css'])
+    @stack('header-scripts')
 </head>
 <body class="bg-db">
 <main class="font-primary relative">
@@ -112,7 +113,7 @@
     }
 
 </script>
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>
 @stack('scripts')
 
 </body>

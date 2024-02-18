@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', 'Dashboard')
+@section('title', 'User')
 @section('page', 'User Management')
 @push('header-scripts')
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"
@@ -54,6 +54,18 @@
                                     <option value="">Select Site</option>
                                     @foreach($sites as $site)
                                         <option value="{{$site->id}}" {{ request()->query('site_id') == $site->id ? "selected" : '' }}>{{$site->name}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="w-full mb-3">
+                                <label class="font-big text-normal text-filter_text">Filter by State</label>
+                                <select
+                                    class="outline-none w-full border border-filterInput bg-transparent h-[44px] px-2 py-1 rounded-lg text-normal font-normal text-filter_text site"
+                                    name="state_id"
+                                >
+                                    <option value="">Select State</option>
+                                    @foreach($states as $state)
+                                        <option value="{{$state->id}}" {{ request()->query('state_id') == $state->id ? "selected" : '' }}>{{$state->name}}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -163,7 +175,7 @@
                             </tr>
                         @empty
                             <tr class="text-normal font-normal border border-table border-collapse text-natural hover:bg-db">
-                                <td class="text-center" rowspan="6">No Data</td>
+                                <td class="text-center" colspan="5">No Data</td>
                             </tr>
                         @endforelse
 
