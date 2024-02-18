@@ -9,7 +9,9 @@ use App\Http\Requests\Company\UpdateUserRequest;
 use App\Models\User;
 use App\QueryFilters\CreatedAtFilter;
 use App\QueryFilters\SiteIdFilter;
+use App\QueryFilters\StateIdFilter;
 use App\Repositories\Eloquent\Repository\SiteRepository;
+use App\Repositories\Eloquent\Repository\StateRepository;
 use App\Repositories\Eloquent\Repository\UserRepository;
 use App\Services\FileUploadService;
 use Carbon\Carbon;
@@ -21,6 +23,7 @@ class UserController extends Controller
     public function __construct(
         private readonly UserRepository    $userRepository,
         private readonly SiteRepository    $siteRepository,
+        private  readonly StateRepository $stateRepository,
     )
     {
     }
@@ -33,17 +36,19 @@ class UserController extends Controller
         $pipes = [
             CreatedAtFilter::class,
             SiteIdFilter::class,
+            StateIdFilter::class,
         ];
         $countOfGuards = $this->userRepository->modelQuery()->whereHas('roles', function ($query) {
             $query->where('name', RoleEnum::SECURITY->value);
         })->count();
         $sites = $this->siteRepository->modelQuery()->get();
+        $states = $this->stateRepository->fetchByCountryID();
         $userQuery = $this->userRepository->modelQuery()->whereHas('roles', function ($query) {
             $query->where('name', RoleEnum::SECURITY->value);
         })->search();
         $userQuery = constructPipes($userQuery, $pipes);
         $users = $userQuery->with(['tenant', 'site', 'state', 'state.country'])->paginate(request('per_page', 15));
-        return view('company.user.index', compact('users', 'countOfGuards', 'sites'));
+        return view('company.user.index', compact('users', 'countOfGuards', 'sites', 'states'));
     }
 
     /**
@@ -76,7 +81,8 @@ class UserController extends Controller
     public function edit(User $user)
     {
         $sites = $this->siteRepository->modelQuery()->get();
-        return view('company.user.edit', compact('user', 'sites'));
+        $states = $this->stateRepository->fetchByCountryID();
+        return view('company.user.edit', compact('user', 'sites', 'states'));
     }
 
     /**
@@ -86,17 +92,6 @@ class UserController extends Controller
     public function update(UpdateUserRequest $request, User $user)
     {
         $validated_data = $request->validated();
-        if ($request->input('shift_start_time')){
-            $shift_start_time  = $validated_data['shift_start_time'];
-            $time = Carbon::parse($shift_start_time)->toTimeString();
-            $validated_data['shift_start_time'] = $time;
-        }
-        if ($request->input('shift_end_time')){
-            $shift_start_time  = $validated_data['shift_end_time'];
-            $time = Carbon::parse($shift_start_time)->toTimeString();
-            $validated_data['shift_end_time'] = $time;
-        }
-
         if ($request->hasfile('profile_image')){
             $response = FileUploadService::uploadToS3($request->file('profile_image'), 'profile_images');
             $validated_data['profile_image'] = $response->path;

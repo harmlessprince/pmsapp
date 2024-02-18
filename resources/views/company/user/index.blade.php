@@ -57,6 +57,18 @@
                                     @endforeach
                                 </select>
                             </div>
+                            <div class="w-full mb-3">
+                                <label class="font-big text-normal text-filter_text">Filter by State</label>
+                                <select
+                                    class="outline-none w-full border border-filterInput bg-transparent h-[44px] px-2 py-1 rounded-lg text-normal font-normal text-filter_text site"
+                                    name="state_id"
+                                >
+                                    <option value="">Select State</option>
+                                    @foreach($states as $state)
+                                        <option value="{{$state->id}}" {{ request()->query('state_id') == $state->id ? "selected" : '' }}>{{$state->name}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
 {{--                            <div class="w-full mb-3">--}}
 {{--                                <label class="font-big text-normal text-filter_text">Filter by Country</label>--}}
 {{--                                <select--}}
@@ -163,7 +175,7 @@
                             </tr>
                         @empty
                             <tr class="text-normal font-normal border border-table border-collapse text-natural hover:bg-db">
-                                <td class="text-center" rowspan="6">No Data</td>
+                                <td class="text-center" colspan="5">No Data</td>
                             </tr>
                         @endforelse
 

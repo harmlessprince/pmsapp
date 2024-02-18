@@ -45,21 +45,37 @@
                 <x-input-error :messages="$errors->get('last_name')" class="mt-2"/>
             </div>
         </div>
-
-        <div class="w-full mb-3">
-            <label class="font-big text-normal text-natural"> Site</label>
-            <select
-                class="outline-none w-full border border-filterInput bg-transparent h-[44px] px-2 py-1 rounded-lg text-normal font-normal text-filter_text"
-                name="site_id"
-            >
-                <option>Select Site</option>
-                @foreach($sites as $site)
-                    <option
-                        value="{{$site->id}}" {{$user->site->id ==  $site->id ? 'selected' : ''}}>{{$site->name}}</option>
-                @endforeach
-            </select>
-            <x-input-error :messages="$errors->get('site_id')" class="mt-2"/>
+        <div class="flex flex-row justify-between mb-2  max-lg:flex-col">
+            <div class="w-[48%] max-lg:w-full max-lg:mb-2">
+                <label class="font-big text-normal text-natural"> Site</label>
+                <select
+                    class="outline-none w-full border border-filterInput bg-transparent h-[44px] px-2 py-1 rounded-lg text-normal font-normal text-filter_text"
+                    name="site_id"
+                >
+                    <option>Select Site</option>
+                    @foreach($sites as $site)
+                        <option
+                            value="{{$site->id}}" {{$user->site->id ==  $site->id ? 'selected' : ''}}>{{$site->name}}</option>
+                    @endforeach
+                </select>
+                <x-input-error :messages="$errors->get('site_id')" class="mt-2"/>
+            </div>
+            <div class="w-[48%] max-lg:w-full">
+                <label class="font-big text-normal text-natural"> State</label>
+                <select
+                    class="outline-none w-full border border-filterInput bg-transparent h-[44px] px-2 py-1 rounded-lg text-normal font-normal text-filter_text"
+                    name="state_id"
+                >
+                    <option>Select State</option>
+                    @foreach($states as $state)
+                        <option
+                            value="{{$state->id}}" {{$user->state->id ==  $state->id ? 'selected' : ''}}>{{$state->name}}</option>
+                    @endforeach
+                </select>
+                <x-input-error :messages="$errors->get('state_id')" class="mt-2"/>
+            </div>
         </div>
+
 
         <div class="flex flex-row justify-between mb-2 max-lg:flex-col">
             <div class="w-[48%] max-lg:w-full max-lg:mb-2">
@@ -183,11 +199,8 @@
             <input
                 type="file"
                 class="w-full border border-natural bg-transparent h-[44px] px-2 py-1 rounded-lg text-natural
-                        placeholder-color font-normal text-normal
-                        focus:outline-none focus:border-primary_color focus:ring-1 focus:ring-background_color
-                        focus:invalid:error focus:invalid:error
-                        "
-                placeholder="" name="profile_image" onchange="readImageURL(this);"/>
+                        placeholder-color font-normal text-normal"
+                placeholder="" name="profile_image" onchange="readImageURL(this);" accept=".jpg, .jpeg, .png"/>
             <x-input-error :messages="$errors->get('profile_image')" class="mt-2"/>
             <div class="mt-2 w-60 h-60">
                 <img src="{{$user->profile_image}}" alt="profile image" class="w-60 h-60" id="profile_image">

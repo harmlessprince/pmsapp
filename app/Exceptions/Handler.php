@@ -47,7 +47,7 @@ class Handler extends ExceptionHandler
                 return sendError("Unauthenticated or Token expired, please try to login again", $statusCode);
             }
             if ($e instanceof NotFoundHttpException) {
-                return sendError( $e->getMessage(), $e->getStatusCode());
+                return sendError($e->getMessage(), $e->getStatusCode());
             }
             if ($e instanceof ValidationException) {
                 $statusCode = ResponseAlias::HTTP_UNPROCESSABLE_ENTITY;
@@ -55,33 +55,36 @@ class Handler extends ExceptionHandler
             }
             if ($e instanceof ModelNotFoundException) {
                 $statusCode = ResponseAlias::HTTP_NOT_FOUND;
-                return sendError("Resource could not be found",$statusCode);
+                return sendError("Resource could not be found", $statusCode);
             }
 
             if ($e instanceof UniqueConstraintViolationException) {
                 $statusCode = ResponseAlias::HTTP_INTERNAL_SERVER_ERROR;
-                return sendError("Duplicate entry found",$statusCode);
+                return sendError("Duplicate entry found", $statusCode);
             }
             if ($e instanceof QueryException) {
                 Log::error($e);
                 $statusCode = ResponseAlias::HTTP_INTERNAL_SERVER_ERROR;
 
-                return sendError( "Could not execute query",$statusCode);
+                return sendError("Could not execute query", $statusCode);
             }
             if ($e instanceof MethodNotAllowedHttpException) {
-                return sendError( $e->getMessage(), ResponseAlias::HTTP_METHOD_NOT_ALLOWED);
+                return sendError($e->getMessage(), ResponseAlias::HTTP_METHOD_NOT_ALLOWED);
             }
             if ($e instanceof \Exception) {
                 Log::error($e);
                 $statusCode = ResponseAlias::HTTP_INTERNAL_SERVER_ERROR;
-                return sendError( "We could not handle your request, please try again later", $statusCode);
+                return sendError("We could not handle your request, please try again later", $statusCode);
             }
 
             if ($e instanceof \Error) {
                 Log::error($e);
                 $statusCode = ResponseAlias::HTTP_INTERNAL_SERVER_ERROR;
-                return sendError("We could not handle your request, please try again later",$statusCode);
+                return sendError("We could not handle your request, please try again later", $statusCode);
             }
+        }
+        if ($e instanceof ValidationException) {
+            session()->flash('validation', 'The form could not be processed, kindly check the form.');
         }
         return parent::render($request, $e);
     }
