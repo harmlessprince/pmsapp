@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', 'Dashboard')
+@section('title', 'User')
 @section('page', 'User Management')
 @push('header-scripts')
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"

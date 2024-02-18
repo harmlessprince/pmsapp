@@ -94,7 +94,7 @@
                                      class="absolute w-[15px] h-[15px] left-[5%] bottom-[32%]"/>
                                 <input
                                     type="search"
-                                    placeholder="Search by tag name"
+                                    placeholder="Search by Tag name or code"
                                     class="font-normal text-natural text-medium placeholder-natural outline-none  w-[400px] max-lg:w-[100%]  h-[46px] rounded-lg bg-transparent border border-natural px-[10%]"
                                     name="searchTerm"
                                     value="{{request()->query('searchTerm', null)}}"
@@ -128,24 +128,30 @@
                         <tr class="text-left text-small text-natural font-big">
                             <th class=" px-small py-[1%]">Country</th>
                             <th class="px-small py-[1%]">Site name</th>
+                            <th class="px-small py-[1%]">Tag Name</th>
+                            <th class="px-small py-[1%]">Code</th>
                             <th class="px-small py-[1%]">Comments</th>
-                            <th class="px-small py-[1%]">Tag name</th>
-                            <th class="px-small py-[1%]">Tag Type</th>
+                            <th class="px-small py-[1%]">Tag</th>
                             <th class="px-small py-[1%]">Action</th>
                         </tr>
                         </thead>
                         <tbody>
                         @forelse($tags as $tag)
                             <tr class="text-normal text-basic font-normal text-natural border border-table border-collapse hover:bg-db">
-                                <td class="text-natural px-small py-small">{{$tag->company->state->country->name ?? 'N/A'}}</td>
+                                <td class="text-natural px-small py-small">{{$tag->site->state->country->name ?? 'N/A'}}</td>
                                 <td class="px-small">
-                                    {{$tag->company->name ?? 'N/A'}}
+                                    {{$tag->site->name ?? 'N/A'}}
+                                </td>
+                                <td class="px-small">
+                                    {{$tag->name ?? 'N/A'}}
+                                </td>
+                                <td class="px-small uppercase">
+                                    {{$tag->code ?? 'N/A'}}
                                 </td>
                                 <td class="px-small">
                                     {{ \Illuminate\Support\Str::limit($tag->comment, 20)}}
                                 </td>
-                                <td class="px-small">{{$tag->name}}</td>
-                                <td class="px-small">Qr code</td>
+                                <td class="px-small">QR</td>
                                 <td class="px-small">
                                     <div class="flex flex-row justify-center">
                                         <a href="{{route('company.tags.edit', ['tag' =>  $tag])}}">
@@ -156,7 +162,7 @@
                             </tr>
                         @empty
                             <tr class="text-normal font-normal border border-table border-collapse text-natural hover:bg-db">
-                                <td class="text-center" rowspan="6">No Data</td>
+                                <td class="text-center" colspan="7">No Data</td>
                             </tr>
                         @endforelse
 

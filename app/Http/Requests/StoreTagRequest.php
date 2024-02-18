@@ -22,10 +22,10 @@ class StoreTagRequest extends FormRequest
     public function rules(): array
     {
         $data = [
-            'site_id' => ['required', 'integer', 'exists:sites,id'],
-            'tag_type' => ['nullable', 'string'],
-            'longitude' => ['required', 'numeric'],
-            'latitude' => ['required', 'numeric'],
+            'tag_name' => ['required', 'string'],
+            'site' => ['required', 'integer', 'exists:sites,id'],
+            'longitude' => ['nullable', 'numeric'],
+            'latitude' => ['nullable', 'numeric'],
             'comment' => ['nullable', 'string', 'max:200']
         ];
         if (request()->user()->isCompanyOwner()){
