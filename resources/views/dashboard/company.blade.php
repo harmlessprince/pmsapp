@@ -6,19 +6,19 @@
     <section class="flex flex-row justify-between w-[100%] max-lg:flex-col max-lg:mt-[15%]">
         <div
             class="flex flex-row bg-background_color rounded-lg h-[111px] w-[290px] items-center px-[20px] max-lg:mx-auto">
-            <div class="w-[44px] h-[44px] bg-site rounded-lg flex flex-row items-center justify-center">
-                <img src="{{asset('assets/images/site.png')}}" alt="dashboard"/>
+            <div class="w-[44px] h-[44px] bg-blue-500 rounded-lg flex flex-row items-center justify-center">
+                <span class="material-symbols-outlined text-white">home</span>
             </div>
             <div class="ml-[5%]">
-                <h1 class="font-bold text-3xl text-site">{{$countOfSites}}</h1>
-                <span class="font-normal text-sm text-site">Sites</span>
+                <h1 class="font-bold text-3xl  text-blue-500">{{$countOfSites}}</h1>
+                <span class="font-normal text-sm text-blue-500">Sites</span>
             </div>
         </div>
 
         <div
             class="flex flex-row bg-background_color rounded-lg h-[111px] w-[290px] items-center px-[20px] max-lg:mt-[5%] max-lg:mx-auto">
             <div class="w-[44px] h-[44px] bg-tags rounded-lg flex flex-row items-center justify-center">
-                <img src="{{asset('assets/images/site.png')}}" alt="dashboard"/>
+                <span class="material-symbols-outlined text-white">tag</span>
             </div>
             <div class="ml-[5%]">
                 <h1 class="font-bold text-3xl text-tags">{{$countOfTags}}</h1>
@@ -29,7 +29,7 @@
         <div
             class="flex flex-row bg-background_color rounded-lg h-[111px] w-[290px] items-center px-[20px] max-lg:mt-[5%] max-lg:mx-auto">
             <div class="w-[44px] h-[44px] bg-guards rounded-lg flex flex-row items-center justify-center">
-                <img src="{{asset('assets/images/site.png')}}" alt="dashboard"/>
+                <span class="material-symbols-outlined text-white">lock</span>
             </div>
             <div class="ml-[5%]">
                 <h1 class="font-bold text-3xl text-guards">{{$countOfGuards}}</h1>
@@ -82,7 +82,7 @@
                 <thead>
                 <tr class="">
                     <th class="text-left text-small text-natural font-big  px-small py-smaller">
-                         Name
+                        Name
                     </th>
                     <th class="text-left text-small text-natural font-big  px-small py-smaller">Time/Date</th>
                     <th class="text-left text-small text-natural font-big  px-small py-smaller">Action Type</th>
@@ -121,7 +121,8 @@
                         <td class="text-normal font-normal px-small">{{$attendance->site->name}}</td>
                         <td class="text-normal font-normal px-small">{{$attendance->distance}} KM</td>
                         <td class="text-normal font-normal px-small">
-                            <img src="{{ $attendance->user->profile_image ?? asset('assets/images/tableImg.png')}}" alt="dashboard"
+                            <img src="{{ $attendance->user->profile_image ?? asset('assets/images/tableImg.png')}}"
+                                 alt="dashboard"
                                  class=" w-[60px] h-[60px]"/>
                         </td>
                         <td class="text-normal font-normal p-small">{{$attendance->proximity}}</td>

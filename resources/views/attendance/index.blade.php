@@ -19,10 +19,22 @@
 
     <!-- Dashboard content -->
     <section class="">
+        @include('filters.attendance_filter')
         <!-- filter searches -->
         <form method="GET" action="{{route('company.attendance.transactions')}}" id="search-form">
+
             <input value="yes" name="date" hidden/>
             <div class="flex flex-row justify-between items-center max-lg:flex-col">
+                <button
+                    type="button"
+                    data-modal-target="crud-modal"
+                    data-modal-toggle="attendance_more_filter"
+                    id="dropdownDefaultButton"
+                     class="rounded-lg border border-natural flex flex-row items-center px-[16px] py-[10px] cursor-pointer"
+                >
+                    <img src="{{asset('assets/images/filters.png')}}" class="w-[20px] h-[20px]" alt="plus"/>
+                    <span class="text-natural font-big text-normal ml-2"> More filters</span>
+                </button>
                 <div class="w-[75%] flex flex-row justify-between max-lg:w-[100%] max-lg:flex-col">
                     <div class="w-[15%] max-lg:w-[100%]">
                         <label class="font-big text-normal text-natural">No Of Rows</label>

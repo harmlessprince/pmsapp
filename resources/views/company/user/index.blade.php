@@ -12,7 +12,7 @@
             <div
                 class="flex flex-row bg-background_color rounded-lg h-[111px] w-[290px] items-center px-[20px] max-lg:mx-auto">
                 <div class="w-[44px] h-[44px] bg-guards rounded-lg flex flex-row items-center justify-center">
-                    <img src="{{asset('assets/images/site.png')}}" alt="dashboard"/>
+                    <span class="material-symbols-outlined text-white">lock</span>
                 </div>
                 <div class="ml-[5%]">
                     <h1 class="font-bold text-3xl text-guards">{{$countOfGuards}}</h1>

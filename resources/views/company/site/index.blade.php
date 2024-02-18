@@ -12,12 +12,12 @@
         <section class="flex flex-row justify-between w-[100%] max-lg:mt-[15%]">
             <div
                 class="flex flex-row bg-background_color rounded-lg h-[111px] w-[290px] items-center px-[20px] max-lg:mx-auto">
-                <div class="w-[44px] h-[44px] bg-site rounded-lg flex flex-row items-center justify-center">
-                    <img src="{{asset('assets/images/site.png')}}" alt="dashboard"/>
+                <div class="w-[44px] h-[44px] bg-blue-500 rounded-lg flex flex-row items-center justify-center">
+                    <span class="material-symbols-outlined text-white">home</span>
                 </div>
                 <div class="ml-[5%]">
-                    <h1 class="font-bold text-3xl text-site">{{$countOfSites}}</h1>
-                    <span class="font-normal text-sm text-site">Sites</span>
+                    <h1 class="font-bold text-3xl text-blue-500">{{$countOfSites}}</h1>
+                    <span class="font-normal text-sm text-blue-500">Sites</span>
                 </div>
             </div>
         </section>

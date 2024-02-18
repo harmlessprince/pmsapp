@@ -3,6 +3,7 @@
 @section('page', 'Site Management')
 @push('header-links')
     <link rel="stylesheet" href="{{asset('assets/timepicker/jquery.timepicker.min.css')}}">
+    <script src="https://cdn.tailwindcss.com"></script>
 @endpush
 @section('content')
 
@@ -16,16 +17,16 @@
         <button
             class="font-big text-normal text-white rounded-lg border-none bg-red-700 px-[16px] py-[10px] cursor-pointer focus:outline-none text-white"
             id="show_change_password_dialog"
-            data-custom-target="changePasswordModal"
-            data-custom-toggle="changePasswordModal"
+            data-modal-target="changePasswordModal"
+            data-modal-toggle="changePasswordModal"
             {{--            onclick="showChangePasswordModal()"--}}
         >
             Change Site Password
         </button>
         <button
             class="font-big text-normal text-white rounded-lg px-[16px] py-[10px] cursor-pointer bg-yellow-500"
-            data-custom-target="changeLogoutModal"
-            data-custom-toggle="changeLogoutModal"
+            data-modal-target="changeLogoutModal"
+            data-modal-toggle="changeLogoutModal"
         >
             Change Site Logout Pin
         </button>
