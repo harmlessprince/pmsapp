@@ -3,8 +3,8 @@
 
     @hasSection('page')
         <div class="flex flex-row items-center  w-[35%] max-lg:w-[75%] max-lg:py-[5%]">
-            <img src="{{asset('assets/images/left_arrow.png')}}" alt="dashboard" class="mr-[40px]"/>
-            <img src="{{asset('assets/images/right_arrow.png')}}" alt="dashboard" class="mr-[40px]"/>
+{{--            <img src="{{asset('assets/images/left_arrow.png')}}" alt="dashboard" class="mr-[40px]"/>--}}
+{{--            <img src="{{asset('assets/images/right_arrow.png')}}" alt="dashboard" class="mr-[40px]"/>--}}
             @yield('page')
 
         </div>

@@ -40,7 +40,7 @@ class AttendanceController extends Controller
         $sites =  $this->siteRepository->all();
         $attendanceQuery = $this->attendanceRepository->modelQuery()->search();
         $attendanceQuery = constructPipes($attendanceQuery, $pipes);
-        $attendances = $attendanceQuery->latest('attendance_date_time')->with(['company', 'site', 'user'])->paginate();
+        $attendances = $attendanceQuery->latest('attendance_date_time')->with(['company', 'site', 'user'])->paginate(request('per_page', 15));
         return view('attendance.index', compact('attendances', 'sites'));
     }
 

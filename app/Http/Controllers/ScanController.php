@@ -9,6 +9,7 @@ use App\QueryFilters\CompanyIdFilter;
 use App\QueryFilters\CreatedAtFilter;
 use App\QueryFilters\DateFilter;
 use App\QueryFilters\SiteIdFilter;
+use App\QueryFilters\TagIdFilter;
 use App\Repositories\Eloquent\Repository\CompanyRepository;
 use App\Repositories\Eloquent\Repository\ScanRepository;
 use App\Repositories\Eloquent\Repository\SiteRepository;
@@ -32,6 +33,7 @@ class ScanController extends Controller
             new DateFilter('scan_date'),
             CompanyIdFilter::class,
             SiteIdFilter::class,
+            TagIdFilter::class,
         ];
 
 

@@ -20,113 +20,125 @@
     <!-- Dashboard content -->
     <section class="">
         <!-- filter searches -->
-        <form method="GET" action="{{route('company.scans.transactions')}}" id="search-form">
-            <input value="yes" name="date" hidden/>
-            <div class="flex flex-row justify-between items-center max-lg:flex-col">
-                <div class="w-[75%] flex flex-row justify-between max-lg:w-[100%] max-lg:flex-col">
-                    <div class="w-[15%] max-lg:w-[100%]">
-                        <label class="font-big text-normal text-natural">No Of Rows</label>
-                        <label>
-                            <select
-                                class="cursor-pointer w-full border border-natural bg-db h-[44px] px-2 py-1 rounded-lg text-normal font-normal text-natural"
-                                name="per_page"
-                            >
-                                <option class="" value="15" {{ request()->query('per_page') == 15 ? "selected" : '' }}>
-                                    15 rows
+        <x-filter-card>
+            <form method="GET" action="{{route('company.scans.transactions')}}" id="search-form">
+                <input value="yes" name="date" hidden/>
+                {{--                <div class="relative mb-10 w-full flex  items-center justify-between rounded-md">--}}
+                {{--                    <svg class="absolute left-2 block h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg"--}}
+                {{--                         width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"--}}
+                {{--                         stroke-width="2" stroke-linecap="round" stroke-linejoin="round">--}}
+                {{--                        <circle cx="11" cy="11" r="8" class=""></circle>--}}
+                {{--                        <line x1="21" y1="21" x2="16.65" y2="16.65" class=""></line>--}}
+                {{--                    </svg>--}}
+                {{--                    <x-text-input id="search" class="h-12 w-full cursor-text bg-db py-4 pr-40 pl-12" type="text"--}}
+                {{--                                  name="searchTerm" placeholder="Search by name"--}}
+                {{--                                  :value="request()->query('searchTerm')"/>--}}
+                {{--                </div>--}}
+
+                <div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+                    <div class="flex flex-col">
+                        <x-input-label for="per_page" :value="__('Number of rows')"/>
+                        <x-select-input id="per_page" class="block w-full" name="per_page">
+                            <option class="" value="15" {{ request()->query('per_page') == 15 ? "selected" : '' }}>
+                                15 rows
+                            </option>
+                            @for ($i = 10; $i <= 50; $i += 10)
+                                <option class=""
+                                        value="{{$i}}" {{ request()->query('per_page') == $i ? "selected" : '' }}> {{$i}}
+                                    rows
                                 </option>
-                                @for ($i = 10; $i <= 50; $i += 10)
-                                    <option class=""
-                                            value="{{$i}}" {{ request()->query('per_page') == $i ? "selected" : '' }}> {{$i}}
-                                        rows
-                                    </option>
-                                @endfor
-
-                            </select>
-                        </label>
+                            @endfor
+                        </x-select-input>
                     </div>
-                    <div class="relative w-[19%] max-lg:w-[100%]">
-                        <label class="font-big text-normal text-natural">Start date</label>
-                        <div class="absolute bottom-[20%] start-0 flex items-center ps-3.5 pointer-events-none">
-                            <svg class="w-4 h-4 text-natural dark:text-gray-400" aria-hidden="true"
-                                 xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
-                                <path
-                                    d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z"/>
-                            </svg>
+
+                    <div class="flex flex-col">
+                        <div class="relative">
+                            <x-input-label for="scan_date_from_date" :value="__('Start date')"/>
+                            <div class="absolute bottom-[20%] start-0 flex items-center ps-3.5 pointer-events-none">
+                                <svg class="w-4 h-4 text-natural dark:text-gray-400" aria-hidden="true"
+                                     xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                                    <path
+                                        d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z"/>
+                                </svg>
+                            </div>
+                            <x-text-input
+                                id="name"
+                                class="block w-full pl-[20%]"
+                                type="text"
+                                datepicker
+                                datepicker-autohide
+                                datepicker-format="dd-mm-yyyy"
+                                type="text"
+                                placeholder="Select start date"
+                                name="scan_date_from_date"
+                                :value="request()->query('scan_date_from_date')"
+                            />
                         </div>
-                        <input
-                            datepicker
-                            datepicker-autohide
-                            datepicker-format="dd-mm-yyyy"
-                            type="text"
-                            class="w-full border border-natural bg-transparent h-11 pl-[21%] max-lg:pl-[12%] py-1 rounded-lg text-natural
-                      placeholder-color font-normal text-normal
-                      focus:outline-none focus:border-primary_color focus:ring-1 focus:ring-background_color"
-                            placeholder="select start date"
-                            name="scan_date_from_date"
-                            value="{{request()->query('scan_date_from_date')}}"
-                        />
                     </div>
-
-                    <div class="relative w-[19%] max-lg:w-[100%]">
-                        <label class="font-big text-normal text-natural">End date</label>
-                        <div class="absolute bottom-[20%] start-0 flex items-center ps-3.5 pointer-events-none">
-                            <svg class="w-4 h-4 text-natural dark:text-gray-400" aria-hidden="true"
-                                 xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
-                                <path
-                                    d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z"/>
-                            </svg>
+                    <div class="flex flex-col">
+                        <div class="relative">
+                            <x-input-label for="scan_date_to_date" :value="__('End date')"/>
+                            <div class="absolute bottom-[20%] start-0 flex items-center ps-3.5 pointer-events-none">
+                                <svg class="w-4 h-4 text-natural dark:text-gray-400" aria-hidden="true"
+                                     xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                                    <path
+                                        d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z"/>
+                                </svg>
+                            </div>
+                            <x-text-input
+                                id="scan_date_to_date"
+                                class="block w-full pl-[20%]"
+                                type="text"
+                                datepicker
+                                datepicker-autohide
+                                datepicker-format="dd-mm-yyyy"
+                                type="text"
+                                placeholder="Select start date"
+                                name="scan_date_to_date"
+                                :value="request()->query('scan_date_to_date')"
+                            />
                         </div>
-                        <input
-                            datepicker
-                            datepicker-autohide
-                            datepicker-format="dd-mm-yyyy"
-                            type="text"
-                            class="w-full border border-natural bg-transparent h-11 pl-[21%] max-lg:pl-[12%] py-1 rounded-lg text-natural
-                    placeholder-color font-normal text-normal
-                    focus:outline-none focus:border-primary_color focus:ring-1 focus:ring-background_color"
-                            placeholder="select end date"
-                            name="scan_date_to_date"
-                            value="{{request()->query('scan_date_to_date')}}"
-                        />
                     </div>
 
-                    <div class="w-[26%] max-lg:w-[100%]">
-                        <label class="font-big text-normal text-natural">Select Site</label>
-                        <label>
-                            <select
-                                class="select-2-sites cursor-pointer w-full border border-natural bg-db h-[44px] px-2 py-1 rounded-lg text-normal font-normal text-natural"
-                                name="site_id"
-                            >
-                                <option class="" value="">All site</option>
-                                @foreach($sites as $site)
-                                    <option
-                                        value="{{$site->id}}" {{ request()->query('site_id') == $site->id ? "selected" : '' }}>{{$site->name}}</option>
-                                @endforeach
-                            </select>
-                        </label>
+                    <div class="flex flex-col">
+                        <x-input-label for="site_id" :value="__('Site')" class="text-white"/>
+                        <x-select-input id="site_id" class="block w-full" name="site_id">
+                            <option class="" value="">All site</option>
+                            @foreach($sites as $site)
+                                <option
+                                    value="{{$site->id}}" {{ request()->query('site_id') == $site->id ? "selected" : '' }}>{{$site->name}}</option>
+                            @endforeach
+                        </x-select-input>
                     </div>
-
-                    <div class="mt-[2.5%] flex flex-row justify-between items-center w-[25%] max-lg:w-[100%]">
-                        <button
-                            type="button"
-                            class="cursor-pointer w-[45%] h-[44px] outline-none bg-transparent text-natural text-normal rounded-lg font-semibold px-[16px] py-[10px] border border-primary_color"
-                            onclick="resetForm()">
-                            Reset
-                        </button>
-                        <button
-                            class="cursor-pointer w-[45%] h-[44px] outline-none bg-primary_color text-natural text-normal rounded-lg font-big px-[16px] py-[10px]">
-                            Search
-                        </button>
+                    <div class="flex flex-col">
+                        <x-input-label for="tag_id" :value="__('Tag')" class="text-white"/>
+                        <x-select-input id="tag_id" class="block w-full" name="tag_id">
+                            <option class="" value="">Select a site</option>
+                        </x-select-input>
                     </div>
                 </div>
 
-                <div class="flex flex-row items-center justify-end w-[15%] max-lg:w-[100%] mt-[2.5%]">
-                    <span class="text-primary_color text-normal font-big">Export</span>
-                    <img src="{{ asset('assets/images/export2.png')}}" alt="dashboard" class="ml-2 w-[16px] h-[16px]"/>
+                <div class="mt-6  w-full">
+                    <div class=" w-full flex justify-between px-5 py-3">
+                        <div>
+                            <x-icon-button class="px-8 py-2 text-primary_color hover:scale-75" type="submit">
+                                <span class="material-symbols-outlined text-primary_color mr-1">export_notes</span>
+                                <span class="text-primary_color">Export</span>
+                            </x-icon-button>
+                        </div>
+                        <div class="grid w-full grid-cols-1 justify-end space-x-4 md:flex">
+                            <x-secondary-button type="reset" class="px-8 py-2" onclick="resetForm()">Reset
+                            </x-secondary-button>
+                            <x-primary-button class="px-8 py-2" type="submit">Apply filters</x-primary-button>
+                        </div>
+
+
+                    </div>
+
+
                 </div>
-            </div>
-            <!-- end of filter search -->
-        </form>
+            </form>
+        </x-filter-card>
 
 
         <!-- table -->
@@ -181,11 +193,55 @@
 
 @push('scripts')
     <script>
+
+        const selectSite = document.getElementById("site_id");
+        const selectTag = document.getElementById("tag_id");
+
         $(document).ready(function () {
             $('.select-2-sites').select2({
                 placeholder: "Select a site",
                 allowClear: true
             });
+            selectTag.disabled = true;
+            const siteParamValue = getQueryParamValue('site_id');
+            if (siteParamValue != null) {
+                getSiteTags(siteParamValue)
+            }
+
+        });
+
+        function createOption(displayMember, valueMember, isSelected) {
+            const newOption = document.createElement("option");
+            newOption.value = valueMember;
+            newOption.text = displayMember;
+            if (isSelected) {
+                newOption.selected = true;
+            }
+            return newOption;
+        }
+
+        function getSiteTags(site_id) {
+
+            const currentBaseUrl = window.location.origin;
+            fetch(`${currentBaseUrl}/company/sites/${site_id}`)
+                .then(response => response.json())  // convert to json
+                .then(function (json) {
+                    selectTag.innerHTML = "";
+                    selectTag.append(createOption("Select Site", ""));
+                    tags = json.data?.site?.tags ?? []
+                    const selectedTagId = getQueryParamValue('tag_id')
+                    tags.forEach((tag) => {
+                        const isSelected = selectedTagId && tag.id === parseInt(selectedTagId, 10);
+                        console.log(selectedTagId)
+                        selectTag.append(createOption(tag.name, tag.id, isSelected));
+                    });
+                    selectTag.disabled = false;
+                })    //print data to console
+                .catch(err => console.log('Request Failed', err)); // Catch errors
+        }
+
+        selectSite.addEventListener("change", function (e) {
+            getSiteTags(e.target.value)
         });
 
         function resetForm() {

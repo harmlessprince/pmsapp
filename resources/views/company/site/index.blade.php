@@ -35,85 +35,50 @@
                 </div>
             </div>
 
-            <!-- filter sites -->
-            <div class="flex flex-row justify-between items-center max-lg:flex-col max-lg:items-start">
-                <div class="relative max-lg:mb-2 max-lg:w-[70%]">
-                    <div onclick="toggleFilter()"
-                         class="rounded-lg border border-natural flex flex-row items-center px-[16px] py-[10px] cursor-pointer">
-                        <img src="{{asset('assets/images/filters.png')}}" class="w-[20px] h-[20px]" alt="plus"/>
-                        <span class="text-natural font-big text-normal ml-2"> More filters</span>
+            <x-filter-card>
+                <form class="" method="GET" action="{{route('company.sites.index')}}" id="search-form-1">
+                    <div class="relative mb-10 w-full flex  items-center justify-between rounded-md">
+                        <svg class="absolute left-2 block h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg"
+                             width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                             stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="11" cy="11" r="8" class=""></circle>
+                            <line x1="21" y1="21" x2="16.65" y2="16.65" class=""></line>
+                        </svg>
+                        <x-text-input id="search" class="h-12 w-full cursor-text bg-db py-4 pr-40 pl-12" type="text"
+                                      name="search" placeholder="Search by name, type, manufacturer, etc"/>
                     </div>
-                    <div id="filter"
-                         class="z-20 absolute hidden bottom-[-1000%] w-[420px] bg-white rounded-lg p-[10%] max-lg:p-[5%] max-lg:w-[100%] max-lg:mb-3 max-lg:bottom-[-1000%]">
-                        <div class="flex flex-row items-center justify-between mb-2">
-                            <span class="font-big text-eighteen text-filter">Filter Sites</span>
-                            <img onclick="toggleFilter()" src="{{asset('assets/images/close.png')}}"
-                                 class="w-[12px] h-[12px] cursor-pointer" alt="plus"/>
+
+                    <div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+                        <div class="flex flex-col">
+                            <x-input-label for="state_id" :value="__('Select State')"/>
+                            <x-select-input id="state_id" class="block mt-1 w-full" name="state_id">
+                                <option value="">Select State</option>
+                                @foreach($states as $state)
+                                    <option
+                                        value="{{$state->id}}" {{ request()->query('state_id') == $state->id ? "selected" : '' }}>{{$state->name}}</option>
+                                @endforeach
+                            </x-select-input>
                         </div>
-
-                        <form method="GET" action="{{route('company.sites.index')}}" id="search-form-2">
-                            <div class="w-full mb-3">
-                                <x-input-label for="state_id" :value="__('Select State')"/>
-                                <x-select-input id="state_id" class="block mt-1 w-full" name="state_id">
-                                    <option value="">Select State</option>
-                                    @foreach($states as $state)
-                                        <option
-                                            value="{{$state->id}}" {{ request()->query('state_id') == $state->id ? "selected" : '' }}>{{$state->name}}</option>
-                                    @endforeach
-                                </x-select-input>
-                                <x-input-error :messages="$errors->get('site')" class="mt-2"/>
-                            </div>
-                            <div class="w-full mb-3">
-                                <label class="font-big text-normal text-filter_text">Filter by Status</label>
-                                <select
-                                    class="outline-none w-full border border-filterInput bg-transparent h-[44px] px-2 py-1 rounded-lg text-normal font-normal text-filter_text"
-                                    name="status" id="status">
-                                    <option value="">Select Status</option>
-                                    <option value="yes" {{ request()->query('status') == 'yes' ? "selected" : '' }}>Active
-                                    </option>
-                                    <option value="no" {{ request()->query('status') == 'no' ? "selected" : '' }}>Inactive
-                                    </option>
-                                </select>
-                            </div>
-
-                            <button
-                                type="reset"
-                                class="mt-[1%] w-[67px] h-[40px] bg-transparent rounded-lg text-normal text-primary_color font-big border border-primary_color"
-                                onclick="resetForm()"
-                            >
-                                Clear
-                            </button>
-                            <button
-                                type="submit"
-                                class="mt-[1%] w-[67px] h-[40px] bg-primary_color rounded-lg text-normal text-natural font-big ml-3"
-                            >
-                                Filter
-                            </button>
-                        </form>
+                        <div class="flex flex-col">
+                            <x-input-label for="status" :value="__('Select Status')"/>
+                            <x-select-input id="status" class="block mt-1 w-full" name="status">
+                                <option value="">Select Status</option>
+                                <option value="active" {{ request()->query('status') == 'active' ? "selected" : '' }}>
+                                    Active
+                                </option>
+                                <option value="inactive" {{ request()->query('status') == 'inactive' ? "selected" : '' }}>
+                                    Inactive
+                                </option>
+                            </x-select-input>
+                        </div>
                     </div>
-                </div>
-                <form method="GET" action="{{route('company.sites.index')}}" id="search-form-1">
-                    <div class="flex flex-row items-center max-lg:flex-col max-lg:items-start max-lg:w-full">
-                        <div class="relative max-lg:w-full">
-                            <img src="{{asset('assets/images/search.png')}}" alt="search"
-                                 class="absolute w-[15px] h-[15px] left-[5%] bottom-[32%]"/>
-                            <input type="search" placeholder="Search by site name, email"
-                                   class="font-normal text-natural text-medium placeholder-natural outline-none  w-[400px] max-lg:w-[100%]  h-[46px] rounded-lg bg-transparent border border-natural px-[10%]"/>
-                        </div>
-                        <button
 
-                            class="w-[80px] h-[40px] outline-none bg-primary_color text-natural text-normal rounded-lg font-big ml-[25px] max-lg:ml-0 max-lg:mt-2">
-                            Search
-                        </button>
-                        <button
-                            type="reset"
-                            class="mt-[1%] w-[67px] h-[40px] bg-transparent rounded-lg text-normal text-primary_color font-big border border-primary_color"
-                            onclick="resetForm()">
-                            Clear
-                        </button>
+                    <div class="mt-6 grid w-full grid-cols-2 justify-end space-x-4 md:flex">
+                        <x-secondary-button type="reset" class="px-8 py-2" onclick="resetForm()">Reset</x-secondary-button>
+                        <x-primary-button class="px-8 py-2" type="submit">Search</x-primary-button>
                     </div>
                 </form>
-            </div>
+            </x-filter-card>
 
             <!-- table 2 section -->
             <section class="border border-table rounded-lg w-[100%] mt-[2%] bg-background_color">
@@ -196,7 +161,7 @@
             $("#status").val('').trigger('change')
 
             document.getElementById("search-form-1").reset();
-            document.getElementById("search-form-2").reset();
+            // document.getElementById("search-form-2").reset();
             window.location.replace(location.pathname);
         }
     </script>

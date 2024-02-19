@@ -19,126 +19,134 @@
 
     <!-- Dashboard content -->
     <section class="">
-        @include('filters.attendance_filter')
-        <!-- filter searches -->
-        <form method="GET" action="{{route('company.attendance.transactions')}}" id="search-form">
+        <x-filter-card>
+            <form method="GET" action="{{route('company.attendance.transactions')}}" id="search-form">
+                <input value="yes" name="date" hidden/>
+                <div class="relative mb-10 w-full flex  items-center justify-between rounded-md">
+                    <svg class="absolute left-2 block h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg"
+                         width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                         stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="11" cy="11" r="8" class=""></circle>
+                        <line x1="21" y1="21" x2="16.65" y2="16.65" class=""></line>
+                    </svg>
+                    <x-text-input id="search" class="h-12 w-full cursor-text bg-db py-4 pr-40 pl-12" type="text"
+                                  name="searchTerm" placeholder="Search by name"
+                                  :value="request()->query('searchTerm')"/>
+                </div>
 
-            <input value="yes" name="date" hidden/>
-            <div class="flex flex-row justify-between items-center max-lg:flex-col">
-                <button
-                    type="button"
-                    data-modal-target="crud-modal"
-                    data-modal-toggle="attendance_more_filter"
-                    id="dropdownDefaultButton"
-                     class="rounded-lg border border-natural flex flex-row items-center px-[16px] py-[10px] cursor-pointer"
-                >
-                    <img src="{{asset('assets/images/filters.png')}}" class="w-[20px] h-[20px]" alt="plus"/>
-                    <span class="text-natural font-big text-normal ml-2"> More filters</span>
-                </button>
-                <div class="w-[75%] flex flex-row justify-between max-lg:w-[100%] max-lg:flex-col">
-                    <div class="w-[15%] max-lg:w-[100%]">
-                        <label class="font-big text-normal text-natural">No Of Rows</label>
-                        <label>
-                            <select
-                                class="cursor-pointer w-full border border-natural bg-db h-[44px] px-2 py-1 rounded-lg text-normal font-normal text-natural"
-                                name="per_page"
-                            >
-                                <option class="" value="15" {{ request()->query('per_page') == 15 ? "selected" : '' }}>
-                                    15 rows
+                <div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+                    <div class="flex flex-col">
+                        <x-input-label for="per_page" :value="__('Number of rows')"/>
+                        <x-select-input id="per_page" class="block w-full" name="per_page">
+                            <option class="" value="15" {{ request()->query('per_page') == 15 ? "selected" : '' }}>
+                                15 rows
+                            </option>
+                            @for ($i = 10; $i <= 50; $i += 10)
+                                <option class=""
+                                        value="{{$i}}" {{ request()->query('per_page') == $i ? "selected" : '' }}> {{$i}}
+                                    rows
                                 </option>
-                                @for ($i = 10; $i <= 50; $i += 10)
-                                    <option class=""
-                                            value="{{$i}}" {{ request()->query('per_page') == $i ? "selected" : '' }}> {{$i}}
-                                        rows
-                                    </option>
-                                @endfor
-
-                            </select>
-                        </label>
+                            @endfor
+                        </x-select-input>
                     </div>
-                    <div class="relative w-[19%] max-lg:w-[100%]">
-                        <label class="font-big text-normal text-natural">Start date</label>
-                        <div class="absolute bottom-[20%] start-0 flex items-center ps-3.5 pointer-events-none">
-                            <svg class="w-4 h-4 text-natural dark:text-gray-400" aria-hidden="true"
-                                 xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
-                                <path
-                                    d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z"/>
-                            </svg>
+
+                    <div class="flex flex-col">
+                        <div class="relative">
+                            <x-input-label for="attendance_date_from_date" :value="__('Start date')"/>
+                            <div class="absolute bottom-[20%] start-0 flex items-center ps-3.5 pointer-events-none">
+                                <svg class="w-4 h-4 text-natural dark:text-gray-400" aria-hidden="true"
+                                     xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                                    <path
+                                        d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z"/>
+                                </svg>
+                            </div>
+                            <x-text-input
+                                id="name"
+                                class="block w-full pl-[20%]"
+                                type="text"
+                                datepicker
+                                datepicker-autohide
+                                datepicker-format="dd-mm-yyyy"
+                                type="text"
+                                placeholder="Select start date"
+                                name="attendance_date_from_date"
+                                :value="request()->query('attendance_date_from_date')"
+                            />
                         </div>
-                        <input
-                            datepicker
-                            datepicker-autohide
-                            datepicker-format="dd-mm-yyyy"
-                            type="text"
-                            class="w-full border border-natural bg-transparent h-11 pl-[21%] max-lg:pl-[12%] py-1 rounded-lg text-natural
-                      placeholder-color font-normal text-normal
-                      focus:outline-none focus:border-primary_color focus:ring-1 focus:ring-background_color"
-                            placeholder="select start date"
-                            name="attendance_date_from_date"
-                            value="{{request()->query('attendance_date_from_date')}}"
-                        />
                     </div>
-
-                    <div class="relative w-[19%] max-lg:w-[100%]">
-                        <label class="font-big text-normal text-natural">End date</label>
-                        <div class="absolute bottom-[20%] start-0 flex items-center ps-3.5 pointer-events-none">
-                            <svg class="w-4 h-4 text-natural dark:text-gray-400" aria-hidden="true"
-                                 xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
-                                <path
-                                    d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z"/>
-                            </svg>
+                    <div class="flex flex-col">
+                        <div class="relative">
+                            <x-input-label for="attendance_date_to_date" :value="__('End date')"/>
+                            <div class="absolute bottom-[20%] start-0 flex items-center ps-3.5 pointer-events-none">
+                                <svg class="w-4 h-4 text-natural dark:text-gray-400" aria-hidden="true"
+                                     xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                                    <path
+                                        d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z"/>
+                                </svg>
+                            </div>
+                            <x-text-input
+                                id="attendance_date_to_date"
+                                class="block w-full pl-[20%]"
+                                type="text"
+                                datepicker
+                                datepicker-autohide
+                                datepicker-format="dd-mm-yyyy"
+                                type="text"
+                                placeholder="Select start date"
+                                name="attendance_date_to_date"
+                                :value="request()->query('attendance_date_to_date')"
+                            />
                         </div>
-                        <input
-                            datepicker
-                            datepicker-autohide
-                            datepicker-format="dd-mm-yyyy"
-                            type="text"
-                            class="w-full border border-natural bg-transparent h-11 pl-[21%] max-lg:pl-[12%] py-1 rounded-lg text-natural
-                    placeholder-color font-normal text-normal
-                    focus:outline-none focus:border-primary_color focus:ring-1 focus:ring-background_color"
-                            placeholder="select end date"
-                            name="attendance_date_to_date"
-                            value="{{request()->query('attendance_date_to_date')}}"
-                        />
                     </div>
 
-                    <div class="w-[26%] max-lg:w-[100%]">
-                        <label class="font-big text-normal text-natural">Select Site</label>
-                        <label>
-                            <select
-                                class="select-2-sites cursor-pointer w-full border border-natural bg-db h-[44px] px-2 py-1 rounded-lg text-normal font-normal text-natural"
-                                name="site_id"
-                            >
-                                <option class="" value="">All site</option>
-                                @foreach($sites as $site)
-                                    <option
-                                        value="{{$site->id}}" {{ request()->query('site_id') == $site->id ? "selected" : '' }}>{{$site->name}}</option>
-                                @endforeach
-                            </select>
-                        </label>
+                    <div class="flex flex-col">
+                        <x-input-label for="site_id" :value="__('Site')" class="text-white"/>
+                        <x-select-input id="site_id" class="block w-full" name="site_id">
+                            <option class="" value="">All site</option>
+                            @foreach($sites as $site)
+                                <option
+                                    value="{{$site->id}}" {{ request()->query('site_id') == $site->id ? "selected" : '' }}>{{$site->name}}</option>
+                            @endforeach
+                        </x-select-input>
                     </div>
-
-                    <div class="mt-[2.5%] flex flex-row justify-between items-center w-[25%] max-lg:w-[100%]">
-                        <button
-                            type="button"
-                            class="cursor-pointer w-[45%] h-[44px] outline-none bg-transparent text-natural text-normal rounded-lg font-semibold px-[16px] py-[10px] border border-primary_color"
-                            onclick="resetForm()">
-                            Reset
-                            <button
-                                class="cursor-pointer w-[45%] h-[44px] outline-none bg-primary_color text-natural text-normal rounded-lg font-big px-[16px] py-[10px]">
-                                Search
-                            </button>
+                    <div class="flex flex-col">
+                        <x-input-label for="attendance_action_type" :value="__('Action type')"/>
+                        <x-select-input id="attendance_action_type" class="block mt-1 w-full"
+                                        name="attendance_action_type">
+                            <option value="">Select Action</option>
+                            <option
+                                value="check_in" {{ request()->query('attendance_action_type') == 'check_in' ? "selected" : '' }}>
+                                Check In
+                            </option>
+                            <option
+                                value="check_out" {{ request()->query('attendance_action_type') == 'check_out' ? "selected" : '' }}>
+                                Check Out
+                            </option>
+                        </x-select-input>
                     </div>
                 </div>
 
-                <div class="flex flex-row items-center justify-end w-[15%] max-lg:w-[100%] mt-[2.5%]">
-                    <span class="text-primary_color text-normal font-big">Export</span>
-                    <img src="{{ asset('assets/images/export2.png')}}" alt="dashboard" class="ml-2 w-[16px] h-[16px]"/>
-                </div>
-            </div>
-            <!-- end of filter search -->
-        </form>
+                <div class="mt-6  w-full">
+                    <div class=" w-full flex justify-between px-5 py-3">
+                        <div>
+                            <x-icon-button class="px-8 py-2 text-primary_color hover:scale-75" type="submit">
+                                <span class="material-symbols-outlined text-primary_color mr-1">export_notes</span>
+                                <span class="text-primary_color">Export</span>
+                            </x-icon-button>
+                        </div>
+                        <div class="grid w-full grid-cols-1 justify-end space-x-4 md:flex">
+                            <x-secondary-button type="reset" class="px-8 py-2" onclick="resetForm()">Reset
+                            </x-secondary-button>
+                            <x-primary-button class="px-8 py-2" type="submit">Apply filters</x-primary-button>
+                        </div>
 
+
+                    </div>
+
+
+                </div>
+            </form>
+        </x-filter-card>
 
         <!-- table -->
         <section class="border border-table py-1 mt-[2%] rounded-lg">
@@ -159,39 +167,41 @@
                     </thead>
                     <tbody>
                     @forelse($attendances as $attendance)
-                    <tr class="border border-table border-x-0 text-natural hover:bg-db">
-                        <td class="text-normal font-normal px-small">{{$attendance->user->first_name}} {{$attendance->user->last_name}}</td>
-                        <td class="text-normal font-normal px-small">
-                            <div>{{$attendance->attendance_date->format('d/m/Y')}}</div>
-                            <div>{{Carbon\Carbon::parse($attendance->attendance_time)->format('g:i A')}}</div>
-                        </td>
-                        <td class="text-normal font-normal px-small">
-                            @if($attendance->action_type == 'check_in')
-                                <button
-                                    class="bg-checkin W-[78px] h-[22px] p-5% rounded-full flex flex-row items-center justify-between">
-                                    <img src="{{asset('assets/images/green_dot.png')}}" alt="dashboard" class="mr-2"/>
-                                    <span class="text-checkInText font-big text-small">Check in</span>
-                                </button>
-                            @endif
-                            @if($attendance->action_type == 'check_out')
-                                <button
-                                    class="bg-checkout W-[78px] h-[22px] p-5% rounded-full flex flex-row items-center justify-between">
-                                    <img src="{{asset('assets/images/red_dot.png')}}" alt="dashboard" class="mr-2"/>
-                                    <span class="text-checkInText font-big text-small">Check out</span>
-                                </button>
-                            @endif
-                        </td>
-                        <td class="text-normal font-normal px-small">{{$attendance->site->name}}</td>
-                        <td class="text-normal font-normal px-small">{{$attendance->distance}} KM</td>
-                        <td class="text-normal font-normal px-small">
-                            <img src="{{ $attendance->user->profile_image ?? asset('assets/images/tableImg.png')}}" alt="dashboard"
-                                 class=" w-[60px] h-[60px]"/>
-                        </td>
-                        <td class="text-normal font-normal p-small">{{$attendance->proximity}}</td>
-                    </tr>
+                        <tr class="border border-table border-x-0 text-natural hover:bg-db">
+                            <td class="text-normal font-normal px-small">{{$attendance->user->first_name}} {{$attendance->user->last_name}}</td>
+                            <td class="text-normal font-normal px-small">
+                                <div>{{$attendance->attendance_date->format('d/m/Y')}}</div>
+                                <div>{{Carbon\Carbon::parse($attendance->attendance_time)->format('g:i A')}}</div>
+                            </td>
+                            <td class="text-normal font-normal px-small">
+                                @if($attendance->action_type == 'check_in')
+                                    <button
+                                        class="bg-checkin  px-2 py-1 me-2 rounded-full flex flex-row items-center justify-between">
+                                        <img src="{{asset('assets/images/green_dot.png')}}" alt="dashboard"
+                                             class="mr-2"/>
+                                        <span class="text-checkInText font-big text-small">Check in</span>
+                                    </button>
+                                @endif
+                                @if($attendance->action_type == 'check_out')
+                                    <button
+                                        class="bg-checkout  px-2 py-1 me-2 rounded-full flex flex-row items-center justify-between">
+                                        <img src="{{asset('assets/images/red_dot.png')}}" alt="dashboard" class="mr-2"/>
+                                        <span class="text-checkInText font-big text-small">Check out</span>
+                                    </button>
+                                @endif
+                            </td>
+                            <td class="text-normal font-normal px-small">{{$attendance->site->name}}</td>
+                            <td class="text-normal font-normal px-small">{{$attendance->distance}} KM</td>
+                            <td class="text-normal font-normal px-small">
+                                <img src="{{ $attendance->user->profile_image ?? asset('assets/images/tableImg.png')}}"
+                                     alt="dashboard"
+                                     class=" w-[60px] h-[60px]"/>
+                            </td>
+                            <td class="text-normal font-normal p-small">{{$attendance->proximity}}</td>
+                        </tr>
                     @empty
                         <tr class="border border-table border-x-0 text-natural hover:bg-db">
-                           <td colspan="7" class="text-center">No Data</td>
+                            <td colspan="7" class="text-center">No Data</td>
                         </tr>
                     @endforelse
                     </tbody>
@@ -214,6 +224,7 @@
         function resetForm() {
             $(".select-2-sites").val('').trigger('change')
             document.getElementById("search-form").reset();
+            document.getElementById("search-form-1").reset();
             window.location.replace(location.pathname);
         }
     </script>

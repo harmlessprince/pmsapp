@@ -23,6 +23,10 @@ class Site extends Model
     {
         return $this->belongsTo(State::class);
     }
+    public function tags()
+    {
+        return $this->hasMany(Tag::class);
+    }
     public function createdBy(): BelongsTo
     {
         return $this->belongsTo(User::class, 'created_by');

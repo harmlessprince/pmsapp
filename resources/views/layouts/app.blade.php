@@ -111,6 +111,11 @@
     const toggleProfile = () => {
         profileDropdown.classList.toggle("hidden")
     }
+    function getQueryParamValue(param) {
+        const queryString = window.location.search;
+        const urlParams = new URLSearchParams(queryString);
+        return urlParams.get(param);
+    }
 
 </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>
