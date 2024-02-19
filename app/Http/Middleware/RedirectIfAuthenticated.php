@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\Enums\RoleEnum;
 use App\Providers\RouteServiceProvider;
 use Closure;
 use Illuminate\Http\Request;
@@ -21,7 +22,12 @@ class RedirectIfAuthenticated
 
         foreach ($guards as $guard) {
             if (Auth::guard($guard)->check()) {
-                return redirect(RouteServiceProvider::HOME);
+                if ($request->user()->hasRole(RoleEnum::COMPANY_OWNER->value)){
+                    return redirect()->intended(route('company.dashboard'));
+                }
+                if ($request->user()->hasRole(RoleEnum::ADMIN->name)){
+                    return redirect()->intended(route('admin-dashboard'));
+                }
             }
         }
 

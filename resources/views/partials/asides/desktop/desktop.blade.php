@@ -4,13 +4,13 @@
         border-l-[0] border-t-[0] border-b-[0] border-r-natural z-50 max-lg:hidden">
     @if(auth()->user()->isCompanyOwner())
         <a class="flex flex-row items-center mb-16" href="{{route('company.dashboard')}}">
-            <img src="{{ asset('assets/images/logo.png') }}" alt="dashboard" class="mr-2"/>
-            <span class="text-lg font-medium text-primary_color">PERFTRAKA</span>
+            <img src="{{ asset('assets/images/logo-red-dot.png') }}" alt="dashboard" class="mr-2"/>
+            <span class="text-lg font-bold text-red-700">PERFTRAKA</span>
         </a>
     @elseif(auth()->user()->isAdministrator())
         <a class="flex flex-row items-center mb-16" href="{{route('admin-dashboard')}}">
-            <img src="{{ asset('assets/images/logo.png') }}" alt="dashboard" class="mr-2"/>
-            <span class="text-lg font-medium text-primary_color">PERFTRAKA</span>
+            <img src="{{ asset('assets/images/logo-red-dot.png') }}" alt="dashboard" class="mr-2"/>
+            <span class="text-lg font-bold text-red-700">PERFTRAKA</span>
         </a>
     @endif
 
