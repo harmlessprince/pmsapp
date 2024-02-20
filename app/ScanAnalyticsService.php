@@ -86,7 +86,7 @@ class ScanAnalyticsService
         $scanCountsDailyPerSite = $scanQuery
             ->join('sites', 'scans.site_id', '=', 'sites.id')
             ->select('sites.name as site_name', DB::raw("TO_CHAR(scan_date, 'YYYY-MM') as month"), DB::raw('COUNT(*) as scan_count'))
-            ->groupBy('sites.name', DB::raw("TO_CHAR(scan_date, 'YYYY-MM')"))->get();
+            ->groupBy('sites.name', DB::raw("TO_CHAR(scan_date, 'YYYY-MM')"))->orderBy( DB::raw("TO_CHAR(scan_date, 'YYYY-MM')"))->get();
 
         $siteData = [];
         $labels = [];

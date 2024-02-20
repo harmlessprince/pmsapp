@@ -117,7 +117,8 @@
                             </thead>
                             @forelse($items as $item)
                                 <tr class="text-left border border-x-0 border-t-0 border-b-table">
-                                    <td class="py-1%">{{\Carbon\Carbon::parse($item->date)->format('F Y')}}</td>
+
+                                    <td class="py-1%">{{\Carbon\Carbon::parse($item->month)->format('F Y')}}</td>
                                     <td class="py-1%">{{$item->actual_scan}}</td>
                                     <td class="py-1%">{{$item->expected_scan}}</td>
                                 </tr>
