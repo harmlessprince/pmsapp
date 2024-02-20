@@ -20,124 +20,75 @@
     <!-- Dashboard content -->
     <section class="">
         <!-- filter searches -->
-        <x-filter-card>
-            <form method="GET" action="{{route('company.scans.transactions')}}" id="search-form">
-                <input value="yes" name="date" hidden/>
-                {{--                <div class="relative mb-10 w-full flex  items-center justify-between rounded-md">--}}
-                {{--                    <svg class="absolute left-2 block h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg"--}}
-                {{--                         width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"--}}
-                {{--                         stroke-width="2" stroke-linecap="round" stroke-linejoin="round">--}}
-                {{--                        <circle cx="11" cy="11" r="8" class=""></circle>--}}
-                {{--                        <line x1="21" y1="21" x2="16.65" y2="16.65" class=""></line>--}}
-                {{--                    </svg>--}}
-                {{--                    <x-text-input id="search" class="h-12 w-full cursor-text bg-db py-4 pr-40 pl-12" type="text"--}}
-                {{--                                  name="searchTerm" placeholder="Search by name"--}}
-                {{--                                  :value="request()->query('searchTerm')"/>--}}
-                {{--                </div>--}}
+        <x-filter-card :actionUrl="route('company.scans.transactions')">
+            <input value="yes" name="date" hidden/>
 
-                <div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-                    <div class="flex flex-col">
-                        <x-input-label for="per_page" :value="__('Number of rows')"/>
-                        <x-select-input id="per_page" class="block w-full" name="per_page">
-                            <option class="" value="15" {{ request()->query('per_page') == 15 ? "selected" : '' }}>
-                                15 rows
-                            </option>
-                            @for ($i = 10; $i <= 50; $i += 10)
-                                <option class=""
-                                        value="{{$i}}" {{ request()->query('per_page') == $i ? "selected" : '' }}> {{$i}}
-                                    rows
-                                </option>
-                            @endfor
-                        </x-select-input>
-                    </div>
 
-                    <div class="flex flex-col">
-                        <div class="relative">
-                            <x-input-label for="scan_date_from_date" :value="__('Start date')"/>
-                            <div class="absolute bottom-[20%] start-0 flex items-center ps-3.5 pointer-events-none">
-                                <svg class="w-4 h-4 text-natural dark:text-gray-400" aria-hidden="true"
-                                     xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
-                                    <path
-                                        d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z"/>
-                                </svg>
-                            </div>
-                            <x-text-input
-                                id="name"
-                                class="block w-full pl-[20%]"
-                                type="text"
-                                datepicker
-                                datepicker-autohide
-                                datepicker-format="dd-mm-yyyy"
-                                type="text"
-                                placeholder="Select start date"
-                                name="scan_date_from_date"
-                                :value="request()->query('scan_date_from_date')"
-                            />
-                        </div>
+            <div class="flex flex-col">
+                <div class="relative">
+                    <x-input-label for="scan_date_from_date" :value="__('Start date')"/>
+                    <div class="absolute bottom-[20%] start-0 flex items-center ps-3.5 pointer-events-none">
+                        <svg class="w-4 h-4 text-natural dark:text-gray-400" aria-hidden="true"
+                             xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                            <path
+                                d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z"/>
+                        </svg>
                     </div>
-                    <div class="flex flex-col">
-                        <div class="relative">
-                            <x-input-label for="scan_date_to_date" :value="__('End date')"/>
-                            <div class="absolute bottom-[20%] start-0 flex items-center ps-3.5 pointer-events-none">
-                                <svg class="w-4 h-4 text-natural dark:text-gray-400" aria-hidden="true"
-                                     xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
-                                    <path
-                                        d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z"/>
-                                </svg>
-                            </div>
-                            <x-text-input
-                                id="scan_date_to_date"
-                                class="block w-full pl-[20%]"
-                                type="text"
-                                datepicker
-                                datepicker-autohide
-                                datepicker-format="dd-mm-yyyy"
-                                type="text"
-                                placeholder="Select start date"
-                                name="scan_date_to_date"
-                                :value="request()->query('scan_date_to_date')"
-                            />
-                        </div>
-                    </div>
-
-                    <div class="flex flex-col">
-                        <x-input-label for="site_id" :value="__('Site')" class="text-white"/>
-                        <x-select-input id="site_id" class="block w-full" name="site_id">
-                            <option class="" value="">All site</option>
-                            @foreach($sites as $site)
-                                <option
-                                    value="{{$site->id}}" {{ request()->query('site_id') == $site->id ? "selected" : '' }}>{{$site->name}}</option>
-                            @endforeach
-                        </x-select-input>
-                    </div>
-                    <div class="flex flex-col">
-                        <x-input-label for="tag_id" :value="__('Tag')" class="text-white"/>
-                        <x-select-input id="tag_id" class="block w-full" name="tag_id">
-                            <option class="" value="">Select a site</option>
-                        </x-select-input>
-                    </div>
+                    <x-text-input
+                        id="name"
+                        class="block w-full pl-[20%]"
+                        type="text"
+                        datepicker
+                        datepicker-autohide
+                        datepicker-format="dd-mm-yyyy"
+                        type="text"
+                        placeholder="Select start date"
+                        name="scan_date_from_date"
+                        :value="request()->query('scan_date_from_date')"
+                    />
                 </div>
-
-                <div class="mt-6  w-full">
-                    <div class=" w-full flex justify-between px-5 py-3">
-                        <div>
-                            <x-icon-button class="px-8 py-2 text-primary_color hover:scale-75" type="submit">
-                                <span class="material-symbols-outlined text-primary_color mr-1">export_notes</span>
-                                <span class="text-primary_color">Export</span>
-                            </x-icon-button>
-                        </div>
-                        <div class="grid w-full grid-cols-1 justify-end space-x-4 md:flex">
-                            <x-secondary-button type="reset" class="px-8 py-2" onclick="resetForm()">Reset
-                            </x-secondary-button>
-                            <x-primary-button class="px-8 py-2" type="submit">Apply filters</x-primary-button>
-                        </div>
-
-
+            </div>
+            <div class="flex flex-col">
+                <div class="relative">
+                    <x-input-label for="scan_date_to_date" :value="__('End date')"/>
+                    <div class="absolute bottom-[20%] start-0 flex items-center ps-3.5 pointer-events-none">
+                        <svg class="w-4 h-4 text-natural dark:text-gray-400" aria-hidden="true"
+                             xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                            <path
+                                d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z"/>
+                        </svg>
                     </div>
-
-
+                    <x-text-input
+                        id="scan_date_to_date"
+                        class="block w-full pl-[20%]"
+                        type="text"
+                        datepicker
+                        datepicker-autohide
+                        datepicker-format="dd-mm-yyyy"
+                        type="text"
+                        placeholder="Select start date"
+                        name="scan_date_to_date"
+                        :value="request()->query('scan_date_to_date')"
+                    />
                 </div>
-            </form>
+            </div>
+
+            <div class="flex flex-col">
+                <x-input-label for="site_id" :value="__('Site')" class="text-white"/>
+                <x-select-input id="site_id" class="block w-full" name="site_id">
+                    <option class="" value="">All site</option>
+                    @foreach($sites as $site)
+                        <option
+                            value="{{$site->id}}" {{ request()->query('site_id') == $site->id ? "selected" : '' }}>{{$site->name}}</option>
+                    @endforeach
+                </x-select-input>
+            </div>
+            <div class="flex flex-col">
+                <x-input-label for="tag_id" :value="__('Tag')" class="text-white"/>
+                <x-select-input id="tag_id" class="block w-full" name="tag_id">
+                    <option class="" value="">Select a site</option>
+                </x-select-input>
+            </div>
         </x-filter-card>
 
 

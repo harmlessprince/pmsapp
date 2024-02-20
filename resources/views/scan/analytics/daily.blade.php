@@ -7,89 +7,66 @@
     <!-- Dashboard content -->
 
     <section>
-        <form method="GET" action="{{route('company.scans.analytics')}}" id="search-form">
-
-            <input type="text" value="yes" name="date" hidden/>
-            <!-- filter searches -->
-            <div class="flex flex-row justify-between items-center w-[100%] max-lg:flex-col">
-                <div class="flex flex-row justify-between items-center w-[65%] max-lg:w-[100%] max-lg:flex-col">
-                    <div class="relative w-[30%] max-lg:w-[100%]">
-                        <label class="font-big text-normal text-natural">From</label>
-                        <div class="absolute bottom-[20%] start-0 flex items-center ps-3.5 pointer-events-none">
-                            <svg class="w-4 h-4 text-natural dark:text-gray-400" aria-hidden="true"
-                                 xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
-                                <path
-                                    d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z"/>
-                            </svg>
-                        </div>
-                        <input
-                            datepicker
-                            datepicker-autohide
-                            datepicker-format="yyyy-mm-dd"
-                            type="text"
-                            class="w-full border border-natural bg-transparent h-11 pl-[21%] max-lg:pl-[12%] py-1 rounded-lg text-natural
-                    placeholder-color font-normal text-normal
-                    focus:outline-none focus:border-primary_color focus:ring-1 focus:ring-background_color
-                    focus:invalid:border-error focus:invalid:ring-error"
-                            placeholder="select date"
-                            name="scan_date_from_date"
-                            value="{{request()->query('scan_date_from_date', $defaultStartMonth)}}"
-                        />
+        <x-filter-card :actionUrl="route('company.scans.analytics')" :hasTable="false">
+            <input value="yes" name="date" hidden/>
+            <div class="flex flex-col">
+                <div class="relative">
+                    <x-input-label for="attendance_date_from_date" :value="__('Start date')"/>
+                    <div class="absolute bottom-[20%] start-0 flex items-center ps-3.5 pointer-events-none">
+                        <svg class="w-4 h-4 text-natural dark:text-gray-400" aria-hidden="true"
+                             xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                            <path
+                                d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z"/>
+                        </svg>
                     </div>
-
-                    <div class="relative w-[30%] max-lg:w-[100%]">
-                        <label class="font-big text-normal text-natural">To</label>
-                        <div class="absolute bottom-[20%] start-0 flex items-center ps-3.5 pointer-events-none">
-                            <svg class="w-4 h-4 text-natural dark:text-gray-400" aria-hidden="true"
-                                 xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
-                                <path
-                                    d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z"/>
-                            </svg>
-                        </div>
-                        <input
-                            datepicker
-                            datepicker-autohide
-                            datepicker-format="yyyy-mm-dd"
-                            type="text"
-                            class="w-full border border-natural bg-transparent h-11 pl-[21%] max-lg:pl-[12%] py-1 rounded-lg text-natural
-                    placeholder-color font-normal text-normal
-                    focus:outline-none focus:border-primary_color focus:ring-1 focus:ring-background_color
-                    focus:invalid:border-error focus:invalid:ring-error"
-                            placeholder="Select end date"
-                            name="scan_date_to_date"
-                            value="{{request()->query('scan_date_to_date', $defaultEndMonth)}}"
-                        />
-                    </div>
-                    <div class="w-[37%] max-lg:w-[100%] relative">
-                        <label class="font-big text-normal text-natural">Frequency</label>
-                        <select class="w-full border border-natural bg-transparent h-11 pl-[5%] py-1 rounded-lg text-natural
-                    placeholder-color font-normal text-normal
-                    focus:outline-none focus:border-primary_color focus:ring-1 focus:ring-background_color
-                    " name="frequency" id="frequency">
-                            @foreach($frequencies as $frequency)
-                                <option class="bg-background_color"
-                                        value="{{$frequency}}">{{strtoupper($frequency)}}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                </div>
-
-                <div class="flex flex-row justify-between items-center w-[25%] max-lg:w-[100%]">
-                    <button
-                        type="button"
-                        class="cursor-pointer w-[45%] h-[44px] outline-none bg-transparent text-natural text-normal rounded-lg font-semibold px-[16px] py-[10px] border border-primary_color"
-                        onclick="resetForm()">
-                        Reset
-                    </button>
-                    <button
-                        class="cursor-pointer w-[45%] h-[44px] outline-none bg-primary_color text-natural text-normal rounded-lg font-big px-[16px] py-[10px]">
-                        Search
-                    </button>
+                    <x-text-input
+                        id="name"
+                        class="block w-full pl-[20%]"
+                        type="text"
+                        datepicker
+                        datepicker-autohide
+                        datepicker-format="yyyy-mm-dd"
+                        type="text"
+                        placeholder="Select start date"
+                        name="scan_date_from_date"
+                        :value="request()->query('scan_date_from_date', $defaultStartMonth)"
+                    />
                 </div>
             </div>
-            <!-- end of filter searches -->
-        </form>
-
+            <div class="flex flex-col">
+                <div class="relative">
+                    <x-input-label for="attendance_date_to_date" :value="__('End date')"/>
+                    <div class="absolute bottom-[20%] start-0 flex items-center ps-3.5 pointer-events-none">
+                        <svg class="w-4 h-4 text-natural dark:text-gray-400" aria-hidden="true"
+                             xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                            <path
+                                d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z"/>
+                        </svg>
+                    </div>
+                    <x-text-input
+                        id="scan_date_to_date"
+                        class="block w-full pl-[20%]"
+                        type="text"
+                        datepicker
+                        datepicker-autohide
+                        datepicker-format="yyyy-mm-dd"
+                        type="text"
+                        placeholder="Select start date"
+                        name="scan_date_to_date"
+                        :value="request()->query('scan_date_to_date', $defaultEndMonth)"
+                    />
+                </div>
+            </div>
+            <div class="flex flex-col">
+                <x-input-label for="frequency" :value="__('Site')" class="text-white"/>
+                <x-select-input id="frequency" class="block w-full" name="frequency">
+                    @foreach($frequencies as $frequency)
+                        <option class="bg-background_color"
+                                value="{{$frequency}}" {{ request()->query('frequency') == $frequency ? "selected" : '' }}>{{strtoupper($frequency)}}</option>
+                    @endforeach
+                </x-select-input>
+            </div>
+        </x-filter-card>
         <!-- start of bar chart -->
         <div class="bg-background_color mt-[5%] max-lg:mt-[10%] rounded-lg overflow-x-auto">
             <div class="text-natural font-normal text-normal p-[2%]">Daily scan % by all sites</div>

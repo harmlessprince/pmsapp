@@ -14,7 +14,7 @@ class Tag extends Model
 
     protected $guarded = [];
 
-    public array $searchable = ['name', 'code'];
+    public array $searchable = ['name', 'code', 'comment'];
 
     public function company()
     {

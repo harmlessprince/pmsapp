@@ -9,72 +9,38 @@
     <!-- Dashboard content -->
 
     <section>
-        <form method="GET" action="{{route('company.scans.analytics')}}" id="search-form">
-
-            <input type="text" value="yes" name="date" hidden/>
-            <!-- filter searches -->
-            <div class="flex flex-row justify-between items-center w-[100%] max-lg:flex-col">
-                <div class="flex flex-row justify-between items-center w-[65%] max-lg:w-[100%] max-lg:flex-col">
-                    <div class="relative w-[30%] max-lg:w-[100%]">
-                        <label class="font-big text-normal text-natural">From</label>
-                        <label>
-                            <select
-                                class="cursor-pointer w-full border border-natural bg-db h-[44px] px-2 py-1 rounded-lg text-normal font-normal text-natural"
-                                name="scan_date_from_date"
-                            >
-                                <option class="" value="">Select Month Year</option>
-                                @foreach($months as $month)
-                                    <option
-                                        value="{{$month['value']}}" {{ request()->query('scan_date_from_date', $defaultStartMonth) == $month['value'] ? "selected" : '' }}>{{$month['name']}}</option>
-                                @endforeach
-                            </select>
-                        </label>
-                    </div>
-
-                    <div class="relative w-[30%] max-lg:w-[100%]">
-                        <label class="font-big text-normal text-natural">To</label>
-                        <label>
-                            <select
-                                class="cursor-pointer w-full border border-natural bg-db h-[44px] px-2 py-1 rounded-lg text-normal font-normal text-natural"
-                                name="scan_date_to_date"
-                            >
-                                <option class="" value="">Select Month Year</option>
-                                @foreach($months as $month)
-                                    <option
-                                        value="{{$month['value']}}" {{ request()->query('scan_date_to_date', $defaultEndMonth) == $month['value'] ? "selected" : '' }}>{{$month['name']}}</option>
-                                @endforeach
-                            </select>
-                        </label>
-                    </div>
-                    <div class="w-[37%] max-lg:w-[100%] relative">
-                        <label class="font-big text-normal text-natural">Frequency</label>
-                        <select class="w-full border border-natural bg-transparent h-11 pl-[5%] py-1 rounded-lg text-natural
-                    placeholder-color font-normal text-normal
-                    focus:outline-none focus:border-primary_color focus:ring-1 focus:ring-background_color
-                    focus:invalid:border-error focus:invalid:ring-error" name="frequency" id="frequency">
-                            @foreach($frequencies as $frequency)
-                                <option class="bg-background_color"
-                                        value="{{$frequency}}" {{ request()->query('frequency') == $frequency ? "selected" : '' }}>{{strtoupper($frequency)}}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                </div>
-
-                <div class="flex flex-row justify-between items-center w-[25%] max-lg:w-[100%]">
-                    <button
-                        type="button"
-                        class="cursor-pointer w-[45%] h-[44px] outline-none bg-transparent text-natural text-normal rounded-lg font-semibold px-[16px] py-[10px] border border-primary_color"
-                        onclick="resetForm()">
-                        Reset
-                    </button>
-                    <button
-                        class="cursor-pointer w-[45%] h-[44px] outline-none bg-primary_color text-natural text-normal rounded-lg font-big px-[16px] py-[10px]">
-                        Search
-                    </button>
-                </div>
+        <x-filter-card :actionUrl="route('company.scans.analytics')" :hasTable="false">
+            <input value="yes" name="date" hidden/>
+            <div class="flex flex-col">
+                <x-input-label for="scan_date_from_date" :value="__('From')" class="text-white"/>
+                <x-select-input id="scan_date_from_date" class="block w-full" name="scan_date_from_date">
+                    <option class="" value="">Select Start Month Year</option>
+                    @foreach($months as $month)
+                        <option
+                            value="{{$month['value']}}" {{ request()->query('scan_date_from_date', $defaultStartMonth) == $month['value'] ? "selected" : '' }}>{{$month['name']}}</option>
+                    @endforeach
+                </x-select-input>
             </div>
-            <!-- end of filter searches -->
-        </form>
+            <div class="flex flex-col">
+                <x-input-label for="scan_date_to_date" :value="__('To')" class="text-white"/>
+                <x-select-input id="scan_date_to_date" class="block w-full" name="scan_date_to_date">
+                    <option class="" value="">Select End Month Year</option>
+                    @foreach($months as $month)
+                        <option
+                            value="{{$month['value']}}" {{ request()->query('scan_date_to_date', $defaultEndMonth) == $month['value'] ? "selected" : '' }}>{{$month['name']}}</option>
+                    @endforeach
+                </x-select-input>
+            </div>
+            <div class="flex flex-col">
+                <x-input-label for="frequency" :value="__('Site')" class="text-white"/>
+                <x-select-input id="frequency" class="block w-full" name="frequency">
+                    @foreach($frequencies as $frequency)
+                        <option class="bg-background_color"
+                                value="{{$frequency}}" {{ request()->query('frequency') == $frequency ? "selected" : '' }}>{{strtoupper($frequency)}}</option>
+                    @endforeach
+                </x-select-input>
+            </div>
+        </x-filter-card>
 
         <!-- start of bar chart -->
         <div class="bg-background_color mt-[5%] max-lg:mt-[10%] rounded-lg overflow-x-auto">
@@ -235,11 +201,12 @@
             document.getElementById("search-form").reset();
             window.location.replace(location.pathname);
         }
+
         var coll = document.getElementsByClassName("collapsible");
         var i;
 
         for (i = 0; i < coll.length; i++) {
-            coll[i].addEventListener("click", function() {
+            coll[i].addEventListener("click", function () {
                 this.classList.toggle("active");
                 var content = this.nextElementSibling;
                 if (content.style.display === "block") {

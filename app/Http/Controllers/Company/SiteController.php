@@ -37,7 +37,7 @@ class SiteController extends Controller
      */
     public function index()
     {
-        $siteQuery = $this->siteRepository->modelQuery();
+        $siteQuery = $this->siteRepository->modelQuery()->search();
 
         $pipes = [
             CreatedAtFilter::class,

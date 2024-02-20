@@ -11,7 +11,14 @@ class FilterCard extends Component
     /**
      * Create a new component instance.
      */
-    public function __construct()
+    public function __construct(
+        public string $actionUrl = "",
+        public string $formId = 'search-form',
+        public bool   $canExport = false,
+        public bool   $canSearch = false,
+        public string   $searchPlaceholder = "Search",
+        public bool $hasTable = true,
+    )
     {
         //
     }

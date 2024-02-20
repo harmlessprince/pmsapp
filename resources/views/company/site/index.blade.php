@@ -35,51 +35,32 @@
                 </div>
             </div>
 
-            <x-filter-card>
-                <form class="" method="GET" action="{{route('company.sites.index')}}" id="search-form-1">
-                    <div class="relative mb-10 w-full flex  items-center justify-between rounded-md">
-                        <svg class="absolute left-2 block h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg"
-                             width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                             stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <circle cx="11" cy="11" r="8" class=""></circle>
-                            <line x1="21" y1="21" x2="16.65" y2="16.65" class=""></line>
-                        </svg>
-                        <x-text-input id="search" class="h-12 w-full cursor-text bg-db py-4 pr-40 pl-12" type="text"
-                                      name="search" placeholder="Search by name, type, manufacturer, etc"/>
+            <section>
+                <x-filter-card :actionUrl="route('company.sites.index')" :hasTable="false" :canSearch="true" :searchPlaceholder="'Search by site name or email'">
+                    <div class="flex flex-col">
+                        <x-input-label for="state_id" :value="__('Select State')"/>
+                        <x-select-input id="state_id" class="block mt-1 w-full" name="state_id">
+                            <option value="">Select State</option>
+                            @foreach($states as $state)
+                                <option
+                                    value="{{$state->id}}" {{ request()->query('state_id') == $state->id ? "selected" : '' }}>{{$state->name}}</option>
+                            @endforeach
+                        </x-select-input>
                     </div>
-
-                    <div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-                        <div class="flex flex-col">
-                            <x-input-label for="state_id" :value="__('Select State')"/>
-                            <x-select-input id="state_id" class="block mt-1 w-full" name="state_id">
-                                <option value="">Select State</option>
-                                @foreach($states as $state)
-                                    <option
-                                        value="{{$state->id}}" {{ request()->query('state_id') == $state->id ? "selected" : '' }}>{{$state->name}}</option>
-                                @endforeach
-                            </x-select-input>
-                        </div>
-                        <div class="flex flex-col">
-                            <x-input-label for="status" :value="__('Select Status')"/>
-                            <x-select-input id="status" class="block mt-1 w-full" name="status">
-                                <option value="">Select Status</option>
-                                <option value="active" {{ request()->query('status') == 'active' ? "selected" : '' }}>
-                                    Active
-                                </option>
-                                <option value="inactive" {{ request()->query('status') == 'inactive' ? "selected" : '' }}>
-                                    Inactive
-                                </option>
-                            </x-select-input>
-                        </div>
+                    <div class="flex flex-col">
+                        <x-input-label for="status" :value="__('Select Status')"/>
+                        <x-select-input id="status" class="block mt-1 w-full" name="status">
+                            <option value="">Select Status</option>
+                            <option value="active" {{ request()->query('status') == 'active' ? "selected" : '' }}>
+                                Active
+                            </option>
+                            <option value="inactive" {{ request()->query('status') == 'inactive' ? "selected" : '' }}>
+                                Inactive
+                            </option>
+                        </x-select-input>
                     </div>
-
-                    <div class="mt-6 grid w-full grid-cols-2 justify-end space-x-4 md:flex">
-                        <x-secondary-button type="reset" class="px-8 py-2" onclick="resetForm()">Reset</x-secondary-button>
-                        <x-primary-button class="px-8 py-2" type="submit">Search</x-primary-button>
-                    </div>
-                </form>
-            </x-filter-card>
-
+                </x-filter-card>
+            </section>
             <!-- table 2 section -->
             <section class="border border-table rounded-lg w-[100%] mt-[2%] bg-background_color">
                 <div class="overflow-x-auto">
@@ -159,9 +140,7 @@
         function resetForm() {
             $("#state_id").val('').trigger('change')
             $("#status").val('').trigger('change')
-
-            document.getElementById("search-form-1").reset();
-            // document.getElementById("search-form-2").reset();
+            document.getElementById("search-form").reset();
             window.location.replace(location.pathname);
         }
     </script>
