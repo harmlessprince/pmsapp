@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Mobile;
 
 use App\Enums\RoleEnum;
+use App\Exceptions\CustomException;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreAttendanceRequest;
 use App\Repositories\Eloquent\Repository\AttendanceRepository;
@@ -33,6 +34,9 @@ class AttendanceController extends Controller
         return sendSuccess(['attendances' => $attendances], 'All attendance retrieved');
     }
 
+    /**
+     * @throws CustomException
+     */
     public function store(StoreAttendanceRequest $request)
     {
         $securityGuard = $this->userRepository->findByRole($request->input('security_guard_id'), RoleEnum::SECURITY->value);
@@ -41,13 +45,20 @@ class AttendanceController extends Controller
             return sendError("Security guard does not exist", 404);
         }
         $user = $request->user()->load('site');
+        $latitude = $request->input('latitude');
+        $longitude = $request->input('longitude');
+        if ($latitude && $longitude) {
+            $distance = calculateDistance($user->site->latitude, $user->site->longitude, $request->input('latitude'), $request->input('longitude'));
+            $proximity = deriveProximity($distance);
+        } else {
+            $distance = null;
+            $proximity = 'No Point Configured';
+        }
 
-        $distance = calculateDistance($user->site->latitude, $user->site->longitude, $request->input('latitude'), $request->input('longitude'));
-        $proximity = deriveProximity($distance);
         $image = null;
-        if ($request->hasFile('image')){
+        if ($request->hasFile('image')) {
             $response = FileUploadService::uploadToS3($request->file('image'), 'profile_images');
-            $image  = $response->path;
+            $image = $response->path;
         }
 
         $attendance = $this->attendanceRepository->create([
@@ -55,8 +66,8 @@ class AttendanceController extends Controller
             'image' => $image,
             'attendance_date' => $request->input('attendance_date'),
             'attendance_time' => $request->input('attendance_time'),
-            'longitude' => $request->input('longitude'),
-            'latitude' => $request->input('latitude'),
+            'longitude' => $longitude,
+            'latitude' => $latitude,
             'user_id' => $request->input('security_guard_id'),
             'site_id' => $user->site_id,
             'company_id' => $user->company_id,

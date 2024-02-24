@@ -41,6 +41,14 @@
             --tw-text-opacity: 1;
             color: rgb(254 255 254 / var(--tw-text-opacity));
         }
+        @keyframes text-animation {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+        .button-transition {
+            transition: text-animation 1s ease; /* Adjust the transition duration as needed */
+        }
     </style>
     @vite(['resources/js/app.js', 'resources/css/app.css'])
     @stack('header-scripts')
@@ -120,6 +128,28 @@
         const queryString = window.location.search;
         const urlParams = new URLSearchParams(queryString);
         return urlParams.get(param);
+    }
+
+    const exportCheckbox = document.getElementById('export_checkbox')
+    if (exportCheckbox != null) {
+        exportCheckbox.value = 'filter'
+        const exportButton = document.getElementById('filter_button')
+        exportCheckbox.addEventListener('change', function () {
+
+            if (this.checked) {
+                exportCheckbox.value = 'export'
+                exportButton.innerText = 'Export Data'
+            } else {
+                exportCheckbox.value = 'filter'
+                exportButton.innerText = 'Apply Filters'
+            }
+            // Add a class to trigger the transition
+            exportButton.classList.add('button-transition');
+            // Remove the class after a short delay to allow the transition to complete
+            setTimeout(() => {
+                exportButton.classList.remove('button-transition');
+            }, 300); // Adjust the delay time as needed
+        })
     }
 
 </script>

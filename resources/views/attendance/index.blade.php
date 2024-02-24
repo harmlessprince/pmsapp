@@ -20,7 +20,7 @@
     <!-- Dashboard content -->
     <section class="">
         <x-filter-card :actionUrl="route('company.attendance.transactions')" :canSearch="true"
-                       :searchPlaceholder="'Search by name'">
+                       :searchPlaceholder="'Search by name'" :canExport="true">
             <input value="yes" name="date" hidden/>
             <div class="flex flex-col">
                 <div class="relative">

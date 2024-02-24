@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\AttendanceExport;
+use App\Exports\ScansExport;
 use App\Http\Requests\StoreScanRequest;
 use App\Http\Requests\UpdateScanRequest;
 use App\Models\Scan;
@@ -13,7 +15,8 @@ use App\QueryFilters\TagIdFilter;
 use App\Repositories\Eloquent\Repository\CompanyRepository;
 use App\Repositories\Eloquent\Repository\ScanRepository;
 use App\Repositories\Eloquent\Repository\SiteRepository;
-
+use Carbon\Carbon;
+use Illuminate\Http\Request;
 class ScanController extends Controller
 {
 
@@ -27,18 +30,21 @@ class ScanController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
+
         $pipes = [
             new DateFilter('scan_date'),
             CompanyIdFilter::class,
             SiteIdFilter::class,
             TagIdFilter::class,
         ];
+        if ($request->query('export') == 'export') {
+            $name = 'scan_report_' . Carbon::now()->format('d-m-Y') . '.xlsx';
+            session()->flash('success', 'Scan exported successfully');
+            return (new ScansExport($this->scanRepository))->download($name);
+        }
 
-
-
-//        $companies =  $this->companyRepository->all();
         $sites =  $this->siteRepository->all();
         $scanQuery = $this->scanRepository->modelQuery()->search();
         $scanQuery = constructPipes($scanQuery, $pipes);

@@ -1,4 +1,4 @@
-<div class="mt-4 w-full">
+<div class="w-full">
 
     <div class="flex flex-col">
         <div class="rounded-xl border border-gray-200 bg-background_color p-6 shadow-lg">
@@ -41,20 +41,24 @@
                 </div>
 
                 <div class="mt-3  w-full">
-                    <div class=" w-full flex justify-between px-5 py-3">
+                    <div class=" w-full flex justify-between items-center px-5 py-3">
                         @if($canExport)
                             <div>
-                                <x-icon-button class="px-8 py-2 text-primary_color hover:scale-75" type="button"
-                                >
-                                    <span class="material-symbols-outlined text-primary_color mr-1">export_notes</span>
-                                    <span class="text-primary_color">Export</span>
-                                </x-icon-button>
+                                <label class="inline-flex items-center me-5 cursor-pointer">
+                                    <input type="checkbox" value="" class="sr-only peer" id="export_checkbox"
+                                           name="export">
+                                    <div
+                                        class="relative w-11 h-6 bg-gray-200 rounded-full peer dark:bg-gray-700 peer-focus:ring-4 peer-focus:ring-teal-300 dark:peer-focus:ring-teal-800 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-teal-600"></div>
+                                    <span
+                                        class="ms-3 text-sm font-medium text-gray-900 dark:text-gray-300">Export</span>
+                                </label>
                             </div>
                         @endif
                         <div class="grid w-full grid-cols-1 justify-end space-x-4 md:flex">
                             <x-secondary-button type="reset" class="px-8 py-2" onclick="resetForm()">Reset
                             </x-secondary-button>
-                            <x-primary-button class="px-8 py-2" type="submit">Apply filters</x-primary-button>
+                            <x-primary-button class="px-8 py-2" type="submit" id="filter_button">Apply filters
+                            </x-primary-button>
                         </div>
                     </div>
                 </div>
@@ -63,3 +67,4 @@
     </div>
 
 </div>
+
