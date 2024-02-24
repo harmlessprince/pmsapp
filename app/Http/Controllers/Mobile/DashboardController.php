@@ -30,10 +30,10 @@ class DashboardController extends Controller
                 $query->where('name', RoleEnum::SECURITY->value);
             })->count();
         $latestAttendance = $this->attendanceRepository->modelQuery()
-            ->select(['id', 'site_id', 'company_id', 'attendance_time', 'attendance_date', 'attendance_date_time', 'image', 'action_type'])
+            ->select(['id', 'site_id', 'company_id', 'attendance_time', 'attendance_date', 'attendance_date_time', 'image', 'action_type', 'user_id'])
             ->where('site_id', $user->site_id)
             ->where('company_id', $user->company_id)
-            ->with(['site:id,name','company:id,name'])
+            ->with(['site:id,name','company:id,name', 'user:id,first_name,last_name,profile_image'])
             ->latest()->limit(10)->get();
         $latestScans = $this->scanRepository->modelQuery()
             ->select(['id', 'site_id', 'company_id', 'scan_time', 'scan_date', 'scan_date_time'])

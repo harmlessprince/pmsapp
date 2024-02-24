@@ -25,8 +25,8 @@ class AttendanceController extends Controller
     {
         $user = $request->user();
         $attendances = $this->attendanceRepository->modelQuery()
-            ->select(['id', 'site_id', 'company_id', 'attendance_time', 'attendance_date', 'attendance_date_time', 'image', 'action_type'])
-            ->with(['site:id,name', 'company:id,name'])
+            ->select(['id', 'site_id', 'company_id', 'attendance_time', 'attendance_date', 'attendance_date_time', 'image', 'action_type', 'user_id'])
+            ->with(['site:id,name', 'company:id,name', 'user:id,first_name,last_name,profile_image'])
             ->where('company_id', $user->company_id)
             ->where('site_id', $user->site_id)
             ->paginate();
