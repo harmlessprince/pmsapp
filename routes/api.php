@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\Mobile\Attendancecontroller;
+use App\Http\Controllers\Mobile\AttendanceController;
 use App\Http\Controllers\Mobile\AuthenticationController;
 use App\Http\Controllers\Mobile\DashboardController;
 use App\Http\Controllers\Mobile\ScanController;
@@ -33,8 +33,8 @@ Route::middleware('auth:sanctum')->group(function (){
     Route::get('dashboard', [DashboardController::class, 'dashboard']);
     Route::get('scans', [ScanController::class, 'index']);
     Route::post('scans', [ScanController::class, 'store']);
-    Route::get('attendances', [Attendancecontroller::class, 'index']);
-    Route::post('attendances', [Attendancecontroller::class, 'store']);
+    Route::get('attendances', [AttendanceController::class, 'index']);
+    Route::post('attendances', [AttendanceController::class, 'store']);
 
     Route::get('guards', [SecurityGuardController::class, 'index']);
     Route::post('guards', [SecurityGuardController::class, 'store']);
