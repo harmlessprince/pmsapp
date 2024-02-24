@@ -25,7 +25,7 @@ class AttendanceController extends Controller
     {
         $user = $request->user();
         $attendances = $this->attendanceRepository->modelQuery()
-            ->select(['id', 'site_id', 'company_id', 'attendance_time', 'attendance_date', 'attendance_date_time', 'image'])
+            ->select(['id', 'site_id', 'company_id', 'attendance_time', 'attendance_date', 'attendance_date_time', 'image', 'action_type'])
             ->with(['site:id,name', 'company:id,name'])
             ->where('company_id', $user->company_id)
             ->where('site_id', $user->site_id)
