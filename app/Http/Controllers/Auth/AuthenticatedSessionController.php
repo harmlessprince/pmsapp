@@ -33,7 +33,7 @@ class AuthenticatedSessionController extends Controller
             return redirect()->intended(route('company.dashboard'));
         }
         if ($request->user()->hasRole(RoleEnum::SUPER_ADMIN->value)){
-            return redirect()->intended(route('admin-dashboard'));
+            return redirect()->intended(route('admin.dashboard'));
         }
         return $this->destroy($request);
     }

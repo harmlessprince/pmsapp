@@ -33,7 +33,7 @@ Route::get('/', function () {
 
 
 
-Route::prefix('company')->middleware('auth')->name('company.')->group(function (){
+Route::prefix('company')->middleware(['auth', 'company_owner'])->name('company.')->group(function (){
     Route::get('dashboard', [DashboardController::class, 'company'])->name('dashboard');
     Route::prefix('attendance')->name('attendance.')->group(function (){
         Route::get('analytics', AttendanceAnalyticsController::class)->name('analytics');
@@ -53,9 +53,6 @@ Route::prefix('company')->middleware('auth')->name('company.')->group(function (
     Route::resource('sites', SiteController::class);
 
 });
-
-Route::get('admin/dashboard', [DashboardController::class, 'admin'])->middleware(['auth'])->name('admin-dashboard');
-
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

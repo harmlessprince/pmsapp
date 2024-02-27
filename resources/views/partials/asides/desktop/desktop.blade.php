@@ -7,15 +7,18 @@
             <img src="{{ asset('assets/images/logo-red-dot.png') }}" alt="dashboard" class="mr-2"/>
             <span class="text-lg font-bold text-red-700">PERFTRAKA</span>
         </a>
+        @include('partials.asides.desktop.dash')
+        @include('partials.asides.desktop.company.analytics')
+        @include('partials.asides.desktop.company.transactions')
+        @include('partials.asides.desktop.company.management')
     @elseif(auth()->user()->isAdministrator())
-        <a class="flex flex-row items-center mb-16" href="{{route('admin-dashboard')}}">
+        <a class="flex flex-row items-center mb-16" href="{{route('admin.dashboard')}}">
             <img src="{{ asset('assets/images/logo-red-dot.png') }}" alt="dashboard" class="mr-2"/>
             <span class="text-lg font-bold text-red-700">PERFTRAKA</span>
         </a>
+        @include('partials.asides.desktop.dash')
+        @include('partials.asides.desktop.admin.tag')
     @endif
 
-    @include('partials.asides.desktop.dash')
-    @include('partials.asides.desktop.analytics')
-    @include('partials.asides.desktop.transactions')
-    @include('partials.asides.desktop.management')
+
 </aside>

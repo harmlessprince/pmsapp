@@ -9,9 +9,9 @@
              alt="cancel"/>
     </div>
     @include('partials.asides.desktop.dash')
-    @include('partials.asides.desktop.analytics')
-    @include('partials.asides.desktop.transactions')
-    @include('partials.asides.desktop.management')
+    @include('partials.asides.desktop.company.analytics')
+    @include('partials.asides.desktop.company.transactions')
+    @include('partials.asides.desktop.company.management')
     <div class="mb-8 cursor-pointer">
         <span class="text-natural text-base font-medium">Log out</span>
     </div>
