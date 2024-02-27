@@ -54,7 +54,7 @@ Route::prefix('company')->middleware('auth')->name('company.')->group(function (
 
 });
 
-Route::get('admin/dashboard', [DashboardController::class, 'admin'])->middleware(['auth', 'verified'])->name('admin-dashboard');
+Route::get('admin/dashboard', [DashboardController::class, 'admin'])->middleware(['auth'])->name('admin-dashboard');
 
 
 Route::middleware('auth')->group(function () {
