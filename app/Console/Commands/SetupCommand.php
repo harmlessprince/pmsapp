@@ -73,7 +73,7 @@ class SetupCommand extends Command
             ]
         );
         $admin->assignRole(RoleEnum::ADMIN->value);
-//        $dashboard->a
+
         $company_owner = User::query()->updateOrCreate(
             [
                 "username" => env('COMPANY_OWNER_EMAIL'),
