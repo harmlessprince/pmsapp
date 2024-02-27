@@ -64,7 +64,7 @@
                         datepicker-autohide
                         datepicker-format="dd-mm-yyyy"
                         type="text"
-                        placeholder="Select start date"
+                        placeholder="Select end date"
                         name="attendance_date_to_date"
                         :value="request()->query('attendance_date_to_date')"
                     />

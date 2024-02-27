@@ -5,7 +5,7 @@ namespace App\Enums;
 enum RoleEnum: string
 {
     case SUPER_ADMIN = 'super_admin';
-    case ADMIN = 'dashboard';
+    case ADMIN = 'admin';
     case RESELLER = 'reseller';
     case SITE_INSPECTOR = 'site_inspector';
 

@@ -29,12 +29,10 @@ class AuthenticatedSessionController extends Controller
         $request->authenticate();
 
         $request->session()->regenerate();
-
-
         if ($request->user()->hasRole(RoleEnum::COMPANY_OWNER->value)){
             return redirect()->intended(route('company.dashboard'));
         }
-        if ($request->user()->hasRole(RoleEnum::ADMIN->name)){
+        if ($request->user()->hasRole(RoleEnum::SUPER_ADMIN->value)){
             return redirect()->intended(route('admin-dashboard'));
         }
         return $this->destroy($request);

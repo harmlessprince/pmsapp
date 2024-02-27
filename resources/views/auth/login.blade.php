@@ -34,7 +34,7 @@
                 focus:outline-none focus:border-primary_color focus:ring-1 focus:ring-background_color
                 focus:invalid:error focus:invalid:error
                 "
-                placeholder=". . . . . . . " name="password" value="password"/>
+                placeholder=". . . . . . . " name="password" value=""/>
             <x-input-error :messages="$errors->get('password')" class="mt-2"/>
         </div>
 
