@@ -21,6 +21,7 @@ class AuthenticationController extends Controller
         try {
             /* @var User $user */
             $user = User::query()->where('email', Str::lower($request->email))->with(['tenant', 'site'])->first();
+//            dd($user);
             if (!$user || !Hash::check($request->input('password'), $user->password)) {
                 return sendError('The provided credentials are incorrect.', 401);
             }

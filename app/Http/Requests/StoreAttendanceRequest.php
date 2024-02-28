@@ -27,6 +27,7 @@ class StoreAttendanceRequest extends FormRequest
         return [
             'action_type' => ['required', 'string', Rule::in([AttendanceActionTypeEnum::CHECK_IN->value, AttendanceActionTypeEnum::CHECK_OUT->value])],
             'image' => ['required', 'image'],
+            'comment' => ['nullable', 'string', 'max:500'],
             'security_guard_id' => ['required', 'integer', 'exists:users,id'],
             'attendance_date' => ['required', 'date_format:Y-m-d'],
             'attendance_time' => ['required', 'date_format:H:i:s'],
