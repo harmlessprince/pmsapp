@@ -22,8 +22,8 @@ class ScanController extends Controller
     public function index(Request $request): JsonResponse
     {
         $scans = $this->scanRepository->allPaginated(
-            ['id', 'site_id', 'company_id', 'scan_time', 'scan_date', 'scan_date_time'],
-            ['site:id,name','company:id,name']
+            ['id', 'site_id', 'company_id','tag_id', 'scan_time', 'scan_date', 'scan_date_time'],
+            ['site:id,name','company:id,name', 'tag:id,name,code']
         );
         return sendSuccess(['scans' => $scans], 'All scans retrieved');
     }
