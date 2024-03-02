@@ -1,5 +1,6 @@
 @extends('layouts.app')
 @section('title', 'Tags')
+@section('page', 'Tag Management')
 @section('content')
 
     <section>
@@ -7,7 +8,7 @@
             <div
                 class="flex flex-row  bg-background_color rounded-lg h-[111px] w-[290px] items-center px-[20px] max-lg:mx-auto">
                 <div class="w-[44px] h-[44px] bg-tags rounded-lg flex flex-row items-center justify-center">
-                    <span class="material-symbols-outlined text-white">tag</span>
+                    <span class="material-symbols-outlined text-white">sell</span>
                 </div>
                 <div class="ml-[5%]">
                     <h1 class="font-bold text-3xl text-tags">12233</h1>
@@ -68,8 +69,41 @@
                         </thead>
                         <tbody>
 
-                        <tr class="text-normal font-normal text-natural border border-table border-collapse hover:bg-db">
+                        
+                        <tr class=" text-normal font-normal border border-table border-x-0 border-b-0 text-natural hover:bg-db">
+                            <td class="text-normal font-normal px-small">company name</td>
+                            <td class="text-normal font-normal  px-small py-smaller">Headquarters</td>
+                            <td class="text-normal font-normal  px-small py-smaller">fun pathway</td>
+                            <td class="text-normal font-normal px-small">Headquarters</td>
+                            <td class="text-normal font-normal px-small">Qr code</td>
+                            <td class="text-normal font-normal px-small">Qr code</td>
+                            <td class="text-normal font-normal px-small">
+                                <span class="material-symbols-outlined w-[24px] h-[24px] text-natural">edit_square</span>
+                            </td>
+                        </tr>
 
+                        <tr class=" text-normal font-normal border border-table border-x-0 border-b-0 text-natural hover:bg-db">
+                            <td class="text-normal font-normal px-small">company name</td>
+                            <td class="text-normal font-normal  px-small py-smaller">Headquarters</td>
+                            <td class="text-normal font-normal  px-small py-smaller">fun pathway</td>
+                            <td class="text-normal font-normal px-small">Headquarters</td>
+                            <td class="text-normal font-normal px-small">Qr code</td>
+                            <td class="text-normal font-normal px-small">Qr code</td>
+                            <td class="text-normal font-normal px-small">
+                                <span class="material-symbols-outlined w-[24px] h-[24px] text-natural">edit_square</span>
+                            </td>
+                        </tr>
+
+                        <tr class=" text-normal font-normal border border-table border-x-0 border-b-0 text-natural hover:bg-db">
+                            <td class="text-normal font-normal px-small">company name</td>
+                            <td class="text-normal font-normal  px-small py-smaller">Headquarters</td>
+                            <td class="text-normal font-normal  px-small py-smaller">fun pathway</td>
+                            <td class="text-normal font-normal px-small">Headquarters</td>
+                            <td class="text-normal font-normal px-small">Qr code</td>
+                            <td class="text-normal font-normal px-small">Qr code</td>
+                            <td class="text-normal font-normal px-small">
+                                <span class="material-symbols-outlined w-[16px] h-[16px] text-natural">edit_square</span>
+                            </td>
                         </tr>
 
                         </tbody>

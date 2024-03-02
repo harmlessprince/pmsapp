@@ -1,6 +1,6 @@
 @extends('layouts.app')
-@section('title', 'Company')
-@section('page', 'Company')
+@section('title', 'Site management')
+@section('page', 'Site management')
 @push('header-scripts')
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"
             integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
@@ -11,12 +11,12 @@
         <section class="flex flex-row justify-between w-[100%] max-lg:mt-[15%]">
             <div
                 class="flex flex-row bg-background_color rounded-lg h-[111px] w-[290px] items-center px-[20px] max-lg:mx-auto">
-                <div class="w-[44px] h-[44px] bg-primary_color rounded-lg flex flex-row items-center justify-center">
-                    <span class="material-symbols-outlined text-white">account_balance</span>
+                <div class="w-[44px] h-[44px] bg-site rounded-lg flex flex-row items-center justify-center">
+                    <span class="material-symbols-outlined text-white">pin_drop</span>
                 </div>
                 <div class="ml-[5%]">
-                    <h1 class="font-bold text-3xl text-primary_color">74</h1>
-                    <span class="font-normal text-sm text-primary_color">Companies</span>
+                    <h1 class="font-bold text-3xl text-site">740</h1>
+                    <span class="font-normal text-sm text-site">Sites</span>
                 </div>
             </div>
         </section>
@@ -25,13 +25,13 @@
         <section class="pt-basic_padding">
             <!-- add user -->
             <div class="font-big text-big text-natural mb-2 flex flex-row justify-between">
-                <div>Added Companies</div>
+                <div>Added Sites</div>
                 <div
                     class="rounded-lg border border-primary_color flex flex-row items-center px-[16px] py-[10px] cursor-pointer">
                     {{-- <img src="{{asset('assets/images/plus.png')}}" class="w-[11px] h-[11px]" alt="plus"/> --}}
                     <span class="material-symbols-outlined text-primary_color">add</span>
-                    <a href="{{route('admin.companies.create')}}">
-                        <span class="text-primary_color font-big text-normal ml-2"> Add New Company</span>
+                    <a href="{{route('admin.sites.create')}}">
+                        <span class="text-primary_color font-big text-normal ml-2"> Add New Site</span>
                     </a>
                 </div>
             </div>
@@ -64,11 +64,11 @@
                     <table class="table-fixed w-[100%] max-lg:w-[1000px]">
                         <thead class="">
                         <tr class="text-left text-small text-natural font-big">
-                            <th class="px-smaller py-[1%] w-[13%]">City</th>
-                            <th class=" px-smaller py-[1%] w-[15%]">Display name</th>
+                            <th class="px-smaller py-[1%] w-[13%]">Company</th>
+                            <th class=" px-smaller py-[1%] w-[13%]">Site name</th>
                             <th class="px-smaller py-[1%] w-[20%]">Email</th>
-                            <th class="px-smaller py-[1%]  w-[25%]">Name</th>
-                            <th class="px-smaller py-[1%]">Tags</th>
+                            <th class="px-smaller py-[1%]  w-[25%]">Address</th>
+                            <th class="px-smaller py-[1%]">Photo</th>
                             <th class="px-smaller py-[1%]">Status</th>
                             <th class="px-smaller py-[1%] text-right">Action</th>
                         </tr>
@@ -77,11 +77,11 @@
                         {{-- @forelse($users as $user) --}}
                             <tr class="text-normal font-normal border border-table border-x-0 border-b-0 text-natural hover:bg-db">
                                 <td class="text-natural px-smaller py-small">
-                                   kaduna
+                                   Company name
                                 </td>
 
                                 <td class="px-smaller">
-                                    Display name
+                                    TCN
                                 </td>
 
                                 <td class="px-smaller">
@@ -89,10 +89,10 @@
                                 </td>
                                 
                                 <td class="px-smaller">
-                                fun way club
+                               Close up, yaba lagos
                                 </td>
                                 <td class="px-smaller">
-                                   10
+                                    view image
                                 </td>
 
                                 <td class="px-smaller">
@@ -119,23 +119,23 @@
 
                             <tr class="text-normal font-normal border border-table border-x-0 border-b-0 text-natural hover:bg-db">
                                 <td class="text-natural px-smaller py-small">
-                                   kaduna
-                                </td>
-
-                                <td class="px-smaller">
-                                    Display name
-                                </td>
-
-                                <td class="px-smaller">
-                                   example@gmail.com
-                                </td>
-                                
-                                <td class="px-smaller">
-                                fun way club
-                                </td>
-                                <td class="px-smaller">
-                                   10
-                                </td>
+                                    Company name
+                                 </td>
+ 
+                                 <td class="px-smaller">
+                                     TCN
+                                 </td>
+ 
+                                 <td class="px-smaller">
+                                    example@gmail.com
+                                 </td>
+                                 
+                                 <td class="px-smaller">
+                                Close up, yaba lagos
+                                 </td>
+                                 <td class="px-smaller">
+                                     view image
+                                 </td>
 
                                 <td class="px-smaller">
                                     <button
