@@ -29,7 +29,7 @@ class AttendanceController extends Controller
             ->with(['site:id,name', 'company:id,name', 'user:id,first_name,last_name,profile_image'])
             ->where('company_id', $user->company_id)
             ->where('site_id', $user->site_id)
-            ->paginate();
+            ->paginate($request->query('per_page', 15));
 
         return sendSuccess(['attendances' => $attendances], 'All attendance retrieved');
     }
