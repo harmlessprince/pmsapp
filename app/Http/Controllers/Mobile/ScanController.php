@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Mobile;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreAttendanceRequest;
 use App\Http\Requests\StoreScanRequest;
+use App\QueryFilters\DateFilter;
 use App\Repositories\Eloquent\Repository\ScanRepository;
 use App\Repositories\Eloquent\Repository\TagRepository;
 use Illuminate\Http\JsonResponse;
@@ -21,9 +22,14 @@ class ScanController extends Controller
 
     public function index(Request $request): JsonResponse
     {
-        $scans = $this->scanRepository->modelQuery()
-            ->select(['id', 'site_id', 'company_id','tag_id', 'scan_time', 'scan_date', 'scan_date_time'])
-            ->with(['site:id,name','company:id,name', 'tag:id,name,code'])
+        $pipes = [
+            new DateFilter('scan_date'),
+        ];
+        $scanQuery = $this->scanRepository->modelQuery()->search();
+        $scanQuery = constructPipes($scanQuery, $pipes);
+        $scans = $scanQuery
+            ->select(['id', 'site_id', 'company_id', 'tag_id', 'scan_time', 'scan_date', 'scan_date_time'])
+            ->with(['site:id,name', 'company:id,name', 'tag:id,name,code'])
             ->latest('scan_date_time')->paginate($request->query('per_page', 15));
         return sendSuccess(['scans' => $scans], 'All scans retrieved');
     }
