@@ -1,6 +1,6 @@
 @extends('layouts.app')
-@section('title', 'Company')
-@section('page', 'Company')
+@section('title', 'User')
+@section('page', 'User Management')
 @push('header-scripts')
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"
             integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
@@ -11,12 +11,12 @@
         <section class="flex flex-row justify-between w-[100%] max-lg:mt-[15%]">
             <div
                 class="flex flex-row bg-background_color rounded-lg h-[111px] w-[290px] items-center px-[20px] max-lg:mx-auto">
-                <div class="w-[44px] h-[44px] bg-primary_color rounded-lg flex flex-row items-center justify-center">
-                    <span class="material-symbols-outlined text-white">account_balance</span>
+                <div class="w-[44px] h-[44px] bg-guards rounded-lg flex flex-row items-center justify-center">
+                    <span class="material-symbols-outlined text-white">person</span>
                 </div>
                 <div class="ml-[5%]">
-                    <h1 class="font-bold text-3xl text-primary_color">74</h1>
-                    <span class="font-normal text-sm text-primary_color">Companies</span>
+                    <h1 class="font-bold text-3xl text-guards">345</h1>
+                    <span class="font-normal text-sm text-guards">Users</span>
                 </div>
             </div>
         </section>
@@ -25,13 +25,13 @@
         <section class="pt-basic_padding">
             <!-- add user -->
             <div class="font-big text-big text-natural mb-2 flex flex-row justify-between">
-                <div>Added Companies</div>
+                <div>Added Users</div>
                 <div
                     class="rounded-lg border border-primary_color flex flex-row items-center px-[16px] py-[10px] cursor-pointer">
                     {{-- <img src="{{asset('assets/images/plus.png')}}" class="w-[11px] h-[11px]" alt="plus"/> --}}
                     <span class="material-symbols-outlined text-primary_color">add</span>
-                    <a href="{{route('admin.companies.create')}}">
-                        <span class="text-primary_color font-big text-normal ml-2"> Add New Company</span>
+                    <a href="{{route('admin.users.create')}}">
+                        <span class="text-primary_color font-big text-normal ml-2"> Add New User</span>
                     </a>
                 </div>
             </div>
@@ -61,51 +61,51 @@
             <!-- table 2 section -->
             <section class="border border-table rounded-lg w-[100%] mt-[2%] bg-background_color">
                 <div class="overflow-x-auto">
-                    <table class="table-fixed w-[100%] max-lg:w-[1000px]">
+                    <table class="table-auto w-[100%] max-lg:w-[1000px]">
                         <thead class="">
                         <tr class="text-left text-small text-natural font-big">
-                            <th class="px-smaller py-[1%] w-[13%]">City</th>
-                            <th class=" px-smaller py-[1%] w-[15%]">Display name</th>
-                            <th class="px-smaller py-[1%] w-[20%]">Email</th>
-                            <th class="px-smaller py-[1%]  w-[25%]">Name</th>
-                            <th class="px-smaller py-[1%]">Tags</th>
-                            <th class="px-smaller py-[1%]">Status</th>
-                            <th class="px-smaller py-[1%] text-right">Action</th>
+                            <th class=" px-small py-[1%]">Name</th>
+                            <th class="px-small py-[1%]">Company</th>
+                            <th class="px-small py-[1%]">Phone number</th>
+                            <th class="px-small py-[1%]">Postal Address</th>
+                            <th class="px-small py-[1%]">Site</th>
+                            <th class="px-small py-[1%]">Action</th>
                         </tr>
                         </thead>
                         <tbody>
                         {{-- @forelse($users as $user) --}}
                             <tr class="text-normal font-normal border border-table border-x-0 border-b-0 text-natural hover:bg-db">
-                                <td class="text-natural px-smaller py-small">
-                                   kaduna
+
+                                <td class="text-natural px-small py-small flex flex-row items-center">
+                                    {{-- <div class="w-[40px] h-[40px] rounded-full"> --}}
+                                        {{-- <img src="{{$user->profile_image}}" alt="Profile Image"
+                                             class="rounded-full w-[40px] h-[40px]"> --}}
+                                             <span class="material-symbols-outlined text-white">account_circle</span>
+                                    {{-- </div> --}}
+                                    {{-- <span class="ml-2">{{$user->first_name}} {{$user->last_name}}</span> --}}
+                                    <span class="ml-2">Ayomide segun</span>
                                 </td>
 
-                                <td class="px-smaller">
-                                    Display name
+                                <td class="px-small">
+                                    company name
                                 </td>
 
-                                <td class="px-smaller">
-                                   example@gmail.com
+                                <td class="px-small">
+                                    {{-- {{$user->phone_number}} --}}
+                                    +23470345790
                                 </td>
                                 
-                                <td class="px-smaller">
-                                fun way club
+                                <td class="px-small truncate">
+                                {{-- {{ \Illuminate\Support\Str::limit($user->address, 15)}} --}}
+                                postal address
                                 </td>
-                                <td class="px-smaller">
-                                   10
+                                <td class="px-small">
+                                    {{-- {{$user->site->name ?? 'N/A'}} --}}
+                                    site name
                                 </td>
 
-                                <td class="px-smaller">
-                                <button
-                                class="bg-foundation W-[78px] h-[22px] px-[8px] py-[2px] rounded-full flex flex-row items-center justify-between">
-                                <img src="{{asset('assets/images/white_dot.png')}}" alt="dashboard"
-                                     class="mr-2"/>
-                                <span class="text-natural font-big text-small">Active</span>
-                            </button>
-                        </td>
-
-                                <td class="px-small text-right">
-                                    {{-- <div class="flex flex-row justify-center"> --}}
+                                <td class="px-small">
+                                    <div class="flex flex-row justify-center">
                                         {{-- <a href="{{route('company.users.edit', ['user' => $user->id])}}"> --}}
                                             <a href="#">
                                             {{-- <img src="{{asset('assets/images/edit.png')}}" alt="edit"
@@ -113,41 +113,42 @@
                                         <span class="material-symbols-outlined w-[16px] h-[16px] ml-3 cursor-pointer text-natural">edit_square</span>
                                         </a>
 
-                                    {{-- </div> --}}
+                                    </div>
                                 </td>
                             </tr>
 
                             <tr class="text-normal font-normal border border-table border-x-0 border-b-0 text-natural hover:bg-db">
-                                <td class="text-natural px-smaller py-small">
-                                   kaduna
+
+                                <td class="text-natural px-small py-small flex flex-row items-center">
+                                    {{-- <div class="w-[40px] h-[40px] rounded-full"> --}}
+                                        {{-- <img src="{{$user->profile_image}}" alt="Profile Image"
+                                             class="rounded-full w-[40px] h-[40px]"> --}}
+                                             <span class="material-symbols-outlined text-white">account_circle</span>
+                                    {{-- </div> --}}
+                                    {{-- <span class="ml-2">{{$user->first_name}} {{$user->last_name}}</span> --}}
+                                    <span class="ml-2">Ayomide segun</span>
                                 </td>
 
-                                <td class="px-smaller">
-                                    Display name
+                                <td class="px-small">
+                                    company name
                                 </td>
 
-                                <td class="px-smaller">
-                                   example@gmail.com
+                                <td class="px-small">
+                                    {{-- {{$user->phone_number}} --}}
+                                    +23470345790
                                 </td>
                                 
-                                <td class="px-smaller">
-                                fun way club
+                                <td class="px-small truncate">
+                                {{-- {{ \Illuminate\Support\Str::limit($user->address, 15)}} --}}
+                                postal address
                                 </td>
-                                <td class="px-smaller">
-                                   10
+                                <td class="px-small">
+                                    {{-- {{$user->site->name ?? 'N/A'}} --}}
+                                    site name
                                 </td>
 
-                                <td class="px-smaller">
-                                    <button
-                                    class="bg-inactive W-[78px] h-[22px] px-[8px] py-[2px] rounded-full flex flex-row items-center justify-between">
-                                    <img src="{{asset('assets/images/white_dot.png')}}" alt="dashboard"
-                                         class="mr-2"/>
-                                    <span class="text-natural font-big text-small">Inactive</span>
-                                </button>
-                        </td>
-
-                                <td class="px-small text-right">
-                                    {{-- <div class="flex flex-row justify-center"> --}}
+                                <td class="px-small">
+                                    <div class="flex flex-row justify-center">
                                         {{-- <a href="{{route('company.users.edit', ['user' => $user->id])}}"> --}}
                                             <a href="#">
                                             {{-- <img src="{{asset('assets/images/edit.png')}}" alt="edit"
@@ -155,7 +156,7 @@
                                         <span class="material-symbols-outlined w-[16px] h-[16px] ml-3 cursor-pointer text-natural">edit_square</span>
                                         </a>
 
-                                    {{-- </div> --}}
+                                    </div>
                                 </td>
                             </tr>
                         {{-- @empty
@@ -168,7 +169,7 @@
                         </tbody>
                     </table>
                 </div>
-                {{-- {{ $users->links() }} --}}
+                {{ $users->links() }}
             </section>
         </section>
     </section>

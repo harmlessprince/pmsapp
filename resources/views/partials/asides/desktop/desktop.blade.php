@@ -17,7 +17,12 @@
             <span class="text-lg font-bold text-red-700">PERFTRAKA</span>
         </a>
         @include('partials.asides.desktop.dash')
+        @include('partials.asides.desktop.admin.users')
+        @include('partials.asides.desktop.admin.Company')
         @include('partials.asides.desktop.admin.tag')
+        @include('partials.asides.desktop.admin.site')
+       
+       
     @endif
 
 

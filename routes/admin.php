@@ -13,9 +13,10 @@ use Illuminate\Support\Facades\Route;
 Route::name('admin.')->middleware(['auth'])->group(function (){
     Route::get('dashboard', [DashboardController::class, 'admin'])->name('dashboard');
     Route::get('/users', [UserController::class, 'create']);
-    Route::get('states', [StateController::class, 'index']);
+    // Route::get('states', [StateController::class, 'index']);
     Route::resource('companies', CompanyController::class);
     Route::resource('sites', SiteController::class);
+    Route::resource('users', UserController::class);
     Route::resource('tags', TagController::class);
 });
 
