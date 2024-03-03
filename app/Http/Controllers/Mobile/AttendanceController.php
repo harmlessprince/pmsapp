@@ -6,6 +6,7 @@ use App\Enums\RoleEnum;
 use App\Exceptions\CustomException;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreAttendanceRequest;
+use App\QueryFilters\DateFilter;
 use App\Repositories\Eloquent\Repository\AttendanceRepository;
 use App\Repositories\Eloquent\Repository\UserRepository;
 use App\Services\FileUploadService;
@@ -24,12 +25,16 @@ class AttendanceController extends Controller
     public function index(Request $request): JsonResponse
     {
         $user = $request->user();
-        $attendances = $this->attendanceRepository->modelQuery()
+        $pipes = [
+            new DateFilter('attendance_date'),
+        ];
+        $attendanceQuery = constructPipes($this->attendanceRepository->modelQuery(), $pipes);
+        $attendances = $attendanceQuery
             ->select(['id', 'site_id', 'company_id', 'attendance_time', 'attendance_date', 'attendance_date_time', 'image', 'action_type', 'user_id'])
             ->with(['site:id,name', 'company:id,name', 'user:id,first_name,last_name,profile_image'])
             ->where('company_id', $user->company_id)
             ->where('site_id', $user->site_id)
-            ->paginate();
+            ->paginate($request->query('per_page', 15));
 
         return sendSuccess(['attendances' => $attendances], 'All attendance retrieved');
     }
@@ -65,7 +70,9 @@ class AttendanceController extends Controller
             'action_type' => $request->input('action_type'),
             'image' => $image,
             'attendance_date' => $request->input('attendance_date'),
+            'attendance_date_time' => $request->input('attendance_date_time'),
             'attendance_time' => $request->input('attendance_time'),
+            'comment' => $request->input('comment'),
             'longitude' => $longitude,
             'latitude' => $latitude,
             'user_id' => $request->input('security_guard_id'),
