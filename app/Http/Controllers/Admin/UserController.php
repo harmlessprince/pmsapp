@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UpdateUserRequest;
+use App\Http\Controllers\Controller;
 use App\Models\User;
 use App\QueryFilters\CompanyIdFilter;
 use App\QueryFilters\CreatedAtFilter;
@@ -33,7 +34,7 @@ class UserController extends Controller
         $userQuery = $this->userRepository->modelQuery()->search();
         $userQuery = constructPipes($userQuery, $pipes);
         $users = $userQuery->with(['tenant', 'site'])->paginate(request('per_page', 15));
-        return view('user.index', compact('users', 'companies'));
+        return view('admin.user.index', compact('users', 'companies'));
     }
 
     /**
@@ -42,7 +43,7 @@ class UserController extends Controller
     public function create()
     {
         $users = User::all();
-        return view('user.create');
+        return view('admin.user.create');
     }
 
     /**

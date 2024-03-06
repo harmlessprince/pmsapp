@@ -36,23 +36,11 @@
                 </div>
             </div>
             <x-filter-card :actionUrl="route('company.users.index')" :canSearch="true" :searchPlaceholder="'Search by name or phone number'">
-                <div class="flex flex-col">
-                    <x-input-label for="site_id" :value="__('Select Company')"/>
-                    <x-select-input id="site_id" class="block mt-1 w-full" name="site_id">
-                        <option value="">Select Company</option>
-
-                    </x-select-input>
-                </div>
 
                 <div class="flex flex-col">
                     <x-input-label for="site_id" :value="__('Site')" class="text-white"/>
                     <x-select-input id="site_id" class="block w-full" name="site_id">
                         <option class="" value="">All site</option>
-                        {{-- @foreach($sites as $site)
-                            <option>
-                                all site
-                            </option>
-                        @endforeach --}}
                     </x-select-input>
                 </div>
             </x-filter-card>

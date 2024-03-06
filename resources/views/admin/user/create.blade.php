@@ -40,13 +40,24 @@
                         focus:outline-none focus:border-primary_color focus:ring-1 focus:ring-background_color
                         focus:invalid:error focus:invalid:error
                         "
-                placeholder="Name" name="last_name" value=""/>
+                placeholder="Last name" name="last_name" value=""/>
             <x-input-error :messages="$errors->get('last_name')" class="mt-2"/>
         </div>
     </div>
-   
-        <div class="w-full mb-2 max-lg:w-full max-lg:mb-2">
-            <label class="font-big text-normal text-natural"> Site</label>
+
+    <div class="flex flex-row justify-between mb-2 max-lg:flex-col">
+        <div class="w-[48%] mb-2 max-lg:w-full max-lg:mb-2">
+            <label class="font-big text-normal text-natural">Select company</label>
+            <select
+                class="outline-none w-full border border-filterInput bg-transparent h-[44px] px-2 py-1 rounded-lg text-normal font-normal text-filter_text"
+                name="company"
+            >
+                <option>Select company</option>
+            </select>
+            <x-input-error :messages="$errors->get('company')" class="mt-2"/>
+        </div>
+        <div class="w-[48%] mb-2 max-lg:w-full max-lg:mb-2">
+            <label class="font-big text-normal text-natural"> Select site</label>
             <select
                 class="outline-none w-full border border-filterInput bg-transparent h-[44px] px-2 py-1 rounded-lg text-normal font-normal text-filter_text"
                 name="site_id"
@@ -59,6 +70,7 @@
             </select>
             <x-input-error :messages="$errors->get('site_id')" class="mt-2"/>
         </div>
+    </div>
 
     <div class="flex flex-row justify-between mb-2 max-lg:flex-col">
         <div class="w-[48%] max-lg:w-full max-lg:mb-2">

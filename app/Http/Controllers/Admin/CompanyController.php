@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use App\Enums\RoleEnum;
 use App\Http\Requests\StoreCompanyRequest;
+use App\Http\Controllers\Controller;
 use App\Http\Requests\UpdateCompanyRequest;
 use App\Models\Company;
 use App\QueryFilters\IndustryIdFilter;
@@ -46,7 +47,7 @@ class CompanyController extends Controller
         $companyQuery = $this->companyRepository->modelQuery()->search();
         $companyQuery = constructPipes($companyQuery, $pipes);
         $companies = $companyQuery->with(['owner', 'state', 'industry'])->withCount(['tags'])->paginate();
-        return view('company.index', compact('companies'));
+        return view('admin.company.index', compact('companies'));
     }
 
     /**
@@ -56,7 +57,7 @@ class CompanyController extends Controller
     {
         $states = $this->stateRepository->fetchByCountryID();
         $industries = $this->industryRepository->all();
-        return view('company.create', compact('states', 'industries'));
+        return view('admin.company.create', compact('states', 'industries'));
     }
 
     /**
