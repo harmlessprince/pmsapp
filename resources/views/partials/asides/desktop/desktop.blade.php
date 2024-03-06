@@ -21,6 +21,10 @@
         @include('partials.asides.desktop.admin.Company')
         @include('partials.asides.desktop.admin.tag')
         @include('partials.asides.desktop.admin.site')
+        @include('partials.asides.desktop.admin.scan')
+        @include('partials.asides.desktop.admin.attendance')
+        @include('partials.asides.desktop.admin.admin')
+       
        
        
     @endif

@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use App\Enums\RoleEnum;
 use App\Http\Requests\StoreSiteRequest;
+use App\Http\Controllers\Controller;
 use App\Http\Requests\UpdateSiteRequest;
 use App\Models\Site;
 use App\Repositories\Eloquent\Repository\CompanyRepository;
@@ -12,7 +13,7 @@ use App\Services\UserService;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
-class SiteController extends Controller
+class SiteController extends controller
 {
 
     public function __construct(
@@ -28,7 +29,7 @@ class SiteController extends Controller
     public function index()
     {
         $sites =  $this->siteRepository->allPaginated();
-        return view('site.index', compact('sites'));
+        return view('admin.site.index', compact('sites'));
     }
 
     /**
@@ -37,7 +38,7 @@ class SiteController extends Controller
     public function create()
     {
         $company = $this->companyRepository->all();
-        return view('site.create', compact('company'));
+        return view('admin.site.create', compact('company'));
     }
 
     /**

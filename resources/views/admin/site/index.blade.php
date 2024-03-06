@@ -44,17 +44,17 @@
                     </x-select-input>
                 </div>
 
-                <div class="flex flex-col">
+                {{-- <div class="flex flex-col">
                     <x-input-label for="site_id" :value="__('Site')" class="text-white"/>
                     <x-select-input id="site_id" class="block w-full" name="site_id">
-                        <option class="" value="">All site</option>
+                        <option class="" value="">All site</option> --}}
                         {{-- @foreach($sites as $site)
                             <option>
                                 all site
                             </option>
                         @endforeach --}}
-                    </x-select-input>
-                </div>
+                    {{-- </x-select-input>
+                </div> --}}
             </x-filter-card>
 
 
@@ -104,16 +104,10 @@
                             </button>
                         </td>
 
-                                <td class="px-small text-right">
-                                    {{-- <div class="flex flex-row justify-center"> --}}
-                                        {{-- <a href="{{route('company.users.edit', ['user' => $user->id])}}"> --}}
+                                <td class="px-small text-right">                             
                                             <a href="#">
-                                            {{-- <img src="{{asset('assets/images/edit.png')}}" alt="edit"
-                                                 class="w-[16px] h-[16px] ml-3 cursor-pointer"/> --}}
                                         <span class="material-symbols-outlined w-[16px] h-[16px] ml-3 cursor-pointer text-natural">edit_square</span>
                                         </a>
-
-                                    {{-- </div> --}}
                                 </td>
                             </tr>
 
@@ -147,28 +141,18 @@
                         </td>
 
                                 <td class="px-small text-right">
-                                    {{-- <div class="flex flex-row justify-center"> --}}
-                                        {{-- <a href="{{route('company.users.edit', ['user' => $user->id])}}"> --}}
+                                    
                                             <a href="#">
-                                            {{-- <img src="{{asset('assets/images/edit.png')}}" alt="edit"
-                                                 class="w-[16px] h-[16px] ml-3 cursor-pointer"/> --}}
+                                         
                                         <span class="material-symbols-outlined w-[16px] h-[16px] ml-3 cursor-pointer text-natural">edit_square</span>
                                         </a>
-
-                                    {{-- </div> --}}
                                 </td>
                             </tr>
-                        {{-- @empty
-                            <tr class="text-normal font-normal border border-table border-collapse text-natural hover:bg-db">
-                                <td class="text-center" colspan="5">No Data</td>
-                            </tr>
-                        @endforelse --}}
 
 
                         </tbody>
                     </table>
                 </div>
-                {{-- {{ $users->links() }} --}}
             </section>
         </section>
     </section>
