@@ -9,6 +9,7 @@ use App\Providers\RouteServiceProvider;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\ValidationException;
 use Illuminate\View\View;
 
 class AuthenticatedSessionController extends Controller
@@ -23,6 +24,7 @@ class AuthenticatedSessionController extends Controller
 
     /**
      * Handle an incoming authentication request.
+     * @throws ValidationException
      */
     public function store(LoginRequest $request): RedirectResponse
     {
@@ -35,7 +37,12 @@ class AuthenticatedSessionController extends Controller
         if ($request->user()->hasRole(RoleEnum::SUPER_ADMIN->value)){
             return redirect()->intended(route('admin.dashboard'));
         }
-        return $this->destroy($request);
+        Auth::guard('web')->logout();
+        throw ValidationException::withMessages([
+            'email' => trans('auth.failed'),
+        ]);
+
+//        return $this->destroy($request);
     }
 
     /**

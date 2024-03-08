@@ -93,7 +93,7 @@
 
 
         <!-- table -->
-        <section class="border border-table py-1 mt-[2%] rounded-lg">
+        <section class="border border-table mt-[2%] rounded-lg">
             <div class="overflow-x-auto">
                 <table class="table-auto w-[100%] max-lg:w-[1000px] bg-background_color">
                     <thead>

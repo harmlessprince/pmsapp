@@ -100,7 +100,7 @@
         </x-filter-card>
 
         <!-- table -->
-        <section class="border border-table py-1 mt-[2%] rounded-lg">
+        <section class="border border-table mt-[2%] rounded-lg">
             <div class="overflow-x-auto">
                 <table class="table-auto w-[100%] max-lg:w-[1000px] bg-background_color">
                     <thead>
@@ -151,9 +151,11 @@
                             <td class="text-normal font-normal p-small">{{$attendance->proximity}}</td>
                         </tr>
                     @empty
-                        <tr class="border border-table border-x-0 text-natural hover:bg-db">
-                            <td colspan="7" class="text-center">No Data</td>
+
+                        <tr class="text-normal font-normal border border-table border-collapse text-natural hover:bg-db">
+                            <td class="text-center" colspan="7">No Data</td>
                         </tr>
+
                     @endforelse
                     </tbody>
                 </table>
