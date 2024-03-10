@@ -1,10 +1,12 @@
 <?php
 
+use App\Http\Controllers\CompanySiteController;
 use App\Http\Controllers\Mobile\AttendanceController;
 use App\Http\Controllers\Mobile\AuthenticationController;
 use App\Http\Controllers\Mobile\DashboardController;
 use App\Http\Controllers\Mobile\ScanController;
 use App\Http\Controllers\Mobile\SecurityGuardController;
+use App\Http\Controllers\SiteTagController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -39,3 +41,6 @@ Route::middleware('auth:sanctum')->group(function (){
     Route::get('guards', [SecurityGuardController::class, 'index']);
     Route::post('guards', [SecurityGuardController::class, 'store']);
 });
+
+Route::get('company/{company}/sites', [CompanySiteController::class, 'show']);
+Route::get('sites/{site}/tags', [SiteTagController::class, 'show']);

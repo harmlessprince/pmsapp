@@ -15,7 +15,7 @@
                     <span class="material-symbols-outlined text-white">account_balance</span>
                 </div>
                 <div class="ml-[5%]">
-                    <h1 class="font-bold text-3xl text-primary_color">74</h1>
+                    <h1 class="font-bold text-3xl text-primary_color">{{$countCompany}}</h1>
                     <span class="font-normal text-sm text-primary_color">Companies</span>
                 </div>
             </div>
@@ -28,19 +28,34 @@
                 <div>Added Companies</div>
                 <div
                     class="rounded-lg border border-primary_color flex flex-row items-center px-[16px] py-[10px] cursor-pointer">
-                    {{-- <img src="{{asset('assets/images/plus.png')}}" class="w-[11px] h-[11px]" alt="plus"/> --}}
                     <span class="material-symbols-outlined text-primary_color">add</span>
                     <a href="{{route('admin.companies.create')}}">
                         <span class="text-primary_color font-big text-normal ml-2"> Add New Company</span>
                     </a>
                 </div>
             </div>
-            <x-filter-card :actionUrl="route('company.users.index')" :canSearch="true" :searchPlaceholder="'Search by name or phone number'">
-
+            <x-filter-card :actionUrl="route('admin.companies.index')" :canSearch="true"
+                           :searchPlaceholder="'Search by name or phone number'">
                 <div class="flex flex-col">
-                    <x-input-label for="site_id" :value="__('Site')" class="text-white"/>
-                    <x-select-input id="site_id" class="block w-full" name="site_id">
-                        <option class="" value="">All site</option>
+                    <x-input-label for="state_id" :value="__('Select State')"/>
+                    <x-select-input id="state_id" class="block mt-1 w-full" name="state_id">
+                        <option value="">Select State</option>
+                        @foreach($states as $state)
+                            <option
+                                value="{{$state->id}}" {{ request()->query('state_id') == $state->id ? "selected" : '' }}>{{$state->name}}</option>
+                        @endforeach
+                    </x-select-input>
+                </div>
+                <div class="flex flex-col">
+                    <x-input-label for="status" :value="__('Select Status')"/>
+                    <x-select-input id="status" class="block mt-1 w-full" name="status">
+                        <option value="">Select Status</option>
+                        <option value="active" {{ request()->query('status') == 'active' ? "selected" : '' }}>
+                            Active
+                        </option>
+                        <option value="inactive" {{ request()->query('status') == 'inactive' ? "selected" : '' }}>
+                            Inactive
+                        </option>
                     </x-select-input>
                 </div>
             </x-filter-card>
@@ -62,101 +77,68 @@
                         </tr>
                         </thead>
                         <tbody>
-                        {{-- @forelse($users as $user) --}}
+                        @forelse($companies as $company)
                             <tr class="text-normal font-normal border border-table border-x-0 border-b-0 text-natural hover:bg-db">
                                 <td class="text-natural px-smaller py-small">
-                                   kaduna
+                                    {{$company->state->name  ?? 'N/A'}}
                                 </td>
 
                                 <td class="px-smaller">
-                                    Display name
+                                    {{$company->display_name}}
                                 </td>
 
                                 <td class="px-smaller">
-                                   example@gmail.com
-                                </td>
-                                
-                                <td class="px-smaller">
-                                fun way club
-                                </td>
-                                <td class="px-smaller">
-                                   10
+                                    {{$company->owner->email}}
                                 </td>
 
                                 <td class="px-smaller">
-                                <button
-                                class="bg-foundation W-[78px] h-[22px] px-[8px] py-[2px] rounded-full flex flex-row items-center justify-between">
-                                <img src="{{asset('assets/images/white_dot.png')}}" alt="dashboard"
-                                     class="mr-2"/>
-                                <span class="text-natural font-big text-small">Active</span>
-                            </button>
-                        </td>
+                                    {{$company->owner->first_name}} {{$company->owner->last_name}}
+                                </td>
+                                <td class="px-smaller">
+                                    {{$company->tags_count}}
+                                </td>
+
+                                <td class="px-smaller">
+                                    @if($company->status)
+                                        <button
+                                            class="bg-foundation W-[78px] h-[22px] px-[8px] py-[2px] rounded-full flex flex-row items-center justify-between">
+                                            <img src="{{asset('assets/images/white_dot.png')}}" alt="dashboard"
+                                                 class="mr-2"/>
+                                            <span class="text-natural font-big text-small">Active</span>
+                                        </button>
+                                    @else
+                                        <button
+                                            class="bg-inactive W-[78px] h-[22px] px-[8px] py-[2px] rounded-full flex flex-row items-center justify-between">
+                                            <img src="{{asset('assets/images/white_dot.png')}}" alt="dashboard"
+                                                 class="mr-2"/>
+                                            <span class="text-natural font-big text-small">Inactive</span>
+                                        </button>
+                                    @endif
+                                </td>
 
                                 <td class="px-small text-right">
-                                    {{-- <div class="flex flex-row justify-center"> --}}
-                                        {{-- <a href="{{route('company.users.edit', ['user' => $user->id])}}"> --}}
-                                            <a href="#">
-                                            {{-- <img src="{{asset('assets/images/edit.png')}}" alt="edit"
-                                                 class="w-[16px] h-[16px] ml-3 cursor-pointer"/> --}}
-                                        <span class="material-symbols-outlined w-[16px] h-[16px] ml-3 cursor-pointer text-natural">edit_square</span>
+                                    <div class="flex flex-row justify-center"> -
+                                        <a href="{{route('admin.companies.edit', ['company' => $company->id])}}">
+
+                                        <span
+                                            class="material-symbols-outlined w-[16px] h-[16px] ml-3 cursor-pointer text-natural">edit_square</span>
                                         </a>
 
-                                    {{-- </div> --}}
+                                    </div>
                                 </td>
                             </tr>
 
-                            <tr class="text-normal font-normal border border-table border-x-0 border-b-0 text-natural hover:bg-db">
-                                <td class="text-natural px-smaller py-small">
-                                   kaduna
-                                </td>
-
-                                <td class="px-smaller">
-                                    Display name
-                                </td>
-
-                                <td class="px-smaller">
-                                   example@gmail.com
-                                </td>
-                                
-                                <td class="px-smaller">
-                                fun way club
-                                </td>
-                                <td class="px-smaller">
-                                   10
-                                </td>
-
-                                <td class="px-smaller">
-                                    <button
-                                    class="bg-inactive W-[78px] h-[22px] px-[8px] py-[2px] rounded-full flex flex-row items-center justify-between">
-                                    <img src="{{asset('assets/images/white_dot.png')}}" alt="dashboard"
-                                         class="mr-2"/>
-                                    <span class="text-natural font-big text-small">Inactive</span>
-                                </button>
-                        </td>
-
-                                <td class="px-small text-right">
-                                    {{-- <div class="flex flex-row justify-center"> --}}
-                                        {{-- <a href="{{route('company.users.edit', ['user' => $user->id])}}"> --}}
-                                            <a href="#">
-                                            {{-- <img src="{{asset('assets/images/edit.png')}}" alt="edit"
-                                                 class="w-[16px] h-[16px] ml-3 cursor-pointer"/> --}}
-                                        <span class="material-symbols-outlined w-[16px] h-[16px] ml-3 cursor-pointer text-natural">edit_square</span>
-                                        </a>
-
-                                    {{-- </div> --}}
-                                </td>
-                            </tr>
-                        {{-- @empty
+                        @empty
                             <tr class="text-normal font-normal border border-table border-collapse text-natural hover:bg-db">
                                 <td class="text-center" colspan="5">No Data</td>
                             </tr>
-                        @endforelse --}}
+                        @endforelse
 
 
                         </tbody>
                     </table>
                 </div>
-                {{-- {{ $users->links() }} --}}
+                 {{ $companies->links() }}
             </section>
         </section>
     </section>

@@ -9,7 +9,8 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Cabin:ital,wght@0,500;0,600;0,700;1,400&family=Inter:wght@400;500;600;700&display=swap"
         rel="stylesheet">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0"/>
 
     <link rel="apple-touch-icon" sizes="180x180" href="{{asset('assets/images/favicon_io/apple-touch-icon.png')}}">
     <link rel="icon" type="image/png" sizes="32x32" href="{{asset('assets/images/favicon_io/favicon-32x32.png')}}">
@@ -18,7 +19,7 @@
     @stack('header-links')
 
     <!-- Scripts -->
-{{--    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.1/datepicker.min.js"></script>--}}
+    {{--    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.1/datepicker.min.js"></script>--}}
     <style>
         .select2-container--default .select2-selection--single {
             padding-top: 0.25rem;
@@ -41,11 +42,19 @@
             --tw-text-opacity: 1;
             color: rgb(254 255 254 / var(--tw-text-opacity));
         }
+
         @keyframes text-animation {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.1); }
-            100% { transform: scale(1); }
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.1);
+            }
+            100% {
+                transform: scale(1);
+            }
         }
+
         .button-transition {
             transition: text-animation 1s ease; /* Adjust the transition duration as needed */
         }
@@ -124,6 +133,7 @@
     const toggleProfile = () => {
         profileDropdown.classList.toggle("hidden")
     }
+
     function getQueryParamValue(param) {
         const queryString = window.location.search;
         const urlParams = new URLSearchParams(queryString);
@@ -151,6 +161,58 @@
             }, 300); // Adjust the delay time as needed
         })
     }
+
+    function createOption(displayMember, valueMember, isSelected) {
+        const newOption = document.createElement("option");
+        newOption.value = valueMember;
+        newOption.text = displayMember;
+        if (isSelected) {
+            newOption.selected = true;
+        }
+        return newOption;
+    }
+
+    function getCompanySites(company_id) {
+
+        const currentBaseUrl = window.location.origin;
+        fetch(`${currentBaseUrl}/api/company/${company_id}/sites`)
+            .then(response => response.json())  // convert to json
+            .then(function (json) {
+                selectSite.innerHTML = "";
+                selectSite.append(createOption("Select Site", ""));
+
+                sites = json.data?.sites ?? []
+                const selectedSiteId = getQueryParamValue('site_id')
+                sites.forEach((site) => {
+                    const isSelected = selectedSiteId && site.id === parseInt(selectedSiteId, 10);
+                    selectSite.append(createOption(site.name, site.id, isSelected));
+                });
+                selectSite.disabled = false;
+            })    //print data to console
+            .catch(err => console.log('Request Failed', err));
+    }
+
+    function getSiteTags(site_id) {
+
+        const currentBaseUrl = window.location.origin;
+        fetch(`${currentBaseUrl}/api/sites/${site_id}/tags`)
+            .then(response => response.json())  // convert to json
+            .then(function (json) {
+                selectTag.innerHTML = "";
+                selectTag.append(createOption("Select tag", ""));
+                tags = json.data?.tags ?? []
+                const selectedTagId = getQueryParamValue('tag_id')
+                console.log(selectedTagId)
+                tags.forEach((tag) => {
+                    const isSelected = selectedTagId && tag.id === parseInt(selectedTagId, 10);
+                    selectTag.append(createOption(tag.name, tag.id, isSelected));
+                });
+                selectTag.disabled = false;
+            })    //print data to console
+            .catch(err => console.log('Request Failed', err));
+
+    }
+
 
 </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>

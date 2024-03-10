@@ -35,12 +35,16 @@
                     </a>
                 </div>
             </div>
-            <x-filter-card :actionUrl="route('company.users.index')" :canSearch="true" :searchPlaceholder="'Search by name or phone number'">
+            <x-filter-card :actionUrl="route('admin.users.index')" :canSearch="true"
+                           :searchPlaceholder="'Search by name or phone number'">
                 <div class="flex flex-col">
-                    <x-input-label for="site_id" :value="__('Select Company')"/>
-                    <x-select-input id="site_id" class="block mt-1 w-full" name="site_id">
+                    <x-input-label for="company_id" :value="__('Select Company')"/>
+                    <x-select-input id="company_id" class="block mt-1 w-full" name="company_id">
                         <option value="">Select Company</option>
-
+                        @foreach($companies as $company)
+                            <option
+                                value="{{$company->id}}" {{ request()->query('company_id') == $company->id ? "selected" : '' }}>{{$company->name}}</option>
+                        @endforeach
                     </x-select-input>
                 </div>
 
@@ -48,11 +52,6 @@
                     <x-input-label for="site_id" :value="__('Site')" class="text-white"/>
                     <x-select-input id="site_id" class="block w-full" name="site_id">
                         <option class="" value="">All site</option>
-                        {{-- @foreach($sites as $site)
-                            <option>
-                                all site
-                            </option>
-                        @endforeach --}}
                     </x-select-input>
                 </div>
             </x-filter-card>
@@ -73,97 +72,51 @@
                         </tr>
                         </thead>
                         <tbody>
-                        {{-- @forelse($users as $user) --}}
+                        @forelse($users as $user)
                             <tr class="text-normal font-normal border border-table border-x-0 border-b-0 text-natural hover:bg-db">
 
                                 <td class="text-natural px-small py-small flex flex-row items-center">
-                                    {{-- <div class="w-[40px] h-[40px] rounded-full"> --}}
-                                        {{-- <img src="{{$user->profile_image}}" alt="Profile Image"
-                                             class="rounded-full w-[40px] h-[40px]"> --}}
-                                             <span class="material-symbols-outlined text-white">account_circle</span>
-                                    {{-- </div> --}}
-                                    {{-- <span class="ml-2">{{$user->first_name}} {{$user->last_name}}</span> --}}
-                                    <span class="ml-2">Ayomide segun</span>
+                                    <div class="w-[40px] h-[40px] rounded-full">
+                                        <img src="{{$user->profile_image}}" alt="Profile Image"
+                                             class="rounded-full w-[40px] h-[40px]">
+                                    </div>
+                                    <span class="ml-2">{{$user->first_name}} {{$user->last_name}}</span>
                                 </td>
 
                                 <td class="px-small">
-                                    company name
+
+                                    {{$user->tenant->name ?? ''}}
                                 </td>
 
                                 <td class="px-small">
-                                    {{-- {{$user->phone_number}} --}}
-                                    +23470345790
+                                    {{$user->phone_number}}
                                 </td>
-                                
+
                                 <td class="px-small truncate">
-                                {{-- {{ \Illuminate\Support\Str::limit($user->address, 15)}} --}}
-                                postal address
+                                    {{ \Illuminate\Support\Str::limit($user->address, 15)}}
+
                                 </td>
                                 <td class="px-small">
-                                    {{-- {{$user->site->name ?? 'N/A'}} --}}
-                                    site name
+                                    {{$user->site->name ?? 'N/A'}}
                                 </td>
 
                                 <td class="px-small">
                                     <div class="flex flex-row justify-center">
-                                        {{-- <a href="{{route('company.users.edit', ['user' => $user->id])}}"> --}}
-                                            <a href="#">
-                                            {{-- <img src="{{asset('assets/images/edit.png')}}" alt="edit"
-                                                 class="w-[16px] h-[16px] ml-3 cursor-pointer"/> --}}
-                                        <span class="material-symbols-outlined w-[16px] h-[16px] ml-3 cursor-pointer text-natural">edit_square</span>
+                                        <a href="{{route('admin.users.edit', ['user' => $user->id])}}">
+
+                                                <span
+                                                    class="material-symbols-outlined w-[16px] h-[16px] ml-3 cursor-pointer text-natural">edit_square</span>
                                         </a>
 
                                     </div>
                                 </td>
                             </tr>
 
-                            <tr class="text-normal font-normal border border-table border-x-0 border-b-0 text-natural hover:bg-db">
-
-                                <td class="text-natural px-small py-small flex flex-row items-center">
-                                    {{-- <div class="w-[40px] h-[40px] rounded-full"> --}}
-                                        {{-- <img src="{{$user->profile_image}}" alt="Profile Image"
-                                             class="rounded-full w-[40px] h-[40px]"> --}}
-                                             <span class="material-symbols-outlined text-white">account_circle</span>
-                                    {{-- </div> --}}
-                                    {{-- <span class="ml-2">{{$user->first_name}} {{$user->last_name}}</span> --}}
-                                    <span class="ml-2">Ayomide segun</span>
-                                </td>
-
-                                <td class="px-small">
-                                    company name
-                                </td>
-
-                                <td class="px-small">
-                                    {{-- {{$user->phone_number}} --}}
-                                    +23470345790
-                                </td>
-                                
-                                <td class="px-small truncate">
-                                {{-- {{ \Illuminate\Support\Str::limit($user->address, 15)}} --}}
-                                postal address
-                                </td>
-                                <td class="px-small">
-                                    {{-- {{$user->site->name ?? 'N/A'}} --}}
-                                    site name
-                                </td>
-
-                                <td class="px-small">
-                                    <div class="flex flex-row justify-center">
-                                        {{-- <a href="{{route('company.users.edit', ['user' => $user->id])}}"> --}}
-                                            <a href="#">
-                                            {{-- <img src="{{asset('assets/images/edit.png')}}" alt="edit"
-                                                 class="w-[16px] h-[16px] ml-3 cursor-pointer"/> --}}
-                                        <span class="material-symbols-outlined w-[16px] h-[16px] ml-3 cursor-pointer text-natural">edit_square</span>
-                                        </a>
-
-                                    </div>
-                                </td>
-                            </tr>
-                        {{-- @empty
+                        @empty
                             <tr class="text-normal font-normal border border-table border-collapse text-natural hover:bg-db">
                                 <td class="text-center" colspan="5">No Data</td>
                             </tr>
-                        @endforelse --}}
+                        @endforelse
 
 
                         </tbody>
@@ -179,13 +132,32 @@
 @push('scripts')
     <script>
         const filterDropdown = document.querySelector("#filter");
-        const toggleFilter = () => {
-            filterDropdown.classList.toggle("hidden")
-        }
+        const selectSite = document.getElementById("site_id");
+        const selectCompany = document.getElementById("company_id");
+        $(document).ready(function () {
+            // $('.select-2-sites').select2({
+            //     placeholder: "Select a site",
+            //     allowClear: true
+            // });
+            selectSite.disabled = true;
+            const companyParamValue = getQueryParamValue('company_id');
+            console.log(companyParamValue)
+            if (companyParamValue != null) {
+                getCompanySites(companyParamValue)
+            }
 
-        function exportUsers() {
-            console.log("export button clicked")
-        }
+        });
+
+        selectCompany.addEventListener("change", function (e) {
+            getCompanySites(e.target.value)
+        });
+        // const toggleFilter = () => {
+        //     filterDropdown.classList.toggle("hidden")
+        // }
+        //
+        // function exportUsers() {
+        //     console.log("export button clicked")
+        // }
 
         function resetForm() {
             $(".site").val('').trigger('change')

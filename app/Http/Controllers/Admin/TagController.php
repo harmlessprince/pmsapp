@@ -32,9 +32,10 @@ class TagController extends controller
         ];
         $companies =  $this->companyRepository->all();
         $tagQuery = $this->tagRepository->modelQuery()->search();
+        $tagCount = $this->tagRepository->modelQuery()->count();
         $tagQuery = constructPipes($tagQuery, $pipes);
         $tags = $tagQuery->with(['company', 'site'])->paginate(request('per_page', 15));
-        return view('admin.tag.index', compact('tags', 'companies'));
+        return view('admin.tag.index', compact('tags', 'companies', 'tagCount'));
     }
 
     /**

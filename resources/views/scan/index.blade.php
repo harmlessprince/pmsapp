@@ -86,7 +86,7 @@
             <div class="flex flex-col">
                 <x-input-label for="tag_id" :value="__('Tag')" class="text-white"/>
                 <x-select-input id="tag_id" class="block w-full" name="tag_id">
-                    <option class="" value="">Select a site</option>
+                    <option class="" value="">Select a tag</option>
                 </x-select-input>
             </div>
         </x-filter-card>
@@ -160,36 +160,6 @@
             }
 
         });
-
-        function createOption(displayMember, valueMember, isSelected) {
-            const newOption = document.createElement("option");
-            newOption.value = valueMember;
-            newOption.text = displayMember;
-            if (isSelected) {
-                newOption.selected = true;
-            }
-            return newOption;
-        }
-
-        function getSiteTags(site_id) {
-
-            const currentBaseUrl = window.location.origin;
-            fetch(`${currentBaseUrl}/company/sites/${site_id}`)
-                .then(response => response.json())  // convert to json
-                .then(function (json) {
-                    selectTag.innerHTML = "";
-                    selectTag.append(createOption("Select Site", ""));
-                    tags = json.data?.site?.tags ?? []
-                    const selectedTagId = getQueryParamValue('tag_id')
-                    tags.forEach((tag) => {
-                        const isSelected = selectedTagId && tag.id === parseInt(selectedTagId, 10);
-                        console.log(selectedTagId)
-                        selectTag.append(createOption(tag.name, tag.id, isSelected));
-                    });
-                    selectTag.disabled = false;
-                })    //print data to console
-                .catch(err => console.log('Request Failed', err)); // Catch errors
-        }
 
         selectSite.addEventListener("change", function (e) {
             getSiteTags(e.target.value)

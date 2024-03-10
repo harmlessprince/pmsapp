@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Enums\RoleEnum;
 use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UpdateUserRequest;
 use App\Http\Controllers\Controller;
@@ -15,11 +16,12 @@ use App\Repositories\Eloquent\Repository\UserRepository;
 class UserController extends Controller
 {
     public function __construct(
-        private readonly UserRepository $userRepository,
+        private readonly UserRepository    $userRepository,
         private readonly CompanyRepository $companyRepository,
     )
     {
     }
+
     /**
      * Display a listing of the resource.
      */
@@ -30,10 +32,12 @@ class UserController extends Controller
             CompanyIdFilter::class,
             SiteIdFilter::class,
         ];
-        $companies =  $this->companyRepository->all();
-        $userQuery = $this->userRepository->modelQuery()->search();
+        $companies = $this->companyRepository->all();
+        $userQuery = $this->userRepository->modelQuery()->whereHas('roles', function ($query) {
+            $query->where('name', RoleEnum::SECURITY->value);
+        })->search();
         $userQuery = constructPipes($userQuery, $pipes);
-        $users = $userQuery->with(['tenant', 'site'])->paginate(request('per_page', 15));
+        $users = $userQuery->with(['tenant', 'site', 'company:id,name'])->paginate(request('per_page', 15));
         return view('admin.user.index', compact('users', 'companies'));
     }
 
@@ -42,7 +46,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        $users = User::all();
+
         return view('admin.user.create');
     }
 
@@ -67,7 +71,7 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
-        //
+        return view('admin.user.edit', compact('user'));
     }
 
     /**

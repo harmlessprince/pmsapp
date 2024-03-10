@@ -15,7 +15,7 @@
                     <span class="material-symbols-outlined text-white">pin_drop</span>
                 </div>
                 <div class="ml-[5%]">
-                    <h1 class="font-bold text-3xl text-site">740</h1>
+                    <h1 class="font-bold text-3xl text-site">{{$countOfSites}}</h1>
                     <span class="font-normal text-sm text-site">Sites</span>
                 </div>
             </div>
@@ -35,26 +35,42 @@
                     </a>
                 </div>
             </div>
-            <x-filter-card :actionUrl="route('company.users.index')" :canSearch="true" :searchPlaceholder="'Search by name or phone number'">
+            <x-filter-card :actionUrl="route('admin.sites.index')" :canSearch="true"
+                           :searchPlaceholder="'Search by site name or email'">
                 <div class="flex flex-col">
-                    <x-input-label for="site_id" :value="__('Select Company')"/>
-                    <x-select-input id="site_id" class="block mt-1 w-full" name="site_id">
+                    <x-input-label for="company_id" :value="__('Select Company')"/>
+                    <x-select-input id="company_id" class="block mt-1 w-full" name="company_id">
                         <option value="">Select Company</option>
-
+                        @foreach($companies as $company)
+                            <option
+                                value="{{$company->id}}" {{ request()->query('company_id') == $company->id ? "selected" : '' }}>{{$company->name}}</option>
+                        @endforeach
                     </x-select-input>
                 </div>
 
-                {{-- <div class="flex flex-col">
-                    <x-input-label for="site_id" :value="__('Site')" class="text-white"/>
-                    <x-select-input id="site_id" class="block w-full" name="site_id">
-                        <option class="" value="">All site</option> --}}
-                        {{-- @foreach($sites as $site)
-                            <option>
-                                all site
-                            </option>
-                        @endforeach --}}
-                    {{-- </x-select-input>
-                </div> --}}
+
+                <div class="flex flex-col">
+                    <x-input-label for="status" :value="__('Select Status')"/>
+                    <x-select-input id="status" class="block mt-1 w-full" name="status">
+                        <option value="">Select Status</option>
+                        <option value="active" {{ request()->query('status') == 'active' ? "selected" : '' }}>
+                            Active
+                        </option>
+                        <option value="inactive" {{ request()->query('status') == 'inactive' ? "selected" : '' }}>
+                            Inactive
+                        </option>
+                    </x-select-input>
+                </div>
+                <div class="flex flex-col">
+                    <x-input-label for="state_id" :value="__('Select State')"/>
+                    <x-select-input id="state_id" class="block mt-1 w-full" name="state_id">
+                        <option value="">Select State</option>
+                        @foreach($states as $state)
+                            <option
+                                value="{{$state->id}}" {{ request()->query('state_id') == $state->id ? "selected" : '' }}>{{$state->name}}</option>
+                        @endforeach
+                    </x-select-input>
+                </div>
             </x-filter-card>
 
 
@@ -74,101 +90,77 @@
                         </tr>
                         </thead>
                         <tbody>
-                        {{-- @forelse($users as $user) --}}
+                        @forelse($sites as $site)
                             <tr class="text-normal font-normal border border-table border-x-0 border-b-0 text-natural hover:bg-db">
                                 <td class="text-natural px-smaller py-small">
-                                   Company name
+                                    {{$site->company->display_name}}
                                 </td>
 
                                 <td class="px-smaller">
-                                    TCN
+                                    {{$site->name}}
                                 </td>
 
                                 <td class="px-smaller">
-                                   example@gmail.com
+                                    {{$site->inspector->email}}
                                 </td>
-                                
+
                                 <td class="px-smaller">
-                               Close up, yaba lagos
+                                    {{$site->address}}
                                 </td>
                                 <td class="px-smaller">
                                     view image
                                 </td>
 
                                 <td class="px-smaller">
-                                <button
-                                class="bg-foundation W-[78px] h-[22px] px-[8px] py-[2px] rounded-full flex flex-row items-center justify-between">
-                                <img src="{{asset('assets/images/white_dot.png')}}" alt="dashboard"
-                                     class="mr-2"/>
-                                <span class="text-natural font-big text-small">Active</span>
-                            </button>
-                        </td>
-
-                                <td class="px-small text-right">                             
-                                            <a href="#">
-                                        <span class="material-symbols-outlined w-[16px] h-[16px] ml-3 cursor-pointer text-natural">edit_square</span>
-                                        </a>
+                                    @if($site->status)
+                                        <button
+                                            class="bg-foundation W-[78px] h-[22px] px-[8px] py-[2px] rounded-full flex flex-row items-center justify-between">
+                                            <img src="{{asset('assets/images/white_dot.png')}}" alt="dashboard"
+                                                 class="mr-2"/>
+                                            <span class="text-natural font-big text-small">Active</span>
+                                        </button>
+                                    @else
+                                        <button
+                                            class="bg-inactive W-[78px] h-[22px] px-[8px] py-[2px] rounded-full flex flex-row items-center justify-between">
+                                            <img src="{{asset('assets/images/white_dot.png')}}" alt="dashboard"
+                                                 class="mr-2"/>
+                                            <span class="text-natural font-big text-small">Inactive</span>
+                                        </button>
+                                    @endif
                                 </td>
-                            </tr>
-
-                            <tr class="text-normal font-normal border border-table border-x-0 border-b-0 text-natural hover:bg-db">
-                                <td class="text-natural px-smaller py-small">
-                                    Company name
-                                 </td>
- 
-                                 <td class="px-smaller">
-                                     TCN
-                                 </td>
- 
-                                 <td class="px-smaller">
-                                    example@gmail.com
-                                 </td>
-                                 
-                                 <td class="px-smaller">
-                                Close up, yaba lagos
-                                 </td>
-                                 <td class="px-smaller">
-                                     view image
-                                 </td>
-
-                                <td class="px-smaller">
-                                    <button
-                                    class="bg-inactive W-[78px] h-[22px] px-[8px] py-[2px] rounded-full flex flex-row items-center justify-between">
-                                    <img src="{{asset('assets/images/white_dot.png')}}" alt="dashboard"
-                                         class="mr-2"/>
-                                    <span class="text-natural font-big text-small">Inactive</span>
-                                </button>
-                        </td>
 
                                 <td class="px-small text-right">
-                                    
-                                            <a href="#">
-                                         
-                                        <span class="material-symbols-outlined w-[16px] h-[16px] ml-3 cursor-pointer text-natural">edit_square</span>
+
+                                    <div class="flex flex-row justify-center">
+                                        <a href="{{route('admin.sites.edit', ['site' => $site->id])}}">
+
+                                                <span
+                                                    class="material-symbols-outlined w-[16px] h-[16px] ml-3 cursor-pointer text-natural">edit_square</span>
                                         </a>
+
+                                    </div>
                                 </td>
                             </tr>
-
+                        @empty
+                            <tr class="text-normal font-normal border border-table border-collapse text-natural hover:bg-db">
+                                <td class="text-center" colspan="5">No Data</td>
+                            </tr>
+                        @endforelse
 
                         </tbody>
                     </table>
                 </div>
+                {{ $sites->links() }}
             </section>
         </section>
     </section>
 @endsection
 
-
 @push('scripts')
     <script>
         const filterDropdown = document.querySelector("#filter");
-        const toggleFilter = () => {
-            filterDropdown.classList.toggle("hidden")
-        }
-
-        function exportUsers() {
-            console.log("export button clicked")
-        }
+        // const selectSite = document.getElementById("site_id");
+        // const selectCompany = document.getElementById("company_id");
 
         function resetForm() {
             $(".site").val('').trigger('change')

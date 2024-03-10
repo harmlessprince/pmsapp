@@ -50,172 +50,110 @@
     </div>
 </section>
 
-<!-- table section -->
-<section class="pt-basic_padding overflow-x-auto max-lg:w-[100%] max-lg:mt-[5%]">
-    <div class="font-big text-big text-natural mb-2%"> Attendance Report</div>
-    <section class="border border-table py-1 mt-[2%] rounded-lg bg-background_color overflow-x-auto">
-    <table class="table-auto w-[100%] bg-background_color rounded-lg max-lg:w-[1000px]">
-        <thead>
-        <tr class="">
-            <th class="text-left text-small text-natural font-big  px-small py-[1%]">Company</th>
-            <th class="text-left text-small text-natural font-big  px-small py-[1%]">Scan Date/Time</th>
-            <th class="text-left text-small text-natural font-big px-small py-[1%]">Tags</th>
-            <th class="text-left text-small text-natural font-big px-small py-[1%]">Site</th>
-            <th class="text-left text-small text-natural font-big px-small py-[1%]">Proximity</th>
-            <th class="text-left text-small text-natural font-big  px-small py-[1%]">Longitude</th>
-            <th class="text-left text-small text-natural font-big  px-small py-[1%]">Latitude</th>
-            <th class="text-left text-small text-natural font-big px-small py-[1%]">Distance</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr class="border border-table border-x-0 border-b-0 text-natural hover:bg-db">
-            <td class="text-left text-small text-natural font-big  px-small py-[1%]">Company name</td>
-            <td class="text-normal font-normal px-small py-smaller">
-                <div>3/10/2023</div>
-                <div>5:00pm</div>
-            </td>
-            <td class="text-normal font-normal px-small py-smaller">Tag name</td>
-            <td class="text-normal font-normal px-small py-smaller">Site name</td>
-            <td class="text-normal font-normal px-small py-smaller">Very close</td>
-            <td class="text-normal font-normal px-small py-smaller">2</td>
-            <td class="text-normal font-normal px-small py-smaller">2</td>
-            <td class="text-normal font-normal px-small py-smaller">1</td>
-        </tr>
+ <section class="pt-basic_padding overflow-x-auto max-lg:w-[100%] max-lg:mt-[5%]">
+     <div class="font-big text-big text-natural mb-2%"> Recent Scan Report</div>
+     <section class="border border-table mt-[2%] rounded-lg bg-background_color overflow-x-auto">
+         <table class=" table-auto w-[100%] bg-background_color rounded-lg max-lg:w-[1000px]">
+             <thead>
+             <tr class="border border-x-0 border-y-0 border-table border-collapse">
+                 <th class="text-left text-small text-natural font-big  px-small py-[1%]">Scan Date/Time</th>
+                 <th class="text-left text-small text-natural font-big px-small py-[1%]">Tag Name</th>
+                 <th class="text-left text-small text-natural font-big px-small py-[1%]">Site Name</th>
+                 <th class="text-left text-small text-natural font-big px-small py-[1%]">Proximity</th>
+                 {{--                <th class="text-left text-small text-natural font-big  px-small py-[1%]">Longitude</th>--}}
+                 {{--                <th class="text-left text-small text-natural font-big  px-small py-[1%]">Latitude</th>--}}
+                 <th class="text-left text-small text-natural font-big px-small py-[1%]">Distance</th>
+             </tr>
+             </thead>
+             <tbody>
+             @forelse($latestScans as $scan)
+                 <tr class="border border-table border-x-0 text-natural hover:bg-db">
+                     <td class="text-normal font-normal px-small py-smaller">
+                         <div>{{$scan->scan_date->format('d/m/Y')}}</div>
+                         <div>{{Carbon\Carbon::parse($scan->scan_time)->format('g:i A')}}</div>
+                     </td>
+                     <td class="text-normal font-normal px-small py-smaller">{{$scan->tag->name}}</td>
+                     <td class="text-normal font-normal px-small py-smaller">{{$scan->site->name}}</td>
+                     <td class="text-normal font-normal px-small py-smaller">{{$scan->proximity}}</td>
+                     {{--                    <td class="text-normal font-normal px-small py-smaller">{{$scan->tag->name}}</td>--}}
+                     {{--                    <td class="text-normal font-normal px-small py-smaller">2</td>--}}
+                     <td class="text-normal font-normal px-small py-smaller">{{$scan->distance}} KM</td>
+                 </tr>
+             @empty
 
-        <tr class="border border-table border-x-0 border-b-0 text-natural hover:bg-db">
-            <td class="text-left text-small text-natural font-big  px-small py-[1%]">Company name</td>
-            <td class="text-normal font-normal px-small py-smaller">
-                <div>3/10/2023</div>
-                <div>5:00pm</div>
-            </td>
-            <td class="text-normal font-normal px-small py-smaller">Tag name</td>
-            <td class="text-normal font-normal px-small py-smaller">Site name</td>
-            <td class="text-normal font-normal px-small py-smaller">Very close</td>
-            <td class="text-normal font-normal px-small py-smaller">2</td>
-            <td class="text-normal font-normal px-small py-smaller">2</td>
-            <td class="text-normal font-normal px-small py-smaller">1</td>
-        </tr>
+                 <tr class="text-normal font-normal border border-table border-collapse text-natural hover:bg-db">
+                     <td class="text-center" colspan="7">No Data</td>
+                 </tr>
 
-        <tr class="border border-table border-x-0 border-b-0 text-natural hover:bg-db">
-            <td class="text-left text-small text-natural font-big  px-small py-[1%]">Company name</td>
-            <td class="text-normal font-normal px-small py-smaller">
-                <div>3/10/2023</div>
-                <div>5:00pm</div>
-            </td>
-            <td class="text-normal font-normal px-small py-smaller">Tag name</td>
-            <td class="text-normal font-normal px-small py-smaller">Site name</td>
-            <td class="text-normal font-normal px-small py-smaller">Very close</td>
-            <td class="text-normal font-normal px-small py-smaller">2</td>
-            <td class="text-normal font-normal px-small py-smaller">2</td>
-            <td class="text-normal font-normal px-small py-smaller">1</td>
-        </tr>
-
-        <tr class="border border-table border-x-0 border-b-0 text-natural">
-            <td class="text-left text-small text-natural font-big  px-small py-[1%]">Company name</td>
-            <td class="text-normal font-normal px-small py-smaller">
-                <div>3/10/2023</div>
-                <div>5:00pm</div>
-            </td>
-            <td class="text-normal font-normal px-small py-smaller">Tag name</td>
-            <td class="text-normal font-normal px-small py-smaller">Site name</td>
-            <td class="text-normal font-normal px-small py-smaller">Very close</td>
-            <td class="text-normal font-normal px-small py-smaller">2</td>
-            <td class="text-normal font-normal px-small py-smaller">2</td>
-            <td class="text-normal font-normal px-small py-smaller">1</td>
-        </tr>
-        </tbody>
-    </table>
-    </section>
-</section>
-
+             @endforelse
+             </tbody>
+         </table>
+     </section>
+ </section>
  <!-- table 2 section -->
  <section class="pt-basic_padding max-lg:w-[100%] max-lg:mt-[5%]">
-    <div class="font-big text-big text-natural mb-2%">Scan Report</div>
-    <section class="border border-table py-1 mt-[2%] rounded-lg bg-background_color overflow-x-auto">
-        <table class="table-auto w-[100%] bg-background_color max-lg:w-[1000px]">
-            <thead>
-            <tr class="">
-                <th class="text-left text-small text-natural font-big px-small py-smaller">Company</th>
-                <th class="text-left text-small text-natural font-big px-small py-smaller">Name</th>
-                <th class="text-left text-small text-natural font-big  px-small py-smaller">Time/Date</th>
-                <th class="text-left text-small text-natural font-big  px-small py-smaller">Action Type</th>
-                <th class="text-left text-small text-natural font-big px-small py-smaller">Tags</th>
-                <th class="text-left text-small text-natural font-big px-small py-smaller">Site</th>
-                <th class="text-left text-small text-natural font-big px-small py-smaller">Distance</th>
-                <th class="text-left text-small text-natural font-big px-small py-smaller">Image</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr class="border border-table border-x-0 border-b-0 text-natural hover:bg-db">
-                <td class="text-normal font-normal px-small">company name</td>
-                <td class="text-normal font-normal px-small">Olatunji Afeez</td>
-                <td class="text-normal font-normal px-small">
-                    <div>3/10/2023</div>
-                    <div>5:00pm</div>
-                </td>
-                <td class="text-normal font-normal px-small">
-                    <button
-                        class="bg-checkin W-[78px] h-[22px] p-5% rounded-full flex flex-row items-center justify-between">
-                        <img src="{{asset('assets/images/green_dot.png')}}" alt="dashboard" class="mr-2"/>
-                        <span class="text-checkInText font-big text-small">Check in</span>
-                    </button>
-                </td>
-                <td class="text-normal font-normal px-small">Tag name</td>
-                <td class="text-normal font-normal px-small">Site name</td>
-                <td class="text-normal font-normal px-small">1</td>
-                <td class="text-normal font-normal px-small">
-                    <img src="{{asset('assets/images/tableImg.png')}}" alt="dashboard" class=" w-[60px] h-[60px]"/>
-                </td>
-            </tr>
+     <div class="font-big text-big text-natural mb-2%">Recent Attendance Report</div>
+     <section class="border border-table mt-[2%] rounded-lg bg-background_color overflow-x-auto">
+         <table class="table-auto w-[100%] bg-background_color max-lg:w-[1000px]">
+             <thead>
+             <tr class="">
+                 <th class="text-left text-small text-natural font-big  px-small py-smaller">
+                     Name
+                 </th>
+                 <th class="text-left text-small text-natural font-big  px-small py-smaller">Time/Date</th>
+                 <th class="text-left text-small text-natural font-big  px-small py-smaller">Action Type</th>
+                 {{--                    <th class="text-left text-small text-natural font-big px-small py-smaller">Tags</th>--}}
+                 <th class="text-left text-small text-natural font-big px-small py-smaller">Site</th>
+                 <th class="text-left text-small text-natural font-big px-small py-smaller">Distance</th>
+                 <th class="text-left text-small text-natural font-big px-small py-smaller">Image</th>
+                 <th class="text-left text-small text-natural font-big px-small py-smaller">Proximity</th>
+             </tr>
+             </thead>
+             <tbody>
+             @forelse($latestAttendance as $attendance)
+                 <tr class="border border-table border-x-0 border-b-0 text-natural hover:bg-db">
+                     <td class="text-normal font-normal px-small">{{$attendance->user->first_name}} {{$attendance->user->last_name}}</td>
+                     <td class="text-normal font-normal px-small">
+                         <div>{{$attendance->attendance_date->format('d/m/Y')}}</div>
+                         <div>{{Carbon\Carbon::parse($attendance->attendance_time)->format('g:i A')}}</div>
+                     </td>
+                     <td class="text-normal font-normal px-small">
+                         @if($attendance->action_type == 'check_in')
+                             <button
+                                 class="bg-checkin W-[78px] h-[22px] p-5% rounded-full flex flex-row items-center justify-between">
+                                 <img src="{{asset('assets/images/green_dot.png')}}" alt="dashboard" class="mr-2"/>
+                                 <span class="text-checkInText font-big text-small">Check in</span>
+                             </button>
+                         @endif
+                         @if($attendance->action_type == 'check_out')
+                             <button
+                                 class="bg-checkout W-[78px] h-[22px] p-5% rounded-full flex flex-row items-center justify-between">
+                                 <img src="{{asset('assets/images/red_dot.png')}}" alt="dashboard" class="mr-2"/>
+                                 <span class="text-checkInText font-big text-small">Check out</span>
+                             </button>
+                         @endif
 
-            <tr class="border border-table border-x-0 border-b-0 text-natural hover:bg-db">
-                <td class="text-normal font-normal px-small">company name</td>
-                <td class="text-normal font-normal  px-small py-smallest">Olatunji Afeez</td>
-                <td class="text-normal font-normal  px-small py-smallest">
-                    <div>3/10/2023</div>
-                    <div>5:00pm</div>
-                </td>
-                <td class="text-normal font-normal px-small">
-                    <button
-                        class="bg-checkout W-[78px] h-[22px] p-5% rounded-full flex flex-row items-center justify-between">
-                        <img src="{{asset('assets/images/red_dot.png')}}" alt="dashboard" class="mr-2"/>
-                        <span class="text-checkInText font-big text-small">Check out</span>
-                    </button>
-                </td>
-                <td class="text-normal font-normal  px-small py-smallest">Tag name</td>
-                <td class="text-normal font-normal  px-small py-smallest">Site name</td>
-                <td class="text-normal font-normal  px-small py-smallest">1</td>
-                <td class="text-normal font-normal px-small  py-smallest">
-                    <img src="{{asset('assets/images/tableImg.png')}}" alt="dashboard" class=" w-[60px] h-[60px]"/>
-                </td>
-            </tr>
+                     </td>
+                     <td class="text-normal font-normal px-small">{{$attendance->site->name}}</td>
+                     <td class="text-normal font-normal px-small">{{$attendance->distance}} KM</td>
+                     <td class="text-normal font-normal px-small">
+                         <img src="{{ $attendance->user->profile_image ?? asset('assets/images/tableImg.png')}}"
+                              alt="dashboard"
+                              class=" w-[60px] h-[60px]"/>
+                     </td>
+                     <td class="text-normal font-normal p-small">{{$attendance->proximity}}</td>
+                 </tr>
+             @empty
 
-            <tr class="border border-table border-x-0 border-b-0 text-natural hover:bg-db">
-                <td class="text-normal font-normal px-small">company name</td>
-                <td class="text-normal font-normal  px-small py-smallest">Olatunji Afeez</td>
-                <td class="text-normal font-normal  px-small py-smallest">
-                    <div>3/10/2023</div>
-                    <div>5:00pm</div>
-                </td>
-                <td class="text-normal font-normal px-small">
-                    <button
-                        class="bg-checkout W-[78px] h-[22px] p-5% rounded-full flex flex-row items-center justify-between">
-                        <img src="{{asset('assets/images/red_dot.png')}}" alt="dashboard" class="mr-2"/>
-                        <span class="text-checkInText font-big text-small">Check out</span>
-                    </button>
-                </td>
-                <td class="text-normal font-normal  px-small py-smallest">Tag name</td>
-                <td class="text-normal font-normal  px-small py-smallest">Site name</td>
-                <td class="text-normal font-normal  px-small py-smallest">1</td>
-                <td class="text-normal font-normal px-small  py-smallest">
-                    <img src="{{asset('assets/images/tableImg.png')}}" alt="dashboard" class=" w-[60px] h-[60px]"/>
-                </td>
-            </tr>
-            </tbody>
-        </table>
-    </section>
-</section>
+                 <tr class="text-normal font-normal border border-table border-collapse text-natural hover:bg-db">
+                     <td class="text-center" colspan="7">No Data</td>
+                 </tr>
 
+             @endforelse
 
+             </tbody>
+         </table>
+     </section>
+ </section>
 @endsection
 

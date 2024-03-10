@@ -1,6 +1,10 @@
 @extends('layouts.app')
 @section('title', 'Tags')
 @section('page', 'Tag Management')
+@push('header-scripts')
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+            integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+@endpush
 @section('content')
 
     <section>
@@ -11,7 +15,7 @@
                     <span class="material-symbols-outlined text-white">sell</span>
                 </div>
                 <div class="ml-[5%]">
-                    <h1 class="font-bold text-3xl text-tags">12233</h1>
+                    <h1 class="font-bold text-3xl text-tags">{{$tagCount}}</h1>
                     <span class="font-normal text-sm text-tags">Tags</span>
                 </div>
             </div>
@@ -35,17 +39,20 @@
                 <x-filter-card :actionUrl="route('admin.tags.index')" :hasTable="false" :canSearch="true"
                                :searchPlaceholder="'Search by tag name, code, comment'">
                     <div class="flex flex-col">
-                        <x-input-label for="site_id" :value="__('Select Company')"/>
-                        <x-select-input id="site_id" class="block mt-1 w-full" name="site_id">
+                        <x-input-label for="company_id" :value="__('Select Company')"/>
+                        <x-select-input id="company_id" class="block mt-1 w-full" name="company_id">
                             <option value="">Select Company</option>
-
+                            @foreach($companies as $company)
+                                <option
+                                    value="{{$company->id}}" {{ request()->query('company_id') == $company->id ? "selected" : '' }}>{{$company->name}}</option>
+                            @endforeach
                         </x-select-input>
                     </div>
-                    <div class="flex flex-col">
-                        <x-input-label for="site_id" :value="__('Select site')"/>
-                        <x-select-input id="site_id" class="block mt-1 w-full" name="site_id">
-                            <option value="">Select Site</option>
 
+                    <div class="flex flex-col">
+                        <x-input-label for="site_id" :value="__('Site')" class="text-white"/>
+                        <x-select-input id="site_id" class="block w-full" name="site_id">
+                            <option class="" value="">All site</option>
                         </x-select-input>
                     </div>
 
@@ -58,53 +65,43 @@
                     <table class="table-auto w-[100%] max-lg:w-[1000px]">
                         <thead class="">
                         <tr class="text-left text-small text-natural font-big">
-                            <th class=" px-small py-[1%]">Company</th>
-                            <th class="px-small py-[1%]">Site name</th>
-                            <th class="px-small py-[1%]">Tag Name</th>
-                            <th class="px-small py-[1%]">Code</th>
-                            <th class="px-small py-[1%]">Comments</th>
                             <th class="px-small py-[1%]">Tag</th>
+                            <th class="px-small py-[1%]">Code</th>
+                            <th class=" px-small py-[1%]">Company</th>
+                            <th class="px-small py-[1%]">Site</th>
+                            <th class="px-small py-[1%]">Type</th>
+                            <th class="px-small py-[1%]">Comments</th>
                             <th class="px-small py-[1%]">Action</th>
                         </tr>
                         </thead>
                         <tbody>
 
-                        
-                        <tr class=" text-normal font-normal border border-table border-x-0 border-b-0 text-natural hover:bg-db">
-                            <td class="text-normal font-normal px-small">company name</td>
-                            <td class="text-normal font-normal  px-small py-smaller">Headquarters</td>
-                            <td class="text-normal font-normal  px-small py-smaller">fun pathway</td>
-                            <td class="text-normal font-normal px-small">Headquarters</td>
-                            <td class="text-normal font-normal px-small">Qr code</td>
-                            <td class="text-normal font-normal px-small">Qr code</td>
-                            <td class="text-normal font-normal px-small">
-                                <span class="material-symbols-outlined w-[24px] h-[24px] text-natural">edit_square</span>
-                            </td>
-                        </tr>
+                        @forelse($tags as $tag)
+                            <tr class="text-normal font-normal border border-table border-x-0 border-b-0 text-natural hover:bg-db">
+                                <td class="px-small py-small">
+                                    {{$tag->name}}
+                                </td>
+                                <td class="px-small py-small">{{$tag->code}}</td>
+                                <td class="px-small py-small">{{$tag->company->display_name}}</td>
+                                <td class=" px-small py-small">{{$tag->site->name}}</td>
+                                <td class="px-small py-small">QR Code</td>
+                                <td class="px-small truncate py-small">{{$tag->comment}}</td>
+                                <td class="px-small py-small">
+                                    <div class="flex flex-row justify-center">
+                                        <a href="{{route('admin.tags.edit', ['tag' => $tag->id])}}">
 
-                        <tr class=" text-normal font-normal border border-table border-x-0 border-b-0 text-natural hover:bg-db">
-                            <td class="text-normal font-normal px-small">company name</td>
-                            <td class="text-normal font-normal  px-small py-smaller">Headquarters</td>
-                            <td class="text-normal font-normal  px-small py-smaller">fun pathway</td>
-                            <td class="text-normal font-normal px-small">Headquarters</td>
-                            <td class="text-normal font-normal px-small">Qr code</td>
-                            <td class="text-normal font-normal px-small">Qr code</td>
-                            <td class="text-normal font-normal px-small">
-                                <span class="material-symbols-outlined w-[24px] h-[24px] text-natural">edit_square</span>
-                            </td>
-                        </tr>
+                                                <span
+                                                    class="material-symbols-outlined w-[16px] h-[16px] ml-3 cursor-pointer text-natural">edit_square</span>
+                                        </a>
 
-                        <tr class=" text-normal font-normal border border-table border-x-0 border-b-0 text-natural hover:bg-db">
-                            <td class="text-normal font-normal px-small">company name</td>
-                            <td class="text-normal font-normal  px-small py-smaller">Headquarters</td>
-                            <td class="text-normal font-normal  px-small py-smaller">fun pathway</td>
-                            <td class="text-normal font-normal px-small">Headquarters</td>
-                            <td class="text-normal font-normal px-small">Qr code</td>
-                            <td class="text-normal font-normal px-small">Qr code</td>
-                            <td class="text-normal font-normal px-small">
-                                <span class="material-symbols-outlined w-[16px] h-[16px] text-natural">edit_square</span>
-                            </td>
-                        </tr>
+                                    </div>
+                                </td>
+                            </tr>
+                        @empty
+                            <tr class="text-normal font-normal border border-table border-collapse text-natural hover:bg-db">
+                                <td class="text-center" colspan="5">No Data</td>
+                            </tr>
+                        @endforelse
 
                         </tbody>
                     </table>
@@ -114,3 +111,31 @@
         </section>
     </section>
 @endsection
+@push('scripts')
+    <script>
+        const filterDropdown = document.querySelector("#filter");
+        const selectSite = document.getElementById("site_id");
+        const selectCompany = document.getElementById("company_id");
+        $(document).ready(function () {
+
+            selectSite.disabled = true;
+            const companyParamValue = getQueryParamValue('company_id');
+            console.log(companyParamValue)
+            if (companyParamValue != null) {
+                getCompanySites(companyParamValue)
+            }
+
+        });
+
+        selectCompany.addEventListener("change", function (e) {
+            getCompanySites(e.target.value)
+        });
+
+
+        function resetForm() {
+            $(".site").val('').trigger('change')
+            document.getElementById("search-form").reset();
+            window.location.replace(location.pathname);
+        }
+    </script>
+@endpush

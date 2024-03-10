@@ -7,8 +7,14 @@ use App\Http\Requests\StoreSiteRequest;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UpdateSiteRequest;
 use App\Models\Site;
+use App\QueryFilters\CompanyIdFilter;
+use App\QueryFilters\CreatedAtFilter;
+use App\QueryFilters\SiteIdFilter;
+use App\QueryFilters\StateIdFilter;
+use App\QueryFilters\StatusFilter;
 use App\Repositories\Eloquent\Repository\CompanyRepository;
 use App\Repositories\Eloquent\Repository\SiteRepository;
+use App\Repositories\Eloquent\Repository\StateRepository;
 use App\Services\UserService;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
@@ -20,6 +26,7 @@ class SiteController extends controller
         private readonly SiteRepository $siteRepository,
         private readonly CompanyRepository $companyRepository,
         private readonly UserService $userService,
+        private readonly StateRepository $stateRepository,
     )
     {
     }
@@ -28,8 +35,21 @@ class SiteController extends controller
      */
     public function index()
     {
-        $sites =  $this->siteRepository->allPaginated();
-        return view('admin.site.index', compact('sites'));
+        $siteQuery = $this->siteRepository->modelQuery()->search();
+
+        $pipes = [
+            CreatedAtFilter::class,
+            StatusFilter::class,
+            StateIdFilter::class,
+            CompanyIdFilter::class
+        ];
+        $countOfSites = $this->siteRepository->modelQuery()->count();
+        $companies =  $this->companyRepository->all();
+        $states = $this->stateRepository->fetchByCountryID();
+        $siteQuery = $siteQuery->with(['inspector', 'state', 'state.country', 'company']);
+        $siteQuery = constructPipes($siteQuery, $pipes);
+        $sites = $siteQuery->latest()->paginate(\request('per_page', 15));
+        return view('admin.site.index', compact('sites', 'countOfSites', 'states', 'companies'));
     }
 
     /**

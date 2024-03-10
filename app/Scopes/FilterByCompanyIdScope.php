@@ -20,7 +20,7 @@ class FilterByCompanyIdScope implements Scope
         /** @var User $user */
         if (Auth::hasUser()) {
             $user = \auth()->user();
-            if (!$user->hasRole(RoleEnum::ADMIN->value) || !$user->hasRole(RoleEnum::SUPER_ADMIN->value)) {
+            if ($user->hasRole(RoleEnum::COMPANY_OWNER->value) || $user->hasRole(RoleEnum::SITE_INSPECTOR->value)) {
                 $column =  $model->getTable() . ".company_id";
                 $builder->where($column, $user->company_id);
             }

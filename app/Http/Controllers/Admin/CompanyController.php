@@ -7,12 +7,14 @@ use App\Http\Requests\StoreCompanyRequest;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UpdateCompanyRequest;
 use App\Models\Company;
+use App\QueryFilters\CreatedAtFilter;
 use App\QueryFilters\IndustryIdFilter;
 use App\QueryFilters\PhoneNumberFilter;
 use App\QueryFilters\StateIdFilter;
 use App\QueryFilters\StatusFilter;
 use App\Repositories\Eloquent\Repository\CompanyRepository;
 use App\Repositories\Eloquent\Repository\IndustryRepository;
+use App\Repositories\Eloquent\Repository\SiteRepository;
 use App\Repositories\Eloquent\Repository\StateRepository;
 use App\Repositories\Eloquent\Repository\UserRepository;
 use App\Services\UserService;
@@ -26,7 +28,7 @@ class CompanyController extends Controller
         private readonly CompanyRepository $companyRepository,
         private  readonly StateRepository $stateRepository,
         private readonly IndustryRepository $industryRepository,
-        private readonly UserRepository $userRepository,
+        private readonly SiteRepository $siteRepository,
         private readonly UserService $userService,
     )
     {
@@ -38,16 +40,17 @@ class CompanyController extends Controller
     public function index()
     {
         $pipes = [
-            PhoneNumberFilter::class,
+            CreatedAtFilter::class,
             StatusFilter::class,
             StateIdFilter::class,
-            IndustryIdFilter::class,
         ];
 
         $companyQuery = $this->companyRepository->modelQuery()->search();
+        $countCompany = $this->companyRepository->modelQuery()->count();
         $companyQuery = constructPipes($companyQuery, $pipes);
-        $companies = $companyQuery->with(['owner', 'state', 'industry'])->withCount(['tags'])->paginate();
-        return view('admin.company.index', compact('companies'));
+        $states = $this->stateRepository->fetchByCountryID();
+        $companies = $companyQuery->with(['owner', 'state', 'industry'])->latest()->withCount(['tags'])->paginate(request('per_page', 15));
+        return view('admin.company.index', compact('companies', 'countCompany', 'states'));
     }
 
     /**
@@ -97,7 +100,7 @@ class CompanyController extends Controller
             throw $ex;
         }
 
-        return redirect('companies.index');
+        return redirect('admin.companies.index');
 
     }
 
@@ -106,8 +109,8 @@ class CompanyController extends Controller
      */
     public function show(Company $company)
     {
-        $company->load('site', 'owner');
-        return view('company.show', compact('company'));
+        $company->load('sites', 'owner');
+        return view('admin.company.show', compact('company'));
     }
 
     /**
@@ -115,8 +118,8 @@ class CompanyController extends Controller
      */
     public function edit(Company $company)
     {
-        $company->load('site', 'owner');
-        return view('company.edit', compact('company'));
+        $company->load('sites', 'owner');
+        return view('admin.company.edit', compact('company'));
     }
 
     /**

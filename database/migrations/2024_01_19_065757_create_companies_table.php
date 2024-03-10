@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string("display_name");
             $table->integer("maximum_number_of_tags")->default(0);
             $table->string("phone_number")->unique();
-            $table->string("status")->default(true);
+            $table->boolean("status")->default(true);
             $table->foreignId("owner_id")->constrained('users');
             $table->foreignId("created_by")->constrained('users');
             $table->foreignId("industry_id")->constrained('industries');
