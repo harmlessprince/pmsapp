@@ -18,15 +18,15 @@
         </a>
         @include('partials.asides.desktop.dash')
         @include('partials.asides.desktop.admin.users')
-        @include('partials.asides.desktop.admin.Company')
+        @include('partials.asides.desktop.admin.company')
         @include('partials.asides.desktop.admin.tag')
         @include('partials.asides.desktop.admin.site')
         @include('partials.asides.desktop.admin.scan')
         @include('partials.asides.desktop.admin.attendance')
         @include('partials.asides.desktop.admin.admin')
-       
-       
-       
+
+
+
     @endif
 
 
