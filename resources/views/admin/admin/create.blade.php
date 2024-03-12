@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('title', 'Create Admin')
-@section('page', 'Admin')
+@section('page', 'Admin Management')
 @section('content')
 
 <div class="font-big text-big text-natural mb-2 flex flex-row justify-between">
