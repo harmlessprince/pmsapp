@@ -25,11 +25,11 @@ class CompanyController extends Controller
 {
 
     public function __construct(
-        private readonly CompanyRepository $companyRepository,
-        private  readonly StateRepository $stateRepository,
+        private readonly CompanyRepository  $companyRepository,
+        private readonly StateRepository    $stateRepository,
         private readonly IndustryRepository $industryRepository,
-        private readonly SiteRepository $siteRepository,
-        private readonly UserService $userService,
+        private readonly SiteRepository     $siteRepository,
+        private readonly UserService        $userService,
     )
     {
     }
@@ -79,28 +79,28 @@ class CompanyController extends Controller
                 $request->input('status'),
                 $request->input('username')
             );
-            $company =  $this->companyRepository->create([
-                'name' => $request->input('company_name'),
+            $company = $this->companyRepository->create([
+                'name' => $request->input('display_name'),
                 'display_name' => $request->input('display_name'),
-                'maximum_number_of_tags' => Hash::make($request->input('maximum_number_of_tags')),
+                'maximum_number_of_tags' => $request->input('maximum_number_of_tags'),
                 'status' => $request->input('status'),
                 'phone_number' => $request->input('phone_number'),
-                'username' => $request->input('username'),
                 'created_by' => 1,
-                'industry_id' =>  $request->input('industry_id'),
-                'state_id' =>  $request->input('state_id'),
+                'industry_id' => $request->input('industry_id'),
+                'state_id' => $request->input('state_id'),
                 'city' => $request->input('city'),
+                'address' => $request->input('address'),
                 'owner_id' => $companyOwner->id,
             ]);
             $this->userService->associateUserToComapany($companyOwner, $company);
             $this->userService->associateUserToRole($companyOwner, RoleEnum::COMPANY_OWNER->value);
             DB::commit();
-        }catch (\Exception $ex){
+        } catch (\Exception $ex) {
             DB::rollBack();
             throw $ex;
         }
 
-        return redirect('admin.companies.index');
+        return redirect(route('admin.companies.index'))->with('success', 'Company created successfully');
 
     }
 
@@ -118,16 +118,45 @@ class CompanyController extends Controller
      */
     public function edit(Company $company)
     {
+        $states = $this->stateRepository->fetchByCountryID();
+        $industries = $this->industryRepository->all();
         $company->load('sites', 'owner');
-        return view('admin.company.edit', compact('company'));
+        return view('admin.company.edit', compact('company', 'states', 'industries'));
     }
 
     /**
      * Update the specified resource in storage.
+     * @throws \Exception
      */
     public function update(UpdateCompanyRequest $request, Company $company)
     {
-        //
+        try {
+            DB::beginTransaction();
+            $company->owner()->update([
+                'first_name' => $request->input('first_name'),
+                'last_name' => $request->input('last_name'),
+                'email' => $request->input('email'),
+                'status' => $request->input('status'),
+            ]);
+             $company->update([
+                'name' => $request->input('display_name'),
+                'display_name' => $request->input('display_name'),
+                'maximum_number_of_tags' => $request->input('maximum_number_of_tags'),
+                'status' => $request->input('status'),
+                'phone_number' => $request->input('phone_number'),
+                'industry_id' => $request->input('industry_id'),
+                'state_id' => $request->input('state_id'),
+                'city' => $request->input('city'),
+                'address' => $request->input('address')
+            ]);
+            DB::commit();
+        } catch (\Exception $ex) {
+            DB::rollBack();
+            throw $ex;
+        }
+
+        return redirect(route('admin.companies.index'))->with('success', 'Company updated successfully');
+
     }
 
     /**

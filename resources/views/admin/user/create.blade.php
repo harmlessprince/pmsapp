@@ -8,94 +8,60 @@
 @section('content')
  <!-- <div class="font-big text-big text-natural">Add new Site</div> -->
  <div class="font-big text-big text-natural mb-2 flex flex-row justify-between">
-    <div>Edit user profile</div>
+    <div>Create User</div>
     <a
         class="font-big text-normal text-primary_color rounded-lg border border-primary_color px-[16px] py-[10px] cursor-pointer bg-transparent"
-        href="{{route('company.users.index')}}">
+        href="{{route('admin.users.index')}}">
         Manage Users
     </a>
 </div>
-<form class="mt-[2%] w-[100%]" action="" method="POST" enctype="multipart/form-data">
-    @method('patch')
+<form class="mt-[2%] w-[100%]" action="{{route('admin.users.store')}}" method="POST" enctype="multipart/form-data">
     @csrf
-    <div class="flex flex-row justify-between mb-2  max-lg:flex-col">
-        <div class="w-[48%] max-lg:w-full max-lg:mb-2">
-            <label class="font-big text-normal text-natural">First name</label>
-            <input
-                type="text"
-                class="w-full border border-natural bg-transparent h-11 px-2 py-1 rounded-lg text-natural
-                        placeholder-color font-normal text-normal
-                        focus:outline-none focus:border-primary_color focus:ring-1 focus:ring-background_color
-                        focus:invalid:error focus:invalid:error
-                        "
-                placeholder="First name" name="first_name" value=""/>
+    <div class="grid gap-6 mb-6 md:grid-cols-2">
+        <div class="flex flex-col">
+            <x-input-label for="first_name" :value="__('First Name')"/>
+            <x-text-input id="first_name" class="block mt-1 w-full" type="text" name="first_name" :value="old('first_name')"
+                          required/>
             <x-input-error :messages="$errors->get('first_name')" class="mt-2"/>
         </div>
-        <div class="w-[48%] max-lg:w-full">
-            <label class="font-big text-normal text-natural">Last name</label>
-            <input
-                type="text"
-                class="w-full border border-natural bg-transparent h-[44px] px-2 py-1 rounded-lg text-natural
-                        placeholder-color font-normal text-normal
-                        focus:outline-none focus:border-primary_color focus:ring-1 focus:ring-background_color
-                        focus:invalid:error focus:invalid:error
-                        "
-                placeholder="Last name" name="last_name" value=""/>
+        <div class="flex flex-col">
+            <x-input-label for="last_name" :value="__('Last Name')"/>
+            <x-text-input id="last_name" class="block mt-1 w-full" type="text" name="last_name" :value="old('last_name')"
+                          required/>
             <x-input-error :messages="$errors->get('last_name')" class="mt-2"/>
         </div>
-    </div>
-
-    <div class="flex flex-row justify-between mb-2 max-lg:flex-col">
-        <div class="w-[48%] mb-2 max-lg:w-full max-lg:mb-2">
-            <label class="font-big text-normal text-natural">Select company</label>
-            <select
-                class="outline-none w-full border border-filterInput bg-transparent h-[44px] px-2 py-1 rounded-lg text-normal font-normal text-filter_text"
-                name="company"
-            >
-                <option>Select company</option>
-            </select>
-            <x-input-error :messages="$errors->get('company')" class="mt-2"/>
-        </div>
-        <div class="w-[48%] mb-2 max-lg:w-full max-lg:mb-2">
-            <label class="font-big text-normal text-natural"> Select site</label>
-            <select
-                class="outline-none w-full border border-filterInput bg-transparent h-[44px] px-2 py-1 rounded-lg text-normal font-normal text-filter_text"
-                name="site_id"
-            >
-                <option>Select Site</option>
-                {{-- @foreach($sites as $site)
-                    <option
-                        value="{{$site->id}}" {{$user->site->id ==  $site->id ? 'selected' : ''}}>{{$site->name}}</option>
-                @endforeach --}}
-            </select>
-            <x-input-error :messages="$errors->get('site_id')" class="mt-2"/>
-        </div>
-    </div>
-
-    <div class="flex flex-row justify-between mb-2 max-lg:flex-col">
-        <div class="w-[48%] max-lg:w-full max-lg:mb-2">
-            <label class="font-big text-normal text-natural">Phone number</label>
-            <input
-                type="text"
-                class="w-full border border-natural bg-transparent h-11 px-2 py-1 rounded-lg text-natural
-                        placeholder-color font-normal text-normal
-                        focus:outline-none focus:border-primary_color focus:ring-1 focus:ring-background_color
-                        focus:invalid:error focus:invalid:error
-                        "
-                placeholder="Phone number" name="phone_number" value=""/>
+        <div class="flex flex-col">
+            <x-input-label for="phone_number" :value="__('Phone Numbers')"/>
+            <x-text-input id="phone_number" class="block mt-1 w-full"  name="phone_number" :value="old('phone_number')" required/>
             <x-input-error :messages="$errors->get('phone_number')" class="mt-2"/>
         </div>
-        <div class="w-[48%] max-lg:w-full">
-            <label class="font-big text-normal text-natural">Address</label>
-            <input
-                type="text"
-                class="w-full border border-natural bg-transparent h-[44px] px-2 py-1 rounded-lg text-natural
-                        placeholder-color font-normal text-normal
-                        focus:outline-none focus:border-primary_color focus:ring-1 focus:ring-background_color
-                        focus:invalid:error focus:invalid:error
-                        "
-                placeholder="" name="address" value=""/>
+        <div class="flex flex-col">
+            <x-input-label for="address" :value="__('Address')"/>
+            <x-text-input id="address" class="block mt-1 w-full" type="text"
+                          name="address" required :value="old('address')"/>
             <x-input-error :messages="$errors->get('address')" class="mt-2"/>
+        </div>
+    </div>
+
+
+    <div class="grid gap-6 mb-6 md:grid-cols-2">
+        <div class="flex flex-col">
+            <x-input-label for="company_id" :value="__('Select Company')"/>
+            <x-select-input id="company_id" class="block mt-1 w-full" name="company_id">
+                <option value="">Select Company</option>
+                @foreach($companies as $company)
+                    <option
+                        value="{{$company->id}}" {{ request()->query('company_id') == $company->id ? "selected" : '' }}>{{$company->name}}</option>
+                @endforeach
+            </x-select-input>
+            <x-input-error :messages="$errors->get('company_id')" class="mt-2"/>
+        </div>
+        <div class="flex flex-col">
+            <x-input-label for="site_id" :value="__('Site')" class="text-white"/>
+            <x-select-input id="site_id" class="block w-full" name="site_id">
+                <option class="" value="">Select a company</option>
+            </x-select-input>
+            <x-input-error :messages="$errors->get('site_id')" class="mt-2"/>
         </div>
     </div>
 
@@ -209,6 +175,8 @@
 {{--    https://www.jqueryscript.net/demo/Customizable-jQuery-Timepicker-Plugin-timepicker/--}}
 <script src="{{asset('assets/timepicker/jquery.timepicker.min.js')}}"></script>
 <script>
+    const selectSite = document.getElementById("site_id");
+    const selectCompany = document.getElementById("company_id");
     $(document).ready(function () {
 
         $('.shift_start_time_timepicker').timepicker({
@@ -217,6 +185,12 @@
         $('.shift_end_time_timepicker').timepicker({
             listWidth: 1
         });
+        selectSite.disabled = true;
+        const companyParamValue = getQueryParamValue('company_id');
+        console.log(companyParamValue)
+        if (companyParamValue != null) {
+            getCompanySites(companyParamValue)
+        }
     });
 
     function readImageURL(input) {
@@ -230,6 +204,9 @@
             reader.readAsDataURL(input.files[0]);
         }
     }
+    selectCompany.addEventListener("change", function (e) {
+        getCompanySites(e.target.value)
+    });
 </script>
 @endpush
 

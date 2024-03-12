@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Company;
 use App\Enums\RoleEnum;
 use App\Exceptions\CustomException;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Company\UpdateUserRequest;
+use App\Http\Requests\UpdateUserRequest;
 use App\Models\User;
 use App\QueryFilters\CreatedAtFilter;
 use App\QueryFilters\SiteIdFilter;
@@ -14,7 +14,6 @@ use App\Repositories\Eloquent\Repository\SiteRepository;
 use App\Repositories\Eloquent\Repository\StateRepository;
 use App\Repositories\Eloquent\Repository\UserRepository;
 use App\Services\FileUploadService;
-use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class UserController extends Controller

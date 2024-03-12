@@ -3,15 +3,16 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Enums\RoleEnum;
-use App\Http\Requests\StoreUserRequest;
-use App\Http\Requests\UpdateUserRequest;
+use App\Exceptions\CustomException;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreUserRequest;
 use App\Models\User;
 use App\QueryFilters\CompanyIdFilter;
 use App\QueryFilters\CreatedAtFilter;
 use App\QueryFilters\SiteIdFilter;
 use App\Repositories\Eloquent\Repository\CompanyRepository;
 use App\Repositories\Eloquent\Repository\UserRepository;
+use App\Services\FileUploadService;
 
 class UserController extends Controller
 {
@@ -46,8 +47,8 @@ class UserController extends Controller
      */
     public function create()
     {
-
-        return view('admin.user.create');
+        $companies = $this->companyRepository->all();
+        return view('admin.user.create', compact('companies'));
     }
 
     /**
@@ -71,15 +72,28 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
-        return view('admin.user.edit', compact('user'));
+        $sites = $this->siteRepository->modelQuery()->get();
+        $states = $this->stateRepository->fetchByCountryID();
+        return view('company.user.edit', compact('user', 'sites', 'states'));
     }
 
     /**
      * Update the specified resource in storage.
+     * @throws CustomException
      */
-    public function update(UpdateUserRequest $request, User $user)
+    public function update(\App\Http\Requests\UpdateUserRequest $request, User $user)
     {
-        //
+        $validated_data = $request->validated();
+        if ($request->hasfile('profile_image')){
+            $response = FileUploadService::uploadToS3($request->file('profile_image'), 'profile_images');
+            $validated_data['profile_image'] = $response->path;
+        }else{
+            unset($validated_data['profile_image']);
+        }
+
+        $user->update($validated_data);
+
+        return redirect(route('company.users.index'))->with('success', 'User Profile updated successfully');
     }
 
     /**

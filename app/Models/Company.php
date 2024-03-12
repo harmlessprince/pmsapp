@@ -14,7 +14,7 @@ class Company extends Model
     use HasFactory, SearchableTrait;
 
     protected $guarded = [];
-    public array $searchable = ['phone_number', 'name', 'display_name', 'city', 'address'];
+    public array $searchable = ['phone_number', 'display_name', 'city', 'address', 'owner.email'];
 
     public function owner(): BelongsTo
     {

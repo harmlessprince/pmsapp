@@ -95,11 +95,11 @@
                                     {{$company->owner->first_name}} {{$company->owner->last_name}}
                                 </td>
                                 <td class="px-smaller">
-                                    {{$company->tags_count}}
+                                    {{$company->maximum_number_of_tags}}
                                 </td>
 
                                 <td class="px-smaller">
-                                    @if($company->status)
+                                    @if((bool)$company->status)
                                         <button
                                             class="bg-foundation W-[78px] h-[22px] px-[8px] py-[2px] rounded-full flex flex-row items-center justify-between">
                                             <img src="{{asset('assets/images/white_dot.png')}}" alt="dashboard"
