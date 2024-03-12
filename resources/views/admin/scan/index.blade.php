@@ -20,7 +20,7 @@
     <!-- Dashboard content -->
     <section class="">
         <!-- filter searches -->
-        <x-filter-card :actionUrl="route('company.scans.transactions')" :canExport="true">
+        <x-filter-card :actionUrl="route('admin.scan.index')" :canExport="true">
             <input value="yes" name="date" hidden/>
 
 
@@ -74,19 +74,26 @@
             </div>
 
             <div class="flex flex-col">
+                <x-input-label for="company_id" :value="__('Select Company')"/>
+                <x-select-input id="company_id" class="block mt-1 w-full" name="company_id">
+                    <option value="">Select Company</option>
+                    @foreach($companies as $company)
+                        <option
+                            value="{{$company->id}}" {{ request()->query('company_id') == $company->id ? "selected" : '' }}>{{$company->name}}</option>
+                    @endforeach
+                </x-select-input>
+            </div>
+
+            <div class="flex flex-col">
                 <x-input-label for="site_id" :value="__('Site')" class="text-white"/>
                 <x-select-input id="site_id" class="block w-full" name="site_id">
-                    <option class="" value="">All site</option>
-                    @foreach($sites as $site)
-                        <option
-                            value="{{$site->id}}" {{ request()->query('site_id') == $site->id ? "selected" : '' }}>{{$site->name}}</option>
-                    @endforeach
+                    <option class="" value="">Select a company</option>
                 </x-select-input>
             </div>
             <div class="flex flex-col">
                 <x-input-label for="tag_id" :value="__('Tag')" class="text-white"/>
                 <x-select-input id="tag_id" class="block w-full" name="tag_id">
-                    <option class="" value="">Select a tag</option>
+                    <option class="" value="">Select a site</option>
                 </x-select-input>
             </div>
         </x-filter-card>
@@ -102,6 +109,7 @@
                         {{--                        <th class="text-left text-small text-natural font-big  px-small py-smaller">Scan Time</th>--}}
                         <th class="text-left text-small text-natural font-big px-small py-smaller">Tag</th>
                         <th class="text-left text-small text-natural font-big px-small py-smaller">Site</th>
+                        <th class="text-left text-small text-natural font-big px-small py-smaller">Company</th>
                         <th class="text-left text-small text-natural font-big px-small py-smaller">Longitude</th>
                         <th class="text-left text-small text-natural font-big px-small py-smaller">Latitude</th>
                         <th class="text-left text-small text-natural font-big px-small py-smaller">Distance</th>
@@ -117,11 +125,9 @@
                                 <div>{{$scan->scan_date->format('d/m/Y')}}</div>
                                 <div>{{Carbon\Carbon::parse($scan->scan_time)->format('g:i A')}}</div>
                             </td>
-                            {{--                            <td class="text-normal font-normal px-small">--}}
-                            {{--                                <div>{{Carbon\Carbon::parse($scan->scan_time)->format('g:i A')}}</div>--}}
-                            {{--                            </td>--}}
                             <td class="text-normal font-normal px-small">{{$scan->tag->name}}</td>
                             <td class="text-normal font-normal px-small">{{$scan->site->name}}</td>
+                            <td class="text-normal font-normal px-small">{{$scan->company->name}}</td>
                             <td class="text-normal font-normal p-small">{{$scan->longitude ?? '-'}}</td>
                             <td class="text-normal font-normal px-small">{{$scan->longitude ?? '-'}}</td>
                             <td class="text-normal font-normal px-small">{{$scan->distance}} km</td>
@@ -144,27 +150,30 @@
 
 @push('scripts')
     <script>
-
-        const selectSite = document.getElementById("site_id");
         const selectTag = document.getElementById("tag_id");
-
+        const filterDropdown = document.querySelector("#filter");
+        const selectSite = document.getElementById("site_id");
+        const selectCompany = document.getElementById("company_id");
         $(document).ready(function () {
-            $('.select-2-sites').select2({
-                placeholder: "Select a site",
-                allowClear: true
-            });
+            selectSite.disabled = true;
             selectTag.disabled = true;
+            const companyParamValue = getQueryParamValue('company_id');
             const siteParamValue = getQueryParamValue('site_id');
-            if (siteParamValue != null) {
-                getSiteTags(siteParamValue)
+            if (companyParamValue != null) {
+                getCompanySites(companyParamValue)
+                if (siteParamValue != null) {
+                    getSiteTags(siteParamValue)
+                }
             }
 
         });
 
+        selectCompany.addEventListener("change", function (e) {
+            getCompanySites(e.target.value)
+        });
         selectSite.addEventListener("change", function (e) {
             getSiteTags(e.target.value)
         });
-
         function resetForm() {
             $(".select-2-sites").val('').trigger('change')
             document.getElementById("search-form").reset();

@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class UpdateCompanyRequest extends FormRequest
 {
@@ -11,7 +12,7 @@ class UpdateCompanyRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +23,19 @@ class UpdateCompanyRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'industry_id' => ['sometimes', 'integer', 'exists:industries,id'],
+            'state_id' => ['sometimes', 'integer', 'exists:states,id'],
+            'city' => ['sometimes', 'string'],
+            'email' => ['sometimes', 'string', Rule::unique('users', 'email')->ignore(request()->company->owner->id)],
+            'display_name' => ['sometimes', 'string'],
+            'first_name' => ['sometimes', 'string'],
+            'last_name' => ['sometimes', 'string'],
+            'password' => ['sometimes', 'string', 'min:4'],
+            'confirm_password' => ['same:password'],
+            'address' => ['sometimes', 'string', 'max:200'],
+            'maximum_number_of_tags' => ['sometimes', 'integer', 'min:1'],
+            'phone_number' =>['sometimes', 'string'],
+            'status' => ['sometimes', 'boolean']
         ];
     }
 }

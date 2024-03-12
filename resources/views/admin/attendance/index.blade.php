@@ -5,7 +5,6 @@
 @endsection
 @push('header-links')
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet"/>
-
 @endpush
 @push('header-scripts')
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"
@@ -19,7 +18,7 @@
 
     <!-- Dashboard content -->
     <section class="">
-        <x-filter-card :actionUrl="route('company.attendance.transactions')" :canSearch="true"
+        <x-filter-card :actionUrl="route('admin.attendance.index')" :canSearch="true"
                        :searchPlaceholder="'Search by name'" :canExport="true">
             <input value="yes" name="date" hidden/>
             <div class="flex flex-col">
@@ -72,13 +71,20 @@
             </div>
 
             <div class="flex flex-col">
+                <x-input-label for="company_id" :value="__('Select Company')"/>
+                <x-select-input id="company_id" class="block mt-1 w-full" name="company_id">
+                    <option value="">Select Company</option>
+                    @foreach($companies as $company)
+                        <option
+                            value="{{$company->id}}" {{ request()->query('company_id') == $company->id ? "selected" : '' }}>{{$company->name}}</option>
+                    @endforeach
+                </x-select-input>
+            </div>
+
+            <div class="flex flex-col">
                 <x-input-label for="site_id" :value="__('Site')" class="text-white"/>
                 <x-select-input id="site_id" class="block w-full" name="site_id">
-                    <option class="" value="">All site</option>
-                    @foreach($sites as $site)
-                        <option
-                            value="{{$site->id}}" {{ request()->query('site_id') == $site->id ? "selected" : '' }}>{{$site->name}}</option>
-                    @endforeach
+                    <option class="" value="">Select a company</option>
                 </x-select-input>
             </div>
             <div class="flex flex-col">
@@ -111,6 +117,7 @@
                         <th class="text-left text-small text-natural font-big  px-small py-smaller">Time/Date</th>
                         <th class="text-left text-small text-natural font-big  px-small py-smaller">Action Type</th>
                         <th class="text-left text-small text-natural font-big px-small py-smaller">Site</th>
+                        <th class="text-left text-small text-natural font-big px-small py-smaller">Company</th>
                         <th class="text-left text-small text-natural font-big px-small py-smaller">Distance</th>
                         <th class="text-left text-small text-natural font-big px-small py-smaller">Image</th>
                         <th class="text-left text-small text-natural font-big px-small py-smaller">Proximity</th>
@@ -142,6 +149,7 @@
                                 @endif
                             </td>
                             <td class="text-normal font-normal px-small">{{$attendance->site->name}}</td>
+                            <td class="text-normal font-normal px-small">{{$attendance->company->display_name}}</td>
                             <td class="text-normal font-normal px-small">{{$attendance->distance}} KM</td>
                             <td class="text-normal font-normal px-small">
                                 <img src="{{ $attendance->user->profile_image ?? asset('assets/images/tableImg.png')}}"
@@ -167,11 +175,20 @@
 
 @push('scripts')
     <script>
+        const selectSite = document.getElementById("site_id");
+        const selectCompany = document.getElementById("company_id");
         $(document).ready(function () {
-            $('.select-2-sites').select2({
-                placeholder: "Select a site",
-                allowClear: true
-            });
+            selectSite.disabled = true;
+            const companyParamValue = getQueryParamValue('company_id');
+            // const siteParamValue = getQueryParamValue('site_id');
+            if (companyParamValue != null) {
+                getCompanySites(companyParamValue)
+            }
+
+        });
+
+        selectCompany.addEventListener("change", function (e) {
+            getCompanySites(e.target.value)
         });
 
         function resetForm() {

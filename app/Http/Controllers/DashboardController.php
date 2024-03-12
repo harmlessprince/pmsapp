@@ -29,7 +29,7 @@ class DashboardController extends Controller
 
     public function admin()
     {
-        Gate::allowIf(fn (User $user) => $user->isAdministrator());
+//        Gate::allowIf(fn (User $user) => $user->isAdministrator());
         $countOfUsers = $this->userRepository->modelQuery()->count();
         $countOfCompanies = $this->companyRepository->modelQuery()->count();
         $countOfSites = $this->siteRepository->modelQuery()->count();
@@ -39,11 +39,13 @@ class DashboardController extends Controller
         $currentYear = (int)Carbon::now()->format('Y');
         $countOfAttendanceByYearAndMonth = $this->attendanceRepository->attendanceByMonthYear($currentYear);
         $countOfScanByYearAndMonth = $this->scanRepository->scanByMonthYear($currentYear);
+        $latestScans  = $this->scanRepository->modelQuery()->with(['tag', 'site'])->orderBy('scan_date_time', 'DESC')->limit(6)->get();
+        $latestAttendance  = $this->attendanceRepository->modelQuery()->with(['site', 'user:id,first_name,last_name,profile_image'])->latest('attendance_date_time')->limit(6)->get();
 
         return view('dashboard.admin',
             compact('countOfUsers',
                 'countOfCompanies',
-                'countOfSites', 'countOfTags', 'countOfScans', 'countOfAttendance', 'countOfAttendanceByYearAndMonth', 'countOfScanByYearAndMonth'));
+                'countOfSites', 'countOfTags', 'countOfScans', 'countOfAttendance', 'latestScans', 'latestAttendance'));
     }
 
     public function company()

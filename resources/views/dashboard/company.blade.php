@@ -41,7 +41,8 @@
     <!-- table section -->
     <section class="pt-basic_padding overflow-x-auto max-lg:w-[100%] max-lg:mt-[5%]">
         <div class="font-big text-big text-natural mb-2%"> Recent Scan Report</div>
-        <table class="table-auto w-[100%] bg-background_color rounded-lg max-lg:w-[1000px]">
+        <section class="border border-table mt-[2%] rounded-lg bg-background_color overflow-x-auto">
+        <table class=" table-auto w-[100%] bg-background_color rounded-lg max-lg:w-[1000px]">
             <thead>
             <tr class="border border-x-0 border-y-0 border-table border-collapse">
                 <th class="text-left text-small text-natural font-big  px-small py-[1%]">Scan Date/Time</th>
@@ -68,16 +69,21 @@
                     <td class="text-normal font-normal px-small py-smaller">{{$scan->distance}} KM</td>
                 </tr>
             @empty
-                <p>No Scans</p>
+
+                <tr class="text-normal font-normal border border-table border-collapse text-natural hover:bg-db">
+                    <td class="text-center" colspan="7">No Data</td>
+                </tr>
+
             @endforelse
             </tbody>
         </table>
+        </section>
     </section>
 
     <!-- table 2 section -->
     <section class="pt-basic_padding max-lg:w-[100%] max-lg:mt-[5%]">
         <div class="font-big text-big text-natural mb-2%">Recent Attendance Report</div>
-        <section class="border border-table py-1 mt-[2%] rounded-lg bg-background_color overflow-x-auto">
+        <section class="border border-table mt-[2%] rounded-lg bg-background_color overflow-x-auto">
             <table class="table-auto w-[100%] bg-background_color max-lg:w-[1000px]">
                 <thead>
                 <tr class="">
@@ -128,7 +134,11 @@
                         <td class="text-normal font-normal p-small">{{$attendance->proximity}}</td>
                     </tr>
                 @empty
-                    <p>No Attendance Taken</p>
+
+                    <tr class="text-normal font-normal border border-table border-collapse text-natural hover:bg-db">
+                        <td class="text-center" colspan="7">No Data</td>
+                    </tr>
+
                 @endforelse
 
                 </tbody>

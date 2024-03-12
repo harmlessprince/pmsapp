@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use App\Http\Requests\StoreTagRequest;
 use App\Http\Requests\UpdateTagRequest;
+use App\Http\Controllers\Controller;
 use App\Models\Tag;
 use App\QueryFilters\CompanyIdFilter;
 use App\QueryFilters\CreatedAtFilter;
@@ -11,7 +12,7 @@ use App\QueryFilters\SiteIdFilter;
 use App\Repositories\Eloquent\Repository\CompanyRepository;
 use App\Repositories\Eloquent\Repository\TagRepository;
 
-class TagController extends Controller
+class TagController extends controller
 {
     public function __construct(
         private readonly TagRepository $tagRepository,
@@ -31,9 +32,10 @@ class TagController extends Controller
         ];
         $companies =  $this->companyRepository->all();
         $tagQuery = $this->tagRepository->modelQuery()->search();
+        $tagCount = $this->tagRepository->modelQuery()->count();
         $tagQuery = constructPipes($tagQuery, $pipes);
         $tags = $tagQuery->with(['company', 'site'])->paginate(request('per_page', 15));
-        return view('tag.index', compact('tags', 'companies'));
+        return view('admin.tag.index', compact('tags', 'companies', 'tagCount'));
     }
 
     /**
@@ -42,7 +44,7 @@ class TagController extends Controller
     public function create()
     {
         $companies =  $this->companyRepository->all();
-        return view('tag.create', compact('companies'));
+        return view('admin.tag.create', compact('companies'));
     }
 
     /**

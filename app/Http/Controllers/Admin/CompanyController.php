@@ -1,17 +1,20 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use App\Enums\RoleEnum;
 use App\Http\Requests\StoreCompanyRequest;
+use App\Http\Controllers\Controller;
 use App\Http\Requests\UpdateCompanyRequest;
 use App\Models\Company;
+use App\QueryFilters\CreatedAtFilter;
 use App\QueryFilters\IndustryIdFilter;
 use App\QueryFilters\PhoneNumberFilter;
 use App\QueryFilters\StateIdFilter;
 use App\QueryFilters\StatusFilter;
 use App\Repositories\Eloquent\Repository\CompanyRepository;
 use App\Repositories\Eloquent\Repository\IndustryRepository;
+use App\Repositories\Eloquent\Repository\SiteRepository;
 use App\Repositories\Eloquent\Repository\StateRepository;
 use App\Repositories\Eloquent\Repository\UserRepository;
 use App\Services\UserService;
@@ -22,11 +25,11 @@ class CompanyController extends Controller
 {
 
     public function __construct(
-        private readonly CompanyRepository $companyRepository,
-        private  readonly StateRepository $stateRepository,
+        private readonly CompanyRepository  $companyRepository,
+        private readonly StateRepository    $stateRepository,
         private readonly IndustryRepository $industryRepository,
-        private readonly UserRepository $userRepository,
-        private readonly UserService $userService,
+        private readonly SiteRepository     $siteRepository,
+        private readonly UserService        $userService,
     )
     {
     }
@@ -37,16 +40,17 @@ class CompanyController extends Controller
     public function index()
     {
         $pipes = [
-            PhoneNumberFilter::class,
+            CreatedAtFilter::class,
             StatusFilter::class,
             StateIdFilter::class,
-            IndustryIdFilter::class,
         ];
 
         $companyQuery = $this->companyRepository->modelQuery()->search();
+        $countCompany = $this->companyRepository->modelQuery()->count();
         $companyQuery = constructPipes($companyQuery, $pipes);
-        $companies = $companyQuery->with(['owner', 'state', 'industry'])->withCount(['tags'])->paginate();
-        return view('company.index', compact('companies'));
+        $states = $this->stateRepository->fetchByCountryID();
+        $companies = $companyQuery->with(['owner', 'state', 'industry'])->latest()->withCount(['tags'])->paginate(request('per_page', 15));
+        return view('admin.company.index', compact('companies', 'countCompany', 'states'));
     }
 
     /**
@@ -56,7 +60,7 @@ class CompanyController extends Controller
     {
         $states = $this->stateRepository->fetchByCountryID();
         $industries = $this->industryRepository->all();
-        return view('company.create', compact('states', 'industries'));
+        return view('admin.company.create', compact('states', 'industries'));
     }
 
     /**
@@ -75,28 +79,28 @@ class CompanyController extends Controller
                 $request->input('status'),
                 $request->input('username')
             );
-            $company =  $this->companyRepository->create([
-                'name' => $request->input('company_name'),
+            $company = $this->companyRepository->create([
+                'name' => $request->input('display_name'),
                 'display_name' => $request->input('display_name'),
-                'maximum_number_of_tags' => Hash::make($request->input('maximum_number_of_tags')),
+                'maximum_number_of_tags' => $request->input('maximum_number_of_tags'),
                 'status' => $request->input('status'),
                 'phone_number' => $request->input('phone_number'),
-                'username' => $request->input('username'),
                 'created_by' => 1,
-                'industry_id' =>  $request->input('industry_id'),
-                'state_id' =>  $request->input('state_id'),
+                'industry_id' => $request->input('industry_id'),
+                'state_id' => $request->input('state_id'),
                 'city' => $request->input('city'),
+                'address' => $request->input('address'),
                 'owner_id' => $companyOwner->id,
             ]);
             $this->userService->associateUserToComapany($companyOwner, $company);
             $this->userService->associateUserToRole($companyOwner, RoleEnum::COMPANY_OWNER->value);
             DB::commit();
-        }catch (\Exception $ex){
+        } catch (\Exception $ex) {
             DB::rollBack();
             throw $ex;
         }
 
-        return redirect('companies.index');
+        return redirect(route('admin.companies.index'))->with('success', 'Company created successfully');
 
     }
 
@@ -105,8 +109,8 @@ class CompanyController extends Controller
      */
     public function show(Company $company)
     {
-        $company->load('site', 'owner');
-        return view('company.show', compact('company'));
+        $company->load('sites', 'owner');
+        return view('admin.company.show', compact('company'));
     }
 
     /**
@@ -114,16 +118,45 @@ class CompanyController extends Controller
      */
     public function edit(Company $company)
     {
-        $company->load('site', 'owner');
-        return view('company.edit', compact('company'));
+        $states = $this->stateRepository->fetchByCountryID();
+        $industries = $this->industryRepository->all();
+        $company->load('sites', 'owner');
+        return view('admin.company.edit', compact('company', 'states', 'industries'));
     }
 
     /**
      * Update the specified resource in storage.
+     * @throws \Exception
      */
     public function update(UpdateCompanyRequest $request, Company $company)
     {
-        //
+        try {
+            DB::beginTransaction();
+            $company->owner()->update([
+                'first_name' => $request->input('first_name'),
+                'last_name' => $request->input('last_name'),
+                'email' => $request->input('email'),
+                'status' => $request->input('status'),
+            ]);
+             $company->update([
+                'name' => $request->input('display_name'),
+                'display_name' => $request->input('display_name'),
+                'maximum_number_of_tags' => $request->input('maximum_number_of_tags'),
+                'status' => $request->input('status'),
+                'phone_number' => $request->input('phone_number'),
+                'industry_id' => $request->input('industry_id'),
+                'state_id' => $request->input('state_id'),
+                'city' => $request->input('city'),
+                'address' => $request->input('address')
+            ]);
+            DB::commit();
+        } catch (\Exception $ex) {
+            DB::rollBack();
+            throw $ex;
+        }
+
+        return redirect(route('admin.companies.index'))->with('success', 'Company updated successfully');
+
     }
 
     /**

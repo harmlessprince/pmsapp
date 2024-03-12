@@ -1,6 +1,6 @@
 <div class="w-full">
 
-    <div class="flex flex-col">
+    <div class="flex flex-col"> 
         <div class="rounded-xl border border-gray-200 bg-background_color p-6 shadow-lg">
             <form action="{{$actionUrl}}" id="{{$formId}}">
                 @if($canSearch)
@@ -54,11 +54,17 @@
                                 </label>
                             </div>
                         @endif
-                        <div class="grid w-full grid-cols-1 justify-end space-x-4 md:flex">
-                            <x-secondary-button type="reset" class="px-8 py-2" onclick="resetForm()">Reset
+                        {{-- <div class="grid w-full grid-cols-1 justify-end space-x-4 md:flex">
+                            <x-secondary-button type="reset" class="px-8 py-2 w-full" onclick="resetForm()">Reset
                             </x-secondary-button>
-                            <x-primary-button class="px-8 py-2" type="submit" id="filter_button">Apply filters
+                            <x-primary-button class="px-8 py-2 w-full" type="submit" id="filter_button">Apply filters
                             </x-primary-button>
+                        </div> --}}
+                        <div class="flex flex-col justify-between w-full sm:flex-row sm:justify-end sm:space-x-4">
+                            <x-primary-button class=" py-3 sm:px-8 mb-2 sm:mb-0" type="submit" id="filter_button">Apply filters
+                            </x-primary-button>
+                            <x-secondary-button type="reset" class="sm:px-8 sm:py-2" onclick="resetForm()">Reset
+                            </x-secondary-button>
                         </div>
                     </div>
                 </div>
