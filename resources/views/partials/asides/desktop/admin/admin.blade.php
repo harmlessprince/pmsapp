@@ -1,7 +1,8 @@
 @php
     $isAdminIndexPage =  strpos(Route::currentRouteName(), 'admin.admin.index') === 0;
     $isAdminCreatePage =  strpos(Route::currentRouteName(), 'admin.admin.create') === 0;
-    $isAdminPage = $isAdminCreatePage || $isAdminIndexPage;
+     $isAdminEditPage =  strpos(Route::currentRouteName(), 'admin.admin.edit') === 0;
+    $isAdminPage = $isAdminCreatePage || $isAdminIndexPage || $isAdminEditPage;
 @endphp
 <div class="mb-8 cursor-pointer">
     <a
