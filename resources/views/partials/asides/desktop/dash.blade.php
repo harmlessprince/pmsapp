@@ -1,5 +1,5 @@
 @php
-    $isDashboard = strpos(Route::currentRouteName(), 'company.dashboard') === 0 || strpos(Route::currentRouteName(), 'admin-dashboard') === 0;
+    $isDashboard = strpos(Route::currentRouteName(), 'company.dashboard') === 0 || strpos(Route::currentRouteName(), 'admin.dashboard') === 0;
 @endphp
 
 @auth

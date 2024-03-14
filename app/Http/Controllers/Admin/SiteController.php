@@ -70,9 +70,7 @@ class SiteController extends controller
      */
     public function store(StoreSiteRequest $request)
     {
-        $company = $this->companyRepository->findById($request->input('company_id'));
-//        $companySiteTagsCount = $this->siteRepository->modelQuery()
-//            ->where('company_id', $company->id)->sum('maximum_number_of_tags');
+
         try {
             DB::beginTransaction();
             $site_inspector = $this->userRepository->create([

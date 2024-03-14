@@ -12,13 +12,13 @@ class CompanyOwnerMiddlware
     /**
      * Handle an incoming request.
      *
-     * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
+     * @param \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response) $next
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (!$request->user()->hasRole(RoleEnum::COMPANY_OWNER->value)){
-            return redirect(route('login'));
+        if ($request->user()->hasRole(RoleEnum::COMPANY_OWNER->value) && $request->user()->status) {
+            return $next($request);
         }
-        return $next($request);
+        return redirect(route('login'));
     }
 }

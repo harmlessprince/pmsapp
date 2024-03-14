@@ -16,7 +16,7 @@
                 </div>
                 <div class="ml-[5%]">
                     <h1 class="font-bold text-3xl text-guards">{{$usersCount}}</h1>
-                    <span class="font-normal text-sm text-guards">Users</span>
+                    <span class="font-normal text-sm text-guards">Admin Users</span>
                 </div>
             </div>
         </section>
@@ -48,7 +48,9 @@
                         <thead class="">
                         <tr class="text-left text-small text-natural font-big">
                             <th class=" px-small py-[1%]">Name</th>
+                            <th class=" px-small py-[1%]">Email</th>
                             <th class="px-small py-[1%]">Role</th>
+                            <th class="px-small py-[1%]">Status</th>
                             <th class="px-small py-[1%]">Action</th>
                         </tr>
                         </thead>
@@ -61,12 +63,30 @@
 
                                     {{$user->first_name?? ''}}  {{$user->last_name?? ''}}
                                 </td>
-
                                 <td class="px-small">
-                                    {{$user->roles[0]->name ?? 'N/A'}}
+                                    {{$user->email ?? 'N/A'}}
+                                </td>
+                                <td class="px-small">
+                                    {{ucfirst(str_replace('_', ' ' ,$user->roles[0]->name ))?? 'N/A'}}
                                 </td>
 
-
+                                <td class="px-smaller">
+                                    @if((bool)$user->status)
+                                        <button
+                                            class="bg-foundation W-[78px] h-[22px] px-[8px] py-[2px] rounded-full flex flex-row items-center justify-between">
+                                            <img src="{{asset('assets/images/white_dot.png')}}" alt="dashboard"
+                                                 class="mr-2"/>
+                                            <span class="text-natural font-big text-small">Active</span>
+                                        </button>
+                                    @else
+                                        <button
+                                            class="bg-inactive W-[78px] h-[22px] px-[8px] py-[2px] rounded-full flex flex-row items-center justify-between">
+                                            <img src="{{asset('assets/images/white_dot.png')}}" alt="dashboard"
+                                                 class="mr-2"/>
+                                            <span class="text-natural font-big text-small">Inactive</span>
+                                        </button>
+                                    @endif
+                                </td>
                                 <td class="px-small">
                                     <div class="flex flex-row justify-center">
                                         <a href="{{route('admin.admin.edit', ['admin' => $user->id])}}">

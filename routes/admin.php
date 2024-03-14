@@ -4,6 +4,7 @@
 use App\Http\Controllers\Admin\CompanyController;
 use App\Http\Controllers\Admin\AttendanceController;
 use App\Http\Controllers\Admin\ScanController;
+use App\Http\Controllers\AdminPasswordChangeController;
 use App\Http\Controllers\CompanyCredentialController;
 use App\Http\Controllers\CompanySiteController;
 use App\Http\Controllers\DashboardController;
@@ -29,6 +30,7 @@ Route::name('admin.')->middleware(['auth', 'administrator'])->group(function (){
     Route::resource('admin', AdminController::class);
     Route::prefix('credentials')->name('credentials.')->group(function (){
         Route::patch('password/change/{company}', [CompanyCredentialController::class, 'changePassword'])->name('company.password.change');
+        Route::patch('password/change/{admin}/admin', [AdminPasswordChangeController::class, 'changePassword'])->name('admin.password.change');
     });
 });
 

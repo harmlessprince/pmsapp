@@ -16,7 +16,7 @@ class AdminMiddleware
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if ($request->user()->hasRole(RoleEnum::SUPER_ADMIN->value) || $request->user()->hasRole(RoleEnum::ADMIN->value)) {
+        if (($request->user()->hasRole(RoleEnum::SUPER_ADMIN->value) || $request->user()->hasRole(RoleEnum::ADMIN->value)) && $request->user()->status) {
             return $next($request);
         }
         return redirect(route('login'));
