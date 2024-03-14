@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\RoleEnum;
 use App\Http\Requests\UpdateSiteLogoutPinRequest;
 use App\Http\Requests\UpdateSitePasswordRequest;
 use App\Models\Site;
@@ -23,6 +24,9 @@ class SiteCredentialController extends Controller
         $site_inspector = $this->userRepository->modelQuery()->where('id', $site->inspector_id)->first();
         $site_inspector->password = Hash::make($request->input('password'));
         $site_inspector->save();
+        if (!$request->user()->hasRole(RoleEnum::COMPANY_OWNER->value)){
+            return redirect()->route('admin.sites.edit', ['site' => $site])->with('success', 'Site password changed successfully');
+        }
         return redirect()->route('company.sites.edit', ['site' => $site])->with('success', 'Site password changed successfully');
     }
 
@@ -31,7 +35,9 @@ class SiteCredentialController extends Controller
         $site->update([
             'logout_pin' => Hash::make($request->input('logout_pin'))
         ]);
-
+        if (!$request->user()->hasRole(RoleEnum::COMPANY_OWNER->value)){
+            return redirect()->route('admin.sites.edit', ['site' => $site])->with('success', 'Site logout pin changed successfully');
+        }
         return redirect()->route('company.sites.edit', ['site' => $site])->with('success', 'Site logout pin changed successfully');
     }
 }

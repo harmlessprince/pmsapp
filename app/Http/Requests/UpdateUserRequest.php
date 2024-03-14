@@ -43,6 +43,7 @@ class UpdateUserRequest extends FormRequest
         }
         return [
                 'company_id' => ['required', 'integer', 'exists:companies,id'],
+//                'status' => ['required', 'boolean']
             ] + $data;
     }
 }

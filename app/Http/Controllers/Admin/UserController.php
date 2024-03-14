@@ -11,6 +11,8 @@ use App\QueryFilters\CompanyIdFilter;
 use App\QueryFilters\CreatedAtFilter;
 use App\QueryFilters\SiteIdFilter;
 use App\Repositories\Eloquent\Repository\CompanyRepository;
+use App\Repositories\Eloquent\Repository\SiteRepository;
+use App\Repositories\Eloquent\Repository\StateRepository;
 use App\Repositories\Eloquent\Repository\UserRepository;
 use App\Services\FileUploadService;
 
@@ -19,6 +21,8 @@ class UserController extends Controller
     public function __construct(
         private readonly UserRepository    $userRepository,
         private readonly CompanyRepository $companyRepository,
+        private readonly SiteRepository $siteRepository,
+        private readonly StateRepository $stateRepository,
     )
     {
     }
@@ -36,10 +40,11 @@ class UserController extends Controller
         $companies = $this->companyRepository->all();
         $userQuery = $this->userRepository->modelQuery()->whereHas('roles', function ($query) {
             $query->where('name', RoleEnum::SECURITY->value);
-        })->search();
+        });
+        $usersCount = $userQuery->count();
         $userQuery = constructPipes($userQuery, $pipes);
-        $users = $userQuery->with(['tenant', 'site', 'company:id,name'])->paginate(request('per_page', 15));
-        return view('admin.user.index', compact('users', 'companies'));
+        $users = $userQuery->search()->with(['tenant', 'site', 'company:id,name'])->paginate(request('per_page', 15));
+        return view('admin.user.index', compact('users', 'companies', 'usersCount'));
     }
 
     /**
@@ -74,7 +79,8 @@ class UserController extends Controller
     {
         $sites = $this->siteRepository->modelQuery()->get();
         $states = $this->stateRepository->fetchByCountryID();
-        return view('company.user.edit', compact('user', 'sites', 'states'));
+        $companies = $this->companyRepository->all();
+        return view('admin.user.edit', compact('user', 'sites', 'states', 'companies'));
     }
 
     /**
@@ -93,7 +99,7 @@ class UserController extends Controller
 
         $user->update($validated_data);
 
-        return redirect(route('company.users.index'))->with('success', 'User Profile updated successfully');
+        return redirect(route('admin.users.index'))->with('success', 'User Profile updated successfully');
     }
 
     /**

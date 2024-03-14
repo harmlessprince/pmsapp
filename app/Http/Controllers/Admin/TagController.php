@@ -34,7 +34,7 @@ class TagController extends controller
         $tagQuery = $this->tagRepository->modelQuery()->search();
         $tagCount = $this->tagRepository->modelQuery()->count();
         $tagQuery = constructPipes($tagQuery, $pipes);
-        $tags = $tagQuery->with(['company', 'site'])->paginate(request('per_page', 15));
+        $tags = $tagQuery->with(['company', 'site'])->latest()->paginate(request('per_page', 15));
         return view('admin.tag.index', compact('tags', 'companies', 'tagCount'));
     }
 
@@ -52,7 +52,26 @@ class TagController extends controller
      */
     public function store(StoreTagRequest $request)
     {
+        $company_id = $request->input('company_id');
+        $site_id = $request->input('site');
+        $code = generateTagCode($site_id, $company_id);
 
+        $tag = $this->tagRepository->create([
+            'name' => $request->input('tag_name'),
+            'site_id' => $site_id,
+            'company_id' => $company_id,
+            'created_by' => $request->user()->id,
+            'comment' => $request->input('comment'),
+            'code' => $code,
+            'latitude' => $request->input('latitude'),
+            'longitude' => $request->input('longitude'),
+        ]);
+
+        $tag->code = $tag->code . '/' . $tag->id;
+        $tag->save();
+
+
+        return redirect()->route('admin.tags.index')->with('success', 'Tag Created Successfully');
     }
 
     /**
@@ -68,7 +87,8 @@ class TagController extends controller
      */
     public function edit(Tag $tag)
     {
-        //
+        $companies =  $this->companyRepository->all();
+        return view('admin.tag.edit', compact('tag', 'companies'));
     }
 
     /**
@@ -76,7 +96,21 @@ class TagController extends controller
      */
     public function update(UpdateTagRequest $request, Tag $tag)
     {
-        //
+
+//        dd($request->validated());
+
+        $site_id = $request->input('site');
+
+        $this->tagRepository->update($tag->id, [
+            'name' => $request->input('tag_name'),
+            'site_id' => $site_id,
+            'company_id' => $request->input('company_id'),
+            'comment' => $request->input('comment'),
+            'latitude' => $request->input('latitude'),
+            'longitude' => $request->input('longitude'),
+        ]);
+
+        return redirect()->route('admin.tags.edit', $tag->refresh())->with('success', 'Tag Updated Successfully');
     }
 
     /**

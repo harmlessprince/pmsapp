@@ -15,7 +15,7 @@
                     <span class="material-symbols-outlined text-white">person</span>
                 </div>
                 <div class="ml-[5%]">
-                    <h1 class="font-bold text-3xl text-guards">345</h1>
+                    <h1 class="font-bold text-3xl text-guards">{{$usersCount}}</h1>
                     <span class="font-normal text-sm text-guards">Users</span>
                 </div>
             </div>

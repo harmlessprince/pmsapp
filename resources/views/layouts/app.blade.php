@@ -172,7 +172,7 @@
         return newOption;
     }
 
-    function getCompanySites(company_id) {
+    function getCompanySites(company_id, selectedSite = null) {
 
         const currentBaseUrl = window.location.origin;
         fetch(`${currentBaseUrl}/api/company/${company_id}/sites`)
@@ -182,7 +182,7 @@
                 selectSite.append(createOption("Select Site", ""));
 
                 sites = json.data?.sites ?? []
-                const selectedSiteId = getQueryParamValue('site_id')
+                const selectedSiteId = selectedSite ?? getQueryParamValue('site_id')
                 sites.forEach((site) => {
                     const isSelected = selectedSiteId && site.id === parseInt(selectedSiteId, 10);
                     selectSite.append(createOption(site.name, site.id, isSelected));

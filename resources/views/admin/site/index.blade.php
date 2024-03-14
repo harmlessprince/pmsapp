@@ -29,8 +29,9 @@
                 <div
                     class="rounded-lg border border-primary_color flex flex-row items-center px-[16px] py-[10px] cursor-pointer">
                     {{-- <img src="{{asset('assets/images/plus.png')}}" class="w-[11px] h-[11px]" alt="plus"/> --}}
-                    <span class="material-symbols-outlined text-primary_color">add</span>
-                    <a href="{{route('admin.sites.create')}}">
+
+                    <a href="{{route('admin.sites.create')}}" class="flex flex-row items-center">
+                        <span class="material-symbols-outlined text-primary_color">add</span>
                         <span class="text-primary_color font-big text-normal ml-2"> Add New Site</span>
                     </a>
                 </div>

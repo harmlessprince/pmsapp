@@ -130,6 +130,7 @@ class CompanyController extends Controller
      */
     public function update(UpdateCompanyRequest $request, Company $company)
     {
+//        dd($request->input('status'));
         try {
             DB::beginTransaction();
             $company->owner()->update([

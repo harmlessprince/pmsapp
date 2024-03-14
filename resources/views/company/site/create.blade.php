@@ -15,7 +15,7 @@
             Manage Sites
         </a>
     </div>
-    <form class="mt-[2%] w-[100%]" action="{{route('company.sites.store')}}" method="POST">
+    <form class="mt-[2%] w-[100%]" action="{{route('company.sites.store')}}" method="POST" enctype='multipart/form-data'>
         @csrf
         <div class="flex flex-row justify-between mb-2 max-lg:flex-col">
             <div class="w-[48%] max-lg:w-[100%] max-lg:mb-2">

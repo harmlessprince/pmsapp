@@ -18,7 +18,7 @@
                     <span class="sr-only">Close modal</span>
                 </button>
             </div>
-            <form action="{{route('company.credentials.logout.pin.change', ['site' => $site])}}" method="POST">
+            <form action="{{route('common.credentials.logout.pin.change', ['site' => $site])}}" method="POST">
                 @method('PATCH')
                 @csrf
                 <div class="p-6 space-y-6">

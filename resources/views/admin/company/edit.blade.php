@@ -90,8 +90,8 @@
                 <x-input-label for="status" :value="__('Status')"/>
                 <x-select-input id="status" class="block mt-1 w-full" name="status">
                     <option>Select Status</option>
-                    <option value="0" {{$company->status  == 1 ? 'selected' : ''}}>Active</option>
-                    <option value="1" {{$company->status  == 0 ? 'selected' : ''}}>In Active</option>
+                    <option value="1" {{$company->status  == 1 ? 'selected' : ''}}>Active</option>
+                    <option value="0" {{$company->status  == 0 ? 'selected' : ''}}>In Active</option>
                 </x-select-input>
                 <x-input-error :messages="$errors->get('status')" class="mt-2"/>
             </div>

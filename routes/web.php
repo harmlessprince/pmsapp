@@ -30,7 +30,12 @@ Route::get('/', function () {
 
 
 
-
+Route::middleware(['auth'])->name('common.')->group(function (){
+    Route::prefix('credentials')->name('credentials.')->group(function () {
+        Route::patch('password/change/{site}', [SiteCredentialController::class, 'changeSitePassword'])->name('password.change');
+        Route::patch('logout/pin/change/{site}', [SiteCredentialController::class, 'changeSiteLogoutPin'])->name('logout.pin.change');
+    });
+});
 
 
 Route::prefix('company')->middleware(['auth', 'company_owner'])->name('company.')->group(function (){
@@ -44,10 +49,6 @@ Route::prefix('company')->middleware(['auth', 'company_owner'])->name('company.'
         Route::get('transactions', [ScanController::class, 'index'])->name('transactions');
     });
 
-    Route::prefix('credentials')->name('credentials.')->group(function (){
-        Route::patch('password/change/{site}', [SiteCredentialController::class, 'changeSitePassword'])->name('password.change');
-        Route::patch('logout/pin/change/{site}',[SiteCredentialController::class, 'changeSiteLogoutPin'])->name('logout.pin.change');
-    });
     Route::resource('users', UserController::class);
     Route::resource('tags', TagController::class);
     Route::resource('sites', SiteController::class);

@@ -15,6 +15,7 @@ use App\QueryFilters\StatusFilter;
 use App\Repositories\Eloquent\Repository\CompanyRepository;
 use App\Repositories\Eloquent\Repository\SiteRepository;
 use App\Repositories\Eloquent\Repository\StateRepository;
+use App\Repositories\Eloquent\Repository\UserRepository;
 use App\Services\UserService;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
@@ -27,6 +28,7 @@ class SiteController extends controller
         private readonly CompanyRepository $companyRepository,
         private readonly UserService $userService,
         private readonly StateRepository $stateRepository,
+        private readonly UserRepository $userRepository,
     )
     {
     }
@@ -57,8 +59,9 @@ class SiteController extends controller
      */
     public function create()
     {
-        $company = $this->companyRepository->all();
-        return view('admin.site.create', compact('company'));
+        $companies = $this->companyRepository->all();
+        $states = $this->stateRepository->fetchByCountryID();
+        return view('admin.site.create', compact('companies', 'states'));
     }
 
     /**
@@ -68,42 +71,39 @@ class SiteController extends controller
     public function store(StoreSiteRequest $request)
     {
         $company = $this->companyRepository->findById($request->input('company_id'));
-        $companySiteTagsCount = $this->siteRepository->modelQuery()
-            ->where('company_id', $company->id)->sum('maximum_number_of_tags');
+//        $companySiteTagsCount = $this->siteRepository->modelQuery()
+//            ->where('company_id', $company->id)->sum('maximum_number_of_tags');
         try {
             DB::beginTransaction();
-            $siteInspector = $this->userService->createUser(
-                $request->input('first_name'),
-                $request->input('last_name'),
-                $request->input('password'),
-                $request->input('email'),
-                $request->input('status'),
-                $request->input('username')
-            );
+            $site_inspector = $this->userRepository->create([
+                'email' => $request->input('email'),
+                'password' => Hash::make($request->input('password')),
+                'username' => $request->input('email'),
+            ]);
 
             $site = $this->siteRepository->create([
                 'company_id' =>  $request->input('company_id'),
+                'state_id' =>  $request->input('state'),
                 'longitude' =>  $request->input('longitude'),
                 'latitude' =>  $request->input('latitude'),
                 'logout_pin' => Hash::make( $request->input('logout_pin')),
-                'name' =>  $request->input('site_name'),
+                'name' =>  $request->input('name'),
                 'address' =>  $request->input('address'),
                 'photo' =>  $request->input('photo'),
                 'shift_start_time' => $request->input('shift_start_time'),
                 'shift_end_time' => $request->input('shift_end_time'),
                 'number_of_tags' =>  $request->input('number_of_tags'),
                 'maximum_number_of_rounds' =>  $request->input('maximum_number_of_rounds'),
-                'attendance_date' =>  $request->input('attendance_date'),
-                'site_inspector' => $siteInspector->id,
-                'created_by' => 1,
+                'inspector_id' => $site_inspector->id,
+                'created_by' => $request->user()->id,
             ]);
-            $this->userService->associateUserToRole($siteInspector, RoleEnum::SITE_INSPECTOR->value);
+            $this->userService->associateUserToRole($site_inspector, RoleEnum::SITE_INSPECTOR->value);
             DB::commit();
         }catch (\Exception $exception){
             DB::rollBack();
             throw $exception;
         }
-
+        return redirect()->route('admin.sites.index')->with('success', 'Site Created Successfully');
     }
 
     /**
@@ -119,7 +119,9 @@ class SiteController extends controller
      */
     public function edit(Site $site)
     {
-        //
+        $states = $this->stateRepository->fetchByCountryID();
+        $companies = $this->companyRepository->all();
+        return view('admin.site.edit', compact('site', 'states', 'companies'));
     }
 
     /**
