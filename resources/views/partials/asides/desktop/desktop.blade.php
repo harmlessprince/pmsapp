@@ -23,9 +23,9 @@
         @include('partials.asides.desktop.admin.site')
         @include('partials.asides.desktop.admin.scan')
         @include('partials.asides.desktop.admin.attendance')
-        @include('partials.asides.desktop.admin.admin')
-
-
+        @if(auth()->user()->isSuperAdmin())
+            @include('partials.asides.desktop.admin.admin')
+        @endif
 
     @endif
 

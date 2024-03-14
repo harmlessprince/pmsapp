@@ -1,3 +1,6 @@
+@php
+    $isSuperAdmin = \Illuminate\Support\Facades\Auth::user()->hasRole(\App\Enums\RoleEnum::SUPER_ADMIN->value);
+@endphp
 @extends('layouts.app')
 @section('title', 'User')
 @section('page', 'Admin Management')
@@ -26,14 +29,16 @@
             <!-- add user -->
             <div class="font-big text-big text-natural mb-2 flex flex-row justify-between">
                 <div>Added Users</div>
-                <div
-                    class="rounded-lg border border-primary_color flex flex-row items-center px-[16px] py-[10px] cursor-pointer">
-                    {{-- <img src="{{asset('assets/images/plus.png')}}" class="w-[11px] h-[11px]" alt="plus"/> --}}
-                    <span class="material-symbols-outlined text-primary_color">add</span>
-                    <a href="{{route('admin.admin.create')}}">
-                        <span class="text-primary_color font-big text-normal ml-2"> Add User</span>
-                    </a>
-                </div>
+                @if($isSuperAdmin)
+                    <div
+                        class="rounded-lg border border-primary_color flex flex-row items-center px-[16px] py-[10px] cursor-pointer">
+                        {{-- <img src="{{asset('assets/images/plus.png')}}" class="w-[11px] h-[11px]" alt="plus"/> --}}
+                        <span class="material-symbols-outlined text-primary_color">add</span>
+                        <a href="{{route('admin.admin.create')}}">
+                            <span class="text-primary_color font-big text-normal ml-2"> Add Admin User</span>
+                        </a>
+                    </div>
+                @endif
             </div>
             <x-filter-card :actionUrl="route('admin.admin.index')" :canSearch="true"
                            :searchPlaceholder="'Search by name or phone number'">
@@ -59,7 +64,7 @@
                             <tr class="text-normal font-normal border border-table border-x-0 border-b-0 text-natural hover:bg-db">
 
 
-                                <td class="px-small">
+                                <td class="px-smaller py-small">
 
                                     {{$user->first_name?? ''}}  {{$user->last_name?? ''}}
                                 </td>
@@ -88,14 +93,18 @@
                                     @endif
                                 </td>
                                 <td class="px-small">
-                                    <div class="flex flex-row justify-center">
-                                        <a href="{{route('admin.admin.edit', ['admin' => $user->id])}}">
+                                    @if($isSuperAdmin)
+                                        <div class="flex flex-row justify-center">
+                                            <a href="{{route('admin.admin.edit', ['admin' => $user->id])}}">
 
                                                 <span
                                                     class="material-symbols-outlined w-[16px] h-[16px] ml-3 cursor-pointer text-natural">edit_square</span>
-                                        </a>
+                                            </a>
 
-                                    </div>
+                                        </div>
+                                    @else
+                                        -
+                                    @endif
                                 </td>
                             </tr>
 

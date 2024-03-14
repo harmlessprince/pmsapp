@@ -60,6 +60,7 @@ class PopulateRolesPermissionCommand extends Command
             ]
         ];
         foreach ($roles as $role){
+            $this->info($role['name']);
             Role::query()->updateOrCreate([
                 'name' => $role['name'],
                 'guard_name' => 'web'

@@ -82,6 +82,16 @@ class User extends Authenticatable
         return $this->hasRole(RoleEnum::ADMIN->value) || $this->hasRole(RoleEnum::SUPER_ADMIN->value);
     }
 
+    public function isSuperAdmin(): bool
+    {
+        return $this->hasRole(RoleEnum::SUPER_ADMIN->value);
+    }
+
+    public function isAdmin(): bool
+    {
+        return $this->hasRole(RoleEnum::ADMIN->value);
+    }
+
     public function isCompanyOwner(): bool
     {
         return $this->hasRole(RoleEnum::COMPANY_OWNER->value);

@@ -13,6 +13,7 @@ use App\QueryFilters\SiteIdFilter;
 use App\Repositories\Eloquent\Repository\CompanyRepository;
 use App\Repositories\Eloquent\Repository\UserRepository;
 use App\Services\UserService;
+use Illuminate\Auth\Access\Gate;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
@@ -59,6 +60,7 @@ class AdminController extends Controller
      */
     public function store(StoreAdminRequest $request)
     {
+        Gate::allowIf(fn (User $user) => $user->isSuperAdmin());
         try {
             DB::beginTransaction();
             $admin = $this->userRepository->create([
@@ -68,7 +70,7 @@ class AdminController extends Controller
                 'password' => Hash::make($request->input('password')),
                 'username' => $request->input('email'),
             ]);
-            $this->userService->associateUserToRole($admin, RoleEnum::SUPER_ADMIN->value);
+            $this->userService->associateUserToRole($admin, RoleEnum::ADMIN->value);
             DB::commit();
         } catch (\Exception $exception) {
             DB::rollBack();
@@ -90,6 +92,7 @@ class AdminController extends Controller
      */
     public function edit(User $admin)
     {
+        Gate::allowIf(fn (User $user) => $user->isSuperAdmin());
         return view('admin.admin.edit', compact('admin'));
     }
 
@@ -98,11 +101,16 @@ class AdminController extends Controller
      */
     public function update(UpdateAdminRequest $request, User $admin)
     {
+        Gate::allowIf(fn (User $user) => $user->isSuperAdmin());
+        if ($admin->hasRole(RoleEnum::SUPER_ADMIN->value)){
+            return redirect()->route('admin.admin.edit', ['admin' => $admin])->with('error', 'You can not update super admin');
+        }
         $this->userRepository->update($admin->id, [
             'first_name' => $request->input('first_name'),
             'last_name' => $request->input('last_name'),
             'email' => $request->input('email'),
             'username' => $request->input('email'),
+            'status' => $request->input('status'),
         ]);
         $admin = $admin->fresh();
         return redirect()->route('admin.admin.edit', ['admin' => $admin])->with('success', 'Admin updated successfully');

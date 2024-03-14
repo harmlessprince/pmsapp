@@ -4,7 +4,7 @@
 @section('content')
 
     <div class="font-big text-big text-natural mb-2 flex flex-row justify-between">
-        <div>Add new Admin</div>
+        <div>Add New Admin</div>
     </div>
 
     <form class="mt-[2%] w-[100%]" action="{{route('admin.admin.store')}}" method="POST">
