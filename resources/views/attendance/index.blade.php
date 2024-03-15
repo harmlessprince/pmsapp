@@ -108,12 +108,12 @@
                         <th class="text-left text-small text-natural font-big  px-small py-smaller">
                             Name
                         </th>
-                        <th class="text-left text-small text-natural font-big  px-small py-smaller">Time/Date</th>
-                        <th class="text-left text-small text-natural font-big  px-small py-smaller">Action Type</th>
-                        <th class="text-left text-small text-natural font-big px-small py-smaller">Site</th>
-                        <th class="text-left text-small text-natural font-big px-small py-smaller">Distance</th>
-                        <th class="text-left text-small text-natural font-big px-small py-smaller">Image</th>
-                        <th class="text-left text-small text-natural font-big px-small py-smaller">Proximity</th>
+                        <th class="text-left text-small text-natural font-big  px-smaller py-smaller">Time/Date</th>
+                        <th class="text-left text-small text-natural font-big  px-smaller py-smaller">Action Type</th>
+                        <th class="text-left text-small text-natural font-big px-smaller py-smaller">Site</th>
+                        <th class="text-left text-small text-natural font-big px-smaller py-smaller">Distance</th>
+                        <th class="text-left text-small text-natural font-big px-smaller py-smaller">Image</th>
+                        <th class="text-left text-small text-natural font-big px-smaller py-smaller">Proximity</th>
                     </tr>
                     </thead>
                     <tbody>
