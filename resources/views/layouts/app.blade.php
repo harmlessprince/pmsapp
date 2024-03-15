@@ -187,7 +187,10 @@
     }
 
     function getCompanySites(company_id, selectedSite = null) {
-        if (!company_id) return
+        if (!company_id) {
+            selectSite.innerHTML = "";
+            selectSite.append(createOption("Select a company", ""));
+        }
         showLoader()
         const currentBaseUrl = window.location.origin;
         fetch(`${currentBaseUrl}/api/company/${company_id}/sites`)
@@ -209,7 +212,10 @@
     }
 
     function getSiteTags(site_id) {
-        if (!site_id) return
+        if (!site_id) {
+            selectTag.innerHTML = "";
+            selectTag.append(createOption("Select a company", ""));
+        }
         showLoader()
         const currentBaseUrl = window.location.origin;
         fetch(`${currentBaseUrl}/api/sites/${site_id}/tags`)
