@@ -84,6 +84,7 @@
     const mobileTransactionDropdown = document.querySelector("#mobileTransaction");
     const profileDropdown = document.querySelector("#profileList");
     const mobileSideBar = document.querySelector("#mobileAside");
+    const ajaxLoader = document.querySelector("#ajax_loader");
 
     const toggleSideBar = () => {
         mobileSideBar.classList.toggle("hidden")
@@ -172,8 +173,21 @@
         return newOption;
     }
 
-    function getCompanySites(company_id, selectedSite = null) {
+    function showLoader() {
+        if (ajaxLoader) {
+            ajaxLoader.classList.remove('hidden')
+        }
 
+    }
+
+    function hideLoader() {
+        if (ajaxLoader) {
+            ajaxLoader.classList.add('hidden')
+        }
+    }
+
+    function getCompanySites(company_id, selectedSite = null) {
+        showLoader()
         const currentBaseUrl = window.location.origin;
         fetch(`${currentBaseUrl}/api/company/${company_id}/sites`)
             .then(response => response.json())  // convert to json
@@ -188,12 +202,13 @@
                     selectSite.append(createOption(site.name, site.id, isSelected));
                 });
                 selectSite.disabled = false;
+                hideLoader()
             })    //print data to console
             .catch(err => console.log('Request Failed', err));
     }
 
     function getSiteTags(site_id) {
-
+        showLoader()
         const currentBaseUrl = window.location.origin;
         fetch(`${currentBaseUrl}/api/sites/${site_id}/tags`)
             .then(response => response.json())  // convert to json
@@ -208,6 +223,7 @@
                     selectTag.append(createOption(tag.name, tag.id, isSelected));
                 });
                 selectTag.disabled = false;
+                hideLoader()
             })    //print data to console
             .catch(err => console.log('Request Failed', err));
 

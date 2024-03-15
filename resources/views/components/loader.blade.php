@@ -1,0 +1,3 @@
+<span id="ajax_loader" class="hidden">
+    loading.....
+</span>

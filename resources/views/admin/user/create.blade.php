@@ -57,7 +57,7 @@
             <x-input-error :messages="$errors->get('company_id')" class="mt-2"/>
         </div>
         <div class="flex flex-col">
-            <x-input-label for="site_id" :value="__('Site')" class="text-white"/>
+            <x-input-label for="site_id" :value="__('Site')" class="text-white"/>  <x-loader/>
             <x-select-input id="site_id" class="block w-full" name="site_id">
                 <option class="" value="">Select a company</option>
             </x-select-input>
