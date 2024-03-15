@@ -187,6 +187,7 @@
     }
 
     function getCompanySites(company_id, selectedSite = null) {
+        if (!company_id) return
         showLoader()
         const currentBaseUrl = window.location.origin;
         fetch(`${currentBaseUrl}/api/company/${company_id}/sites`)
@@ -208,6 +209,7 @@
     }
 
     function getSiteTags(site_id) {
+        if (!site_id) return
         showLoader()
         const currentBaseUrl = window.location.origin;
         fetch(`${currentBaseUrl}/api/sites/${site_id}/tags`)
