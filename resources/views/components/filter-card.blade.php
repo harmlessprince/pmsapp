@@ -1,18 +1,18 @@
-<div class="w-full">
+<div class="w-full z-0">
 
     <div class="flex flex-col"> 
         <div class="rounded-xl border border-gray-200 bg-background_color p-6 shadow-lg">
             <form action="{{$actionUrl}}" id="{{$formId}}">
                 @if($canSearch)
                     <x-input-label for="searchTerm" :value="__('Search')"/>
-                    <div class="relative mb-3 w-full flex  items-center justify-between rounded-md">
+                    <div class="relative mb-3 w-full flex  items-center justify-between rounded-md z-0">
                         <svg class="absolute left-2 block h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg"
                              width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                              stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <circle cx="11" cy="11" r="8" class=""></circle>
                             <line x1="21" y1="21" x2="16.65" y2="16.65" class=""></line>
                         </svg>
-                        <x-text-input id="search" class="h-12 w-full cursor-text bg-db py-4 pr-40 pl-12" type="text"
+                        <x-text-input id="search" class="h-12 w-full cursor-text bg-db py-4 pr-40 pl-12 z-0" type="text"
                                       name="searchTerm" placeholder="{{$searchPlaceholder}}"
                                       :value="request()->query('searchTerm')"/>
                     </div>
@@ -61,7 +61,9 @@
                             </x-primary-button>
                         </div> --}}
                         <div class="flex flex-col justify-between w-full sm:flex-row sm:justify-end sm:space-x-4">
-                            <x-primary-button class=" py-3 sm:px-8 mb-2 sm:mb-0" type="submit" id="filter_button">Apply filters
+                            <x-primary-button class=" py-3 sm:px-8 mb-2 sm:mb-0" type="submit" id="filter_button">
+                                {{-- <x-loader> --}}
+                                Apply filters
                             </x-primary-button>
                             <x-secondary-button type="reset" class="sm:px-8 sm:py-2" onclick="resetForm()">Reset
                             </x-secondary-button>
