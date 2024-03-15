@@ -187,9 +187,11 @@
     }
 
     function getCompanySites(company_id, selectedSite = null) {
-        if (!company_id) {
+        console.log(company_id)
+        if (isNaN(company_id) || company_id == "") {
             selectSite.innerHTML = "";
             selectSite.append(createOption("Select a company", ""));
+            return
         }
         showLoader()
         const currentBaseUrl = window.location.origin;
@@ -212,9 +214,10 @@
     }
 
     function getSiteTags(site_id) {
-        if (!site_id) {
+        if (isNaN(site_id) || site_id == "") {
             selectTag.innerHTML = "";
-            selectTag.append(createOption("Select a company", ""));
+            selectTag.append(createOption("Select a site", ""));
+            return
         }
         showLoader()
         const currentBaseUrl = window.location.origin;
