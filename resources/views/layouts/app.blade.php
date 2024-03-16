@@ -85,6 +85,7 @@
     const profileDropdown = document.querySelector("#profileList");
     const mobileSideBar = document.querySelector("#mobileAside");
     const ajaxLoader = document.querySelector("#ajax_loader");
+    const ajaxLoader2 = document.querySelector("#ajax_loader2");
 
     const toggleSideBar = () => {
         mobileSideBar.classList.toggle("hidden")
@@ -180,9 +181,22 @@
 
     }
 
+    function showLoader2() {
+        if (ajaxLoader2) {
+            ajaxLoader2.classList.remove('hidden')
+        }
+
+    }
+
     function hideLoader() {
         if (ajaxLoader) {
             ajaxLoader.classList.add('hidden')
+        }
+    }
+
+    function hideLoader2() {
+        if (ajaxLoader2) {
+            ajaxLoader2.classList.add('hidden')
         }
     }
 
@@ -216,7 +230,7 @@
             selectTag.innerHTML = "";
             selectTag.append(createOption("Select a company", ""));
         }
-        showLoader()
+        showLoader2()
         const currentBaseUrl = window.location.origin;
         fetch(`${currentBaseUrl}/api/sites/${site_id}/tags`)
             .then(response => response.json())  // convert to json
@@ -231,7 +245,7 @@
                     selectTag.append(createOption(tag.name, tag.id, isSelected));
                 });
                 selectTag.disabled = false;
-                hideLoader()
+                hideLoader2()
             })    //print data to console
             .catch(err => console.log('Request Failed', err));
 

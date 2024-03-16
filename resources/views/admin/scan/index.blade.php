@@ -85,15 +85,21 @@
             </div>
 
             <div class="flex flex-col">
+                <div class="flex flex-row items-center h-6">
                 <x-input-label for="site_id" :value="__('Site')" class="text-white"/>
+                <x-loader/>
+                </div>
                 <x-select-input id="site_id" class="block w-full" name="site_id">
-                    <option class="" value="">Select a company</option>
+                    <option class="" value="">Select a site</option>
                 </x-select-input>
             </div>
             <div class="flex flex-col">
+                <div class="flex flex-row items-center h-6">
                 <x-input-label for="tag_id" :value="__('Tag')" class="text-white"/>
+                <x-loader2/>
+                </div>
                 <x-select-input id="tag_id" class="block w-full" name="tag_id">
-                    <option class="" value="">Select a site</option>
+                    <option class="" value="">Select a tag</option>
                 </x-select-input>
             </div>
         </x-filter-card>
