@@ -105,15 +105,14 @@
                 <table class="table-auto w-[100%] max-lg:w-[1000px] bg-background_color">
                     <thead>
                     <tr class="overflow-x-auto">
-                        <th class="text-left text-small text-natural font-big  px-small py-smaller">Scan Date/Time</th>
-                        {{--                        <th class="text-left text-small text-natural font-big  px-small py-smaller">Scan Time</th>--}}
-                        <th class="text-left text-small text-natural font-big px-small py-smaller">Tag</th>
-                        <th class="text-left text-small text-natural font-big px-small py-smaller">Site</th>
-                        <th class="text-left text-small text-natural font-big px-small py-smaller">Company</th>
-                        <th class="text-left text-small text-natural font-big px-small py-smaller">Longitude</th>
-                        <th class="text-left text-small text-natural font-big px-small py-smaller">Latitude</th>
-                        <th class="text-left text-small text-natural font-big px-small py-smaller">Distance</th>
-                        <th class="text-left text-small text-natural font-big px-small py-smaller">Proximity</th>
+                        <th class="text-left text-small text-natural font-big  px-smaller py-smaller w-[10%]">Scan Date/Time</th>
+                        <th class="text-left text-small text-natural font-big px-smaller py-smaller">Tag</th>
+                        <th class="text-left text-small text-natural font-big px-smaller py-smaller w-[12%]">Site</th>
+                        <th class="text-left text-small text-natural font-big px-smaller py-smaller w-[18%]">Company</th>
+                        <th class="text-left text-small text-natural font-big px-smaller py-smaller">Longitude</th>
+                        <th class="text-left text-small text-natural font-big px-smaller py-smaller">Latitude</th>
+                        <th class="text-left text-small text-natural font-big px-smaller py-smaller">Distance</th>
+                        <th class="text-left text-small text-natural font-big px-smaller py-smaller w-[18%]">Proximity</th>
                         {{--                        <th class="text-left text-small text-natural font-big px-small py-smaller">Gap</th>--}}
                     </tr>
                     </thead>
@@ -121,18 +120,17 @@
 
                     @forelse($scans as $scan)
                         <tr class="border border-table border-x-0 text-natural hover:bg-db">
-                            <td class="text-normal font-normal px-small">
+                            <td class="text-left text-normal font-normal px-smaller">
                                 <div>{{$scan->scan_date->format('d/m/Y')}}</div>
                                 <div>{{Carbon\Carbon::parse($scan->scan_time)->format('g:i A')}}</div>
                             </td>
-                            <td class="text-normal font-normal px-small">{{$scan->tag->name}}</td>
-                            <td class="text-normal font-normal px-small">{{$scan->site->name}}</td>
-                            <td class="text-normal font-normal px-small">{{$scan->company->name}}</td>
-                            <td class="text-normal font-normal p-small">{{$scan->longitude ?? '-'}}</td>
-                            <td class="text-normal font-normal px-small">{{$scan->longitude ?? '-'}}</td>
-                            <td class="text-normal font-normal px-small">{{$scan->distance}} km</td>
-                            <td class="text-normal font-normal px-small">{{$scan->proximity}}</td>
-                            {{--                            <td class="text-normal font-normal px-small">00h00</td>--}}
+                            <td class="text-left text-normal font-normal px-smaller">{{$scan->tag->name}}</td>
+                            <td class="text-left text-normal font-normal px-smaller">{{$scan->site->name}}</td>
+                            <td class="text-left text-normal font-normal px-smaller">{{$scan->company->name}}</td>
+                            <td class="text-left text-normal font-normal p-smaller">{{$scan->longitude ?? '-'}}</td>
+                            <td class="text-left text-normal font-normal px-smaller">{{$scan->longitude ?? '-'}}</td>
+                            <td class="text-left text-normal font-normal px-smaller">{{$scan->distance}} km</td>
+                            <td class="text-left text-normal font-normal px-smaller">{{$scan->proximity}}</td>
                         </tr>
                     @empty
                         <tr class="border border-table border-x-0 text-natural hover:bg-db">

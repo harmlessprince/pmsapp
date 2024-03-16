@@ -23,7 +23,7 @@
 
         <!-- table section -->
         <section class="pt-basic_padding">
-            <!-- add site -->
+            <!-- add tag -->
             <div class="font-big text-big text-natural mb-2 flex flex-row justify-between">
                 <div>Added Tags</div>
                 <div
@@ -62,31 +62,31 @@
             <!-- table 2 section -->
             <section class="border border-table rounded-lg w-[100%] mt-[2%] bg-background_color">
                 <div class="overflow-x-auto">
-                    <table class="table-auto w-[100%] max-lg:w-[1000px]">
+                    <table class="table-fixed w-[100%] max-lg:w-[1000px]">
                         <thead class="">
                         <tr class="text-left text-small text-natural font-big">
-                            <th class="px-small py-[1%]">Tag</th>
-                            <th class="px-small py-[1%]">Code</th>
-                            <th class=" px-small py-[1%]">Company</th>
-                            <th class="px-small py-[1%]">Site</th>
-                            <th class="px-small py-[1%]">Type</th>
-                            <th class="px-small py-[1%]">Comments</th>
-                            <th class="px-small py-[1%]">Action</th>
+                            <th class="px-smaller py-[1%]">Tag</th>
+                            <th class="px-smaller py-[1%]">Code</th>
+                            <th class=" px-smaller py-[1%] w-[15%]">Company</th>
+                            <th class="px-smaller py-[1%] w-[15%]">Site</th>
+                            <th class="px-smaller py-[1%]">Type</th>
+                            <th class="px-smaller py-[1%] w-[30%]">Comments</th>
+                            <th class="px-smaller py-[1%] w-[5%] text-right">Action</th>
                         </tr>
                         </thead>
                         <tbody>
 
                         @forelse($tags as $tag)
                             <tr class="text-normal font-normal border border-table border-x-0 border-b-0 text-natural hover:bg-db">
-                                <td class="px-small py-small">
+                                <td class="px-smaller py-small">
                                     {{$tag->name}}
                                 </td>
-                                <td class="px-small py-small">{{$tag->code}}</td>
-                                <td class="px-small py-small">{{$tag->company->display_name}}</td>
-                                <td class=" px-small py-small">{{$tag->site->name}}</td>
-                                <td class="px-small py-small">QR Code</td>
-                                <td class="px-small truncate py-small">{{$tag->comment}}</td>
-                                <td class="px-small py-small">
+                                <td class="px-smaller py-small">{{$tag->code}}</td>
+                                <td class="px-smaller py-small">{{$tag->company->display_name}}</td>
+                                <td class=" px-smaller py-small">{{$tag->site->name}}</td>
+                                <td class="px-smaller py-small">QR Code</td>
+                                <td class="px-smaller truncate py-small">{{$tag->comment}}</td>
+                                <td class="px-smaller text-right">
                                     <div class="flex flex-row justify-center">
                                         <a href="{{route('admin.tags.edit', ['tag' => $tag->id])}}">
 
