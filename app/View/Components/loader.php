@@ -8,13 +8,14 @@ use Illuminate\View\Component;
 
 class loader extends Component
 {
+    public string $loaderId;
 
     /**
      * Create a new component instance.
      */
-    public function __construct(public string $loaderId = 'ajax_loader')
+    public function __construct(string $loaderId = 'ajax_loader')
     {
-
+        $this->loaderId = $loaderId;
     }
 
     /**
@@ -22,6 +23,8 @@ class loader extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('components.loader');
+        return view('components.loader', [
+            'loaderId' => $this->loaderId
+        ]);
     }
 }
