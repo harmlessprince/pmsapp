@@ -85,7 +85,7 @@
     const profileDropdown = document.querySelector("#profileList");
     const mobileSideBar = document.querySelector("#mobileAside");
     const ajaxLoader = document.querySelector("#ajax_loader");
-    const ajaxLoader2 = document.querySelector("#ajax_loader2");
+
 
     const toggleSideBar = () => {
         mobileSideBar.classList.toggle("hidden")
@@ -181,12 +181,12 @@
 
     }
 
-    function showLoader2() {
-        if (ajaxLoader2) {
-            ajaxLoader2.classList.remove('hidden')
-        }
-
-    }
+    // function showLoader2() {
+    //     if (ajaxLoader2) {
+    //         ajaxLoader2.classList.remove('hidden')
+    //     }
+    //
+    // }
 
     function hideLoader() {
         if (ajaxLoader) {
@@ -194,11 +194,11 @@
         }
     }
 
-    function hideLoader2() {
-        if (ajaxLoader2) {
-            ajaxLoader2.classList.add('hidden')
-        }
-    }
+    // function hideLoader2() {
+    //     if (ajaxLoader2) {
+    //         ajaxLoader2.classList.add('hidden')
+    //     }
+    // }
 
     function getCompanySites(company_id, selectedSite = null) {
         if (isNaN(company_id) || company_id == "") {
@@ -232,7 +232,7 @@
             selectTag.append(createOption("Select a site", ""));
             return
         }
-        showLoader2()
+        showLoader()
         const currentBaseUrl = window.location.origin;
         fetch(`${currentBaseUrl}/api/sites/${site_id}/tags`)
             .then(response => response.json())  // convert to json
@@ -247,7 +247,7 @@
                     selectTag.append(createOption(tag.name, tag.id, isSelected));
                 });
                 selectTag.disabled = false;
-                hideLoader2()
+                hideLoader()
             })    //print data to console
             .catch(err => console.log('Request Failed', err));
 
