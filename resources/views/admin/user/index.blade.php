@@ -51,8 +51,8 @@
                 <div class="flex flex-col">
                     <div class="flex flex-row items-center h-5">
                         <x-input-label for="site_id" :value="__('Site')" class="text-white"/>
-                        <x-loader/>
-                        </div>
+                        <x-loader></x-loader>
+                    </div>
                     <x-select-input id="site_id" class="block w-full" name="site_id">
                         <option class="" value="">Select site</option>
                     </x-select-input>
