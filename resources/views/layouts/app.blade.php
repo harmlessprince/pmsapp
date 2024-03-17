@@ -187,7 +187,6 @@
     }
 
     function getCompanySites(company_id, selectedSite = null) {
-        console.log(company_id)
         if (isNaN(company_id) || company_id == "") {
             selectSite.innerHTML = "";
             selectSite.append(createOption("Select a company", ""));
