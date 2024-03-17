@@ -81,13 +81,13 @@
                     <table class="table-fixed w-[100%] max-lg:w-[1000px]">
                         <thead class="">
                         <tr class="text-left text-small text-natural font-big">
-                            <th class="px-smaller py-[1%] w-[13%]">Company</th>
-                            <th class=" px-smaller py-[1%] w-[13%]">Site name</th>
+                            <th class="px-smaller py-[1%] w-[15%]">Company</th>
+                            <th class=" px-smaller py-[1%] w-[15%]">Site name</th>
                             <th class="px-smaller py-[1%] w-[20%]">Email</th>
                             <th class="px-smaller py-[1%]  w-[25%]">Address</th>
                             <th class="px-smaller py-[1%]">Photo</th>
                             <th class="px-smaller py-[1%]">Status</th>
-                            <th class="px-smaller py-[1%] text-right">Action</th>
+                            <th class="px-smaller py-[1%] text-right w-[5%]">Action</th>
                         </tr>
                         </thead>
                         <tbody>

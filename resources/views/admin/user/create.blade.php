@@ -57,16 +57,19 @@
             <x-input-error :messages="$errors->get('company_id')" class="mt-2"/>
         </div>
         <div class="flex flex-col">
-            <x-input-label for="site_id" :value="__('Site')" class="text-white"/>  <x-loader/>
+            <div class="flex flex-row items-center h-6">
+            <x-input-label for="site_id" :value="__('Site')" class="text-white"/>
+            <x-loader/>
+            </div>
             <x-select-input id="site_id" class="block w-full" name="site_id">
-                <option class="" value="">Select a company</option>
+                <option class="" value="">Select a site</option>
             </x-select-input>
             <x-input-error :messages="$errors->get('site_id')" class="mt-2"/>
         </div>
     </div>
 
     <div class="flex flex-row justify-between mb-2 max-lg:flex-col">
-        <div class="w-[48%] max-lg:w-full max-lg:mb-2">
+        <div class="w-[49%] max-lg:w-full max-lg:mb-2">
             <label class="font-big text-normal text-natural">Shift start time</label>
             <input
                 type="text"
@@ -77,7 +80,7 @@
                 placeholder="" name="shift_start_time" value=""/>
             <x-input-error :messages="$errors->get('shift_start_time')" class="mt-2"/>
         </div>
-        <div class="w-[48%] max-lg:w-full">
+        <div class="w-[49%] max-lg:w-full">
             <label class="font-big text-normal text-natural">Shift end time</label>
             <input
                 type="text"
@@ -91,7 +94,7 @@
     </div>
 
     <div class="flex flex-row justify-between mb-2 max-lg:flex-col">
-        <div class="w-[48%] max-lg:w-full max-lg:mb-2">
+        <div class="w-[49%] max-lg:w-full max-lg:mb-2">
             <label class="font-big text-normal text-natural">Normal rate per hour</label>
             <input
                 type="text"
@@ -103,7 +106,7 @@
                 placeholder="" name="normal_rate_per_hour" value=""/>
             <x-input-error :messages="$errors->get('normal_rate_per_hour')" class="mt-2"/>
         </div>
-        <div class="w-[48%] max-lg:w-full">
+        <div class="w-[49%] max-lg:w-full">
             <label class="font-big text-normal text-natural">Sunday rate per hour</label>
             <input
                 type="text"
@@ -116,7 +119,7 @@
     </div>
 
     <div class="flex flex-row justify-between mb-2 max-lg:flex-col">
-        <div class="w-[48%] max-lg:w-full max-lg:mb-2">
+        <div class="w-[49%] max-lg:w-full max-lg:mb-2">
             <label class="font-big text-normal text-natural">Holiday rate per hour</label>
             <input
                 type="text"
@@ -128,7 +131,7 @@
                 placeholder="" name="holiday_rate_per_hour" value=""/>
             <x-input-error :messages="$errors->get('holiday_rate_per_hour')" class="mt-2"/>
         </div>
-        <div class="w-[48%] max-lg:w-full">
+        <div class="w-[49%] max-lg:w-full">
             <label class="font-big text-normal text-natural">Number of night shift</label>
             <input
                 type="text"

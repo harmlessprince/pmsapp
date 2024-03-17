@@ -46,7 +46,10 @@
                 <x-input-error :messages="$errors->get('company_id')" class="mt-2"/>
             </div>
             <div class="flex flex-col">
-                <x-input-label for="site_id" :value="__('Site')"/>
+                <div class="flex flex-row items-center h-5">
+                <x-input-label for="site_id" :value="__('Site')" class="text-white"/>
+                <x-loader/>
+                </div>
                 <x-select-input id="site_id" class="block mt-1 w-full" name="site_id">
                     <option>Select Site</option>
                     @foreach($sites as $site)

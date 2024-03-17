@@ -39,7 +39,7 @@
                            :searchPlaceholder="'Search by name or phone number'">
                 <div class="flex flex-col">
                     <x-input-label for="company_id" :value="__('Select Company')"/>
-                    <x-select-input id="company_id" class="block mt-1 w-full" name="company_id">
+                    <x-select-input id="company_id" class="block w-full" name="company_id">
                         <option value="">Select Company</option>
                         @foreach($companies as $company)
                             <option
@@ -49,9 +49,12 @@
                 </div>
 
                 <div class="flex flex-col">
-                    <x-input-label for="site_id" :value="__('Site')" class="text-white"/>
+                    <div class="flex flex-row items-center h-5">
+                        <x-input-label for="site_id" :value="__('Site')" class="text-white"/>
+                        <x-loader/>
+                        </div>
                     <x-select-input id="site_id" class="block w-full" name="site_id">
-                        <option class="" value="">All site</option>
+                        <option class="" value="">Select site</option>
                     </x-select-input>
                 </div>
             </x-filter-card>
@@ -60,15 +63,15 @@
             <!-- table 2 section -->
             <section class="border border-table rounded-lg w-[100%] mt-[2%] bg-background_color">
                 <div class="overflow-x-auto">
-                    <table class="table-auto w-[100%] max-lg:w-[1000px]">
+                    <table class="table-fixed w-[100%] max-lg:w-[1000px]">
                         <thead class="">
                         <tr class="text-left text-small text-natural font-big">
-                            <th class=" px-small py-[1%]">Name</th>
-                            <th class="px-small py-[1%]">Company</th>
-                            <th class="px-small py-[1%]">Phone number</th>
-                            <th class="px-small py-[1%]">Postal Address</th>
-                            <th class="px-small py-[1%]">Site</th>
-                            <th class="px-small py-[1%]">Action</th>
+                            <th class="px-smaller py-[1%]">Name</th>
+                            <th class="px-smaller py-[1%] w-[22%]">Company</th>
+                            <th class="px-small py-[1%] w-[15%]">Phone number</th>
+                            <th class="px-smaller py-[1%] w-[22%]">Postal Address</th>
+                            <th class="px-smaller py-[1%]">Site</th>
+                            <th class="px-smaller py-[1%] text-right w-[5%]">Action</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -83,24 +86,24 @@
                                     <span class="ml-2">{{$user->first_name}} {{$user->last_name}}</span>
                                 </td>
 
-                                <td class="px-small">
+                                <td class="px-smaller">
 
                                     {{$user->tenant->name ?? ''}}
                                 </td>
 
-                                <td class="px-small">
+                                <td class="px-smaller">
                                     {{$user->phone_number}}
                                 </td>
 
-                                <td class="px-small truncate">
-                                    {{ \Illuminate\Support\Str::limit($user->address, 15)}}
+                                <td class="px-smaller truncate">
+                                    {{ \Illuminate\Support\Str::limit($user->address, 25)}}
 
                                 </td>
-                                <td class="px-small">
+                                <td class="px-smaller">
                                     {{$user->site->name ?? 'N/A'}}
                                 </td>
 
-                                <td class="px-small">
+                                <td class="px-smaller">
                                     <div class="flex flex-row justify-center">
                                         <a href="{{route('admin.users.edit', ['user' => $user->id])}}">
 
