@@ -23,7 +23,7 @@ class Loader extends Component
      */
     public function render(): View|Closure|string
     {
-        dd($this->loaderId);
+
         return view('components.loader', [
             'loaderId' => $this->loaderId
         ]);
