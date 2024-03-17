@@ -86,8 +86,8 @@
 
             <div class="flex flex-col">
                 <div class="flex flex-row items-center h-6">
-                <x-input-label for="site_id" :value="__('Site')" class="text-white"/>
-                <x-loader/>
+                    <x-input-label for="site_id" :value="__('Site')" class="text-white"/>
+                    <x-loader/>
                 </div>
                 <x-select-input id="site_id" class="block w-full" name="site_id">
                     <option class="" value="">Select a site</option>
@@ -95,8 +95,8 @@
             </div>
             <div class="flex flex-col">
                 <div class="flex flex-row items-center h-6">
-                <x-input-label for="tag_id" :value="__('Tag')" class="text-white"/>
-                <x-loader2/>
+                    <x-input-label for="tag_id" :value="__('Tag')" class="text-white"/>
+                    <x-loader :loaderId="'ajax_loader_tag'"/>
                 </div>
                 <x-select-input id="tag_id" class="block w-full" name="tag_id">
                     <option class="" value="">Select a tag</option>
@@ -111,14 +111,18 @@
                 <table class="table-auto w-[100%] max-lg:w-[1000px] bg-background_color">
                     <thead>
                     <tr class="overflow-x-auto">
-                        <th class="text-left text-small text-natural font-big  px-smaller py-smaller w-[10%]">Scan Date/Time</th>
+                        <th class="text-left text-small text-natural font-big  px-smaller py-smaller w-[10%]">Scan
+                            Date/Time
+                        </th>
                         <th class="text-left text-small text-natural font-big px-smaller py-smaller">Tag</th>
                         <th class="text-left text-small text-natural font-big px-smaller py-smaller w-[12%]">Site</th>
-                        <th class="text-left text-small text-natural font-big px-smaller py-smaller w-[18%]">Company</th>
+                        <th class="text-left text-small text-natural font-big px-smaller py-smaller w-[18%]">Company
+                        </th>
                         <th class="text-left text-small text-natural font-big px-smaller py-smaller">Longitude</th>
                         <th class="text-left text-small text-natural font-big px-smaller py-smaller">Latitude</th>
                         <th class="text-left text-small text-natural font-big px-smaller py-smaller">Distance</th>
-                        <th class="text-left text-small text-natural font-big px-smaller py-smaller w-[18%]">Proximity</th>
+                        <th class="text-left text-small text-natural font-big px-smaller py-smaller w-[18%]">Proximity
+                        </th>
                         {{--                        <th class="text-left text-small text-natural font-big px-small py-smaller">Gap</th>--}}
                     </tr>
                     </thead>
@@ -178,6 +182,7 @@
         selectSite.addEventListener("change", function (e) {
             getSiteTags(e.target.value)
         });
+
         function resetForm() {
             $(".select-2-sites").val('').trigger('change')
             document.getElementById("search-form").reset();

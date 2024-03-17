@@ -84,6 +84,7 @@
     const mobileTransactionDropdown = document.querySelector("#mobileTransaction");
     const profileDropdown = document.querySelector("#profileList");
     const mobileSideBar = document.querySelector("#mobileAside");
+    const ajaxSpan = document.querySelector("#ajax_span");
     const ajaxLoader = document.querySelector("#ajax_loader");
 
 
@@ -174,31 +175,21 @@
         return newOption;
     }
 
-    function showLoader() {
-        if (ajaxLoader) {
-            ajaxLoader.classList.remove('hidden')
+    function showLoader(loaderId = 'ajax_loader') {
+        const loaderElement = document.getElementById(loaderId);
+        if (loaderElement) {
+            loaderElement.classList.remove('hidden')
         }
 
     }
 
-    // function showLoader2() {
-    //     if (ajaxLoader2) {
-    //         ajaxLoader2.classList.remove('hidden')
-    //     }
-    //
-    // }
-
-    function hideLoader() {
-        if (ajaxLoader) {
-            ajaxLoader.classList.add('hidden')
+    function hideLoader(loaderId = 'ajax_loader') {
+        const loaderElement = document.getElementById(loaderId);
+        if (loaderElement) {
+            loaderElement.classList.add('hidden')
         }
     }
 
-    // function hideLoader2() {
-    //     if (ajaxLoader2) {
-    //         ajaxLoader2.classList.add('hidden')
-    //     }
-    // }
 
     function getCompanySites(company_id, selectedSite = null) {
         if (isNaN(company_id) || company_id == "") {
@@ -226,13 +217,13 @@
             .catch(err => console.log('Request Failed', err));
     }
 
-    function getSiteTags(site_id) {
+    function getSiteTags(site_id, loaderId = 'ajax_loader_tag') {
         if (isNaN(site_id) || site_id == "") {
             selectTag.innerHTML = "";
             selectTag.append(createOption("Select a site", ""));
             return
         }
-        showLoader()
+        showLoader(loaderId)
         const currentBaseUrl = window.location.origin;
         fetch(`${currentBaseUrl}/api/sites/${site_id}/tags`)
             .then(response => response.json())  // convert to json
@@ -241,13 +232,12 @@
                 selectTag.append(createOption("Select tag", ""));
                 tags = json.data?.tags ?? []
                 const selectedTagId = getQueryParamValue('tag_id')
-                console.log(selectedTagId)
                 tags.forEach((tag) => {
                     const isSelected = selectedTagId && tag.id === parseInt(selectedTagId, 10);
                     selectTag.append(createOption(tag.name, tag.id, isSelected));
                 });
                 selectTag.disabled = false;
-                hideLoader()
+                hideLoader(loaderId)
             })    //print data to console
             .catch(err => console.log('Request Failed', err));
 

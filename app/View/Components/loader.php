@@ -8,12 +8,13 @@ use Illuminate\View\Component;
 
 class loader extends Component
 {
+
     /**
      * Create a new component instance.
      */
-    public function __construct()
+    public function __construct(public string $loaderId = 'ajax_loader')
     {
-        //
+
     }
 
     /**
