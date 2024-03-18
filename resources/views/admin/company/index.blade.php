@@ -68,12 +68,12 @@
                         <thead class="">
                         <tr class="text-left text-small text-natural font-big">
                             <th class="px-smaller py-[1%] w-[10%]">City</th>
-                            <th class="px-smaller py-[1%] w-[21%]">Display name</th>
-                            <th class="px-smaller py-[1%] w-[24%]">Email</th>
-                            <th class="px-smaller py-[1%]  w-[18%]">Name</th>
-                            <th class="px-smaller py-[1%]">Tags</th>
-                            <th class="px-smaller py-[1%]">Status</th>
-                            <th class="px-smaller py-[1%] text-right">Action</th>
+                            <th class="px-smaller py-[1%] w-[20%]">Display name</th>
+                            <th class="px-smaller py-[1%] w-[25%]">Email</th>
+                            <th class="px-smaller py-[1%]  w-[20%]">Name</th>
+                            <th class="px-smaller py-[1%] w-[10%]">Tags</th>
+                            <th class="px-smaller py-[1%] w-[10%]">Status</th>
+                            <th class="px-smaller py-[1%] text-right w-[5%]">Action</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -116,7 +116,7 @@
                                     @endif
                                 </td>
 
-                                <td class="px-small text-right">
+                                <td class="px-smaller">
                                     <div class=""> 
                                         <a href="{{route('admin.companies.edit', ['company' => $company->id])}}">
 

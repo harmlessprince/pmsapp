@@ -84,9 +84,9 @@
                             <th class="px-smaller py-[1%] w-[15%]">Company</th>
                             <th class=" px-smaller py-[1%] w-[15%]">Site name</th>
                             <th class="px-smaller py-[1%] w-[20%]">Email</th>
-                            <th class="px-smaller py-[1%]  w-[25%]">Address</th>
-                            <th class="px-smaller py-[1%]">Photo</th>
-                            <th class="px-smaller py-[1%]">Status</th>
+                            <th class="px-smaller py-[1%]  w-[20%]">Address</th>
+                            <th class="px-smaller py-[1%]  w-[8%]">Photo</th>
+                            <th class="px-smaller py-[1%]  w-[8%]">Status</th>
                             <th class="px-smaller py-[1%] text-right w-[5%]">Action</th>
                         </tr>
                         </thead>

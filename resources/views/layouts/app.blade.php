@@ -180,7 +180,6 @@
         if (loaderElement) {
             loaderElement.classList.remove('hidden')
         }
-
     }
 
     function hideLoader(loaderId = 'ajax_loader') {
