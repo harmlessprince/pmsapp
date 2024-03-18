@@ -33,7 +33,7 @@ class StoreCompanyRequest extends FormRequest
             'confirm_password' => ['same:password'],
             'address' => ['required', 'string', 'max:200'],
             'maximum_number_of_tags' => ['required', 'integer', 'min:1'],
-            'phone_number' =>['required', 'string'],
+            'phone_number' =>['required', 'string', 'unique:companies,phone_number'],
             'status' => ['required', 'boolean']
         ];
     }

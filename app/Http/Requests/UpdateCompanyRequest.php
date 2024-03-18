@@ -34,7 +34,7 @@ class UpdateCompanyRequest extends FormRequest
             'confirm_password' => ['same:password'],
             'address' => ['sometimes', 'string', 'max:200'],
             'maximum_number_of_tags' => ['sometimes', 'integer', 'min:1'],
-            'phone_number' =>['sometimes', 'string'],
+            'phone_number' =>['sometimes', 'string', Rule::unique('companies', 'phone_number')->ignore(request()->company->id)],
             'status' => ['sometimes', 'boolean']
         ];
     }

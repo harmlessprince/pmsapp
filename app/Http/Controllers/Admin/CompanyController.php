@@ -148,7 +148,7 @@ class CompanyController extends Controller
                 'industry_id' => $request->input('industry_id'),
                 'state_id' => $request->input('state_id'),
                 'city' => $request->input('city'),
-                'address' => $request->input('address')
+                'address' => $request->input('address'),
             ]);
             DB::commit();
         } catch (\Exception $ex) {
