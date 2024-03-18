@@ -15,14 +15,18 @@ use App\Repositories\Eloquent\Repository\SiteRepository;
 use App\Repositories\Eloquent\Repository\StateRepository;
 use App\Repositories\Eloquent\Repository\UserRepository;
 use App\Services\FileUploadService;
+use App\Services\UserService;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 
 class UserController extends Controller
 {
     public function __construct(
         private readonly UserRepository    $userRepository,
         private readonly CompanyRepository $companyRepository,
-        private readonly SiteRepository $siteRepository,
-        private readonly StateRepository $stateRepository,
+        private readonly SiteRepository    $siteRepository,
+        private readonly StateRepository   $stateRepository,
+        private readonly UserService       $userService,
     )
     {
     }
@@ -61,7 +65,33 @@ class UserController extends Controller
      */
     public function store(StoreUserRequest $request)
     {
-        //
+        $user = $request->user();
+        $createdUser = $this->userRepository->create([
+            'password' => Hash::make(Str::random(4)),
+            "first_name" => $request->input('first_name'),
+            "last_name" => $request->input('last_name'),
+            'address' => $request->input('address'),
+            'state_id' => $request->input('state_id'),
+            'phone_number' => $request->input('phone_number'),
+            'shift_start_time' => $request->input('shift_start_time'),
+            'shift_end_time' => $request->input('shift_end_time'),
+            'normal_rate_per_hour' => $request->input('normal_rate_per_hour'),
+            'sunday_rate_per_hour' => $request->input('sunday_rate_per_hour'),
+            'holiday_rate_per_hour' => $request->input('holiday_rate_per_hour'),
+            'number_of_night_shift' => $request->input('number_of_night_shift'),
+            'night_shift_allowance' => $request->input('night_shift_allowance'),
+        ]);
+        $photo = null;
+        if ($request->hasFile('profile_image')) {
+            $response = FileUploadService::uploadToS3($request->file('profile_image'), 'profile_images');
+            $photo = $response->path;
+        }
+        $createdUser->company_id = $user->company_id;
+        $createdUser->site_id = $user->site_id;
+        $createdUser->profile_image = $photo;
+        $createdUser->save();
+        $this->userService->associateUserToRole($createdUser, RoleEnum::SECURITY->value);
+        return redirect(route('admin.users.index'))->with('success', 'User created successfully');
     }
 
     /**
@@ -90,10 +120,10 @@ class UserController extends Controller
     public function update(\App\Http\Requests\UpdateUserRequest $request, User $user)
     {
         $validated_data = $request->validated();
-        if ($request->hasfile('profile_image')){
+        if ($request->hasfile('profile_image')) {
             $response = FileUploadService::uploadToS3($request->file('profile_image'), 'profile_images');
             $validated_data['profile_image'] = $response->path;
-        }else{
+        } else {
             unset($validated_data['profile_image']);
         }
 

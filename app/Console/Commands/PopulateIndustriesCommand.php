@@ -45,7 +45,8 @@ class PopulateIndustriesCommand extends Command
             "Advertising/Marketing",
             "Finance",
             "Fashion",
-            "Real Estate"
+            "Real Estate",
+            "Others"
         ];
 
         foreach ($industries as $industry){

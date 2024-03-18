@@ -35,7 +35,7 @@ class SecurityGuardController extends Controller
             ->whereHas('roles', function ($query) {
                 $query->where('name', RoleEnum::SECURITY->value);
             })->latest()->paginate();
-        return sendSuccess(['guards' => $securityGuards], 'Security guards retrieved');
+        return sendSuccess(['guards' => $securityGuards], 'Users retrieved');
     }
 
     /**
@@ -46,7 +46,7 @@ class SecurityGuardController extends Controller
         $user = $request->user();
         $createdUser = $this->userService->createUser(
             $request->input('first_name'),
-            $request->input('first_name'),
+            $request->input('last_name'),
             Str::random(4)
         );
         $photo = null;
@@ -59,6 +59,6 @@ class SecurityGuardController extends Controller
         $createdUser->profile_image = $photo;
         $createdUser->save();
         $this->userService->associateUserToRole($createdUser, RoleEnum::SECURITY->value);
-        return sendSuccess(['user' => $createdUser], 'Security guard created successfully');
+        return sendSuccess(['user' => $createdUser], 'User created successfully');
     }
 }
