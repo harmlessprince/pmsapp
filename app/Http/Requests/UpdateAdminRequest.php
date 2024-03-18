@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class UpdateAdminRequest extends FormRequest
 {
@@ -24,7 +25,7 @@ class UpdateAdminRequest extends FormRequest
         return [
             'first_name' => ['required', 'string', 'max:200'],
             'last_name' => ['required', 'string', 'max:200'],
-            'email' => ['required', 'email', 'max:200'],
+            'email' => ['required', 'email', 'max:200', Rule::unique('users', 'email')->ignore(request()->admin->id)],
             'status' => ['required', 'boolean'],
         ];
     }
