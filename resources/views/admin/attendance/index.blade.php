@@ -117,13 +117,13 @@
                         <th class="text-left text-small text-natural font-big  px-smaller py-smaller w-[13%]">
                             Name
                         </th>
-                        <th class="text-left text-small text-natural font-big  px-smaller py-smaller">Time/Date</th>
-                        <th class="text-left text-small text-natural font-big  px-smaller py-smaller">Action Type</th>
+                        <th class="text-left text-small text-natural font-big  px-smaller py-smaller w-[10%]">Time/Date</th>
+                        <th class="text-left text-small text-natural font-big  px-smaller py-smaller w-[10%]">Action Type</th>
                         <th class="text-left text-small text-natural font-big px-smaller py-smaller w-[15%]">Site</th>
-                        <th class="text-left text-small text-natural font-big px-smaller py-smaller w-[17%]">Company</th>
-                        <th class="text-left text-small text-natural font-big px-smaller py-smaller">Distance</th>
-                        <th class="text-left text-small text-natural font-big px-smaller py-smaller">Image</th>
-                        <th class="text-left text-small text-natural font-big px-smaller py-smaller w-[13%]">Proximity</th>
+                        <th class="text-left text-small text-natural font-big px-smaller py-smaller w-[20%]">Company</th>
+                        <th class="text-left text-small text-natural font-big px-smaller py-smaller w-[10%]">Distance</th>
+                        <th class="text-left text-small text-natural font-big px-smaller py-smaller w-[8%]">Image</th>
+                        <th class="text-left text-small text-natural font-big px-smaller py-smaller w-[10%]">Proximity</th>
                     </tr>
                     </thead>
                     <tbody>

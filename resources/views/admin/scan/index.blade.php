@@ -114,14 +114,14 @@
                         <th class="text-left text-small text-natural font-big  px-smaller py-smaller w-[10%]">Scan
                             Date/Time
                         </th>
-                        <th class="text-left text-small text-natural font-big px-smaller py-smaller">Tag</th>
+                        <th class="text-left text-small text-natural font-big px-smaller py-smaller w-[13%]">Tag</th>
                         <th class="text-left text-small text-natural font-big px-smaller py-smaller w-[12%]">Site</th>
-                        <th class="text-left text-small text-natural font-big px-smaller py-smaller w-[18%]">Company
+                        <th class="text-left text-small text-natural font-big px-smaller py-smaller w-[20%]">Company
                         </th>
-                        <th class="text-left text-small text-natural font-big px-smaller py-smaller">Longitude</th>
-                        <th class="text-left text-small text-natural font-big px-smaller py-smaller">Latitude</th>
-                        <th class="text-left text-small text-natural font-big px-smaller py-smaller">Distance</th>
-                        <th class="text-left text-small text-natural font-big px-smaller py-smaller w-[18%]">Proximity
+                        <th class="text-left text-small text-natural font-big px-smaller py-smaller w-[10%]">Longitude</th>
+                        <th class="text-left text-small text-natural font-big px-smaller py-smaller w-[10%]">Latitude</th>
+                        <th class="text-left text-small text-natural font-big px-smaller py-smaller w-[10%]">Distance</th>
+                        <th class="text-left text-small text-natural font-big px-smaller py-smaller w-[12%]">Proximity
                         </th>
                         {{--                        <th class="text-left text-small text-natural font-big px-small py-smaller">Gap</th>--}}
                     </tr>
