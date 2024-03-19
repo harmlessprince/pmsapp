@@ -67,28 +67,28 @@
                     <table class="table-auto w-[100%] max-lg:w-[1000px]">
                         <thead class="">
                         <tr class="text-left text-small text-natural font-big">
-                            <th class=" px-small py-[1%]">Country</th>
-                            <th class=" px-small py-[1%]">State</th>
-                            <th class="px-small py-[1%]">Site name</th>
-                            <th class="px-small py-[1%]">Email</th>
-                            <th class="px-small py-[1%]">Photo</th>
-                            <th class="px-small py-[1%]">Status</th>
-                            <th class="px-small py-[1%]">Action</th>
+                            <th class="px-smaller py-[1%] w-[10%]">Country</th>
+                            <th class="px-smaller py-[1%] w-[10%]">State</th>
+                            <th class="px-smaller py-[1%] w-[15%]">Site name</th>
+                            <th class="px-smaller py-[1%] w-[20%]">Email</th>
+                            <th class="px-smaller py-[1%] w-[10%]">Photo</th>
+                            <th class="px-smaller py-[1%] w-[10%]">Status</th>
+                            <th class="px-smaller py-[1%] w-[5%]">Action</th>
                         </tr>
                         </thead>
                         <tbody>
                         @forelse($sites as $site)
-                            <tr class="text-normal text-basic font-normal text-natural border border-table border-collapse hover:bg-db">
-                                <td class="text-natural px-small py-small">{{$site->state->country->name}}</td>
-                                <td class="px-small">{{$site->state->name}}</td>
-                                <td class="px-small">
+                            <tr class="text-normal text-basic font-normal text-natural border border-table border-x-0 border-b-0 hover:bg-db">
+                                <td class="text-natural px-smaller py-small">{{$site->state->country->name}}</td>
+                                <td class="px-smaller">{{$site->state->name}}</td>
+                                <td class="px-smaller">
                                     {{$site->name}}
                                 </td>
-                                <td class="px-small">
+                                <td class="px-smaller">
                                     {{$site->inspector->email}}
                                 </td>
-                                <td class="px-small">view image</td>
-                                <td class="px-small">
+                                <td class="px-smaller">view image</td>
+                                <td class="px-smaller">
                                     @if($site->status)
                                         <button
                                             class="bg-foundation W-[78px] h-[22px] px-[8px] py-[2px] rounded-full flex flex-row items-center justify-between">
@@ -106,7 +106,7 @@
                                     @endif
 
                                 </td>
-                                <td class="px-small">
+                                <td class="px-smaller">
                                     <div class="flex flex-row justify-center">
                                         <a href="{{route('company.sites.edit', ['site' => $site])}}">
                                             <img src="{{asset('assets/images/edit.png')}}" alt="edit"

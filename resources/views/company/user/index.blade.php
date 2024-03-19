@@ -55,23 +55,23 @@
             <!-- table 2 section -->
             <section class="border border-table rounded-lg w-[100%] mt-[2%] bg-background_color">
                 <div class="overflow-x-auto">
-                    <table class="table-auto w-[100%] max-lg:w-[1000px]">
+                    <table class="table-fixed w-[100%] max-lg:w-[1000px]">
                         <thead class="">
                         <tr class="text-left text-small text-natural font-big">
-                            <th class=" px-small py-[1%]">Name</th>
-                            <th class="px-small py-[1%]">Phone number</th>
-                            <th class="px-small py-[1%]">Country</th>
-                            <th class="px-small py-[1%]">State</th>
-                            <th class="px-small py-[1%]">Postal Address</th>
-                            <th class="px-small py-[1%]">Site</th>
-                            <th class="px-small py-[1%]">Action</th>
+                            <th class="px-smaller py-[1%] w-[17%]">Name</th>
+                            <th class="px-smaller py-[1%] w-[15%]">Phone number</th>
+                            <th class="px-smaller py-[1%]  w-[12%]">Country</th>
+                            <th class="px-smaller py-[1%]  w-[10%]">State</th>
+                            <th class="px-smaller py-[1%]  w-[20%]">Postal Address</th>
+                            <th class="px-smaller py-[1%]  w-[15%]">Site</th>
+                            <th class="px-smaller py-[1%]  w-[5%]">Action</th>
                         </tr>
                         </thead>
                         <tbody>
                         @forelse($users as $user)
                             <tr class="text-normal font-normal border border-table border-collapse text-natural hover:bg-db">
 
-                                <td class="text-natural px-small py-small flex flex-row items-center">
+                                <td class="text-natural px-smaller py-small flex flex-row items-center">
                                     <div class="w-[40px] h-[40px] rounded-full">
                                         <img src="{{$user->profile_image}}" alt="Profile Image"
                                              class="rounded-full w-[40px] h-[40px]">
@@ -79,19 +79,19 @@
                                     <span class="ml-2">{{$user->first_name}} {{$user->last_name}}</span>
                                 </td>
 
-                                <td class="px-small">
+                                <td class="px-smaller">
                                     {{$user->phone_number}}
                                 </td>
-                                <td class="px-small">
+                                <td class="px-smaller">
                                     {{$user->state->country->name ?? "N/A"}}
                                 </td>
-                                <td class="px-small">
+                                <td class="px-smaller">
                                     {{$user->state->name ?? "N/A"}}
                                 </td>
-                                <td class="px-small truncate">{{ \Illuminate\Support\Str::limit($user->address, 15)}}</td>
-                                <td class="px-small">{{$user->site->name ?? 'N/A'}}</td>
+                                <td class="px-smaller truncate">{{ \Illuminate\Support\Str::limit($user->address, 15)}}</td>
+                                <td class="px-smaller">{{$user->site->name ?? 'N/A'}}</td>
 
-                                <td class="px-small">
+                                <td class="px-smaller">
                                     <div class="flex flex-row justify-center">
                                         <a href="{{route('company.users.edit', ['user' => $user->id])}}">
                                             <img src="{{asset('assets/images/edit.png')}}" alt="edit"

@@ -68,7 +68,7 @@
                         <tr class="text-left text-small text-natural font-big">
                             <th class="px-smaller py-[1%] w-[15%]">Name</th>
                             <th class="px-smaller py-[1%] w-[20%]">Company</th>
-                            <th class="px-small py-[1%] w-[15%]">Phone number</th>
+                            <th class="px-smaller py-[1%] w-[15%]">Phone number</th>
                             <th class="px-smaller py-[1%] w-[20%]">Postal Address</th>
                             <th class="px-smaller py-[1%] w-[15%]">Site</th>
                             <th class="px-smaller py-[1%] text-right w-[5%]">Action</th>
