@@ -55,12 +55,12 @@
      <section class="border border-table mt-[2%] rounded-lg bg-background_color overflow-x-auto">
          <table class=" table-fixed w-[100%] bg-background_color rounded-lg max-lg:w-[1000px]">
              <thead>
-             <tr class="text-left border border-x-0 border-y-0 border-table border-collapse">
-                 <th class="text-small text-natural font-big  px-smaller py-[1%] w-[10%]">Scan Date/Time</th>
-                 <th class="text-small text-natural font-big px-smaller py-[1%] w-[20%]">Tag Name</th>
-                 <th class="text-small text-natural font-big px-smaller py-[1%] w-[25%]">Site Name</th>
-                 <th class="text-small text-natural font-big px-smaller py-[1%] w-[25%]">Proximity</th>
-                 <th class="text-small text-natural font-big px-smaller py-[1%] w-[10%]">Distance</th>
+             <tr class="text-left text-small text-natural font-big border border-x-0 border-y-0 border-table border-collapse">
+                 <th class="px-smaller py-[1%] w-[10%]">Scan Date/Time</th>
+                 <th class="px-smaller py-[1%] w-[20%]">Tag Name</th>
+                 <th class="px-smaller py-[1%] w-[25%]">Site Name</th>
+                 <th class="px-smaller py-[1%] w-[25%]">Proximity</th>
+                 <th class="px-smaller py-[1%] w-[10%]">Distance</th>
              </tr>
              </thead>
              <tbody>
@@ -92,16 +92,16 @@
      <section class="border border-table mt-[2%] rounded-lg bg-background_color overflow-x-auto">
          <table class="table-fixed w-[100%] bg-background_color max-lg:w-[1000px]">
              <thead>
-             <tr class="">
-                 <th class="text-left text-small text-natural font-big  px-smaller py-smaller w-[18%]">
+             <tr class="text-left text-small text-natural font-big">
+                 <th class="px-smaller py-smaller w-[18%]">
                      Name
                  </th>
-                 <th class="text-left text-small text-natural font-big  px-smaller py-smaller w-[13%]">Time/Date</th>
-                 <th class="text-left text-small text-natural font-big  px-smaller py-smaller  w-[10%]">Action Type</th>
-                 <th class="text-left text-small text-natural font-big px-smaller py-smaller w-[20%]">Site</th>
-                 <th class="text-left text-small text-natural font-big px-smaller py-smaller w-[12%]">Distance</th>
-                 <th class="text-left text-small text-natural font-big px-smaller py-smaller w-[8%]">Image</th>
-                 <th class="text-left text-small text-natural font-big px-smaller py-smaller  w-[10%]">Proximity</th>
+                 <th class="px-smaller py-smaller w-[13%]">Time/Date</th>
+                 <th class="px-smaller py-smaller  w-[12%]">Action Type</th>
+                 <th class="px-smaller py-smaller w-[20%]">Site</th>
+                 <th class="px-smaller py-smaller w-[12%]">Distance</th>
+                 <th class="px-smaller py-smaller w-[8%]">Image</th>
+                 <th class="px-smaller py-smaller  w-[10%]">Proximity</th>
              </tr>
              </thead>
              <tbody>
@@ -136,7 +136,7 @@
                               alt="dashboard"
                               class=" w-[60px] h-[60px]"/>
                      </td>
-                     <td class="text-normal font-normal p-smaller">{{$attendance->proximity}}</td>
+                     <td class="text-normal font-normal px-smaller">{{$attendance->proximity}}</td>
                  </tr>
              @empty
 
