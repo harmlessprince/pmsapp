@@ -24,6 +24,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        if($this->app->environment('production')) {
+            \URL::forceScheme('https');
+        }
         Model::preventLazyLoading(!app()->isProduction());
         Relation::enforceMorphMap([
             'user' => User::class,

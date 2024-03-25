@@ -106,6 +106,10 @@ class User extends Authenticatable
     {
         return $this->hasRole(RoleEnum::SECURITY->value);
     }
+    public function isPersonnel(): bool
+    {
+        return $this->hasRole(RoleEnum::PERSONNEL->value);
+    }
 
     protected function profileImage(): Attribute
     {

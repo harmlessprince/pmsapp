@@ -33,7 +33,7 @@
             </div>
             <div class="ml-[5%]">
                 <h1 class="font-bold text-3xl text-guards">{{$countOfGuards}}</h1>
-                <span class="font-normal text-sm text-guards">Guards</span>
+                <span class="font-normal text-sm text-guards">Personnel</span>
             </div>
         </div>
     </section>

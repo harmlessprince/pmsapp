@@ -58,7 +58,7 @@
                 </div>
             </div>
             <div class="flex flex-col">
-                <x-input-label for="frequency" :value="__('Site')" class="text-white"/>
+                <x-input-label for="frequency" :value="__('Time Period')" class="text-white"/>
                 <x-select-input id="frequency" class="block w-full" name="frequency">
                     @foreach($frequencies as $frequency)
                         <option class="bg-background_color"
