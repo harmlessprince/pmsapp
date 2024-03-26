@@ -27,7 +27,7 @@ class DashboardController extends Controller
             ->where('company_id', $user->company_id)
             ->where('site_id', $user->site_id)
             ->whereHas('roles', function ($query) {
-                $query->where('name', RoleEnum::SECURITY->value);
+                $query->where('name', RoleEnum::PERSONNEL->value);
             })->count();
         $latestAttendance = $this->attendanceRepository->modelQuery()
             ->select(['id', 'site_id', 'company_id', 'attendance_time', 'attendance_date', 'attendance_date_time', 'image', 'action_type', 'user_id'])

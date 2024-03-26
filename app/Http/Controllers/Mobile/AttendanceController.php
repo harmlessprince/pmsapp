@@ -44,7 +44,7 @@ class AttendanceController extends Controller
      */
     public function store(StoreAttendanceRequest $request)
     {
-        $securityGuard = $this->userRepository->findByRole($request->input('security_guard_id'), RoleEnum::SECURITY->value);
+        $securityGuard = $this->userRepository->findByRole($request->input('security_guard_id'), RoleEnum::PERSONNEL->value);
 
         if (!$securityGuard) {
             return sendError("Security guard does not exist", 404);

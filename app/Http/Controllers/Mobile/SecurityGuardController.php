@@ -33,7 +33,7 @@ class SecurityGuardController extends Controller
             ->where('company_id', $user->company_id)
             ->where('site_id', $user->site_id)
             ->whereHas('roles', function ($query) {
-                $query->where('name', RoleEnum::SECURITY->value);
+                $query->where('name', RoleEnum::PERSONNEL->value);
             })->latest()->paginate();
         return sendSuccess(['guards' => $securityGuards], 'Users retrieved');
     }
@@ -58,7 +58,7 @@ class SecurityGuardController extends Controller
         $createdUser->site_id = $user->site_id;
         $createdUser->profile_image = $photo;
         $createdUser->save();
-        $this->userService->associateUserToRole($createdUser, RoleEnum::SECURITY->value);
+        $this->userService->associateUserToRole($createdUser, RoleEnum::PERSONNEL->value);
         return sendSuccess(['user' => $createdUser], 'User created successfully');
     }
 }
