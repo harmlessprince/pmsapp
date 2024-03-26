@@ -10,6 +10,7 @@ use App\Repositories\Eloquent\Repository\ScanRepository;
 use App\Repositories\Eloquent\Repository\TagRepository;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 
 class ScanController extends Controller
 {
@@ -45,7 +46,10 @@ class ScanController extends Controller
         }
         $distance = calculateDistance($tag->latitude, $tag->longitude, $request->input('latitude'), $request->input('longitude'));
         $proximity = deriveProximity($distance);
-        $scan = $this->scanRepository->create([
+        $lastScanOnTag = $this->scanRepository->modelQuery()
+            ->where('tag_id', $tag->id)
+            ->where('scan_date', $request->input('scan_date'))->first();
+        $data = [
             'scan_date' => $request->input('scan_date'),
             'scan_time' => $request->input('scan_time'),
             'scan_date_time' => $request->input('scan_date_time'),
@@ -57,7 +61,15 @@ class ScanController extends Controller
             'scanned_by' => $user->id,
             'distance' => $distance,
             'proximity' => $proximity,
-        ]);
+            'round' => 1,
+            'gap_duration' => 0,
+        ];
+        if ($lastScanOnTag) {
+            $data['gap_duration'] = Carbon::parse($lastScanOnTag->scan_time)->diffInSeconds(Carbon::parse(($data['scan_time'])));
+            $data['round'] = $lastScanOnTag->roound + 1;
+        }
+
+        $scan = $this->scanRepository->create($data);
         return sendSuccess(['scan' => $scan], 'Scanned successfully');
     }
 }

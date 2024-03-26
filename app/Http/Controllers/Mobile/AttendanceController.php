@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Mobile;
 
+use App\Enums\AttendanceActionTypeEnum;
 use App\Enums\RoleEnum;
 use App\Exceptions\CustomException;
 use App\Http\Controllers\Controller;
@@ -12,6 +13,7 @@ use App\Repositories\Eloquent\Repository\UserRepository;
 use App\Services\FileUploadService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 
 class AttendanceController extends Controller
 {
@@ -47,11 +49,31 @@ class AttendanceController extends Controller
         $securityGuard = $this->userRepository->findByRole($request->input('security_guard_id'), RoleEnum::PERSONNEL->value);
 
         if (!$securityGuard) {
-            return sendError("Security guard does not exist", 404);
+            return sendError("Personnel does not exist", 404);
         }
         $user = $request->user()->load('site');
         $latitude = $request->input('latitude');
         $longitude = $request->input('longitude');
+
+
+        $alreadyCheckedIn = $this->attendanceRepository->modelQuery()
+            ->where('attendance_date', $request->input('attendance_date'))
+            ->where('user_id', $request->input('security_guard_id'))
+            ->where('action_type', AttendanceActionTypeEnum::CHECK_IN->value)->first();
+
+        if ($alreadyCheckedIn && $request->input('action_type') == AttendanceActionTypeEnum::CHECK_IN->value) {
+            return sendError("Personnel already checked in for today", 400);
+        }
+
+        $alreadyCheckedOut = $this->attendanceRepository->modelQuery()
+            ->where('attendance_date', $request->input('attendance_date'))
+            ->where('user_id', $request->input('security_guard_id'))
+            ->where('action_type', AttendanceActionTypeEnum::CHECK_OUT->value)->first();
+
+        if ($alreadyCheckedOut && $request->input('action_type') == AttendanceActionTypeEnum::CHECK_OUT->value) {
+            return sendError("Personnel already checked out for today", 400);
+        }
+
         if ($latitude && $longitude) {
             $distance = calculateDistance($user->site->latitude, $user->site->longitude, $request->input('latitude'), $request->input('longitude'));
             $proximity = deriveProximity($distance);
@@ -65,8 +87,7 @@ class AttendanceController extends Controller
             $response = FileUploadService::uploadToS3($request->file('image'), 'profile_images');
             $image = $response->path;
         }
-
-        $attendance = $this->attendanceRepository->create([
+        $data = [
             'action_type' => $request->input('action_type'),
             'image' => $image,
             'attendance_date' => $request->input('attendance_date'),
@@ -80,7 +101,13 @@ class AttendanceController extends Controller
             'company_id' => $user->company_id,
             'distance' => $distance,
             'proximity' => $proximity,
-        ]);
+        ];
+
+        if ($request->input('action_type') == AttendanceActionTypeEnum::CHECK_OUT->value) {
+            $data['check_in_to_checkout_duration'] = Carbon::parse($alreadyCheckedIn->attendance_time)->diffInSeconds(Carbon::parse( $request->input('attendance_time')));
+        }
+
+        $attendance = $this->attendanceRepository->create($data);
         return sendSuccess(['attendances' => $attendance], 'Attendance taken successfully');
     }
 }
