@@ -20,8 +20,8 @@ class AttendanceSeeder extends Seeder
     public function run(): void
     {
         $sites = Site::with('company')->get();
-        $start = Carbon::parse("2023-09-01");
-        $end = Carbon::parse("2024-01-31");
+        $start = Carbon::parse("2024-01-01");
+        $end = Carbon::parse("2024-05-30");
         $totalSites = $sites->count();
         $this->command->info('Total number of sites: ' . $sites->count());
         $differenceInDays = $start->diffInDays($end);
@@ -29,9 +29,10 @@ class AttendanceSeeder extends Seeder
         $this->command->info('You might want to go play');
 
         foreach ($sites as $site) {
-
+            $start = Carbon::parse("2024-01-01");
+            $end = Carbon::parse("2024-05-30");
             User::factory(10)->create()->each(function ($user) use ($site) {
-                $user->assignRole(RoleEnum::SECURITY->value);
+                $user->assignRole(RoleEnum::PERSONNEL->value);
                 $user->company_id = $site->company->id;
                 $user->site_id = $site->id;
                 $user->save();
@@ -39,20 +40,15 @@ class AttendanceSeeder extends Seeder
             $this->command->info('Creating sample attendances for: ' . $site->name);
             for ($date = $start; $date->lte($end); $date->addDay()) {
 
-                $start = Carbon::parse("2023-09-01");
-                $end = Carbon::parse("2024-01-31");
-
-                $distance = rand(30, 200);
-
-
-                $randomTime = Carbon::createFromTime(
-                    rand(8, 10), // Hour
-                    rand(0, 59), // Minute
-                    rand(0, 59)  // Second
-                );
-                $combinedDateTime = $date->format('Y-m-d') . ' ' . $randomTime->format('H:i:s');
                 $users = User::query()->where('site_id', $site->id)->get();
                 foreach ($users as $user){
+                    $distance = rand(30, 200);
+                    $randomCheckInTime = Carbon::createFromTime(
+                        rand(8, 10), // Hour
+                        rand(0, 59), // Minute
+                        rand(0, 59)  // Second
+                    );
+                    $randomCheckOutTime = $randomCheckInTime->copy()->addHours(rand(8, 9));
                     Attendance::factory()->create([
                         'company_id' => $site->company_id,
                         'site_id' => $site->id,
@@ -61,8 +57,8 @@ class AttendanceSeeder extends Seeder
                         'proximity' =>  fake()->randomElement(['close', 'not close', 'far']),
                         'distance' => $distance,
                         'attendance_date' => $date,
-                        'attendance_time' => $randomTime->format('H:i:s'),
-                        'attendance_date_time' => $combinedDateTime
+                        'attendance_time' => $randomCheckInTime->format('H:i:s'),
+                        'attendance_date_time' => $date->format('Y-m-d') . ' ' . $randomCheckInTime->format('H:i:s')
                     ]);
                     if (rand(0, 1)){
                         Attendance::factory()->create([
@@ -73,8 +69,9 @@ class AttendanceSeeder extends Seeder
                             'proximity' =>  fake()->randomElement(['close', 'not close', 'far']),
                             'distance' => $distance,
                             'attendance_date' => $date,
-                            'attendance_time' => $randomTime->addHours(rand(8, 9))->format('H:i:s'),
-                            'attendance_date_time' => $combinedDateTime
+                            'attendance_time' => $randomCheckOutTime->format('H:i:s'),
+                            'attendance_date_time' => $date->format('Y-m-d') . ' ' . $randomCheckOutTime->format('H:i:s'),
+                            'check_in_to_checkout_duration' => $randomCheckInTime->diffInSeconds($randomCheckOutTime)
                         ]);
                     }
 

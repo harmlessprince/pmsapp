@@ -7,7 +7,7 @@ use App\QueryFilters\CompanyIdFilter;
 use App\QueryFilters\DateFilter;
 use App\QueryFilters\SiteIdFilter;
 use App\Repositories\Eloquent\Repository\ScanRepository;
-use App\ScanAnalyticsService;
+use App\Services\ScanAnalyticsService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 

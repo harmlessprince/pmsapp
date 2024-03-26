@@ -15,7 +15,8 @@
             Manage Sites
         </a>
     </div>
-    <form class="mt-[2%] w-[100%]" action="{{route('company.sites.store')}}" method="POST" enctype='multipart/form-data'>
+    <form class="mt-[2%] w-[100%]" action="{{route('company.sites.store')}}" method="POST"
+          enctype='multipart/form-data'>
         @csrf
         <div class="flex flex-row justify-between mb-2 max-lg:flex-col">
             <div class="w-[48%] max-lg:w-[100%] max-lg:mb-2">
@@ -55,20 +56,23 @@
 
         <div class="w-full  mb-2">
             <x-input-label for="address" :value="__('Address')"/>
-            <x-text-input id="address" class="block mt-1 w-full" type="text" name="address"  :value="old('address')" required/>
+            <x-text-input id="address" class="block mt-1 w-full" type="text" name="address" :value="old('address')"
+                          required/>
             <x-input-error :messages="$errors->get('address')" class="mt-2"/>
         </div>
 
         <div class="flex flex-row justify-between mb-2 max-lg:flex-col">
             <div class="w-[48%] max-lg:w-[100%]  max-lg:mb-2">
                 <x-input-label for="shift_start_time" :value="__('Shift start time')"/>
-                <x-text-input id="shift_start_time" class="block mt-1 w-full shift_start_time_timepicker" type="text" :value="old('shift_start_time')" name="shift_start_time"
+                <x-text-input id="shift_start_time" class="block mt-1 w-full shift_start_time_timepicker" type="text"
+                              :value="old('shift_start_time', '12:00am')" name="shift_start_time"
                               required/>
                 <x-input-error :messages="$errors->get('shift_start_time')" class="mt-2"/>
             </div>
             <div class="w-[48%]  max-lg:w-[100%]">
                 <x-input-label for="shift_end_time" :value="__('Shift end time')"/>
-                <x-text-input id="shift_end_time" class="block mt-1 w-full shift_end_time_timepicker" type="text" name="shift_end_time" :value="old('shift_end_time')" required/>
+                <x-text-input id="shift_end_time" class="block mt-1 w-full shift_end_time_timepicker" type="text"
+                              name="shift_end_time" :value="old('shift_end_time', '11:59pm')" required/>
                 <x-input-error :messages="$errors->get('shift_end_time')" class="mt-2"/>
             </div>
         </div>
@@ -76,7 +80,8 @@
         <div class="flex flex-row justify-between mb-2 max-lg:flex-col">
             <div class="w-[48%] max-lg:w-full max-lg:mb-2">
                 <x-input-label for="number_of_tags" :value="__('Number of Tags')"/>
-                <x-text-input id="number_of_tags" class="block mt-1 w-full" type="number" name="number_of_tags" :value="old('number_of_tags')" required/>
+                <x-text-input id="number_of_tags" class="block mt-1 w-full" type="number" name="number_of_tags"
+                              :value="old('number_of_tags')" required/>
                 <x-input-error :messages="$errors->get('number_of_tags')" class="mt-2"/>
             </div>
             <div class="w-[48%] max-lg:w-full">
@@ -124,7 +129,8 @@
         </div>
 
 
-        <button class="mt-[1%] w-[60px] h-[40px] bg-primary_color rounded-lg text-normal text-natural font-big" type="submit">
+        <button class="mt-[1%] w-[60px] h-[40px] bg-primary_color rounded-lg text-normal text-natural font-big"
+                type="submit">
             Add
         </button>
     </form>
@@ -137,13 +143,14 @@
     {{--    https://www.jqueryscript.net/demo/Customizable-jQuery-Timepicker-Plugin-timepicker/--}}
     <script src="{{asset('assets/timepicker/jquery.timepicker.min.js')}}"></script>
     <script>
-        $(document).ready(function () {
 
+        $(document).ready(function () {
             $('.shift_start_time_timepicker').timepicker({
-                listWidth: 1
+                listWidth: 1,
             });
             $('.shift_end_time_timepicker').timepicker({
-                listWidth: 1
+                listWidth: 1,
+                defaultTime: '11:59',
             });
         });
     </script>

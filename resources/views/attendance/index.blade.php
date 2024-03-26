@@ -110,6 +110,7 @@
                         </th>
                         <th class="text-left text-small text-natural font-big  px-smaller py-smaller">Time/Date</th>
                         <th class="text-left text-small text-natural font-big  px-smaller py-smaller">Action Type</th>
+                        <th class="text-left text-small text-natural font-big  px-smaller py-smaller">Hours Worked</th>
                         <th class="text-left text-small text-natural font-big px-smaller py-smaller">Site</th>
                         <th class="text-left text-small text-natural font-big px-smaller py-smaller">Distance</th>
                         <th class="text-left text-small text-natural font-big px-smaller py-smaller">Image</th>
@@ -140,6 +141,13 @@
                                         <span class="text-checkInText font-big text-small">Check out</span>
                                     </button>
                                 @endif
+                            </td>
+                            <td class="px-small uppercase">
+                                @php
+                                    $interval = \Carbon\CarbonInterval::seconds($attendance->check_in_to_checkout_duration)->cascade();
+                                    $output = sprintf('%sh %sm', $interval->totalHours, $interval->toArray()['minutes']);
+                                @endphp
+                                {{$output}}
                             </td>
                             <td class="text-normal font-normal px-small">{{$attendance->site->name}}</td>
                             <td class="text-normal font-normal px-small">{{$attendance->distance}} KM</td>

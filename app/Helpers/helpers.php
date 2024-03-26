@@ -95,5 +95,25 @@ function generateMonths()
 
 function generateTagCode($site_id, $company_id)
 {
-    return 'TAG/' . rand(111, 999) . '/' . 'S' . $site_id . 'C' . $company_id;
+    return 'TAG/' . rand(100, 999) . '/' . 'S' . $site_id . 'C' . $company_id . '/' . \Illuminate\Support\Str::random(2);
+}
+
+function sencondsToHoursMin($seconds)
+{
+    $interval = \Carbon\CarbonInterval::seconds($seconds)->cascade();
+    return sprintf('%sh %sm', $interval->totalHours, $interval->toArray()['minutes']);
+}
+
+function secondsToHoursMinutes($seconds)
+{
+
+    // Calculate the hours
+    $hours = floor($seconds / 3600);
+
+    // Calculate the remaining seconds
+    // into minutes
+    $minutes = floor(($seconds % 3600) / 60);
+
+    return sprintf('%sh %sm', $hours, $minutes);
+
 }

@@ -24,7 +24,7 @@ return new class extends Migration
             $table->text('comment')->nullable();
             $table->timestamps();
 
-            $table->unique(['site_id', 'name']);
+            $table->unique(['site_id', 'code']);
         });
     }
 

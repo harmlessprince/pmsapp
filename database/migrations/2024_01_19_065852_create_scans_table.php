@@ -24,6 +24,8 @@ return new class extends Migration
             $table->dateTime('scan_date_time');
             $table->double('latitude', 10, 6)->nullable();
             $table->double('longitude', 10, 6)->nullable();
+            $table->integer('round')->nullable();
+            $table->integer('gap_duration')->nullable();
             $table->timestamps();
         });
     }

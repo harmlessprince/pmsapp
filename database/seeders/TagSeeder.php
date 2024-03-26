@@ -15,11 +15,16 @@ class TagSeeder extends Seeder
     {
         $sites = Site::all();
         foreach ($sites as $site) {
-            Tag::factory(rand(8, $site->maximum_number_of_tags))->create([
-                'created_by' => 1,
-                'company_id' => $site->company_id,
-                'site_id' => $site->id
-            ]);
+            $count = rand(8, $site->maximum_number_of_tags);
+            for ($i = 0; $i < $count; $i++) {
+                Tag::factory()->create([
+                    'created_by' => 1,
+                    'company_id' => $site->company_id,
+                    'site_id' => $site->id,
+                    'code' => generateTagCode($site->id, $site->company_id)
+                ]);
+            }
+
         }
     }
 }

@@ -106,7 +106,8 @@
                         <th class="text-left text-small text-natural font-big px-small py-smaller">Latitude</th>
                         <th class="text-left text-small text-natural font-big px-small py-smaller">Distance</th>
                         <th class="text-left text-small text-natural font-big px-small py-smaller">Proximity</th>
-                        {{--                        <th class="text-left text-small text-natural font-big px-small py-smaller">Gap</th>--}}
+                        <th class="text-left text-small text-natural font-big px-small py-smaller">Round</th>
+                        <th class="text-left text-small text-natural font-big px-small py-smaller">Gap</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -124,8 +125,10 @@
                             <td class="text-normal font-normal px-small">{{$scan->site->name}}</td>
                             <td class="text-normal font-normal p-small">{{$scan->longitude ?? '-'}}</td>
                             <td class="text-normal font-normal px-small">{{$scan->longitude ?? '-'}}</td>
-                            <td class="text-normal font-normal px-small">{{$scan->distance}} km</td>
+                            <td class="text-normal font-normal">{{$scan->distance}} km</td>
                             <td class="text-normal font-normal px-small">{{$scan->proximity}}</td>
+                            <td class="text-normal font-normal px-small">{{$scan->round}}</td>
+                            <td class="text-normal font-normal ">{{secondsToHoursMinutes($scan->gap_duration)}}</td>
                             {{--                            <td class="text-normal font-normal px-small">00h00</td>--}}
                         </tr>
                     @empty

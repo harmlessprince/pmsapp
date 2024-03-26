@@ -3,6 +3,4 @@
 @section('page', 'Attendance Analytics')
 @section('content')
 
-
-
 @endsection

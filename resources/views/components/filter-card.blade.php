@@ -1,6 +1,6 @@
 <div class="w-full z-0">
 
-    <div class="flex flex-col"> 
+    <div class="flex flex-col">
         <div class="rounded-xl border border-gray-200 bg-background_color p-6 shadow-lg">
             <form action="{{$actionUrl}}" id="{{$formId}}">
                 @if($canSearch)
@@ -41,7 +41,7 @@
                 </div>
 
                 <div class="mt-3  w-full">
-                    <div class=" w-full flex justify-between items-center px-5 py-3">
+                    <div class="w-full flex justify-between items-center py-3 ">
                         @if($canExport)
                             <div>
                                 <label class="inline-flex items-center me-5 cursor-pointer">

@@ -52,7 +52,7 @@ class DashboardController extends Controller
     {
         Gate::allowIf(fn (User $user) => $user->isCompanyOwner());
         $countOfGuards = $this->userRepository->modelQuery()->whereHas('roles', function ($query) {
-            $query->where('name', RoleEnum::SECURITY->value);
+            $query->where('name', RoleEnum::PERSONNEL->value);
         })->count();
         $countOfSites = $this->siteRepository->modelQuery()->count();
         $countOfTags = $this->tagRepository->modelQuery()->count();

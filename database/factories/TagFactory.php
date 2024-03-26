@@ -21,7 +21,6 @@ class TagFactory extends Factory
 
         return [
             "name" =>  $tag_name,
-            "code" => Str::slug($tag_name, '_'),
             "latitude" => $this->faker->latitude(),
             "longitude" => $this->faker->longitude(),
             "comment" => $this->faker->sentence

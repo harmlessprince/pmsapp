@@ -55,7 +55,7 @@ class PopulateRolesPermissionCommand extends Command
                 'status' => true,
             ],
             [
-                "name" => RoleEnum::SECURITY->value,
+                "name" => RoleEnum::PERSONNEL->value,
                 'status' => false,
             ]
         ];

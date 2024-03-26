@@ -25,6 +25,8 @@ return new class extends Migration
             $table->double('distance',10, 6)->nullable();
             $table->string('proximity')->nullable();
             $table->string("image")->nullable();
+            $table->integer('check_in_to_checkout_duration')->nullable()->default(0);
+            $table->text('comment')->nullable();
             $table->timestamps();
         });
     }
