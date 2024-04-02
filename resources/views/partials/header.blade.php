@@ -28,7 +28,7 @@
             <img src="{{asset('assets/images/chevron.png')}}" alt="dashboard" class="w-[12px] h-[6px] mr-2"/>
             <span class="text-sm">{{strtoupper(str_replace('_', ' ', auth()->user()->roles[0]->name))}}</span>
         </div>
-        <form id="frm-logout" action="{{ route('logout') }}" method="POST" style="display: none;">
+        <form id="frm-logout" action="{{ route('logout') }}" style="display: none;">
             {{ csrf_field() }}
         </form>
         <div id="profileList"
