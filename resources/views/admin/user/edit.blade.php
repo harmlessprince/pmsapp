@@ -54,7 +54,7 @@
                     <option>Select Site</option>
                     @foreach($sites as $site)
                         <option
-                            value="{{$site->id}}" {{$user->site->id ==  $site->id ? 'selected' : ''}}>{{$site->name}}</option>
+                            value="{{$site->id}}" {{optional($user->site)->id ==  $site->id ? 'selected' : ''}}>{{$site->name}}</option>
                     @endforeach
                 </x-select-input>
                 <x-input-error :messages="$errors->get('site_id')" class="mt-2"/>

@@ -72,6 +72,8 @@ class UserController extends Controller
             "last_name" => $request->input('last_name'),
             'address' => $request->input('address'),
             'state_id' => $request->input('state_id'),
+            'company_id' => $request->input('company_id'),
+            'site_id' => $request->input('site_id'),
             'phone_number' => $request->input('phone_number'),
             'shift_start_time' => $request->input('shift_start_time'),
             'shift_end_time' => $request->input('shift_end_time'),
@@ -86,8 +88,6 @@ class UserController extends Controller
             $response = FileUploadService::uploadToS3($request->file('profile_image'), 'profile_images');
             $photo = $response->path;
         }
-        $createdUser->company_id = $user->company_id;
-        $createdUser->site_id = $user->site_id;
         $createdUser->profile_image = $photo;
         $createdUser->save();
         $this->userService->associateUserToRole($createdUser, RoleEnum::PERSONNEL->value);
