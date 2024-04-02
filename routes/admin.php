@@ -17,7 +17,7 @@ use App\Http\Controllers\Admin\AdminController;
 use Illuminate\Support\Facades\Route;
 
 
-Route::name('admin.')->middleware(['auth', 'administrator'])->group(function (){
+Route::name('admin.')->middleware(['auth', 'administrator', 'is_banned'])->group(function (){
     Route::get('dashboard', [DashboardController::class, 'admin'])->name('dashboard');
     // Route::get('/users', [UserController::class, 'create']);
     // Route::get('states', [StateController::class, 'index']);

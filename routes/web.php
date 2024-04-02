@@ -38,7 +38,7 @@ Route::middleware(['auth'])->name('common.')->group(function (){
 });
 
 
-Route::prefix('company')->middleware(['auth', 'company_owner'])->name('company.')->group(function (){
+Route::prefix('company')->middleware(['auth', 'company_owner', 'is_banned'])->name('company.')->group(function (){
     Route::get('dashboard', [DashboardController::class, 'company'])->name('dashboard');
     Route::prefix('attendance')->name('attendance.')->group(function (){
         Route::get('analytics', AttendanceAnalyticsController::class)->name('analytics');

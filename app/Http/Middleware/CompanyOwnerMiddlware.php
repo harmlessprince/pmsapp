@@ -16,7 +16,7 @@ class CompanyOwnerMiddlware
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if ($request->user()->hasRole(RoleEnum::COMPANY_OWNER->value) && $request->user()->status) {
+        if ($request->user()->hasRole(RoleEnum::COMPANY_OWNER->value)) {
             return $next($request);
         }
         return redirect(route('login'));

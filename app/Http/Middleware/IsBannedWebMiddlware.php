@@ -2,12 +2,12 @@
 
 namespace App\Http\Middleware;
 
-use App\Enums\RoleEnum;
 use Closure;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
 
-class AdminMiddleware
+class IsBannedWebMiddlware
 {
     /**
      * Handle an incoming request.
@@ -16,9 +16,10 @@ class AdminMiddleware
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if ($request->user()->hasRole(RoleEnum::SUPER_ADMIN->value) || $request->user()->hasRole(RoleEnum::ADMIN->value)) {
+        if ($request->user()->status) {
             return $next($request);
         }
+        Auth::guard('web')->logout();
         return redirect(route('login'));
     }
 }

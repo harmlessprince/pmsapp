@@ -4,6 +4,7 @@ namespace App\Http;
 
 use App\Http\Middleware\AdminMiddleware;
 use App\Http\Middleware\CompanyOwnerMiddlware;
+use App\Http\Middleware\IsBannedWebMiddlware;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
 class Kernel extends HttpKernel
@@ -68,5 +69,6 @@ class Kernel extends HttpKernel
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'company_owner' => CompanyOwnerMiddlware::class,
         'administrator' => AdminMiddleware::class,
+        'is_banned' => IsBannedWebMiddlware::class,
     ];
 }
