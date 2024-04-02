@@ -247,9 +247,10 @@
 </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>
 <script
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBS0Lms_Kaid9CABvFdysxOxH-jiJJTqq0&libraries=places,geometry&callback=initAutocomplete"
+    src="https://maps.googleapis.com/maps/api/js?key={{ env('GOOGLE_MAP_KEY') }}&libraries=places,geometry&callback=initAutocomplete"
     defer></script>
 <script defer>
+    console.log(window.PLACES_API_KEY)
     const searchLocationElm = document.getElementById("location");
     const longitudeElm = document.getElementById("longitude")
     const latitudeElm = document.getElementById("latitude")
