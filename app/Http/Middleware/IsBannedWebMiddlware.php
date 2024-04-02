@@ -20,6 +20,6 @@ class IsBannedWebMiddlware
             return $next($request);
         }
         Auth::guard('web')->logout();
-        return redirect(route('login'))->with('email', 'Profile deactivated, please contact admin');
+        return redirect(route('login'))->with('banned', 'Profile deactivated, please contact admin');
     }
 }
