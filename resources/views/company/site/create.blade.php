@@ -112,18 +112,18 @@
         <div class="w-full mb-2">
             <label class="font-big text-normal text-natural">Search Location</label>
             <x-input-label for="location" :value="__('Search Location')"/>
-            <x-text-input id="location" class="block mt-1 w-full" type="text" name="location"/>
+            <x-text-input id="location" class="block mt-1 w-full" type="text" name="location" />
             <x-input-error :messages="$errors->get('location')" class="mt-2"/>
         </div>
         <div class="flex flex-row justify-between mb-2 max-lg:flex-col">
             <div class="w-[48%] max-lg:w-full max-lg:mb-2">
                 <x-input-label for="longitude" :value="__('Longitude')"/>
-                <x-text-input id="longitude" class="block mt-1 w-full" type="number" name="longitude"/>
+                <x-text-input id="longitude" class="block mt-1 w-full" type="number" name="longitude" readonly/>
                 <x-input-error :messages="$errors->get('longitude')" class="mt-2"/>
             </div>
             <div class="w-[48%] max-lg:w-full">
                 <x-input-label for="latitude" :value="__('Latitude')"/>
-                <x-text-input id="latitude" class="block mt-1 w-full" type="number" name="latitude"/>
+                <x-text-input id="latitude" class="block mt-1 w-full" type="number" name="latitude" readonly/>
                 <x-input-error :messages="$errors->get('latitude')" class="mt-2"/>
             </div>
         </div>

@@ -246,6 +246,57 @@
 
 </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>
+<script
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBS0Lms_Kaid9CABvFdysxOxH-jiJJTqq0&libraries=places,geometry&callback=initAutocomplete"
+    defer></script>
+<script defer>
+    const searchLocationElm = document.getElementById("location");
+    const longitudeElm = document.getElementById("longitude")
+    const latitudeElm = document.getElementById("latitude")
+    let autocompleteSearchLocation = null;
+    const searchLocation = {
+        id: "",
+        name: "",
+        address: "",
+        latitude: 0,
+        longitude: 0,
+    };
+
+    function initAutocomplete() {
+        const options = {
+            componentRestrictions: {
+                country: "NG"
+            }
+        }
+        if (searchLocationElm) {
+            autocompleteSearchLocation = new google.maps.places.Autocomplete(searchLocationElm, options);
+            autocompleteSearchLocation.addListener("place_changed", onSearchLocationAddressChange)
+        }
+
+    }
+
+    function onSearchLocationAddressChange() {
+        const place = autocompleteSearchLocation.getPlace();
+        searchLocation.address = place.formatted_address;
+        searchLocation.latitude = place.geometry.location.lat();
+        searchLocation.longitude = place.geometry.location.lng();
+        searchLocation.name = place.name;
+        searchLocation.id = place.place_id;
+        const setSearchLocationAddressEvent = new CustomEvent('set-search-location-address-event', {
+            detail: searchLocation.address
+        });
+        window.dispatchEvent(setSearchLocationAddressEvent);
+        if (longitudeElm && latitudeElm) {
+            longitudeElm.value = searchLocation.longitude
+            latitudeElm.value = searchLocation.latitude
+        }
+
+    }
+
+    document.addEventListener("DOMContentLoaded", function (event) {
+        initAutocomplete()
+    });
+</script>
 @stack('scripts')
 
 </body>

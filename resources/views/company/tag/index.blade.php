@@ -108,8 +108,12 @@
 
 
 @push('scripts')
+    <script
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBS0Lms_Kaid9CABvFdysxOxH-jiJJTqq0&libraries=places,geometry&callback=initAutocomplete"
+        defer></script>
     <script>
         const filterDropdown = document.querySelector("#filter");
+
         const toggleFilter = () => {
             filterDropdown.classList.toggle("hidden")
         }

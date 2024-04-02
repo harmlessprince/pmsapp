@@ -139,13 +139,13 @@
             <div class="w-[48%] max-lg:w-full max-lg:mb-2">
                 <x-input-label for="longitude" :value="'longitude'"/>
                 <x-text-input id="longitude" class="block mt-1 w-full" type="number" name="longitude"
-                              :value="$site->longitude"/>
+                              :value="$site->longitude" readonly/>
                 <x-input-error :messages="$errors->get('longitude')" class="mt-2"/>
             </div>
             <div class="w-[48%] max-lg:w-full">
                 <x-input-label for="latitude" :value="__('latitude')"/>
                 <x-text-input id="latitude" class="block mt-1 w-full" type="number" name="latitude"
-                              :value="$site->latitude"/>
+                              :value="$site->latitude" readonly/>
                 <x-input-error :messages="$errors->get('latitude')" class="mt-2"/>
             </div>
         </div>

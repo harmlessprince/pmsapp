@@ -75,12 +75,12 @@
         <div class="grid gap-6 mb-6 md:grid-cols-2">
             <div class="flex flex-col">
                 <x-input-label for="longitude" :value="__('Longitude')"/>
-                <x-text-input id="longitude" class="block mt-1 w-full" type="number" name="longitude"/>
+                <x-text-input id="longitude" class="block mt-1 w-full" type="number" name="longitude" readonly/>
                 <x-input-error :messages="$errors->get('longitude')" class="mt-2"/>
             </div>
             <div class="flex flex-col">
                 <x-input-label for="latitude" :value="__('Latitude')"/>
-                <x-text-input id="latitude" class="block mt-1 w-full" type="number" name="latitude"/>
+                <x-text-input id="latitude" class="block mt-1 w-full" type="number" name="latitude" readonly/>
                 <x-input-error :messages="$errors->get('latitude')" class="mt-2"/>
             </div>
         </div>
