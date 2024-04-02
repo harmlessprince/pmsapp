@@ -250,10 +250,11 @@
     src="https://maps.googleapis.com/maps/api/js?key={{ env('GOOGLE_MAP_KEY') }}&libraries=places,geometry&callback=initAutocomplete"
     defer></script>
 <script defer>
-    console.log(window.PLACES_API_KEY)
+
     const searchLocationElm = document.getElementById("location");
     const longitudeElm = document.getElementById("longitude")
     const latitudeElm = document.getElementById("latitude")
+    const searchLocationMapElm = document.getElementById('searchLocationMap')
     let autocompleteSearchLocation = null;
     const searchLocation = {
         id: "",
@@ -273,6 +274,23 @@
             autocompleteSearchLocation = new google.maps.places.Autocomplete(searchLocationElm, options);
             autocompleteSearchLocation.addListener("place_changed", onSearchLocationAddressChange)
         }
+        if (searchLocationMapElm) {
+            var initialLatLng = {lat: parseFloat(latitudeElm?.value ?? 0), lng: parseFloat(longitudeElm?.value ?? 0)};
+            console.log(initialLatLng)
+            // Create a map object and specify the DOM element for display.
+            map = new google.maps.Map(searchLocationMapElm, {
+                center: initialLatLng,
+                zoom: 18
+            });
+
+            // Create an empty marker
+            marker = new google.maps.Marker({
+                map: map,
+                position: initialLatLng,
+                title: 'Your Location'
+            });
+        }
+
 
     }
 
@@ -290,6 +308,12 @@
         if (longitudeElm && latitudeElm) {
             longitudeElm.value = searchLocation.longitude
             latitudeElm.value = searchLocation.latitude
+            if (searchLocationMapElm) {
+                var newLatLng = new google.maps.LatLng(searchLocation.latitude, searchLocation.longitude);
+                marker.setPosition(newLatLng);
+                map.setCenter(newLatLng);
+            }
+
         }
 
     }

@@ -127,6 +127,10 @@
                 <x-input-error :messages="$errors->get('latitude')" class="mt-2"/>
             </div>
         </div>
+        <div class="w-full mb-2">
+            <div id="searchLocationMap" style="height: 400px; width: 100%;"></div>
+        </div>
+
 
 
         <button class="mt-[1%] w-[60px] h-[40px] bg-primary_color rounded-lg text-normal text-natural font-big"

@@ -149,6 +149,9 @@
                 <x-input-error :messages="$errors->get('latitude')" class="mt-2"/>
             </div>
         </div>
+        <div class="w-full mb-2">
+            <div id="searchLocationMap" style="height: 400px; width: 100%;"></div>
+        </div>
         <div class="w-full  mb-2">
             <x-input-label for="photo" :value="__('Photo')"/>
             <x-text-input id="photo" class="block mt-1 w-full" type="file" name="photo" onchange="readImageURL(this);"
