@@ -43,7 +43,7 @@ class UserController extends Controller
         ];
         $companies = $this->companyRepository->all();
         $userQuery = $this->userRepository->modelQuery()->whereHas('roles', function ($query) {
-            $query->where('name', RoleEnum::SECURITY->value);
+            $query->where('name', RoleEnum::PERSONNEL->value);
         });
         $usersCount = $userQuery->count();
         $userQuery = constructPipes($userQuery, $pipes);
@@ -90,7 +90,7 @@ class UserController extends Controller
         $createdUser->site_id = $user->site_id;
         $createdUser->profile_image = $photo;
         $createdUser->save();
-        $this->userService->associateUserToRole($createdUser, RoleEnum::SECURITY->value);
+        $this->userService->associateUserToRole($createdUser, RoleEnum::PERSONNEL->value);
         return redirect(route('admin.users.index'))->with('success', 'User created successfully');
     }
 

@@ -38,12 +38,12 @@ class UserController extends Controller
             StateIdFilter::class,
         ];
         $countOfGuards = $this->userRepository->modelQuery()->whereHas('roles', function ($query) {
-            $query->where('name', RoleEnum::SECURITY->value);
+            $query->where('name', RoleEnum::PERSONNEL->value);
         })->count();
         $sites = $this->siteRepository->modelQuery()->get();
         $states = $this->stateRepository->fetchByCountryID();
         $userQuery = $this->userRepository->modelQuery()->whereHas('roles', function ($query) {
-            $query->where('name', RoleEnum::SECURITY->value);
+            $query->where('name', RoleEnum::PERSONNEL->value);
         })->search();
         $userQuery = constructPipes($userQuery, $pipes);
         $users = $userQuery->with(['tenant', 'site', 'state', 'state.country'])->paginate(request('per_page', 15));
