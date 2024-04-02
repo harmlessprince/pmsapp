@@ -12,7 +12,7 @@
         <div class="text-white text-xl text-center font-bold">Log in to your account</div>
         <div class="text-basic text-sm font-normal text-center mb-5%">Welcome back! Please enter your details.</div>
         @if ($message = Session::get('banned'))
-            <div class="text-red-400">
+            <div class="text-red-400 ms-3 text-sm font-medium">
                 {{$message}}
             </div>
         @endif
