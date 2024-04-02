@@ -47,7 +47,7 @@ class UserController extends Controller
         });
         $usersCount = $userQuery->count();
         $userQuery = constructPipes($userQuery, $pipes);
-        $users = $userQuery->search()->with(['tenant', 'site', 'company:id,name'])->paginate(request('per_page', 15));
+        $users = $userQuery->latest()->search()->with(['tenant', 'site', 'company:id,name'])->paginate(request('per_page', 15));
         return view('admin.user.index', compact('users', 'companies', 'usersCount'));
     }
 

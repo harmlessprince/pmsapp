@@ -51,7 +51,7 @@
                 <option value="">Select Company</option>
                 @foreach($companies as $company)
                     <option
-                        value="{{$company->id}}" {{ request()->query('company_id') == $company->id ? "selected" : '' }}>{{$company->name}}</option>
+                        value="{{$company->id}}" {{ old('company_id') == $company->id ? "selected" : '' }}>{{$company->name}}</option>
                 @endforeach
             </x-select-input>
             <x-input-error :messages="$errors->get('company_id')" class="mt-2"/>
@@ -77,7 +77,7 @@
                         placeholder-color font-normal text-normal
                         focus:outline-none focus:border-primary_color focus:ring-1 focus:ring-background_color
                         focus:invalid:error focus:invalid:error shift_start_time_timepicker"
-                placeholder="" name="shift_start_time" value=""/>
+                placeholder="" name="shift_start_time" value="{{old("shift_start_time")}}"/>
             <x-input-error :messages="$errors->get('shift_start_time')" class="mt-2"/>
         </div>
         <div class="w-[49%] max-lg:w-full">
@@ -88,7 +88,7 @@
                         placeholder-color font-normal text-normal
                         focus:outline-none focus:border-primary_color focus:ring-1 focus:ring-background_color
                         focus:invalid:error focus:invalid:error shift_end_time_timepicker"
-                placeholder="" name="shift_end_time" value=""/>
+                placeholder="" name="shift_end_time" value="{{old("shift_end_time")}}"/>
             <x-input-error :messages="$errors->get('shift_end_time')" class="mt-2"/>
         </div>
     </div>
@@ -97,23 +97,23 @@
         <div class="w-[49%] max-lg:w-full max-lg:mb-2">
             <label class="font-big text-normal text-natural">Normal rate per hour</label>
             <input
-                type="text"
+                type="number"
                 class="w-full border border-natural bg-transparent h-11 px-2 py-1 rounded-lg text-natural
                         placeholder-color font-normal text-normal
                         focus:outline-none focus:border-primary_color focus:ring-1 focus:ring-background_color
                         focus:invalid:error focus:invalid:error
                         "
-                placeholder="" name="normal_rate_per_hour" value=""/>
+                placeholder="" name="normal_rate_per_hour" value="{{old("normal_rate_per_hour")}}"/>
             <x-input-error :messages="$errors->get('normal_rate_per_hour')" class="mt-2"/>
         </div>
         <div class="w-[49%] max-lg:w-full">
             <label class="font-big text-normal text-natural">Sunday rate per hour</label>
             <input
-                type="text"
+                type="number"
                 class="w-full border border-natural bg-transparent h-[44px] px-2 py-1 rounded-lg text-natural
                         placeholder-color font-normal text-normal
                         focus:outline-none focus:border-primary_color focus:ring-1 focus:ring-background_color"
-                placeholder="" name="sunday_rate_per_hour" value=""/>
+                placeholder="" name="sunday_rate_per_hour" value="{{old("sunday_rate_per_hour")}}"/>
             <x-input-error :messages="$errors->get('sunday_rate_per_hour')" class="mt-2"/>
         </div>
     </div>
@@ -128,19 +128,19 @@
                         focus:outline-none focus:border-primary_color focus:ring-1 focus:ring-background_color
                         focus:invalid:error focus:invalid:error
                         "
-                placeholder="" name="holiday_rate_per_hour" value=""/>
+                placeholder="" name="holiday_rate_per_hour" value="{{old("holiday_rate_per_hour")}}"/>
             <x-input-error :messages="$errors->get('holiday_rate_per_hour')" class="mt-2"/>
         </div>
         <div class="w-[49%] max-lg:w-full">
             <label class="font-big text-normal text-natural">Number of night shift</label>
             <input
-                type="text"
+                type="number"
                 class="w-full border border-natural bg-transparent h-[44px] px-2 py-1 rounded-lg text-natural
                         placeholder-color font-normal text-normal
                         focus:outline-none focus:border-primary_color focus:ring-1 focus:ring-background_color
                         focus:invalid:error focus:invalid:error
                         "
-                placeholder="" name="number_of_night_shift" value=""/>
+                placeholder="" name="number_of_night_shift" value="{{old("number_of_night_shift")}}"/>
             <x-input-error :messages="$errors->get('number_of_night_shift')" class="mt-2"/>
         </div>
     </div>
@@ -148,13 +148,13 @@
     <div class="w-full  mb-2">
         <label class="font-big text-normal text-natural">Night Shift allowance</label>
         <input
-            type="text"
+            type="number"
             class="w-full border border-natural bg-transparent h-[44px] px-2 py-1 rounded-lg text-natural
                     placeholder-color font-normal text-normal
                     focus:outline-none focus:border-primary_color focus:ring-1 focus:ring-background_color
                     focus:invalid:error focus:invalid:error
                     "
-            placeholder="" name="night_shift_allowance" value=""/>
+            placeholder="" name="night_shift_allowance" value="{{old("night_shift_allowance")}}"/>
         <x-input-error :messages="$errors->get('night_shift_allowance')" class="mt-2"/>
     </div>
 
