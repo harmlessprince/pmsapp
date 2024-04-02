@@ -55,7 +55,7 @@
                     <option>Select Site</option>
                     @foreach($sites as $site)
                         <option
-                            value="{{$site->id}}" {{$user->site->id ==  $site->id ? 'selected' : ''}}>{{$site->name}}</option>
+                            value="{{$site->id}}" {{optional($user->site)->id ==  $site->id ? 'selected' : ''}}>{{$site->name}}</option>
                     @endforeach
                 </select>
                 <x-input-error :messages="$errors->get('site_id')" class="mt-2"/>
@@ -69,7 +69,7 @@
                     <option>Select State</option>
                     @foreach($states as $state)
                         <option
-                            value="{{$state->id}}" {{$user->state->id ==  $state->id ? 'selected' : ''}}>{{$state->name}}</option>
+                            value="{{$state->id}}" {{optional($user->state)->id ==  $state->id ? 'selected' : ''}}>{{$state->name}}</option>
                     @endforeach
                 </select>
                 <x-input-error :messages="$errors->get('state_id')" class="mt-2"/>
