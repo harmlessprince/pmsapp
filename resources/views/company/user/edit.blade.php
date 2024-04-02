@@ -80,6 +80,7 @@
         <div class="flex flex-row justify-between mb-2 max-lg:flex-col">
             <div class="w-[48%] max-lg:w-full max-lg:mb-2">
                 <label class="font-big text-normal text-natural">Phone number</label>
+
                 <input
                     type="text"
                     class="w-full border border-natural bg-transparent h-11 px-2 py-1 rounded-lg text-natural
@@ -91,40 +92,21 @@
                 <x-input-error :messages="$errors->get('phone_number')" class="mt-2"/>
             </div>
             <div class="w-[48%] max-lg:w-full">
-                <label class="font-big text-normal text-natural">Address</label>
-                <input
-                    type="text"
-                    class="w-full border border-natural bg-transparent h-[44px] px-2 py-1 rounded-lg text-natural
-                            placeholder-color font-normal text-normal
-                            focus:outline-none focus:border-primary_color focus:ring-1 focus:ring-background_color
-                            focus:invalid:error focus:invalid:error
-                            "
-                    placeholder="" name="address" value="{{$user->address}}"/>
+                <x-input-label for="address" :value="__('Address')" class="text-white"/>
+                <x-text-input name="address" :value="$user->address"/>
                 <x-input-error :messages="$errors->get('address')" class="mt-2"/>
             </div>
         </div>
 
         <div class="flex flex-row justify-between mb-2 max-lg:flex-col">
             <div class="w-[48%] max-lg:w-full max-lg:mb-2">
-                <label class="font-big text-normal text-natural">Shift start time</label>
-                <input
-                    type="text"
-                    class="w-full border border-natural bg-transparent h-11 px-2 py-1 rounded-lg text-natural
-                            placeholder-color font-normal text-normal
-                            focus:outline-none focus:border-primary_color focus:ring-1 focus:ring-background_color
-                            focus:invalid:error focus:invalid:error shift_start_time_timepicker"
-                    placeholder="" name="shift_start_time" value="{{$user->shift_start_time}}"/>
+                <x-input-label for="shift_start_time" :value="__('Shift start time')" class="text-white"/>
+                <x-text-input name="shift_start_time" :value="$user->shift_start_time ?? '00:00'" class="" id="time" type="time"/>
                 <x-input-error :messages="$errors->get('shift_start_time')" class="mt-2"/>
             </div>
             <div class="w-[48%] max-lg:w-full">
-                <label class="font-big text-normal text-natural">Shift end time</label>
-                <input
-                    type="text"
-                    class="w-full border border-natural bg-transparent h-[44px] px-2 py-1 rounded-lg text-natural
-                            placeholder-color font-normal text-normal
-                            focus:outline-none focus:border-primary_color focus:ring-1 focus:ring-background_color
-                            focus:invalid:error focus:invalid:error shift_end_time_timepicker"
-                    placeholder="" name="shift_end_time" value="{{$user->shift_end_time}}"/>
+                <x-input-label for="shift_end_time" :value="__('Shift end time')" class="text-white"/>
+                <x-text-input name="shift_end_time" :value="$user->shift_end_time ?? '23:59'" class="" id="time" type="time"/>
                 <x-input-error :messages="$errors->get('shift_end_time')" class="mt-2"/>
             </div>
         </div>
@@ -215,13 +197,12 @@
 @push('scripts')
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"
             integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
-    {{--    https://www.jqueryscript.net/demo/Customizable-jQuery-Timepicker-Plugin-timepicker/--}}
     <script src="{{asset('assets/timepicker/jquery.timepicker.min.js')}}"></script>
     <script>
         $(document).ready(function () {
 
             $('.shift_start_time_timepicker').timepicker({
-                listWidth: 1
+                listWidth: 10
             });
             $('.shift_end_time_timepicker').timepicker({
                 listWidth: 1

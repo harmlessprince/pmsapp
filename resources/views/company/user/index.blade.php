@@ -26,8 +26,16 @@
             <!-- add site -->
             <div class="font-big text-big text-natural mb-2 flex flex-row justify-between">
                 <div>Added Users</div>
+                <div
+                    class="rounded-lg border border-primary_color flex flex-row items-center px-[16px] py-[10px] cursor-pointer">
+                    <img src="{{asset('assets/images/plus.png')}}" class="w-[11px] h-[11px]" alt="plus"/>
+                    <a href="{{route('company.users.create')}}">
+                        <span class="text-primary_color font-big text-normal ml-2"> Add User</span>
+                    </a>
+                </div>
             </div>
-            <x-filter-card :actionUrl="route('company.users.index')" :canSearch="true" :searchPlaceholder="'Search by name or phone number'">
+            <x-filter-card :actionUrl="route('company.users.index')" :canSearch="true"
+                           :searchPlaceholder="'Search by name or phone number'">
                 <div class="flex flex-col">
                     <x-input-label for="site_id" :value="__('Site')" class="text-white"/>
                     <x-select-input id="site_id" class="block w-full" name="site_id">

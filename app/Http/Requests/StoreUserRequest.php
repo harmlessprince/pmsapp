@@ -30,7 +30,7 @@ class StoreUserRequest extends FormRequest
             'address' => ['sometimes', 'string', 'max:200'],
             'site_id' => ['sometimes', 'integer', 'exists:sites,id'],
             'state_id' => ['sometimes', 'integer', 'exists:states,id'],
-            'phone_number' => ['sometimes', 'string', 'max:20'],
+            'phone_number' => ['sometimes', 'string', 'max:20', "unique:users,phone_number"],
             'shift_start_time' => ['nullable', 'string', 'max:8'],
             'shift_end_time' => ['nullable', 'string', 'max:8'],
             'normal_rate_per_hour' => ['nullable', 'numeric'],
