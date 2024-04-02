@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use Carbon\Carbon;
 use Illuminate\Foundation\Http\FormRequest;
 
 class StoreUserRequest extends FormRequest
@@ -21,15 +22,17 @@ class StoreUserRequest extends FormRequest
      */
     public function rules(): array
     {
-        $data  =  [
+//        dd(request()->all());
+//        dd(request()->all(), Carbon::now()->format("H:ia"));
+        $data = [
             'first_name' => ['sometimes', 'string', 'max:200'],
             'last_name' => ['sometimes', 'string', 'max:200'],
             'address' => ['sometimes', 'string', 'max:200'],
             'site_id' => ['sometimes', 'integer', 'exists:sites,id'],
             'state_id' => ['sometimes', 'integer', 'exists:states,id'],
             'phone_number' => ['sometimes', 'string', 'max:20'],
-            'shift_start_time' => ['nullable', 'string', 'max:10'],
-            'shift_end_time' => ['nullable', 'string', 'max:10'],
+            'shift_start_time' => ['nullable', 'date_format:H:ia', 'max:8'],
+            'shift_end_time' => ['nullable', 'date_format:H:ia', 'max:8'],
             'normal_rate_per_hour' => ['nullable', 'numeric'],
             'sunday_rate_per_hour' => ['nullable', 'numeric'],
             'holiday_rate_per_hour' => ['nullable', 'numeric'],
@@ -38,7 +41,7 @@ class StoreUserRequest extends FormRequest
             'profile_image' => ['nullable', 'image'],
         ];
 
-        if (request()->user()->isCompanyOwner()){
+        if (request()->user()->isCompanyOwner()) {
             return $data;
         }
         return [
