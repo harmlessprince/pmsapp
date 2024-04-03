@@ -64,16 +64,16 @@
             <!-- table 2 section -->
             <section class="border border-table rounded-lg w-[100%] mt-[2%] bg-background_color">
                 <div class="overflow-x-auto">
-                    <table class="table-auto w-[100%] max-lg:w-[1000px]">
+                    <table class="table-fixed w-[100%] max-lg:w-[1000px]">
                         <thead class="">
                         <tr class="text-left text-small text-natural font-big">
-                            <th class=" px-small py-[1%]">Country</th>
-                            <th class=" px-small py-[1%]">State</th>
-                            <th class="px-small py-[1%]">Site name</th>
-                            <th class="px-small py-[1%]">Email</th>
-                            <th class="px-small py-[1%]">Photo</th>
-                            <th class="px-small py-[1%]">Status</th>
-                            <th class="px-small py-[1%]">Action</th>
+                            <th class=" px-small py-[1%] w-[10%]">Country</th>
+                            <th class=" px-small py-[1%] w-[15%]">State</th>
+                            <th class="px-small py-[1%] w-[15%]">Site name</th>
+                            <th class="px-small py-[1%] w-[20%]">Email</th>
+                            <th class="px-small py-[1%] w-[12%]">Photo</th>
+                            <th class="px-small py-[1%] w-[10%]">Status</th>
+                            <th class="px-small py-[1%] w-[8%] text-right">Action</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -107,7 +107,7 @@
 
                                 </td>
                                 <td class="px-small">
-                                    <div class="flex flex-row justify-center">
+                                    <div class="flex flex-row justify-end">
                                         <a href="{{route('company.sites.edit', ['site' => $site])}}">
                                             <img src="{{asset('assets/images/edit.png')}}" alt="edit"
                                                  class="w-[16px] h-[16px] ml-3 cursor-pointer"/>

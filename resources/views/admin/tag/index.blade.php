@@ -68,12 +68,12 @@
                     <table class="table-fixed w-[100%] max-lg:w-[1000px]">
                         <thead class="">
                         <tr class="text-left text-small text-natural font-big">
-                            <th class="px-smaller py-[1%]">Tag</th>
-                            <th class="px-smaller py-[1%]">Code</th>
+                            <th class="px-smaller py-[1%] w-[10%]">Tag</th>
+                            <th class="px-smaller py-[1%] w-[17%]">Code</th>
                             <th class=" px-smaller py-[1%] w-[15%]">Company</th>
-                            <th class="px-smaller py-[1%] w-[15%]">Site</th>
-                            <th class="px-smaller py-[1%]">Type</th>
-                            <th class="px-smaller py-[1%] w-[30%]">Comments</th>
+                            <th class="px-smaller py-[1%] w-[13%]">Site</th>
+                            <th class="px-smaller py-[1%] w-[10%]">Type</th>
+                            <th class="px-smaller py-[1%] w-[25%]">Comments</th>
                             <th class="px-smaller py-[1%] w-[5%] text-right">Action</th>
                         </tr>
                         </thead>
