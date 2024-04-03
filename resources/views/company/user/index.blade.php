@@ -63,16 +63,16 @@
             <!-- table 2 section -->
             <section class="border border-table rounded-lg w-[100%] mt-[2%] bg-background_color">
                 <div class="overflow-x-auto">
-                    <table class="table-auto w-[100%] max-lg:w-[1000px]">
+                    <table class="table-fixed w-[100%] max-lg:w-[1000px]">
                         <thead class="">
                         <tr class="text-left text-small text-natural font-big">
-                            <th class=" px-small py-[1%]">Name</th>
-                            <th class="px-small py-[1%]">Phone number</th>
-                            <th class="px-small py-[1%]">Country</th>
-                            <th class="px-small py-[1%]">State</th>
-                            <th class="px-small py-[1%]">Postal Address</th>
-                            <th class="px-small py-[1%]">Site</th>
-                            <th class="px-small py-[1%]">Action</th>
+                            <th class=" px-small py-[1%] w-[20%]">Name</th>
+                            <th class="px-small py-[1%] w-[15%]">Phone number</th>
+                            <th class="px-small py-[1%] w-[10%]">Country</th>
+                            <th class="px-small py-[1%] w-[10%]">State</th>
+                            <th class="px-small py-[1%] w-[20%]">Postal Address</th>
+                            <th class="px-small py-[1%] w-[12%]">Site</th>
+                            <th class="text-right px-small py-[1%] w-[8%]">Action</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -100,7 +100,7 @@
                                 <td class="px-small">{{$user->site->name ?? 'N/A'}}</td>
 
                                 <td class="px-small">
-                                    <div class="flex flex-row justify-center">
+                                    <div class="flex flex-row justify-end">
                                         <a href="{{route('company.users.edit', ['user' => $user->id])}}">
                                             <img src="{{asset('assets/images/edit.png')}}" alt="edit"
                                                  class="w-[16px] h-[16px] ml-3 cursor-pointer"/>

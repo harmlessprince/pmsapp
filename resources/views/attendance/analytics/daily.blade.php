@@ -80,15 +80,15 @@
         </x-filter-card>
         <section class="border border-table rounded-lg w-[100%] mt-[2%] bg-background_color">
             <div class="overflow-x-auto">
-                <table class="table-auto w-[100%] max-lg:w-[1000px]">
+                <table class="table-fixed w-[100%] max-lg:w-[1000px]">
                     <thead class="">
                     <tr class="text-left text-small text-natural font-big">
-                        <th class="px-small py-[1%]">Name</th>
-                        <th class="px-small py-[1%]">Site</th>
-                        <th class=" px-small py-[1%]">CheckedIn At</th>
-                        <th class="px-small py-[1%]">Checkout At</th>
-                        <th class="px-small py-[1%]">Hours Worked</th>
-                        <th class="px-small py-[1%]">Checked Out</th>
+                        <th class="px-small py-[1%] w-[20%]">Name</th>
+                        <th class="px-small py-[1%] w-[15%]">Site</th>
+                        <th class=" px-small py-[1%] w-[13%]">CheckedIn At</th>
+                        <th class="px-small py-[1%] w-[13%]">Checkout At</th>
+                        <th class="px-small py-[1%] w-[13%]">Hours Worked</th>
+                        <th class="px-small py-[1%] w-[13%]">Checked Out</th>
                     </tr>
                     </thead>
                     <tbody>

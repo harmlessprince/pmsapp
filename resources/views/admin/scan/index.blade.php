@@ -108,7 +108,7 @@
         <!-- table -->
         <section class="border border-table mt-[2%] rounded-lg">
             <div class="overflow-x-auto">
-                <table class="table-auto w-[100%] max-lg:w-[1000px] bg-background_color">
+                <table class="table-fixed w-[100%] max-lg:w-[1000px] bg-background_color">
                     <thead>
                     <tr class="overflow-x-auto">
                         <th class="text-left text-small text-natural font-big  px-smaller py-smaller w-[10%]">Scan

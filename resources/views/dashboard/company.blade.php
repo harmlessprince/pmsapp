@@ -42,16 +42,16 @@
     <section class="pt-basic_padding overflow-x-auto max-lg:w-[100%] max-lg:mt-[5%]">
         <div class="font-big text-big text-natural mb-2%"> Recent Scan Report</div>
         <section class="border border-table mt-[2%] rounded-lg bg-background_color overflow-x-auto">
-        <table class=" table-auto w-[100%] bg-background_color rounded-lg max-lg:w-[1000px]">
+        <table class=" table-fixed w-[100%] bg-background_color rounded-lg max-lg:w-[1000px]">
             <thead>
             <tr class="border border-x-0 border-y-0 border-table border-collapse">
-                <th class="text-left text-small text-natural font-big  px-small py-[1%]">Scan Date/Time</th>
-                <th class="text-left text-small text-natural font-big px-small py-[1%]">Tag Name</th>
-                <th class="text-left text-small text-natural font-big px-small py-[1%]">Site Name</th>
-                <th class="text-left text-small text-natural font-big px-small py-[1%]">Proximity</th>
-                <th class="text-left text-small text-natural font-big px-small py-[1%]">Distance</th>
-                <th class="text-left text-small text-natural font-big px-small py-smaller">Round</th>
-                <th class="text-left text-small text-natural font-big px-small py-smaller">Gap</th>
+                <th class="text-left text-small text-natural font-big  px-small py-[1%] w-[10%]">Scan Date/Time</th>
+                <th class="text-left text-small text-natural font-big px-small py-[1%] w-[15%]">Tag Name</th>
+                <th class="text-left text-small text-natural font-big px-small py-[1%] w-[15%]">Site Name</th>
+                <th class="text-left text-small text-natural font-big px-small py-[1%] w-[20%]">Proximity</th>
+                <th class="text-left text-small text-natural font-big px-small py-[1%] w-[10%]">Distance</th>
+                <th class="text-left text-small text-natural font-big px-small py-[1%] w-[10%]">Round</th>
+                <th class="text-left text-small text-natural font-big px-small py-[1%] w-[10%]">Gap</th>
             </tr>
             </thead>
             <tbody>
@@ -66,7 +66,7 @@
                     <td class="text-normal font-normal px-small py-smaller">{{$scan->proximity}}</td>
                     <td class="text-normal font-normal px-small py-smaller">{{$scan->distance}} KM</td>
                     <td class="text-normal font-normal px-small">{{$scan->round}}</td>
-                    <td class="text-normal font-normal ">{{secondsToHoursMinutes($scan->gap_duration)}}</td>
+                    <td class="text-normal font-normal px-small">{{secondsToHoursMinutes($scan->gap_duration)}}</td>
                 </tr>
             @empty
 
@@ -84,19 +84,19 @@
     <section class="pt-basic_padding max-lg:w-[100%] max-lg:mt-[5%]">
         <div class="font-big text-big text-natural mb-2%">Recent Attendance Report</div>
         <section class="border border-table mt-[2%] rounded-lg bg-background_color overflow-x-auto">
-            <table class="table-auto w-[100%] bg-background_color max-lg:w-[1000px]">
+            <table class="table-fixed w-[100%] bg-background_color max-lg:w-[1000px]">
                 <thead>
                 <tr class="">
-                    <th class="text-left text-small text-natural font-big  px-small py-smaller">
+                    <th class="text-left text-small text-natural font-big  px-small py-smaller w-[15%]">
                         Name
                     </th>
-                    <th class="text-left text-small text-natural font-big  px-small py-smaller">Time/Date</th>
-                    <th class="text-left text-small text-natural font-big  px-small py-smaller">Action Type</th>
+                    <th class="text-left text-small text-natural font-big  px-small py-smaller w-[10%]">Time/Date</th>
+                    <th class="text-left text-small text-natural font-big  px-small py-smaller w-[15%]">Action Type</th>
                     {{--                    <th class="text-left text-small text-natural font-big px-small py-smaller">Tags</th>--}}
-                    <th class="text-left text-small text-natural font-big px-small py-smaller">Site</th>
-                    <th class="text-left text-small text-natural font-big px-small py-smaller">Distance</th>
-                    <th class="text-left text-small text-natural font-big px-small py-smaller">Image</th>
-                    <th class="text-left text-small text-natural font-big px-small py-smaller">Proximity</th>
+                    <th class="text-left text-small text-natural font-big px-small py-smaller w-[15%]">Site</th>
+                    <th class="text-left text-small text-natural font-big px-small py-smaller w-[10%]">Distance</th>
+                    <th class="text-left text-small text-natural font-big px-small py-smaller w-[10%]">Image</th>
+                    <th class="text-left text-small text-natural font-big px-small py-smaller w-[15%]">Proximity</th>
                 </tr>
                 </thead>
                 <tbody>

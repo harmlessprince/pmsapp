@@ -105,27 +105,27 @@
                 <table class="table-auto w-[100%] max-lg:w-[1000px] bg-background_color">
                     <thead>
                     <tr class="">
-                        <th class="text-left text-small text-natural font-big  px-small py-smaller">
+                        <th class="text-left text-small text-natural font-big  px-smaller py-smaller w-[15%]">
                             Name
                         </th>
-                        <th class="text-left text-small text-natural font-big  px-smaller py-smaller">Time/Date</th>
-                        <th class="text-left text-small text-natural font-big  px-smaller py-smaller">Action Type</th>
-                        <th class="text-left text-small text-natural font-big  px-smaller py-smaller">Hours Worked</th>
-                        <th class="text-left text-small text-natural font-big px-smaller py-smaller">Site</th>
-                        <th class="text-left text-small text-natural font-big px-smaller py-smaller">Distance</th>
-                        <th class="text-left text-small text-natural font-big px-smaller py-smaller">Image</th>
-                        <th class="text-left text-small text-natural font-big px-smaller py-smaller">Proximity</th>
+                        <th class="text-left text-small text-natural font-big  px-smaller py-smaller w-[10%]">Time/Date</th>
+                        <th class="text-left text-small text-natural font-big  px-smaller py-smaller w-[15%]">Action Type</th>
+                        <th class="text-left text-small text-natural font-big  px-smaller py-smaller w-[10%]">Hours Worked</th>
+                        <th class="text-left text-small text-natural font-big px-smaller py-smaller w-[10%]">Site</th>
+                        <th class="text-left text-small text-natural font-big px-smaller py-smaller w-[9%]">Distance</th>
+                        <th class="text-left text-small text-natural font-big px-smaller py-smaller w-[10%]">Image</th>
+                        <th class="text-left text-small text-natural font-big px-smaller py-smaller w-[15%]">Proximity</th>
                     </tr>
                     </thead>
                     <tbody>
                     @forelse($attendances as $attendance)
                         <tr class="border border-table border-x-0 text-natural hover:bg-db">
-                            <td class="text-normal font-normal px-small">{{$attendance->user->first_name}} {{$attendance->user->last_name}}</td>
-                            <td class="text-normal font-normal px-small">
+                            <td class="text-normal font-normal px-smaller">{{$attendance->user->first_name}} {{$attendance->user->last_name}}</td>
+                            <td class="text-normal font-normal px-smaller">
                                 <div>{{$attendance->attendance_date->format('d/m/Y')}}</div>
                                 <div>{{Carbon\Carbon::parse($attendance->attendance_time)->format('g:i A')}}</div>
                             </td>
-                            <td class="text-normal font-normal px-small">
+                            <td class="text-normal font-normal px-smaller">
                                 @if($attendance->action_type == 'check_in')
                                     <button
                                         class="bg-checkin  px-2 py-1 me-2 rounded-full flex flex-row items-center justify-between">
@@ -142,21 +142,21 @@
                                     </button>
                                 @endif
                             </td>
-                            <td class="px-small uppercase">
+                            <td class="px-smaller uppercase">
                                 @php
                                     $interval = \Carbon\CarbonInterval::seconds($attendance->check_in_to_checkout_duration)->cascade();
                                     $output = sprintf('%sh %sm', $interval->totalHours, $interval->toArray()['minutes']);
                                 @endphp
                                 {{$output}}
                             </td>
-                            <td class="text-normal font-normal px-small">{{$attendance->site->name}}</td>
-                            <td class="text-normal font-normal px-small">{{$attendance->distance}} KM</td>
-                            <td class="text-normal font-normal px-small">
+                            <td class="text-normal font-normal px-smaller">{{$attendance->site->name}}</td>
+                            <td class="text-normal font-normal px-smaller">{{$attendance->distance}} KM</td>
+                            <td class="text-normal font-normal px-smaller">
                                 <img src="{{ $attendance->user->profile_image ?? asset('assets/images/tableImg.png')}}"
                                      alt="dashboard"
                                      class=" w-[60px] h-[60px]"/>
                             </td>
-                            <td class="text-normal font-normal p-small">{{$attendance->proximity}}</td>
+                            <td class="text-normal font-normal px-smaller">{{$attendance->proximity}}</td>
                         </tr>
                     @empty
 

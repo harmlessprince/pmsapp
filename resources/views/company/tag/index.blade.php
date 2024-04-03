@@ -53,37 +53,37 @@
             <!-- table 2 section -->
             <section class="border border-table rounded-lg w-[100%] mt-[2%] bg-background_color">
                 <div class="overflow-x-auto">
-                    <table class="table-auto w-[100%] max-lg:w-[1000px]">
+                    <table class="table-fixed w-[100%] max-lg:w-[1000px]">
                         <thead class="">
                         <tr class="text-left text-small text-natural font-big">
-                            <th class=" px-small py-[1%]">Country</th>
-                            <th class="px-small py-[1%]">Site name</th>
-                            <th class="px-small py-[1%]">Tag Name</th>
-                            <th class="px-small py-[1%]">Code</th>
-                            <th class="px-small py-[1%]">Comments</th>
-                            <th class="px-small py-[1%]">Tag</th>
-                            <th class="px-small py-[1%]">Action</th>
+                            <th class=" px-smaller py-[1%] w-[10%]">Country</th>
+                            <th class="px-smaller py-[1%] w-[10%]">Site name</th>
+                            <th class="px-smaller py-[1%] w-[13%]">Tag Name</th>
+                            <th class="px-smaller py-[1%] w-[20%]">Code</th>
+                            <th class="px-smaller py-[1%] w-[20%]">Comments</th>
+                            <th class="px-smaller py-[1%] w-[10%]">Tag</th>
+                            <th class="text-right px-smaller py-[1%] w-[8%]">Action</th>
                         </tr>
                         </thead>
                         <tbody>
                         @forelse($tags as $tag)
                             <tr class="text-normal font-normal text-natural border border-table border-collapse hover:bg-db">
-                                <td class="text-natural px-small py-small">{{$tag->site->state->country->name ?? 'N/A'}}</td>
-                                <td class="px-small">
+                                <td class="text-natural px-smaller py-small">{{$tag->site->state->country->name ?? 'N/A'}}</td>
+                                <td class="px-smaller">
                                     {{$tag->site->name ?? 'N/A'}}
                                 </td>
-                                <td class="px-small">
+                                <td class="px-smaller">
                                     {{$tag->name ?? 'N/A'}}
                                 </td>
-                                <td class="px-small uppercase">
+                                <td class="px-smaller uppercase">
                                     {{$tag->code ?? 'N/A'}}
                                 </td>
-                                <td class="px-small">
+                                <td class="px-smaller">
                                     {{ \Illuminate\Support\Str::limit($tag->comment, 20)}}
                                 </td>
-                                <td class="px-small">QR</td>
-                                <td class="px-small">
-                                    <div class="flex flex-row justify-center">
+                                <td class="px-smaller">QR</td>
+                                <td class="px-smaller">
+                                    <div class="flex flex-row justify-end">
                                         <a href="{{route('company.tags.edit', ['tag' =>  $tag])}}">
                                             <img src="{{asset('assets/images/edit.png')}}" alt="edit" class="w-[16px] h-[16px] ml-3 cursor-pointer"/>
                                         </a>
