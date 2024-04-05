@@ -5,7 +5,7 @@ COPY composer.lock composer.json /var/www/
 
 # Set working directory
 WORKDIR /var/www
-
+RUN apt-get update
 RUN apt-get update && apt-get install -y \
     git \
     libpng-dev \
