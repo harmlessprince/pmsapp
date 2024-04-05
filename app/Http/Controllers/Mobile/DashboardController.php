@@ -40,7 +40,7 @@ class DashboardController extends Controller
             ->where('site_id', $user->site_id)
             ->where('company_id', $user->company_id)
             ->with(['site:id,name', 'company:id,name', 'tag:id,name,code'])
-            ->latest('attendance_date_time')->limit(10)->get();
+            ->latest('scan_date_time')->limit(10)->get();
         return sendSuccess([
             'total_security_guards' => $securityCount,
             'latest_attendances' => $latestAttendance,
