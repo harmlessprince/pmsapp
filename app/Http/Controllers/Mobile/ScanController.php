@@ -38,6 +38,7 @@ class ScanController extends Controller
     public function store(StoreScanRequest $request)
     {
         $user = $request->user();
+//        dd($user->company_id);
         $tag = $this->tagRepository->modelQuery()
             ->where('code', $request->input('tag_code'))
             ->first();
@@ -48,7 +49,9 @@ class ScanController extends Controller
         $proximity = deriveProximity($distance);
         $lastScanOnTag = $this->scanRepository->modelQuery()
             ->where('tag_id', $tag->id)
-            ->where('scan_date', $request->input('scan_date'))->first();
+            ->where('scan_date', $request->input('scan_date'))
+            ->latest('scans.scan_date_time')
+            ->first();
         $data = [
             'scan_date' => $request->input('scan_date'),
             'scan_time' => $request->input('scan_time'),
