@@ -32,6 +32,7 @@ class AttendanceController extends Controller
         ];
         $attendanceQuery = constructPipes($this->attendanceRepository->modelQuery(), $pipes);
         $attendances = $attendanceQuery
+
             ->select(['id', 'site_id', 'company_id', 'attendance_time', 'attendance_date', 'attendance_date_time', 'image', 'action_type', 'user_id'])
             ->with(['site:id,name', 'company:id,name', 'user:id,first_name,last_name,profile_image'])
             ->where('company_id', $user->company_id)

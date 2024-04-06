@@ -23,10 +23,13 @@ class ScanController extends Controller
 
     public function index(Request $request): JsonResponse
     {
+        $user =  $request->user();
         $pipes = [
             new DateFilter('scan_date'),
         ];
-        $scanQuery = $this->scanRepository->modelQuery()->search();
+        $scanQuery = $this->scanRepository->modelQuery()->where('scans.site_id', $user->site_id)
+            ->search();
+
         $scanQuery = constructPipes($scanQuery, $pipes);
         $scans = $scanQuery
             ->select(['id', 'site_id', 'company_id', 'tag_id', 'scan_time', 'scan_date', 'scan_date_time'])
