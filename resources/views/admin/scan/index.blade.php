@@ -139,7 +139,7 @@
                             <td class="text-left text-normal font-normal px-smaller">{{$scan->company->name}}</td>
                             <td class="text-left text-normal font-normal p-smaller">{{$scan->longitude ?? '-'}}</td>
                             <td class="text-left text-normal font-normal px-smaller">{{$scan->longitude ?? '-'}}</td>
-                            <td class="text-left text-normal font-normal px-smaller">{{$scan->distance}} km</td>
+                            <td class="text-left text-normal font-normal px-smaller">{{round($scan->distance)}}}} km</td>
                             <td class="text-left text-normal font-normal px-smaller">{{$scan->proximity}}</td>
                         </tr>
                     @empty

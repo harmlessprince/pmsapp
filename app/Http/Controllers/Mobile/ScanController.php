@@ -55,6 +55,7 @@ class ScanController extends Controller
             ->where('scan_date', $request->input('scan_date'))
             ->latest('scans.scan_date_time')
             ->first();
+
         $data = [
             'scan_date' => $request->input('scan_date'),
             'scan_time' => $request->input('scan_time'),
@@ -72,7 +73,7 @@ class ScanController extends Controller
         ];
         if ($lastScanOnTag) {
             $data['gap_duration'] = Carbon::parse($lastScanOnTag->scan_time)->diffInSeconds(Carbon::parse(($data['scan_time'])));
-            $data['round'] = $lastScanOnTag->roound + 1;
+            $data['round'] = $lastScanOnTag->round + 1;
         }
 
         $scan = $this->scanRepository->create($data);

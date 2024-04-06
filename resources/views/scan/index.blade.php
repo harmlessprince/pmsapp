@@ -124,8 +124,8 @@
                             <td class="text-normal font-normal px-smaller">{{$scan->tag->name}}</td>
                             <td class="text-normal font-normal px-smaller">{{$scan->site->name}}</td>
                             <td class="text-normal font-normal p-smaller">{{$scan->longitude ?? '-'}}</td>
-                            <td class="text-normal font-normal px-smaller">{{$scan->longitude ?? '-'}}</td>
-                            <td class="text-normal font-normal px-smaller">{{$scan->distance}} km</td>
+                            <td class="text-normal font-normal px-smaller">{{$scan->latitude ?? '-'}}</td>
+                            <td class="text-normal font-normal px-smaller">{{round($scan->distance)}} km</td>
                             <td class="text-normal font-normal px-smaller">{{$scan->proximity}}</td>
                             <td class="text-normal font-normal px-smaller">{{$scan->round}}</td>
                             <td class="text-normal font-normal px-smaller">{{secondsToHoursMinutes($scan->gap_duration)}}</td>
