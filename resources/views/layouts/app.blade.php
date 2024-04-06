@@ -278,7 +278,7 @@
             let lat = !isNaN(parseFloat(latitudeElm?.value)) ?  parseFloat(latitudeElm?.value) : 0
             let long = !isNaN(parseFloat(longitudeElm?.value)) ? parseFloat(longitudeElm?.value) : 0
             var initialLatLng = {lat: lat, lng: long};
-            console.log(initialLatLng)
+            // console.log(initialLatLng)
             // Create a map object and specify the DOM element for display.
             map = new google.maps.Map(searchLocationMapElm, {
                 center: initialLatLng,
