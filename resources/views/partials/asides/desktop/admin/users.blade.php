@@ -9,6 +9,6 @@
         class="flex flex-row relative" href="{{route('admin.users.index')}}">
         <span
             class="material-symbols-outlined mr-4 w-[24px] h-[24px] {{ $isAdminUserPage == true ? 'text-primary_color' : 'text-natural'}}">person</span>
-        <span class="text-base font-medium {{ $isAdminUserPage == true ? 'text-primary_color' : 'text-natural'}}">User Profile</span>
+        <span class="text-base font-medium {{ $isAdminUserPage == true ? 'text-primary_color' : 'text-natural'}}">Personnel's</span>
     </a>
 </div>

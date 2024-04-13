@@ -1,6 +1,6 @@
 @extends('layouts.app')
-@section('title', 'user management')
-@section('page', 'User Management')
+@section('title', 'Personnel management')
+@section('page', 'Personnel Management')
 @push('header-links')
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css">
     <link rel="stylesheet" href="{{asset('assets/timepicker/jquery.timepicker.min.css')}}">
@@ -8,11 +8,11 @@
 @section('content')
  <!-- <div class="font-big text-big text-natural">Add new Site</div> -->
  <div class="font-big text-big text-natural mb-2 flex flex-row justify-between">
-    <div>Create User</div>
+    <div>Create Personnel</div>
     <a
         class="font-big text-normal text-primary_color rounded-lg border border-primary_color px-[16px] py-[10px] cursor-pointer bg-transparent"
         href="{{route('admin.users.index')}}">
-        Manage Users
+        Manage Personnel
     </a>
 </div>
 <form class="mt-[2%] w-[100%]" action="{{route('admin.users.store')}}" method="POST" enctype="multipart/form-data">

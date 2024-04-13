@@ -36,18 +36,30 @@
             Manage Sites
         </a>
     </div>
-    <form class="mt-[2%] w-[100%]" action="{{route('admin.sites.update',  ['site' => $site])}}" method="POST" enctype='multipart/form-data'>
+    <form class="mt-[2%] w-[100%]" action="{{route('admin.sites.update',  ['site' => $site])}}" method="POST"
+          enctype='multipart/form-data'>
         @csrf
-        <div class="flex flex-col mb-4 ">
-            <x-input-label for="company_id" :value="__('Select Company')"/>
-            <x-select-input id="company_id" class="block mt-1 w-full" name="company_id">
-                <option>Select Company</option>
-                @foreach($companies as $company)
-                    <option
-                        value="{{$company->id}}" {{$site->company_id ==  $company->id ? 'selected' : ''}}>{{$company->name}}</option>
-                @endforeach
-            </x-select-input>
-            <x-input-error :messages="$errors->get('company_id')" class="mt-2"/>
+        <div class="grid gap-6 mb-6 md:grid-cols-2">
+            <div class="flex flex-col">
+                <x-input-label for="company_id" :value="__('Select Company')"/>
+                <x-select-input id="company_id" class="block mt-1 w-full" name="company_id">
+                    <option>Select Company</option>
+                    @foreach($companies as $company)
+                        <option
+                            value="{{$company->id}}" {{$site->company_id ==  $company->id ? 'selected' : ''}}>{{$company->name}}</option>
+                    @endforeach
+                </x-select-input>
+                <x-input-error :messages="$errors->get('company_id')" class="mt-2"/>
+            </div>
+            <div class="flex flex-col">
+                <x-input-label for="status" :value="__('Status')"/>
+                <x-select-input id="status" class="block mt-1 w-full" name="status">
+                    <option>Select Status</option>
+                    <option value="1" {{$site->status  == 1 ? 'selected' : ''}}>Active</option>
+                    <option value="0" {{$site->status  == 0 ? 'selected' : ''}}>In Active</option>
+                </x-select-input>
+                <x-input-error :messages="$errors->get('status')" class="mt-2"/>
+            </div>
         </div>
 
         <div class="grid gap-6 mb-4 md:grid-cols-2">
@@ -59,7 +71,7 @@
             </div>
             <div class="flex flex-col">
                 <x-input-label for="email" :value="__('Email')"/>
-                <x-text-input id="email" class="block mt-1 w-full" type="text" name="email" :value="$site->email "
+                <x-text-input id="email" class="block mt-1 w-full" type="text" name="email" :value="$site->inspector->email "
                               required/>
                 <x-input-error :messages="$errors->get('email')" class="mt-2"/>
             </div>
@@ -93,8 +105,8 @@
         <div class="grid gap-6 mb-6 md:grid-cols-2">
             <div class="flex flex-col">
                 <x-input-label for="shift_start_time" :value="__('Shift start time')"/>
-                <x-text-input id="shift_start_time" class="block mt-1 w-full shift_start_time_timepicker" type="text"
-                              :value="$site->shift_start_time " name="shift_start_time"
+                <x-text-input id="shift_start_time" class="block mt-1 w-full" type="text"
+                              :value="$site->shift_start_time" name="shift_start_time"
                               required/>
                 <x-input-error :messages="$errors->get('shift_start_time')" class="mt-2"/>
             </div>
@@ -150,12 +162,14 @@
         <div class="grid gap-6 mb-6 md:grid-cols-2">
             <div class="flex flex-col max-lg:mb-2">
                 <x-input-label for="longitude" :value="__('Longitude')"/>
-                <x-text-input id="longitude" class="block mt-1 w-full" type="number" name="longitude" readonly :value="$site->longitude"/>
+                <x-text-input id="longitude" class="block mt-1 w-full" type="number" name="longitude" readonly
+                              :value="$site->longitude"/>
                 <x-input-error :messages="$errors->get('longitude')" class="mt-2"/>
             </div>
             <div class="flex flex-col">
                 <x-input-label for="latitude" :value="__('Latitude')"/>
-                <x-text-input id="latitude" class="block mt-1 w-full" type="number" name="latitude" readonly :value="$site->latitude"/>
+                <x-text-input id="latitude" class="block mt-1 w-full" type="number" name="latitude" readonly
+                              :value="$site->latitude"/>
                 <x-input-error :messages="$errors->get('latitude')" class="mt-2"/>
             </div>
         </div>
