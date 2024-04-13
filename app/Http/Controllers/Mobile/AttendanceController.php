@@ -109,7 +109,7 @@ class AttendanceController extends Controller
             return sendError("Personnel can't checkout without checking in");
         }
 
-        if ($request->input('action_type') == AttendanceActionTypeEnum::CHECK_OUT->value) {
+        if ($request->input('action_type') == AttendanceActionTypeEnum::CHECK_OUT->value && $alreadyCheckedIn) {
             $data['check_in_to_checkout_duration'] = Carbon::parse($alreadyCheckedIn->attendance_time)->diffInSeconds(Carbon::parse($request->input('attendance_time')));
         }
 
