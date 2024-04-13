@@ -32,7 +32,6 @@ class AttendanceController extends Controller
         ];
         $attendanceQuery = constructPipes($this->attendanceRepository->modelQuery(), $pipes);
         $attendances = $attendanceQuery
-
             ->select(['id', 'site_id', 'company_id', 'attendance_time', 'attendance_date', 'attendance_date_time', 'image', 'action_type', 'user_id'])
             ->with(['site:id,name', 'company:id,name', 'user:id,first_name,last_name,profile_image'])
             ->where('company_id', $user->company_id)
@@ -59,13 +58,14 @@ class AttendanceController extends Controller
 
 
         $alreadyCheckedIn = $this->attendanceRepository->modelQuery()
+            ->latest('attendance_date_time')
             ->where('attendance_date', $request->input('attendance_date'))
             ->where('user_id', $request->input('security_guard_id'))
             ->where('action_type', AttendanceActionTypeEnum::CHECK_IN->value)->first();
 
-        if ($alreadyCheckedIn && $request->input('action_type') == AttendanceActionTypeEnum::CHECK_IN->value) {
-            return sendError("Personnel already checked in for today", 400);
-        }
+//        if ($alreadyCheckedIn && $request->input('action_type') == AttendanceActionTypeEnum::CHECK_IN->value) {
+//            return sendError("Personnel already checked in for today", 400);
+//        }
 
         $alreadyCheckedOut = $this->attendanceRepository->modelQuery()
             ->where('attendance_date', $request->input('attendance_date'))
@@ -105,9 +105,14 @@ class AttendanceController extends Controller
             'proximity' => $proximity,
         ];
 
-        if ($request->input('action_type') == AttendanceActionTypeEnum::CHECK_OUT->value) {
-            $data['check_in_to_checkout_duration'] = Carbon::parse($alreadyCheckedIn->attendance_time)->diffInSeconds(Carbon::parse( $request->input('attendance_time')));
+        if ($request->input('action_type') == AttendanceActionTypeEnum::CHECK_OUT->value && !$alreadyCheckedIn) {
+            return sendError("Personnel can't checkout without checking in");
         }
+
+        if ($request->input('action_type') == AttendanceActionTypeEnum::CHECK_OUT->value) {
+            $data['check_in_to_checkout_duration'] = Carbon::parse($alreadyCheckedIn->attendance_time)->diffInSeconds(Carbon::parse($request->input('attendance_time')));
+        }
+
 
         $attendance = $this->attendanceRepository->create($data);
         return sendSuccess(['attendances' => $attendance], 'Attendance taken successfully');
