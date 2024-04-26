@@ -153,7 +153,7 @@
                             </td>
                             <td class="text-normal font-normal px-smaller">{{$attendance->site->name}}</td>
                             <td class="text-normal font-normal px-smaller">{{$attendance->company->display_name}}</td>
-                            <td class="text-normal font-normal px-smaller">{{$attendance->distance}} KM</td>
+                            <td class="text-normal font-normal px-smaller">{{round($attendance->distance, 2)}} KM</td>
                             <td class="text-normal font-normal px-smaller">
                                 <img src="{{ $attendance->user->profile_image ?? asset('assets/images/tableImg.png')}}"
                                      alt="dashboard"
