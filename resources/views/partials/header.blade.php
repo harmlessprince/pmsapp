@@ -16,7 +16,7 @@
                 </div>
             @endauth
             <div class="text-sm font-normal text-logo">
-                Track, manage and forecast.
+                Track, manage and excel.
             </div>
         </div>
     @endif

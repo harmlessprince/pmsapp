@@ -51,7 +51,7 @@
 
         <!-- start of multiple bar chart -->
         <div class="bg-background_color mt-[5%] rounded-lg">
-            <div class="text-natural font-normal text-normal p-[2%]">Daily scan count(All sites)</div>
+            <div class="text-natural font-normal text-normal p-[2%]">Monthly scan count(All sites)</div>
             <canvas id="expectedAndActualChart" style="width:100%; height: 50vh;"></canvas>
         </div>
         <!-- end of multiple bar chat -->
@@ -120,7 +120,7 @@
                 label: item.label,
                 backgroundColor: "#" + Math.floor(Math.random() * 16777215).toString(16),
                 color: "#FEFFFE",
-                barThickness: 30,
+                barThickness: 10,
                 borderRadius: 15,
                 data: item.data
             }
@@ -136,7 +136,7 @@
             options: {
                 title: {
                     display: true,
-                    text: "Daily scan % by all sites combined",
+                    text: "Monthly scan % by all sites combined",
                     fontSize: 14,
                     fontColor: "#FEFFFE",
                 },
@@ -167,14 +167,14 @@
                     label: "Expected scan",
                     backgroundColor: barColor1,
                     color: "#FEFFFE",
-                    barThickness: 30,
+                    barThickness: 10,
                     borderRadius: 15,
                     data: actualVSExpected?.data?.expected_scan ?? []
                 }, {
                     label: "Actual scan",
                     backgroundColor: barColor2,
                     color: "#FEFFFE",
-                    barThickness: 30,
+                    barThickness: 10,
                     borderRadius: 15,
                     data: actualVSExpected?.data?.actual_scan ?? []
                 }]

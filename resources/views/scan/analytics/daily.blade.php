@@ -197,7 +197,7 @@
                     label: "Actual scan",
                     backgroundColor: barColor2,
                     color: "#FEFFFE",
-                    barThickness: 30,
+                    barThickness: 10,
                     borderRadius: 15,
                     data: actualVSExpected?.data?.actual_scan ?? []
                 }]
