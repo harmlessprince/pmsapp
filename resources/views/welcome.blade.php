@@ -10,45 +10,463 @@
         <link rel="preconnect" href="https://fonts.bunny.net">
         <link href="https://fonts.bunny.net/css?family=figtree:400,600&display=swap" rel="stylesheet" />
 
-        <!-- Styles -->
-        {{-- <style>
-            /* ! tailwindcss v3.2.4 | MIT License | https://tailwindcss.com */*,::after,::before{box-sizing:border-box;border-width:0;border-style:solid;border-color:#e5e7eb}::after,::before{--tw-content:''}html{line-height:1.5;-webkit-text-size-adjust:100%;-moz-tab-size:4;tab-size:4;font-family:Figtree, sans-serif;font-feature-settings:normal}body{margin:0;line-height:inherit}hr{height:0;color:inherit;border-top-width:1px}abbr:where([title]){-webkit-text-decoration:underline dotted;text-decoration:underline dotted}h1,h2,h3,h4,h5,h6{font-size:inherit;font-weight:inherit}a{color:inherit;text-decoration:inherit}b,strong{font-weight:bolder}code,kbd,pre,samp{font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;font-size:1em}small{font-size:80%}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sub{bottom:-.25em}sup{top:-.5em}table{text-indent:0;border-color:inherit;border-collapse:collapse}button,input,optgroup,select,textarea{font-family:inherit;font-size:100%;font-weight:inherit;line-height:inherit;color:inherit;margin:0;padding:0}button,select{text-transform:none}[type=button],[type=reset],[type=submit],button{-webkit-appearance:button;background-color:transparent;background-image:none}:-moz-focusring{outline:auto}:-moz-ui-invalid{box-shadow:none}progress{vertical-align:baseline}::-webkit-inner-spin-button,::-webkit-outer-spin-button{height:auto}[type=search]{-webkit-appearance:textfield;outline-offset:-2px}::-webkit-search-decoration{-webkit-appearance:none}::-webkit-file-upload-button{-webkit-appearance:button;font:inherit}summary{display:list-item}blockquote,dd,dl,figure,h1,h2,h3,h4,h5,h6,hr,p,pre{margin:0}fieldset{margin:0;padding:0}legend{padding:0}menu,ol,ul{list-style:none;margin:0;padding:0}textarea{resize:vertical}input::placeholder,textarea::placeholder{opacity:1;color:#9ca3af}[role=button],button{cursor:pointer}:disabled{cursor:default}audio,canvas,embed,iframe,img,object,svg,video{display:block;vertical-align:middle}img,video{max-width:100%;height:auto}[hidden]{display:none}*, ::before, ::after{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgb(59 130 246 / 0.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: }::-webkit-backdrop{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgb(59 130 246 / 0.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: }::backdrop{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgb(59 130 246 / 0.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: }.relative{position:relative}.mx-auto{margin-left:auto;margin-right:auto}.mx-6{margin-left:1.5rem;margin-right:1.5rem}.ml-4{margin-left:1rem}.mt-16{margin-top:4rem}.mt-6{margin-top:1.5rem}.mt-4{margin-top:1rem}.-mt-px{margin-top:-1px}.mr-1{margin-right:0.25rem}.flex{display:flex}.inline-flex{display:inline-flex}.grid{display:grid}.h-16{height:4rem}.h-7{height:1.75rem}.h-6{height:1.5rem}.h-5{height:1.25rem}.min-h-screen{min-height:100vh}.w-auto{width:auto}.w-16{width:4rem}.w-7{width:1.75rem}.w-6{width:1.5rem}.w-5{width:1.25rem}.max-w-7xl{max-width:80rem}.shrink-0{flex-shrink:0}.scale-100{--tw-scale-x:1;--tw-scale-y:1;transform:translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}.grid-cols-1{grid-template-columns:repeat(1, minmax(0, 1fr))}.items-center{align-items:center}.justify-center{justify-content:center}.gap-6{gap:1.5rem}.gap-4{gap:1rem}.self-center{align-self:center}.rounded-lg{border-radius:0.5rem}.rounded-full{border-radius:9999px}.bg-gray-100{--tw-bg-opacity:1;background-color:rgb(243 244 246 / var(--tw-bg-opacity))}.bg-white{--tw-bg-opacity:1;background-color:rgb(255 255 255 / var(--tw-bg-opacity))}.bg-red-50{--tw-bg-opacity:1;background-color:rgb(254 242 242 / var(--tw-bg-opacity))}.bg-dots-darker{background-image:url("data:image/svg+xml,%3Csvg width='30' height='30' viewBox='0 0 30 30' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1.22676 0C1.91374 0 2.45351 0.539773 2.45351 1.22676C2.45351 1.91374 1.91374 2.45351 1.22676 2.45351C0.539773 2.45351 0 1.91374 0 1.22676C0 0.539773 0.539773 0 1.22676 0Z' fill='rgba(0,0,0,0.07)'/%3E%3C/svg%3E")}.from-gray-700\/50{--tw-gradient-from:rgb(55 65 81 / 0.5);--tw-gradient-to:rgb(55 65 81 / 0);--tw-gradient-stops:var(--tw-gradient-from), var(--tw-gradient-to)}.via-transparent{--tw-gradient-to:rgb(0 0 0 / 0);--tw-gradient-stops:var(--tw-gradient-from), transparent, var(--tw-gradient-to)}.bg-center{background-position:center}.stroke-red-500{stroke:#ef4444}.stroke-gray-400{stroke:#9ca3af}.p-6{padding:1.5rem}.px-6{padding-left:1.5rem;padding-right:1.5rem}.text-center{text-align:center}.text-right{text-align:right}.text-xl{font-size:1.25rem;line-height:1.75rem}.text-sm{font-size:0.875rem;line-height:1.25rem}.font-semibold{font-weight:600}.leading-relaxed{line-height:1.625}.text-gray-600{--tw-text-opacity:1;color:rgb(75 85 99 / var(--tw-text-opacity))}.text-gray-900{--tw-text-opacity:1;color:rgb(17 24 39 / var(--tw-text-opacity))}.text-gray-500{--tw-text-opacity:1;color:rgb(107 114 128 / var(--tw-text-opacity))}.underline{-webkit-text-decoration-line:underline;text-decoration-line:underline}.antialiased{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}.shadow-2xl{--tw-shadow:0 25px 50px -12px rgb(0 0 0 / 0.25);--tw-shadow-colored:0 25px 50px -12px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.shadow-gray-500\/20{--tw-shadow-color:rgb(107 114 128 / 0.2);--tw-shadow:var(--tw-shadow-colored)}.transition-all{transition-property:all;transition-timing-function:cubic-bezier(0.4, 0, 0.2, 1);transition-duration:150ms}.selection\:bg-red-500 *::selection{--tw-bg-opacity:1;background-color:rgb(239 68 68 / var(--tw-bg-opacity))}.selection\:text-white *::selection{--tw-text-opacity:1;color:rgb(255 255 255 / var(--tw-text-opacity))}.selection\:bg-red-500::selection{--tw-bg-opacity:1;background-color:rgb(239 68 68 / var(--tw-bg-opacity))}.selection\:text-white::selection{--tw-text-opacity:1;color:rgb(255 255 255 / var(--tw-text-opacity))}.hover\:text-gray-900:hover{--tw-text-opacity:1;color:rgb(17 24 39 / var(--tw-text-opacity))}.hover\:text-gray-700:hover{--tw-text-opacity:1;color:rgb(55 65 81 / var(--tw-text-opacity))}.focus\:rounded-sm:focus{border-radius:0.125rem}.focus\:outline:focus{outline-style:solid}.focus\:outline-2:focus{outline-width:2px}.focus\:outline-red-500:focus{outline-color:#ef4444}.group:hover .group-hover\:stroke-gray-600{stroke:#4b5563}.z-10{z-index: 10}@media (prefers-reduced-motion: no-preference){.motion-safe\:hover\:scale-\[1\.01\]:hover{--tw-scale-x:1.01;--tw-scale-y:1.01;transform:translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}}@media (prefers-color-scheme: dark){.dark\:bg-gray-900{--tw-bg-opacity:1;background-color:rgb(17 24 39 / var(--tw-bg-opacity))}.dark\:bg-gray-800\/50{background-color:rgb(31 41 55 / 0.5)}.dark\:bg-red-800\/20{background-color:rgb(153 27 27 / 0.2)}.dark\:bg-dots-lighter{background-image:url("data:image/svg+xml,%3Csvg width='30' height='30' viewBox='0 0 30 30' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1.22676 0C1.91374 0 2.45351 0.539773 2.45351 1.22676C2.45351 1.91374 1.91374 2.45351 1.22676 2.45351C0.539773 2.45351 0 1.91374 0 1.22676C0 0.539773 0.539773 0 1.22676 0Z' fill='rgba(255,255,255,0.07)'/%3E%3C/svg%3E")}.dark\:bg-gradient-to-bl{background-image:linear-gradient(to bottom left, var(--tw-gradient-stops))}.dark\:stroke-gray-600{stroke:#4b5563}.dark\:text-gray-400{--tw-text-opacity:1;color:rgb(156 163 175 / var(--tw-text-opacity))}.dark\:text-white{--tw-text-opacity:1;color:rgb(255 255 255 / var(--tw-text-opacity))}.dark\:shadow-none{--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.dark\:ring-1{--tw-ring-offset-shadow:var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);--tw-ring-shadow:var(--tw-ring-inset) 0 0 0 calc(1px + var(--tw-ring-offset-width)) var(--tw-ring-color);box-shadow:var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000)}.dark\:ring-inset{--tw-ring-inset:inset}.dark\:ring-white\/5{--tw-ring-color:rgb(255 255 255 / 0.05)}.dark\:hover\:text-white:hover{--tw-text-opacity:1;color:rgb(255 255 255 / var(--tw-text-opacity))}.group:hover .dark\:group-hover\:stroke-gray-400{stroke:#9ca3af}}@media (min-width: 640px){.sm\:fixed{position:fixed}.sm\:top-0{top:0px}.sm\:right-0{right:0px}.sm\:ml-0{margin-left:0px}.sm\:flex{display:flex}.sm\:items-center{align-items:center}.sm\:justify-center{justify-content:center}.sm\:justify-between{justify-content:space-between}.sm\:text-left{text-align:left}.sm\:text-right{text-align:right}}@media (min-width: 768px){.md\:grid-cols-2{grid-template-columns:repeat(2, minmax(0, 1fr))}}@media (min-width: 1024px){.lg\:gap-8{gap:2rem}.lg\:p-8{padding:2rem}}
-        </style> --}}
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0"/>
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.css" rel="stylesheet" />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Cabin:ital,wght@0,500;0,600;0,700;1,400&family=Inter:wght@400;500;600;700&display=swap"
+            rel="stylesheet">
+            <link rel="apple-touch-icon" sizes="180x180" href="{{asset('assets/images/favicon_io/apple-touch-icon.png')}}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{asset('assets/images/favicon_io/favicon-32x32.png')}}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{asset('assets/images/favicon_io/favicon-16x16.png')}}">
+    <link rel="manifest" href="{{asset('assets/images/favicon_io/site.webmanifest')}}">
+
+    <style>
+        /* this style is for the frequently used summary tag */
+        .faq1{
+            width: 100%;
+            background-color: #226F65;
+            border-top-left-radius: 8px;
+            border-top-right-radius: 8px;
+            font-weight: 500;
+            font-size: 18px;
+            cursor: pointer;
+            color: #fff;
+            padding: 0.5rem;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center
+        }
+
+        .faq2{
+            width: 100%;
+            background-color: #fff;
+            border-radius: 8px;
+            font-weight: 500;
+            font-size: 18px;
+            cursor: pointer;
+            color: #000;
+            padding: 1rem 0.5rem;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center
+        }
+    </style>
+
+         <!-- Scripts -->
+         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
-    <body class="">
-            <nav class="bg-white dark:bg-gray-900 fixed w-full z-20 top-0 start-0 border-b border-gray-200 dark:border-gray-600">
-                <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
-                <a href="https://flowbite.com/" class="flex items-center space-x-3 rtl:space-x-reverse">
-                    <img src="https://flowbite.com/docs/images/logo.svg" class="h-8" alt="Flowbite Logo">
-                    <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">Flowbite</span>
-                </a>
-                <div class="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
-                    <button type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Get started</button>
-                    <button data-collapse-toggle="navbar-sticky" type="button" class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600" aria-controls="navbar-sticky" aria-expanded="false">
-                    <span class="sr-only">Open main menu</span>
-                    <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14">
-                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h15M1 7h15M1 13h15"/>
-                    </svg>
-                </button>
+    <body class="font-primary">
+        <main>
+        <nav class="bg-white dark:bg-gray-900 fixed w-full z-20 top-0 start-0 border-b border-gray-200 dark:border-gray-600">
+            <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
+            <a href="https://flowbite.com/" class="flex items-center space-x-3 rtl:space-x-reverse md:ml-[5%]">
+                <img src="/assets/landing_images/logo.png" class="h-8" alt="perfraka logo">
+                <img src="/assets/landing_images/logo_name.png" class="" alt="perfraka logo_name">
+            </a>
+            <div class="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
+                <button type="button" class="text-[#ffffff] bg-col2 focus:ring-4 focus:outline-none font-normal rounded-lg text-size1 px-5 py-2 text-center">Login</button>
+                <button data-collapse-toggle="navbar-sticky" type="button" class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden  focus:outline-none " aria-controls="navbar-sticky" aria-expanded="false">
+                <span class="sr-only">Open main menu</span>
+                <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h15M1 7h15M1 13h15"/>
+                </svg>
+            </button>
+            </div>
+            <div class="items-center justify-between hidden w-full md:flex md:w-auto md:order-1" id="navbar-sticky">
+            <ul class="flex flex-col p-4 md:p-0 mt-4 font-medium border border-gray-100 rounded-lg bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
+                <li>
+                    <a href="" class="block py-2 px-3 text-gray-900 rounded md:bg-transparent md:text-size1 md:text-col1 md:hover:text-col3 md:p-0 font-normal">Home</a>
+                </li>
+                <li>
+                <a href="#" class="block py-2 px-3 text-gray-900 rounded md:bg-transparent md:text-size1 md:text-col1 md:hover:text-col3 md:p-0 font-normal">About us</a>
+                </li>
+                <li>
+                    <a href="#" class="block py-2 px-3 text-gray-900 rounded md:bg-transparent md:text-size1 md:text-col1 md:hover:text-col3 md:p-0 font-normal">FAQ</a>
+                </li>
+                <li>
+                    <a href="#" class="block py-2 px-3 text-gray-900 rounded md:bg-transparent md:text-size1 md:text-col1 md:hover:text-col3 md:p-0 font-normal">Contact us</a>
+                </li>
+            </ul>
+            </div>
+            </div>
+        </nav>
+
+        <section class="bg-col4 text-center relative mt-[60px] pb-[12em] relative">
+            <div class="h-[15px] w-[15px] rounded-full bg-[#1A544D] absolute top-[45px] left-[12%]"></div>
+            <div class="h-[13px] w-[13px] rounded-full bg-[#1A544D] absolute top-[40px] left-[40%]"></div>
+            <div class="h-[15px] w-[15px] rounded-full bg-[#268AE6] absolute top-[40px] right-[15%]"></div>
+            <div class="h-[15px] w-[15px] rounded-full bg-[#E63026] absolute top-[145px] right-[36%]"></div>
+            <div class="h-[13px] w-[13px] rounded-full bg-[#1A544D] absolute top-[235px] right-[36%]"></div>
+            <div class="h-[13px] w-[13px] rounded-full bg-[#26E6A1] absolute bottom-[200px] right-[26%]"></div>
+
+            <div class="absolute bottom-[100px] right-[15%] w-[70%] flex flex-row justify-between">
+            <img src="/assets/landing_images/plan1.png" class="w-[227px] h-[269px]" alt="plan1">
+            <img src="/assets/landing_images/plan2.png" class="w-[227px] h-[269px]" alt="plan1">
+            </div>
+
+           <div class="absolute top-[45px] left-0 w-full">
+            <img src="/assets/landing_images/round.png" class="mx-auto w-[31em] h-[31em]" alt="perfraka logo">
+           </div>
+            <div class="font-bigger text-[48px] text-col1 pt-[2em] w-[60%] mx-auto">
+            Take Control of Security Management with <span class="text-col3">PERFTRAKA</span>
+            </div>
+            <div class="w-[32em] mx-auto text-[1.125em] text-[#54576F] font-normal">
+                Manage security tasks seamlessly, from record-keeping to attendance tracking.
+            </div>
+
+            <div class="mt-5">
+                <button class="rounded-[8px] px-4 py-1 border border-[#E63026] mr-5 text-[#E63026] text-size1 font-[600]">Learn more</button>
+                <span class="text-[#C52216] text-[1em] font-[600] text-size1">Request for Demo</span>
+            </div> 
+            <div class="absolute -bottom-[52%] left-0 w-full flex flex-row justify-center">
+            <img src="/assets/landing_images/mobile2.png" class="" alt="perfraka logo">
+            </div>
+        </section>
+        <section class="w-full h-[11em] bg-col3">
+        </section>
+
+        <section class="py-[5%] px-[15%] bg-col4">
+            <div class="text-center text-normal font-[500] text-col5">Learn about PERFTRAKA</div>
+            <header class="font-[700] text-header text-col3 text-center">
+                <span class="px-1 pb-2 relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:h-[8px] after:w-full after:bg-[#E63026] after:rounded-[4px]">About Us</span>
+            </header>
+            <div class="py-[1em] flex flex-row">
+                <div class="pt-[5%] text-size1 font-normal">
+                    <p>
+                    At PERFTRAKA, we specialize in providing cutting-edge Location Capture, 
+                    Employee & Contractor Attendance Management Solutions tailored to meet the diverse needs of 
+                    businesses across various industries. 
+                    <p>Our innovative platform allows 
+                    businesses to seamlessly monitor and manage activities across multiple sites, 
+                    ensuring optimal efficiency and security.
+                    <p>
+                    </p> 
+                    <p class="py-[5%]">
+                        With our solution, businesses can easily track employee attendance, streamline visitor 
+                        registration processes, and capture crucial location data in real-time. Whether you're managing 
+                        a single location or multiple sites, our platform offers the flexibility and scalability to meet 
+                        your unique requirements.
+                    </p>
+                    <p>
+                        Say goodbye to manual tracking methods and inefficiencies – with [Company Name], 
+                        you can centralize your operations and gain full visibility into all activities, empowering you to make informed decisions 
+                        and drive business success.Experience the power of streamlined operations and enhanced security with PERFTRAKA.
+                    </p>
                 </div>
-                <div class="items-center justify-between hidden w-full md:flex md:w-auto md:order-1" id="navbar-sticky">
-                <ul class="flex flex-col p-4 md:p-0 mt-4 font-medium border border-gray-100 rounded-lg bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
-                    <li>
-                    <a href="#" class="block py-2 px-3 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 md:dark:text-blue-500" aria-current="page">Home</a>
-                    </li>
-                    <li>
-                    <a href="#" class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">About</a>
-                    </li>
-                    <li>
-                    <a href="#" class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Services</a>
-                    </li>
-                    <li>
-                    <a href="#" class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Contact</a>
-                    </li>
-                </ul>
+                <img src="/assets/landing_images/mobile3.png" class="w-[26.5em] h-[29.2em] ml-[2em]" alt="perfraka mobile">
+            </div>
+        </section>  
+
+        <section  class="py-[5%] px-[15%]">
+            <div class="text-center text-normal font-[500] text-col5">What’s special on our App</div>
+            <header class="font-[700] text-header text-col3 text-center">
+                <span class="px-1 pb-2 relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:h-[8px] after:w-full after:bg-[#E63026] after:rounded-[4px]">Features </span>
+            </header>
+            <div class="flex flex-row py-[2em]">
+            <div class='w-[48%] relative'>
+            <div class="absolute w-full text-center bottom-[5%] left-0 flex flex-row justify-center z-10">
+            <img src="/assets/landing_images/mobile4.png" class="z-5 w-[18.375em] h-[39.625em]" alt="mobile">
+            </div>
+            <div class="h-[22em] w-full bg-col3 absolute bottom-0 left-0 -z-10"></div>
+        </div>
+
+            <div class="ml-5 w-[48%]">
+            <div class="flex flex-row justify-end w-full">
+                <div class="w-[15em] h-[19em] py-5 px-3 rounded-[8px] border border-[#E7E8E7]">
+                    <div class="rounded-full w-[50px] h-[50px] bg-col3 flex flex-row items-center justify-center">
+                    <img src="/assets/landing_images/code.png" class="w-[1.9375em] h-[1.9375em] " alt="perfraka logo">
+                    </div>
+
+                    <div class="text-eighteen font-bigger mt-1 mb-2">
+                        Scan QR Code
+                    </div>
+
+                    <div class="text-normal font-normal text-[#8C8C8C]">
+                        Utilize PERFTRAKA mobile app scan feature to 
+                        effortlessly scan QR codes strategically placed across different locations within a site."
+                    </div>
+                </div>
+
+                <div class="w-[15em] h-[19em] py-5 px-3 rounded-[8px] border border-[#E7E8E7] ml-4">
+                    <div class="rounded-full w-[50px] h-[50px] bg-col3 flex flex-row items-center justify-center">
+                    <img src="/assets/landing_images/plus.png" class="w-[1.9375em] h-[1.9375em] " alt="perfraka logo">
+                    </div>
+
+                    <div class="text-eighteen font-bigger mt-1 mb-2">
+                        Add New Guard
+                    </div>
+
+                    <div class="text-normal font-normal text-[#8C8C8C]">
+                        This feature enables the creation of multiple user profiles
+                    </div>
+                </div>
+            </div>
+
+            {{-- flex2 --}}
+            <div class="flex flex-row justify-end w-full mt-4">
+                <div class="w-[15em] h-[19em] py-5 px-3 rounded-[8px] border border-[#E7E8E7]">
+                    <div class="rounded-full w-[50px] h-[50px] bg-col3 flex flex-row items-center justify-center">
+                    <img src="/assets/landing_images/user.png" class="w-[1.9375em] h-[1.9375em] " alt="perfraka logo">
+                    </div>
+
+                    <div class="text-eighteen font-bigger mt-1 mb-2">
+                        Admin management 
+                    </div>
+
+                    <div class="text-normal font-normal text-[#8C8C8C]">
+                        With our user management feature, supervisors have full control over site details, 
+                        tags, and user profiles. Seamlessly add new sites and tags with ease.
+                    </div>
+                </div>
+
+                <div class="w-[15em] h-[19em] py-5 px-3 rounded-[8px] border border-[#E7E8E7] ml-4">
+                    <div class="rounded-full w-[50px] h-[50px] bg-col3 flex flex-row items-center justify-center">
+                    <img src="/assets/landing_images/user.png" class="w-[1.9375em] h-[1.9375em] " alt="perfraka logo">
+                    </div>
+
+                    <div class="text-eighteen font-bigger mt-1 mb-2">
+                        Take-Attendance 
+                    </div>
+
+                    <div class="text-normal font-normal text-[#8C8C8C]">
+                        With PERFTRAKA you can  performing actions such as Check-In/Check-Out, 
+                        complete with mandatory photo capture and the option to include a message."
+                    </div>
+                </div>
+            </div>    
+            </div>
+            </div>
+        </section>
+        {{-- control and manage --}}
+        <section class="bg-col4 w-full h-[23.5em]">
+            <div class="w-full flex flex-row justify-between pl-[15%] pr-[8%] bg-col3">
+                <div class="w-[55%] text-[#ffffff] py-[2em]">
+                <div class="font-bigger text-[2.25em]">
+                Control and manage all your operations from one convenient hub With &#160; PERFTRAKA
+                </div>
+                <div class="mt-5">
+                    <button class="h-[44px] px-3 bg-[#E63026] rounded-[8px] text-size1 font-big">Contact us</button>
                 </div>
                 </div>
-            </nav>
+                <div class="relative">
+                 <img src="/assets/landing_images/macbook.png" class="w-[31.3125em] h-[20.875em]" alt="mackbook"> 
+                  <img src="/assets/landing_images/mobile4.png" class="absolute bottom-[5%] left-0 w-[93px] h-[199px]" alt="mobile4">
+                </div>
+            </div>
+            
+        </section>
+
+        <section  class="py-[5%] px-[15%]">
+            <header class="font-[800] text-[2.25em] text-center">Get In touch with us</header>
+            <div class="text-center font-normal text-[#667085]">We’d love to hear from you. Please fill out this form.</div>
+
+            <form class="mt-5">
+                <div class="flex flex-row justify-between mb-5">
+                    <div class="w-[48%]">
+                        <label class="block text-[#344054] font-big text-normal">First name</label>
+                        <input
+                            type="text"
+                            class="outline-none w-full border border-[#D0D5DD] bg-transparent h-[3em] px-2 py-1 rounded-lg text-[#667085]
+                        placeholder-color font-normal text-normal
+                        focus:outline-none focus:border-primary_color focus:ring-1 focus:ring-background_color
+                        focus:invalid:error focus:invalid:error
+                        "
+                            placeholder="First name" name="email" value=""/>
+                        {{-- <x-input-error :messages="$errors->get('email')" class="mt-2"/> --}}
+                    </div>
+                    <div class="w-[48%]">
+                        <label class="block text-[#344054] font-big text-normal">Last name</label>
+                        <input
+                            type="text"
+                            class="outline-none w-full border border-[#D0D5DD] bg-transparent h-[3em] px-2 py-1 rounded-lg text-[#667085]
+                        placeholder-color font-normal text-normal
+                        focus:outline-none focus:border-primary_color focus:ring-1 focus:ring-background_color
+                        focus:invalid:error focus:invalid:error
+                        "
+                            placeholder="Last name" name="email" value=""/>
+                        {{-- <x-input-error :messages="$errors->get('email')" class="mt-2"/> --}}
+                    </div>
+                </div>
+
+                <div class="mb-5">
+                    <div class="w-full">
+                        <label class="block text-[#344054] font-big text-normal">Email</label>
+                        <input
+                            type="email"
+                            class="outline-none w-full border border-[#D0D5DD] bg-transparent h-[3em] px-2 py-1 rounded-lg text-[#667085]
+                        placeholder-color font-normal text-normal
+                        focus:outline-none focus:border-primary_color focus:ring-1 focus:ring-background_color
+                        focus:invalid:error focus:invalid:error
+                        "
+                            placeholder="you@company.com" name="email" value=""/>
+                        {{-- <x-input-error :messages="$errors->get('email')" class="mt-2"/> --}}
+                    </div>
+                </div>
+
+                <div class="mb-5">
+                    <div class="w-full">
+                        <label class="block text-[#344054] font-big text-normal">Message</label>
+                        <textarea id="message" rows="5" 
+                        class="outline-none block bg-transparent px-2 py-1 w-full text-[#667085] font-normal text-normal placeholder-color rounded-lg border border-[#D0D5DD] 
+                        focus:outline-none focus:border-primary_color focus:ring-1 focus:ring-background_color
+                        "></textarea>
+                    </div>
+                </div>
+
+                <button class="bg-[#C52216] w-full h-[60px] rounded-[10px] text-size1 font-[600] text-[#ffffff]">Submit</button>
+
+            </form>
+        </section>
+
+        {{-- frequently asked --}}
+        <section class="bg-col4 py-[5%] px-[15%]">
+            <header class="font-bigger text-header text-center">Frequently Asked <span class="text-[#C52216]">Questions</span> 
+                <div class="relative w-full my-5">
+                    <input type="search" placeholder="Type your Questions" 
+                    class="w-full pr-[75px] bg-[#fff] text-eighteen font-big h-[3.75em] rounded-[10px] outline-none border border-[#838383]"
+                    />
+                    <div class="flex flex-row items-center justify-center absolute top-[1px] right-0 bg-col3 w-[64px] h-[66px] rounded-tr-[10px] rounded-br-[10px]">
+                    <span class="material-symbols-outlined mr-4 w-[18px] h-[18px] text-[#fff] ">Search</span>
+                    </div>
+                </div>
+                {{-- cursor-pointer rounded-tl-[8px] rounded-tr-[8px] bg-col3 text-eighteen text-[#fff] p-2 flex flex-row justify-between items-center --}}
+                <details class="group my-5">
+                    <summary id="group1" class="faq2">
+                        <span class="font-[500]">How can i get the app</span>
+                        <span class="material-symbols-outlined mr-4 w-[18px] h-[18px] text-[#000] transition group-open:rotate-180 group-open:text-[#fff]">expand_more</span>
+                    </summary>
+                <article class="bg-[#fff] text-[#000] px-2 pt-5 pb-10 text-eighteen font-normal text-left">
+                    Contact the team to get the app 
+                </article>
+                </details>
+
+                <details class="group my-5">
+                    <summary id="group2" class="faq2">
+                        <span class="font-[500]">Can any business use it </span>
+                        <span class="material-symbols-outlined mr-4 w-[18px] h-[18px] text-[#000] transition group-open:rotate-180 group-open:text-[#fff]">expand_more</span>
+                    </summary>
+                <article class="bg-[#fff] text-[#000] px-2 pt-5 pb-10 text-eighteen font-normal text-left">
+                    Contact the team to get the app 
+                </article>
+                </details>
+
+                <details class="group my-5">
+                    <summary id="group3" class="faq2">
+                        <span class="font-[500]">How can i contact the team  </span>
+                        <span class="material-symbols-outlined mr-4 w-[18px] h-[18px] text-[#000] transition group-open:rotate-180 group-open:text-[#fff]">expand_more</span>
+                    </summary>
+                <article class="bg-[#fff] text-[#000] px-2 pt-5 pb-10 text-eighteen font-normal text-left">
+                    Contact the team to get the app 
+                </article>
+                </details>
+
+                <details class="group my-5">
+                    <summary id="group4" class="faq2">
+                        <span class="font-[500]">How much is it per month  </span>
+                        <span class="material-symbols-outlined mr-4 w-[18px] h-[18px] text-[#000] transition group-open:rotate-180 group-open:text-[#fff]">expand_more</span>
+                    </summary>
+                <article class="bg-[#fff] text-[#000] px-2 pt-5 pb-10 text-eighteen font-normal text-left">
+                    Contact the team to get the app 
+                </article>
+                </details>      
+            </section>
+
+            <footer class="flex flex-row items-center bg-col3 px-[15%] pt-[3%] pb-[3.5%] text-[#fff]">
+                <div class="w-[19em]">
+                <div class="flex flex-row items-center">
+                <img src="/assets/landing_images/logo2.png" class="w-[40px] h-[54px] mr-1" alt="perfraka logo">
+                <img src="/assets/landing_images/logo_name2.png" class="w-[103px] h-[11px]" alt="perfraka logo_name">
+                </div>
+                <div class="font-normal text-[#fff] text-normal">
+                At PERFTRAKA, we specialize 
+                in providing cutting-edge Location Capture, Attendance.
+                </div>
+                </div>
+                <div class="w-[23em] mx-20">
+                    <header class="text-center font-bigger text-size1">Quick Links</header>
+                    <div class="flex flex-row justify-around py-1 font-normal text-size1">
+                        <span>Home</span>
+                        <span>About us</span>
+                        <span>FAQ</span>
+                        <span>Contact us</span>
+                    </div>
+                </div>
+                <div class="w-[6.5em]">
+                    <header class="text-center font-bigger text-size1">Our socials</header>
+                    <div class="flex flex-row justify-around py-1 font-normal text-size1">
+                        <img src="/assets/landing_images/linkedin.png" class="" alt="linkedin"> 
+                        <img src="/assets/landing_images/facebook.png" class="" alt="facebook"> 
+                        <img src="/assets/landing_images/twitter.png" class="w-[18px] h-[18px]" alt="twitter"> 
+                    </div>
+                </div>
+            </footer>
+        </main>
   
-    </body>
-</html>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>
+        <script>
+            const group1 = document.querySelector("#group1");
+            const group2 = document.querySelector("#group2");
+            const group3 = document.querySelector("#group3");
+            const group4 = document.querySelector("#group4");
+            let value1 = false
+            let value2 = false
+            let value3 = false
+            let value4 = false
+
+            group1.addEventListener("click" , () => {
+                if(value1){
+                    group1.classList.remove("faq1")
+                    group1.classList.add("faq2")
+                }
+                else{
+                    group1.classList.remove("faq2")
+                    group1.classList.add("faq1")
+                }
+                value1 = !value1
+            })
+
+            group2.addEventListener("click" , () => {
+                if(value2){
+                    group2.classList.remove("faq1")
+                    group2.classList.add("faq2")
+                }
+                else{
+                    group2.classList.remove("faq2")
+                    group2.classList.add("faq1")
+                }
+                value2 = !value2
+            })
+
+            group3.addEventListener("click" , () => {
+                if(value3){
+                    group3.classList.remove("faq1")
+                    group3.classList.add("faq2")
+                }
+                else{
+                    group3.classList.remove("faq2")
+                    group3.classList.add("faq1")
+                }
+                value3 = !value3
+            })
+
+            group4.addEventListener("click" , () => {
+                if(value4){
+                    group4.classList.remove("faq1")
+                    group4.classList.add("faq2")
+                }
+                else{
+                    group4.classList.remove("faq2")
+                    group4.classList.add("faq1")
+                }
+                value4 = !value4
+            })
+
+
+        </script>
+        </body>
+    </html>
