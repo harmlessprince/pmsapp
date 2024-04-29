@@ -18,6 +18,7 @@
 @section('content')
 
     <!-- Dashboard content -->
+    @include('image-view-modal')
     <section class="">
         <x-filter-card :actionUrl="route('company.attendance.transactions')" :canSearch="true"
                        :searchPlaceholder="'Search by name'" :canExport="true">
@@ -108,13 +109,20 @@
                         <th class="text-left text-small text-natural font-big  px-smaller py-smaller w-[15%]">
                             Name
                         </th>
-                        <th class="text-left text-small text-natural font-big  px-smaller py-smaller w-[10%]">Time/Date</th>
-                        <th class="text-left text-small text-natural font-big  px-smaller py-smaller w-[15%]">Action Type</th>
-                        <th class="text-left text-small text-natural font-big  px-smaller py-smaller w-[10%]">Hours Worked</th>
+                        <th class="text-left text-small text-natural font-big  px-smaller py-smaller w-[10%]">
+                            Time/Date
+                        </th>
+                        <th class="text-left text-small text-natural font-big  px-smaller py-smaller w-[15%]">Action
+                            Type
+                        </th>
+                        <th class="text-left text-small text-natural font-big  px-smaller py-smaller w-[10%]">Hours
+                            Worked
+                        </th>
                         <th class="text-left text-small text-natural font-big px-smaller py-smaller w-[10%]">Site</th>
-{{--                        <th class="text-left text-small text-natural font-big px-smaller py-smaller w-[9%]">Distance</th>--}}
+                        {{--                        <th class="text-left text-small text-natural font-big px-smaller py-smaller w-[9%]">Distance</th>--}}
                         <th class="text-left text-small text-natural font-big px-smaller py-smaller w-[10%]">Image</th>
-                        <th class="text-left text-small text-natural font-big px-smaller py-smaller w-[15%]">Proximity</th>
+                        <th class="text-left text-small text-natural font-big px-smaller py-smaller w-[15%]">Proximity
+                        </th>
                     </tr>
                     </thead>
                     <tbody>
@@ -150,11 +158,11 @@
                                 {{$output}}
                             </td>
                             <td class="text-normal font-normal px-smaller">{{$attendance->site->name}}</td>
-{{--                            <td class="text-normal font-normal px-smaller">{{round($attendance->distance, 2)}} KM</td>--}}
+                            {{--                            <td class="text-normal font-normal px-smaller">{{round($attendance->distance, 2)}} KM</td>--}}
                             <td class="text-normal font-normal px-smaller">
-                                <img src="{{ $attendance->user->profile_image ?? asset('assets/images/tableImg.png')}}"
+                                <img src="{{ $attendance->image ?? asset('assets/images/tableImg.png')}}"
                                      alt="dashboard"
-                                     class=" w-[60px] h-[60px]"/>
+                                     class=" w-[60px] h-[60px]" />
                             </td>
                             <td class="text-normal font-normal px-smaller">{{$attendance->proximity}}</td>
                         </tr>
@@ -187,5 +195,6 @@
             document.getElementById("search-form").reset();
             window.location.replace(location.pathname);
         }
+
     </script>
 @endpush
