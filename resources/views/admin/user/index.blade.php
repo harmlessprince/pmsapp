@@ -1,6 +1,6 @@
 @extends('layouts.app')
-@section('title', 'User')
-@section('page', 'User Management')
+@section('title', 'Personnel')
+@section('page', 'Personnel Management')
 @push('header-scripts')
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"
             integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
@@ -16,7 +16,7 @@
                 </div>
                 <div class="ml-[5%]">
                     <h1 class="font-bold text-3xl text-guards">{{$usersCount}}</h1>
-                    <span class="font-normal text-sm text-guards">Users</span>
+                    <span class="font-normal text-sm text-guards">Personnels</span>
                 </div>
             </div>
         </section>
@@ -25,13 +25,13 @@
         <section class="pt-basic_padding">
             <!-- add user -->
             <div class="font-big text-big text-natural mb-2 flex flex-row justify-between">
-                <div>Added Users</div>
+                <div>Added Personnels</div>
                 <div
                     class="rounded-lg border border-primary_color flex flex-row items-center px-[16px] py-[10px] cursor-pointer">
                     {{-- <img src="{{asset('assets/images/plus.png')}}" class="w-[11px] h-[11px]" alt="plus"/> --}}
                     <span class="material-symbols-outlined text-primary_color">add</span>
                     <a href="{{route('admin.users.create')}}">
-                        <span class="text-primary_color font-big text-normal ml-2"> Add New User</span>
+                        <span class="text-primary_color font-big text-normal ml-2"> Add New Personnel</span>
                     </a>
                 </div>
             </div>

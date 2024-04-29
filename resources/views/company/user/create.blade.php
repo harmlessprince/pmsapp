@@ -8,11 +8,11 @@
 @section('content')
     <!-- <div class="font-big text-big text-natural">Add new Site</div> -->
     <div class="font-big text-big text-natural mb-2 flex flex-row justify-between">
-        <div>Create User</div>
+        <div>Create Personnel</div>
         <a
             class="font-big text-normal text-primary_color rounded-lg border border-primary_color px-[16px] py-[10px] cursor-pointer bg-transparent"
             href="{{route('company.users.index')}}">
-            Manage Users
+            Manage Personnel
         </a>
     </div>
     <form class="mt-[2%] w-[100%]" action="{{route('company.users.store')}}" method="POST"

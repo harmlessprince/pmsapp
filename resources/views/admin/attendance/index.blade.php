@@ -121,7 +121,7 @@
                         <th class="text-left text-small text-natural font-big  px-smaller py-smaller">Action Type</th>
                         <th class="text-left text-small text-natural font-big px-smaller py-smaller w-[15%]">Site</th>
                         <th class="text-left text-small text-natural font-big px-smaller py-smaller w-[17%]">Company</th>
-                        <th class="text-left text-small text-natural font-big px-smaller py-smaller">Distance</th>
+{{--                        <th class="text-left text-small text-natural font-big px-smaller py-smaller">Distance</th>--}}
                         <th class="text-left text-small text-natural font-big px-smaller py-smaller">Image</th>
                         <th class="text-left text-small text-natural font-big px-smaller py-smaller w-[13%]">Proximity</th>
                     </tr>
@@ -153,9 +153,9 @@
                             </td>
                             <td class="text-normal font-normal px-smaller">{{$attendance->site->name}}</td>
                             <td class="text-normal font-normal px-smaller">{{$attendance->company->display_name}}</td>
-                            <td class="text-normal font-normal px-smaller">{{$attendance->distance}} KM</td>
+{{--                            <td class="text-normal font-normal px-smaller">{{round($attendance->distance, 2)}} KM</td>--}}
                             <td class="text-normal font-normal px-smaller">
-                                <img src="{{ $attendance->user->profile_image ?? asset('assets/images/tableImg.png')}}"
+                                <img src="{{ $attendance->image ?? asset('assets/images/tableImg.png')}}"
                                      alt="dashboard"
                                      class=" w-[60px] h-[60px]"/>
                             </td>

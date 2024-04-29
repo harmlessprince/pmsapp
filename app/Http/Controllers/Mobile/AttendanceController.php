@@ -58,13 +58,14 @@ class AttendanceController extends Controller
 
 
         $alreadyCheckedIn = $this->attendanceRepository->modelQuery()
+            ->latest('attendance_date_time')
             ->where('attendance_date', $request->input('attendance_date'))
             ->where('user_id', $request->input('security_guard_id'))
-            ->where('action_type', AttendanceActionTypeEnum::CHECK_IN->value)->first();
+            ->where('action_type', AttendanceActionTypeEnum::CHECK_IN->value)->oldest('attendance_date_time')->first();
 
-        if ($alreadyCheckedIn && $request->input('action_type') == AttendanceActionTypeEnum::CHECK_IN->value) {
-            return sendError("Personnel already checked in for today", 400);
-        }
+//        if ($alreadyCheckedIn && $request->input('action_type') == AttendanceActionTypeEnum::CHECK_IN->value) {
+//            return sendError("Personnel already checked in for today", 400);
+//        }
 
         $alreadyCheckedOut = $this->attendanceRepository->modelQuery()
             ->where('attendance_date', $request->input('attendance_date'))
@@ -104,9 +105,14 @@ class AttendanceController extends Controller
             'proximity' => $proximity,
         ];
 
-        if ($request->input('action_type') == AttendanceActionTypeEnum::CHECK_OUT->value) {
-            $data['check_in_to_checkout_duration'] = Carbon::parse($alreadyCheckedIn->attendance_time)->diffInSeconds(Carbon::parse( $request->input('attendance_time')));
+        if ($request->input('action_type') == AttendanceActionTypeEnum::CHECK_OUT->value && !$alreadyCheckedIn) {
+            return sendError("Personnel can't checkout without checking in");
         }
+
+        if ($request->input('action_type') == AttendanceActionTypeEnum::CHECK_OUT->value && $alreadyCheckedIn) {
+            $data['check_in_to_checkout_duration'] = Carbon::parse($alreadyCheckedIn->attendance_time)->diffInSeconds(Carbon::parse($request->input('attendance_time')));
+        }
+
 
         $attendance = $this->attendanceRepository->create($data);
         return sendSuccess(['attendances' => $attendance], 'Attendance taken successfully');

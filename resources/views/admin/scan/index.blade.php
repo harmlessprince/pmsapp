@@ -120,7 +120,7 @@
                         </th>
                         <th class="text-left text-small text-natural font-big px-smaller py-smaller">Longitude</th>
                         <th class="text-left text-small text-natural font-big px-smaller py-smaller">Latitude</th>
-                        <th class="text-left text-small text-natural font-big px-smaller py-smaller">Distance</th>
+{{--                        <th class="text-left text-small text-natural font-big px-smaller py-smaller">Distance</th>--}}
                         <th class="text-left text-small text-natural font-big px-smaller py-smaller w-[18%]">Proximity
                         </th>
                         {{--                        <th class="text-left text-small text-natural font-big px-small py-smaller">Gap</th>--}}
@@ -139,7 +139,7 @@
                             <td class="text-left text-normal font-normal px-smaller">{{$scan->company->name}}</td>
                             <td class="text-left text-normal font-normal p-smaller">{{$scan->longitude ?? '-'}}</td>
                             <td class="text-left text-normal font-normal px-smaller">{{$scan->longitude ?? '-'}}</td>
-                            <td class="text-left text-normal font-normal px-smaller">{{$scan->distance}} km</td>
+{{--                            <td class="text-left text-normal font-normal px-smaller">{{round($scan->distance)}} km</td>--}}
                             <td class="text-left text-normal font-normal px-smaller">{{$scan->proximity}}</td>
                         </tr>
                     @empty

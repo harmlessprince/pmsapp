@@ -112,7 +112,7 @@ function secondsToHoursMinutes($seconds)
 
     // Calculate the remaining seconds
     // into minutes
-    $minutes = floor(($seconds % 3600) / 60);
+    $minutes = round(($seconds % 3600) / 60);
 
     return sprintf('%sh %sm', $hours, $minutes);
 

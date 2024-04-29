@@ -25,12 +25,12 @@
         <section class="pt-basic_padding">
             <!-- add site -->
             <div class="font-big text-big text-natural mb-2 flex flex-row justify-between">
-                <div>Added Users</div>
+                <div>Added Personnel</div>
                 <div
                     class="rounded-lg border border-primary_color flex flex-row items-center px-[16px] py-[10px] cursor-pointer">
                     <img src="{{asset('assets/images/plus.png')}}" class="w-[11px] h-[11px]" alt="plus"/>
                     <a href="{{route('company.users.create')}}">
-                        <span class="text-primary_color font-big text-normal ml-2"> Add User</span>
+                        <span class="text-primary_color font-big text-normal ml-2"> Add Personnel</span>
                     </a>
                 </div>
             </div>

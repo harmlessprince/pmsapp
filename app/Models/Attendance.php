@@ -4,9 +4,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Builder;
 use App\Scopes\FilterByCompanyIdScope;
 use App\Traits\SearchableTrait;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Support\Facades\Storage;
 
 class Attendance extends Model
 {
@@ -40,5 +42,17 @@ class Attendance extends Model
     public function scopeSite(Builder $query, int $siteID): void
     {
         $query->where('site_id', $siteID);
+    }
+
+    protected function Image(): Attribute
+    {
+        return Attribute::make(
+            get: function ($value) {
+                if (!str_contains($value, 'profile_images')) {
+                    return $value;
+                }
+                return Storage::url($value);
+            },
+        );
     }
 }

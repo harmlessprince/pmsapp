@@ -17,7 +17,7 @@
         <ul class="">
             <li>
                 <a href="{{route('company.users.index')}}"
-                   class="block pl-[16%] pt-2 text-natural font-headerWeight text-normal hover:text-primary_color {{ $isUserManagement ? 'text-primary_color' : 'text-natural'}}">Users
+                   class="block pl-[16%] pt-2 text-natural font-headerWeight text-normal hover:text-primary_color {{ $isUserManagement ? 'text-primary_color' : 'text-natural'}}">Personnel
                     management</a>
             </li>
             <li>

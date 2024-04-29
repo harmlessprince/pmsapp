@@ -104,7 +104,7 @@
                         <th class="text-left text-small text-natural font-big px-smaller py-smaller w-[10%]">Site</th>
                         <th class="text-left text-small text-natural font-big px-smaller py-smaller w-[10%]">Longitude</th>
                         <th class="text-left text-small text-natural font-big px-smaller py-smaller w-[10%]">Latitude</th>
-                        <th class="text-left text-small text-natural font-big px-smaller py-smaller w-[8%]">Distance</th>
+{{--                        <th class="text-left text-small text-natural font-big px-smaller py-smaller w-[8%]">Distance</th>--}}
                         <th class="text-left text-small text-natural font-big px-smaller py-smaller w-[20%]">Proximity</th>
                         <th class="text-left text-small text-natural font-big px-smaller py-smaller w-[7%]">Round</th>
                         <th class="text-left text-small text-natural font-big px-smaller py-smaller w-[7%]">Gap</th>
@@ -124,8 +124,8 @@
                             <td class="text-normal font-normal px-smaller">{{$scan->tag->name}}</td>
                             <td class="text-normal font-normal px-smaller">{{$scan->site->name}}</td>
                             <td class="text-normal font-normal p-smaller">{{$scan->longitude ?? '-'}}</td>
-                            <td class="text-normal font-normal px-smaller">{{$scan->longitude ?? '-'}}</td>
-                            <td class="text-normal font-normal px-smaller">{{$scan->distance}} km</td>
+                            <td class="text-normal font-normal px-smaller">{{$scan->latitude ?? '-'}}</td>
+{{--                            <td class="text-normal font-normal px-smaller">{{round($scan->distance)}} km</td>--}}
                             <td class="text-normal font-normal px-smaller">{{$scan->proximity}}</td>
                             <td class="text-normal font-normal px-smaller">{{$scan->round}}</td>
                             <td class="text-normal font-normal px-smaller">{{secondsToHoursMinutes($scan->gap_duration)}}</td>

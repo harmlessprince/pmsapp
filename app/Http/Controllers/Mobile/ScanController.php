@@ -23,10 +23,13 @@ class ScanController extends Controller
 
     public function index(Request $request): JsonResponse
     {
+        $user =  $request->user();
         $pipes = [
             new DateFilter('scan_date'),
         ];
-        $scanQuery = $this->scanRepository->modelQuery()->search();
+        $scanQuery = $this->scanRepository->modelQuery()->where('scans.site_id', $user->site_id)
+            ->search();
+
         $scanQuery = constructPipes($scanQuery, $pipes);
         $scans = $scanQuery
             ->select(['id', 'site_id', 'company_id', 'tag_id', 'scan_time', 'scan_date', 'scan_date_time'])
@@ -38,6 +41,7 @@ class ScanController extends Controller
     public function store(StoreScanRequest $request)
     {
         $user = $request->user();
+//        dd($user->company_id);
         $tag = $this->tagRepository->modelQuery()
             ->where('code', $request->input('tag_code'))
             ->first();
@@ -48,7 +52,10 @@ class ScanController extends Controller
         $proximity = deriveProximity($distance);
         $lastScanOnTag = $this->scanRepository->modelQuery()
             ->where('tag_id', $tag->id)
-            ->where('scan_date', $request->input('scan_date'))->first();
+            ->where('scan_date', $request->input('scan_date'))
+            ->latest('scans.scan_date_time')
+            ->first();
+
         $data = [
             'scan_date' => $request->input('scan_date'),
             'scan_time' => $request->input('scan_time'),
@@ -66,7 +73,7 @@ class ScanController extends Controller
         ];
         if ($lastScanOnTag) {
             $data['gap_duration'] = Carbon::parse($lastScanOnTag->scan_time)->diffInSeconds(Carbon::parse(($data['scan_time'])));
-            $data['round'] = $lastScanOnTag->roound + 1;
+            $data['round'] = $lastScanOnTag->round + 1;
         }
 
         $scan = $this->scanRepository->create($data);

@@ -84,7 +84,12 @@
                                 <td class="px-smaller py-small">
                                     {{$tag->name}}
                                 </td>
-                                <td class="px-smaller py-small">{{$tag->code}}</td>
+                                <td class="px-smaller py-small">
+                                    {{$tag->code}}
+                                    <span class="material-symbols-outlined cursor-pointer clipper w-[12px] h-[12px]"
+                                          data-clipboard-text="{{$tag->code}}"
+                                          id="{{$tag->id}}">content_copy</span>
+                                </td>
                                 <td class="px-smaller py-small">{{$tag->company->display_name}}</td>
                                 <td class=" px-smaller py-small">{{$tag->site->name}}</td>
                                 <td class="px-smaller py-small">QR Code</td>
@@ -115,10 +120,16 @@
     </section>
 @endsection
 @push('scripts')
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.11/clipboard.min.js"></script>
     <script>
         const filterDropdown = document.querySelector("#filter");
         const selectSite = document.getElementById("site_id");
         const selectCompany = document.getElementById("company_id");
+        var clipboard = new ClipboardJS('.clipper');
+        clipboard.on('success', function (e) {
+            alert("Tag code copied")
+            e.clearSelection();
+        });
         $(document).ready(function () {
 
             selectSite.disabled = true;

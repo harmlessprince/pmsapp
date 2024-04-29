@@ -136,6 +136,8 @@ class SiteController extends Controller
             $response = FileUploadService::uploadToS3($request->file('photo'), 'sites');
             $photoPath = $response->path;
         }
+
+
         $site->inspector()->update([
             'email' => $request->input('email'),
             'username' => $request->input('email'),
@@ -151,8 +153,15 @@ class SiteController extends Controller
             'maximum_number_of_rounds' => $request->input('maximum_number_of_rounds'),
             'longitude' => $request->input('longitude'),
             'latitude' => $request->input('latitude'),
+            'status' => $request->input('status'),
             'photo' => $photoPath
         ]);
+
+        if ($site->wasChanged('status')){
+            dd('status changed');
+        }
+
+
 
         return redirect()->route('company.sites.index')->with('success', 'Site Updated Successfully');
     }
