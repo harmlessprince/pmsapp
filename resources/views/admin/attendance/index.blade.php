@@ -15,7 +15,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.1/datepicker.min.js"></script>
 @endpush
 @section('content')
-
     <!-- Dashboard content -->
     <section class="">
         <x-filter-card :actionUrl="route('admin.attendance.index')" :canSearch="true"
@@ -157,7 +156,11 @@
                             <td class="text-normal font-normal px-smaller">
                                 <img src="{{ $attendance->image ?? asset('assets/images/tableImg.png')}}"
                                      alt="dashboard"
-                                     class=" w-[60px] h-[60px]"/>
+                                     class=" w-[60px] h-[60px]"
+                                     data-modal-target="imageViewModalElement"
+                                     data-modal-toggle="imageViewModalElement"
+                                     onclick='showImageModal("{{$attendance->image}}")'
+                                />
                             </td>
                             <td class="text-normal font-normal p-smaller">{{$attendance->proximity}}</td>
                         </tr>
@@ -188,6 +191,8 @@
                 getCompanySites(companyParamValue)
             }
 
+            imageViewModalObject = new Flowbite.default.Modal(imageViewModalElement)
+
         });
 
         selectCompany.addEventListener("change", function (e) {
@@ -199,5 +204,6 @@
             document.getElementById("search-form").reset();
             window.location.replace(location.pathname);
         }
+
     </script>
 @endpush

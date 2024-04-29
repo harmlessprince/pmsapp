@@ -66,7 +66,7 @@
 <main class="font-primary relative">
     @include('partials.asides.desktop.desktop')
     @include('partials.asides.mobile.mobile')
-
+    @include('image-view-modal')
     <section class="relative bg-db w-[85%] ml-[15%] h-screen border-natural max-lg:w-[100%] max-lg:ml-0">
         @include('partials.header')
         <section class="px-basic_padding pt-10% pb-5%">
@@ -255,6 +255,8 @@
     const longitudeElm = document.getElementById("longitude")
     const latitudeElm = document.getElementById("latitude")
     const searchLocationMapElm = document.getElementById('searchLocationMap')
+    const imageViewModalElement = document.getElementById('imageViewModalElement');
+    var imageViewModalObject = null;
     let autocompleteSearchLocation = null;
     const searchLocation = {
         id: "",
@@ -275,7 +277,7 @@
             autocompleteSearchLocation.addListener("place_changed", onSearchLocationAddressChange)
         }
         if (searchLocationMapElm) {
-            let lat = !isNaN(parseFloat(latitudeElm?.value)) ?  parseFloat(latitudeElm?.value) : 0
+            let lat = !isNaN(parseFloat(latitudeElm?.value)) ? parseFloat(latitudeElm?.value) : 0
             let long = !isNaN(parseFloat(longitudeElm?.value)) ? parseFloat(longitudeElm?.value) : 0
             var initialLatLng = {lat: lat, lng: long};
             // console.log(initialLatLng)
@@ -322,7 +324,11 @@
 
     document.addEventListener("DOMContentLoaded", function (event) {
         initAutocomplete()
+        imageViewModalObject = new Flowbite.default.Modal(imageViewModalElement)
     });
+
+
+
 </script>
 @stack('scripts')
 
