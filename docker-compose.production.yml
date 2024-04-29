@@ -13,7 +13,7 @@ services:
     restart: unless-stopped
     tty: true
     environment:
-      SERVICE_NAME: pmsapp
+      SERVICE_NAME: pmsapp_poduction
       SERVICE_TAGS: production
       # Add production-specific environment variables here
     working_dir: /var/www
