@@ -16,7 +16,7 @@
           href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0"/>
         <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.css" rel="stylesheet" />
         <link
-            href="https://fonts.googleapis.com/css2?family=Cabin:ital,wght@0,500;0,600;0,700;1,400&family=Inter:wght@400;500;600;700&display=swap"
+            href="https://fonts.googleapis.com/css2?family=Cabin:ital,wght@0,500;0,600;0,700;1,400&family=Inter:wght@400;500;600;700;800&display=swap"
             rel="stylesheet">
             <link rel="apple-touch-icon" sizes="180x180" href="{{asset('assets/images/favicon_io/apple-touch-icon.png')}}">
     <link rel="icon" type="image/png" sizes="32x32" href="{{asset('assets/images/favicon_io/favicon-32x32.png')}}">
@@ -69,7 +69,11 @@
                 <img src="/assets/landing_images/logo_name.png" class="" alt="perfraka logo_name">
             </a>
             <div class="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
-                <button type="button" class="text-[#ffffff] bg-col2 focus:ring-4 focus:outline-none font-normal rounded-lg text-size1 px-5 py-2 text-center">Login</button>
+                <a href="{{route('login')}}">
+                <button type="button" class="text-[#ffffff] bg-col2 outline-none focus:outline-none font-normal rounded-lg text-size1 px-5 py-2 text-center">
+                Login
+                </button>
+                </a>
                 <button data-collapse-toggle="navbar-sticky" type="button" class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden  focus:outline-none " aria-controls="navbar-sticky" aria-expanded="false">
                 <span class="sr-only">Open main menu</span>
                 <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14">
@@ -80,62 +84,64 @@
             <div class="items-center justify-between hidden w-full md:flex md:w-auto md:order-1" id="navbar-sticky">
             <ul class="flex flex-col p-4 md:p-0 mt-4 font-medium border border-gray-100 rounded-lg bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
                 <li>
-                    <a href="" class="block py-2 px-3 text-gray-900 rounded md:bg-transparent md:text-size1 md:text-col1 md:hover:text-col3 md:p-0 font-normal">Home</a>
+                    <a href="{{route('welcome')}}" class="block py-2 px-3 text-gray-900 rounded md:bg-transparent md:text-size1 md:text-col1 md:hover:text-col3 md:p-0 font-normal">Home</a>
                 </li>
                 <li>
-                <a href="#" class="block py-2 px-3 text-gray-900 rounded md:bg-transparent md:text-size1 md:text-col1 md:hover:text-col3 md:p-0 font-normal">About us</a>
+                <a href="{{route('about')}}" class="block py-2 px-3 text-gray-900 rounded md:bg-transparent md:text-size1 md:text-col1 md:hover:text-col3 md:p-0 font-normal">About us</a>
                 </li>
                 <li>
-                    <a href="#" class="block py-2 px-3 text-gray-900 rounded md:bg-transparent md:text-size1 md:text-col1 md:hover:text-col3 md:p-0 font-normal">FAQ</a>
-                </li>
-                <li>
-                    <a href="#" class="block py-2 px-3 text-gray-900 rounded md:bg-transparent md:text-size1 md:text-col1 md:hover:text-col3 md:p-0 font-normal">Contact us</a>
+                    <a href="{{route('faq')}}" class="block py-2 px-3 text-gray-900 rounded md:bg-transparent md:text-size1 md:text-col1 md:hover:text-col3 md:p-0 font-normal">FAQ</a>
                 </li>
             </ul>
             </div>
             </div>
         </nav>
 
-        <section class="bg-col4 text-center relative mt-[60px] pb-[12em] relative">
-            <div class="h-[15px] w-[15px] rounded-full bg-[#1A544D] absolute top-[45px] left-[12%]"></div>
+        <section class="bg-col4 text-center relative mt-[60px] pb-[12em] max-mobile:pb-[7em] relative">
+            <div class="h-[15px] w-[15px] rounded-full bg-[#1A544D] absolute top-[45px] max-mobile:top-[20%] left-[12%] max-mobile:left-[10%]"></div>
             <div class="h-[13px] w-[13px] rounded-full bg-[#1A544D] absolute top-[40px] left-[40%]"></div>
             <div class="h-[15px] w-[15px] rounded-full bg-[#268AE6] absolute top-[40px] right-[15%]"></div>
-            <div class="h-[15px] w-[15px] rounded-full bg-[#E63026] absolute top-[145px] right-[36%]"></div>
+            <div class="h-[15px] w-[15px] rounded-full bg-[#E63026] absolute top-[145px] right-[36%] max-mobile:right-[25%]"></div>
             <div class="h-[13px] w-[13px] rounded-full bg-[#1A544D] absolute top-[235px] right-[36%]"></div>
             <div class="h-[13px] w-[13px] rounded-full bg-[#26E6A1] absolute bottom-[200px] right-[26%]"></div>
 
-            <div class="absolute bottom-[100px] right-[15%] w-[70%] flex flex-row justify-between">
+            <div class="absolute bottom-[100px] right-[15%] w-[70%] flex flex-row justify-between max-mobile:hidden">
             <img src="/assets/landing_images/plan1.png" class="w-[227px] h-[269px]" alt="plan1">
             <img src="/assets/landing_images/plan2.png" class="w-[227px] h-[269px]" alt="plan1">
             </div>
 
-           <div class="absolute top-[45px] left-0 w-full">
-            <img src="/assets/landing_images/round.png" class="mx-auto w-[31em] h-[31em]" alt="perfraka logo">
+            {{-- circle --}}
+           <div class="absolute top-[45px] max-mobile:top-[40%] left-0 w-full">
+            <img src="/assets/landing_images/round.png" class="mx-auto w-[31em] h-[31em] max-mobile:w-[20.25em] max-mobile:h-[20.25em]" alt="perfraka logo">
            </div>
-            <div class="font-bigger text-[48px] text-col1 pt-[2em] w-[60%] mx-auto">
+            <div class="font-bigger text-[3em] max-mobile:text-[2.25em] text-col1 pt-[2em] w-[60%] max-mobile:w-[90%] mx-auto">
             Take Control of Security Management with <span class="text-col3">PERFTRAKA</span>
             </div>
-            <div class="w-[32em] mx-auto text-[1.125em] text-[#54576F] font-normal">
+            <div class="w-[32em] max-mobile:w-[90%] mx-auto text-[1.125em] text-[#54576F] font-normal">
                 Manage security tasks seamlessly, from record-keeping to attendance tracking.
             </div>
 
             <div class="mt-5">
-                <button class="rounded-[8px] px-4 py-1 border border-[#E63026] mr-5 text-[#E63026] text-size1 font-[600]">Learn more</button>
+                <button class="rounded-[8px] px-4 py-1 border border-[#E63026] h-[2.75em] mr-5 text-[#E63026] text-size1 font-[600]">Learn more</button>
                 <span class="text-[#C52216] text-[1em] font-[600] text-size1">Request for Demo</span>
             </div> 
-            <div class="absolute -bottom-[52%] left-0 w-full flex flex-row justify-center">
-            <img src="/assets/landing_images/mobile2.png" class="" alt="perfraka logo">
+            <div class="absolute -bottom-[52%] left-0 w-full flex flex-row justify-center max-mobile:hidden">
+                <img src="/assets/landing_images/mobile2.png" class="" alt="perfraka logo">
+            <img src="/assets/landing_images/mobile.png" class="max-mobile:w-[80%] max-mobile:h-[205px] mobile:hidden" alt="perfraka logo">
+            </div>
+            <div class="absolute -bottom-[12%] left-0 w-full flex flex-row justify-center mobile:hidden">
+            <img src="/assets/landing_images/mobile.png" class="max-mobile:w-[19em] max-mobile:h-[160px]" alt="perfraka logo">
             </div>
         </section>
-        <section class="w-full h-[11em] bg-col3">
+        <section class="w-full h-[11em] max-mobile:h-[7.3em] bg-col3">
         </section>
 
-        <section class="py-[5%] px-[15%] bg-col4">
+        <section class="py-[5%] px-[15%] max-mobile:px-[5%] bg-col4">
             <div class="text-center text-normal font-[500] text-col5">Learn about PERFTRAKA</div>
-            <header class="font-[700] text-header text-col3 text-center">
+            <header class="font-[700] text-header max-mobile:text-[2em] text-col3 text-center">
                 <span class="px-1 pb-2 relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:h-[8px] after:w-full after:bg-[#E63026] after:rounded-[4px]">About Us</span>
             </header>
-            <div class="py-[1em] flex flex-row">
+            <div class="py-[1em] flex flex-row max-mobile:flex-col">
                 <div class="pt-[5%] text-size1 font-normal">
                     <p>
                     At PERFTRAKA, we specialize in providing cutting-edge Location Capture, 
@@ -158,26 +164,27 @@
                         and drive business success.Experience the power of streamlined operations and enhanced security with PERFTRAKA.
                     </p>
                 </div>
-                <img src="/assets/landing_images/mobile3.png" class="w-[26.5em] h-[29.2em] ml-[2em]" alt="perfraka mobile">
+                <img src="/assets/landing_images/mobile3.png" class="w-[26.5em] h-[29.2em]  max-mobile:h-[23em] ml-[2em] max-mobile:ml-0" alt="perfraka mobile">
             </div>
         </section>  
 
-        <section  class="py-[5%] px-[15%]">
+            {{-- features --}}
+        <section  class="py-[5%] px-[15%]  max-mobile:px-[5%]">
             <div class="text-center text-normal font-[500] text-col5">What’s special on our App</div>
             <header class="font-[700] text-header text-col3 text-center">
                 <span class="px-1 pb-2 relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:h-[8px] after:w-full after:bg-[#E63026] after:rounded-[4px]">Features </span>
             </header>
-            <div class="flex flex-row py-[2em]">
-            <div class='w-[48%] relative'>
+            <div class="flex flex-row  max-mobile:flex-col py-[2em]">
+            <div class='w-[48%] relative max-mobile:hidden'>
             <div class="absolute w-full text-center bottom-[5%] left-0 flex flex-row justify-center z-10">
             <img src="/assets/landing_images/mobile4.png" class="z-5 w-[18.375em] h-[39.625em]" alt="mobile">
             </div>
             <div class="h-[22em] w-full bg-col3 absolute bottom-0 left-0 -z-10"></div>
         </div>
 
-            <div class="ml-5 w-[48%]">
-            <div class="flex flex-row justify-end w-full">
-                <div class="w-[15em] h-[19em] py-5 px-3 rounded-[8px] border border-[#E7E8E7]">
+            <div class="ml-5  max-mobile:ml-0 w-[48%] w-full">
+            <div class="flex flex-row  max-mobile:flex-col justify-end w-full">
+                <div class="w-[15em]  max-mobile:w-full h-[19em] py-5 px-3 rounded-[8px] border border-[#E7E8E7]">
                     <div class="rounded-full w-[50px] h-[50px] bg-col3 flex flex-row items-center justify-center">
                     <img src="/assets/landing_images/code.png" class="w-[1.9375em] h-[1.9375em] " alt="perfraka logo">
                     </div>
@@ -192,7 +199,7 @@
                     </div>
                 </div>
 
-                <div class="w-[15em] h-[19em] py-5 px-3 rounded-[8px] border border-[#E7E8E7] ml-4">
+                <div class="w-[15em]  max-mobile:w-full h-[19em] py-5 px-3 rounded-[8px] border border-[#E7E8E7] ml-4  max-mobile:ml-0  max-mobile:mt-5">
                     <div class="rounded-full w-[50px] h-[50px] bg-col3 flex flex-row items-center justify-center">
                     <img src="/assets/landing_images/plus.png" class="w-[1.9375em] h-[1.9375em] " alt="perfraka logo">
                     </div>
@@ -208,8 +215,8 @@
             </div>
 
             {{-- flex2 --}}
-            <div class="flex flex-row justify-end w-full mt-4">
-                <div class="w-[15em] h-[19em] py-5 px-3 rounded-[8px] border border-[#E7E8E7]">
+            <div class="flex flex-row  max-mobile:flex-col justify-end w-full mt-4  max-mobile:mt-5">
+                <div class="w-[15em]  max-mobile:w-full h-[19em] py-5 px-3 rounded-[8px] border border-[#E7E8E7]">
                     <div class="rounded-full w-[50px] h-[50px] bg-col3 flex flex-row items-center justify-center">
                     <img src="/assets/landing_images/user.png" class="w-[1.9375em] h-[1.9375em] " alt="perfraka logo">
                     </div>
@@ -224,7 +231,7 @@
                     </div>
                 </div>
 
-                <div class="w-[15em] h-[19em] py-5 px-3 rounded-[8px] border border-[#E7E8E7] ml-4">
+                <div class="w-[15em] max-mobile:w-full h-[19em] py-5 px-3 rounded-[8px] border border-[#E7E8E7] ml-4 max-mobile:ml-0 max-mobile:mt-5">
                     <div class="rounded-full w-[50px] h-[50px] bg-col3 flex flex-row items-center justify-center">
                     <img src="/assets/landing_images/user.png" class="w-[1.9375em] h-[1.9375em] " alt="perfraka logo">
                     </div>
@@ -242,10 +249,11 @@
             </div>
             </div>
         </section>
+
         {{-- control and manage --}}
-        <section class="bg-col4 w-full h-[23.5em]">
-            <div class="w-full flex flex-row justify-between pl-[15%] pr-[8%] bg-col3">
-                <div class="w-[55%] text-[#ffffff] py-[2em]">
+        <section class="bg-col4 w-full h-[23.5em] max-mobile:h-[100%] max-mobile:h-[100%]  max-mobile:pb-5">
+            <div class="w-full flex flex-row  max-mobile:flex-col justify-between pl-[15%]  max-mobile:pl-0  pr-[8%]  max-mobile:pr-0 bg-col3">
+                <div class="w-[55%]  max-mobile:w-full  max-mobile:px-[5%] text-[#ffffff] py-[2em]">
                 <div class="font-bigger text-[2.25em]">
                 Control and manage all your operations from one convenient hub With &#160; PERFTRAKA
                 </div>
@@ -253,15 +261,15 @@
                     <button class="h-[44px] px-3 bg-[#E63026] rounded-[8px] text-size1 font-big">Contact us</button>
                 </div>
                 </div>
-                <div class="relative">
-                 <img src="/assets/landing_images/macbook.png" class="w-[31.3125em] h-[20.875em]" alt="mackbook"> 
-                  <img src="/assets/landing_images/mobile4.png" class="absolute bottom-[5%] left-0 w-[93px] h-[199px]" alt="mobile4">
+                <div class="relative  max-mobile:px-[5%] m max-mobile:pb-5">
+                 <img src="/assets/landing_images/macbook.png" class="w-[31.3125em] max-mobile:w-[22.25em] h-[20.875em] max-mobile:h-[15.625em]" alt="mackbook"> 
+                  <img src="/assets/landing_images/mobile4.png" class="absolute bottom-[5%]  max-mobile:bottom-[13%] left-0  max-mobile:left-[5%] w-[93px] max-mobile:w-[4.2em] h-[199px] max-mobile:h-[8.875em]" alt="mobile4">
                 </div>
-            </div>
-            
+            </div>        
         </section>
 
-        <section  class="py-[5%] px-[15%]">
+            {{-- get in touch --}}
+        <section  class="py-[5%] px-[15%]  max-mobile:px-[5%]">
             <header class="font-[800] text-[2.25em] text-center">Get In touch with us</header>
             <div class="text-center font-normal text-[#667085]">We’d love to hear from you. Please fill out this form.</div>
 
@@ -324,7 +332,7 @@
         </section>
 
         {{-- frequently asked --}}
-        <section class="bg-col4 py-[5%] px-[15%]">
+        <section class="bg-col4 py-[5%] px-[15%]  max-mobile:px-[5%]">
             <header class="font-bigger text-header text-center">Frequently Asked <span class="text-[#C52216]">Questions</span> 
                 <div class="relative w-full my-5">
                     <input type="search" placeholder="Type your Questions" 
@@ -376,8 +384,8 @@
                 </details>      
             </section>
 
-            <footer class="flex flex-row items-center bg-col3 px-[15%] pt-[3%] pb-[3.5%] text-[#fff]">
-                <div class="w-[19em]">
+            <footer class="flex flex-row  max-mobile:flex-col items-center bg-col3 px-[15%]  max-mobile:px-[5%] pt-[3%] max-mobile:py-[10%] pb-[3.5%] text-[#fff]">
+                <div class="w-[19em] max-mobile:w-full">
                 <div class="flex flex-row items-center">
                 <img src="/assets/landing_images/logo2.png" class="w-[40px] h-[54px] mr-1" alt="perfraka logo">
                 <img src="/assets/landing_images/logo_name2.png" class="w-[103px] h-[11px]" alt="perfraka logo_name">
@@ -387,9 +395,9 @@
                 in providing cutting-edge Location Capture, Attendance.
                 </div>
                 </div>
-                <div class="w-[23em] mx-20">
+                <div class="w-[23em]  max-mobile:w-full mx-20 max-mobile:mx-0  max-mobile:my-10">
                     <header class="text-center font-bigger text-size1">Quick Links</header>
-                    <div class="flex flex-row justify-around py-1 font-normal text-size1">
+                    <div class="flex flex-row justify-around  max-mobile:justify-between py-1 font-normal text-size1">
                         <span>Home</span>
                         <span>About us</span>
                         <span>FAQ</span>

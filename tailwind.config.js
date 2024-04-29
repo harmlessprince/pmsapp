@@ -15,6 +15,9 @@ export default {
     ],
     theme: {
         extend: {
+            screens: {
+                'mobile': '960px'
+            },
 
             colors: {
                 primary_color: '#3DC9B7',

@@ -69,7 +69,11 @@
                 <img src="/assets/landing_images/logo_name.png" class="" alt="perfraka logo_name">
             </a>
             <div class="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
-                <button type="button" class="text-[#ffffff] bg-col2 focus:ring-4 focus:outline-none font-normal rounded-lg text-size1 px-5 py-2 text-center">Login</button>
+                <a href="{{route('login')}}">
+                    <button type="button" class="text-[#ffffff] bg-col2 outline-none focus:outline-none font-normal rounded-lg text-size1 px-5 py-2 text-center">
+                    Login
+                    </button>
+                    </a>
                 <button data-collapse-toggle="navbar-sticky" type="button" class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden  focus:outline-none " aria-controls="navbar-sticky" aria-expanded="false">
                 <span class="sr-only">Open main menu</span>
                 <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14">
@@ -80,16 +84,13 @@
             <div class="items-center justify-between hidden w-full md:flex md:w-auto md:order-1" id="navbar-sticky">
             <ul class="flex flex-col p-4 md:p-0 mt-4 font-medium border border-gray-100 rounded-lg bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
                 <li>
-                    <a href="" class="block py-2 px-3 text-gray-900 rounded md:bg-transparent md:text-size1 md:text-col1 md:hover:text-col3 md:p-0 font-normal">Home</a>
+                    <a href="{{route('welcome')}}" class="block py-2 px-3 text-gray-900 rounded md:bg-transparent md:text-size1 md:text-col1 md:hover:text-col3 md:p-0 font-normal">Home</a>
                 </li>
                 <li>
-                <a href="#" class="block py-2 px-3 text-gray-900 rounded md:bg-transparent md:text-size1 md:text-col1 md:hover:text-col3 md:p-0 font-normal">About us</a>
+                <a href="{{route('about')}}" class="block py-2 px-3 text-gray-900 rounded md:bg-transparent md:text-size1 md:text-col1 md:hover:text-col3 md:p-0 font-normal">About us</a>
                 </li>
                 <li>
-                    <a href="#" class="block py-2 px-3 text-gray-900 rounded md:bg-transparent md:text-size1 md:text-col1 md:hover:text-col3 md:p-0 font-normal">FAQ</a>
-                </li>
-                <li>
-                    <a href="#" class="block py-2 px-3 text-gray-900 rounded md:bg-transparent md:text-size1 md:text-col1 md:hover:text-col3 md:p-0 font-normal">Contact us</a>
+                    <a href="{{route('faq')}}" class="block py-2 px-3 text-gray-900 rounded md:bg-transparent md:text-size1 md:text-col1 md:hover:text-col3 md:p-0 font-normal">FAQ</a>
                 </li>
             </ul>
             </div>
@@ -99,16 +100,16 @@
         <div class="mt-[1.5em] h-[30vh] w-full flex flex-row items-center justify-center font-bigger text-[#fff] text-[3em] bg-col3">FAQ</div>
 
         {{-- frequently asked --}}
-        <section class="bg-col4 py-[5%] px-[15%]">
+        <section class="bg-col4 py-[5%] px-[15%]  max-mobile:px-[5%]">
+            <header class="font-bigger text-header text-center">Frequently Asked <span class="text-[#C52216]">Questions</span> 
                 <div class="relative w-full my-5">
                     <input type="search" placeholder="Type your Questions" 
                     class="w-full pr-[75px] bg-[#fff] text-eighteen font-big h-[3.75em] rounded-[10px] outline-none border border-[#838383]"
                     />
-                    <div class="flex flex-row items-center justify-center  absolute top-[1px] right-0 bg-col3 w-[64px] h-[66px] rounded-tr-[10px] rounded-br-[10px]">
+                    <div class="flex flex-row items-center justify-center absolute top-[1px] right-0 bg-col3 w-[64px] h-[66px] rounded-tr-[10px] rounded-br-[10px]">
                     <span class="material-symbols-outlined mr-4 w-[18px] h-[18px] text-[#fff] ">Search</span>
                     </div>
                 </div>
-                {{-- cursor-pointer rounded-tl-[8px] rounded-tr-[8px] bg-col3 text-eighteen text-[#fff] p-2 flex flex-row justify-between items-center --}}
                 <details class="group my-5">
                     <summary id="group1" class="faq2">
                         <span class="font-[500]">How can i get the app</span>
@@ -150,8 +151,8 @@
                 </details>      
             </section>
 
-            <footer class="flex flex-row items-center bg-col3 px-[15%] pt-[3%] pb-[3.5%] text-[#fff]">
-                <div class="w-[19em]">
+            <footer class="flex flex-row  max-mobile:flex-col items-center bg-col3 px-[15%]  max-mobile:px-[5%] pt-[3%] max-mobile:py-[10%] pb-[3.5%] text-[#fff]">
+                <div class="w-[19em] max-mobile:w-full">
                 <div class="flex flex-row items-center">
                 <img src="/assets/landing_images/logo2.png" class="w-[40px] h-[54px] mr-1" alt="perfraka logo">
                 <img src="/assets/landing_images/logo_name2.png" class="w-[103px] h-[11px]" alt="perfraka logo_name">
@@ -161,9 +162,9 @@
                 in providing cutting-edge Location Capture, Attendance.
                 </div>
                 </div>
-                <div class="w-[23em] mx-28">
+                <div class="w-[23em]  max-mobile:w-full mx-20 max-mobile:mx-0  max-mobile:my-10">
                     <header class="text-center font-bigger text-size1">Quick Links</header>
-                    <div class="flex flex-row justify-around py-1 font-normal text-size1">
+                    <div class="flex flex-row justify-around  max-mobile:justify-between py-1 font-normal text-size1">
                         <span>Home</span>
                         <span>About us</span>
                         <span>FAQ</span>
