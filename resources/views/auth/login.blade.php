@@ -43,6 +43,6 @@
             <x-input-error :messages="$errors->get('password')" class="mt-2"/>
         </div>
 
-        <button class="bg-primary_color text-natural h-11 w-full rounded-lg text-base font-semibold">Log in</button>
+        <button class="bg-primary_color text-natural h-11 w-full rounded-lg text-base font-semibold" id="allBtn">Log in</button>
     </form>
 @endsection

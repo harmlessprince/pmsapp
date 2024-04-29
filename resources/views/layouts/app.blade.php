@@ -86,6 +86,16 @@
     const mobileSideBar = document.querySelector("#mobileAside");
     const ajaxSpan = document.querySelector("#ajax_span");
     const ajaxLoader = document.querySelector("#ajax_loader");
+    // const allBtn = document.querySelector("#allBtn")
+
+    // // const onClickingBtn = () => {
+    // //     console.log("wetin dey happen")
+    // //     allBtn.innerHTML = "Sending.."
+    // //     allBtn.disabled = true
+
+    // }
+
+    // allBtn.addEventListener("click", () => console.log('wetin dey happen'));
 
 
     const toggleSideBar = () => {
@@ -327,7 +337,10 @@
         imageViewModalObject = new Flowbite.default.Modal(imageViewModalElement)
     });
 
-
+    document.getElementById("allBtn").addEventListener("click", function(){
+        document.getElementById("allBtn").innerHTML = "seding..."
+        document.getElementById("allBtn").disabled = true
+     });
 
 </script>
 @stack('scripts')

@@ -15,6 +15,9 @@ export default {
     ],
     theme: {
         extend: {
+            screens: {
+                'mobile': '960px'
+            },
 
             colors: {
                 primary_color: '#3DC9B7',
@@ -39,7 +42,12 @@ export default {
                 error: "#ed64a6",
                 filter: "#010501",
                 filter_text: '#B4B5B4',
-                filterInput: "#D0D5DD"
+                filterInput: "#D0D5DD",
+                col1: "#000000",
+                col2: "#E63026",
+                col3: "#1A544D",
+                col4: "#ECFAF8",
+                col5: "#565C56"
             },
             padding: {
                 "1%": '1%',
@@ -60,6 +68,9 @@ export default {
                 primary: ['Inter'],
             },
             fontSize: {
+                size1: '1em',
+                size2: "0.875em",
+                header: "2.25em",
                 big: "20px",
                 bigger: "30px",
                 normal: "14px",
