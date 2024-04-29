@@ -342,7 +342,6 @@
                     <span class="material-symbols-outlined mr-4 w-[18px] h-[18px] text-[#fff] ">Search</span>
                     </div>
                 </div>
-                {{-- cursor-pointer rounded-tl-[8px] rounded-tr-[8px] bg-col3 text-eighteen text-[#fff] p-2 flex flex-row justify-between items-center --}}
                 <details class="group my-5">
                     <summary id="group1" class="faq2">
                         <span class="font-[500]">How can i get the app</span>
