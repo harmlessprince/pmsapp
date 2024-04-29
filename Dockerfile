@@ -27,8 +27,7 @@ RUN docker-php-ext-configure pgsql -with-pgsql=/usr/local/pgsql \
 
 # Install Node.js 16 and npm
 RUN curl -fsSL https://deb.nodesource.com/setup_18.x | bash - \
-    && apt-get install -y nodejs \
-    npm
+    && apt-get install -y nodejs
 
 RUN echo "Node: " && node -v
 RUN echo "NPM: " && npm -v
