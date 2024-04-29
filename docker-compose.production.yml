@@ -29,7 +29,7 @@ services:
     restart: unless-stopped
     tty: true
     ports:
-      - "8080:80"  # Different port for production
+      - "5656:80"  # Different port for production
     volumes:
       - ./:/var/www
       - ./docker-compose/nginx/conf.d/:/etc/nginx/conf.d/
