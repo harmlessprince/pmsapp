@@ -341,6 +341,12 @@
         document.getElementById("allBtn").innerHTML = "seding..."
         document.getElementById("allBtn").disabled = true
      });
+    function showImageModal(imageUrl) {
+        const imageElement = document.getElementById('image_view_in_modal')
+        imageElement.src = imageUrl
+    }
+
+
 
 </script>
 @stack('scripts')

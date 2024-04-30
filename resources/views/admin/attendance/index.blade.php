@@ -191,7 +191,6 @@
                 getCompanySites(companyParamValue)
             }
 
-            imageViewModalObject = new Flowbite.default.Modal(imageViewModalElement)
 
         });
 
