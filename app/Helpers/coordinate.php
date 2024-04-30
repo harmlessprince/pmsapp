@@ -29,9 +29,10 @@ if (!function_exists('calculateDistance')) {
 
 function deriveProximity(int|float $distance): string
 {
-    if ($distance <= 10) {
+    $distanceInMeter = $distance / 1000;
+    if ($distanceInMeter <= 0.010) {
         return "At the Expected Location";
-    } elseif ($distance <= 50) {
+    } elseif ($distanceInMeter <= 0.050) {
         return "Near the Expected Location";
     } else {
         return "Not at the Expected Location";
