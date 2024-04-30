@@ -82,7 +82,11 @@
                                 <td class="text-natural px-small py-small flex flex-row items-center">
                                     <div class="w-[40px] h-[40px] rounded-full">
                                         <img src="{{$user->profile_image}}" alt="Profile Image"
-                                             class="rounded-full w-[40px] h-[40px]">
+                                             class="rounded-full w-[40px] h-[40px]"
+                                             data-modal-target="imageViewModalElement"
+                                             data-modal-toggle="imageViewModalElement"
+                                             onclick='showImageModal("{{$user->profile_image}}")'
+                                        >
                                     </div>
                                     <span class="ml-2">{{$user->first_name}} {{$user->last_name}}</span>
                                 </td>

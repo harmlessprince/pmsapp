@@ -162,7 +162,11 @@
                             <td class="text-normal font-normal px-smaller">
                                 <img src="{{ $attendance->image ?? asset('assets/images/tableImg.png')}}"
                                      alt="dashboard"
-                                     class=" w-[60px] h-[60px]" />
+                                     class=" w-[60px] h-[60px]"
+                                     data-modal-target="imageViewModalElement"
+                                     data-modal-toggle="imageViewModalElement"
+                                     onclick='showImageModal("{{$attendance->image}}")'
+                                />
                             </td>
                             <td class="text-normal font-normal px-smaller">{{$attendance->proximity}}</td>
                         </tr>
