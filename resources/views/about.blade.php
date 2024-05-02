@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="scroll-smooth">
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Laravel</title>
+        <title>perftraka about page</title>
 
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">
@@ -28,7 +28,7 @@
     </head>
     <body class="font-primary">
         <main>
-        <nav class="bg-white dark:bg-gray-900 fixed w-full z-20 top-0 start-0 border-b border-gray-200 dark:border-gray-600">
+        <nav class="bg-white fixed w-full z-20 top-0 start-0 border-b border-gray-200">
             <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
             <a href="https://flowbite.com/" class="flex items-center space-x-3 rtl:space-x-reverse md:ml-[5%]">
                 <img src="/assets/landing_images/logo.png" class="h-8" alt="perfraka logo">
@@ -65,12 +65,12 @@
 
         <div class="mt-[1.5em] h-[30vh] w-full flex flex-row items-center justify-center font-bigger text-[#fff] text-[3em] bg-col3"> ABOUT US</div>
         
-        <section class="py-[5%] px-[15%] max-mobile:px-[5%] bg-col4">
+        <section class="pt-[5%] px-[15%] max-mobile:px-[5%] bg-col4">
             <div class="text-center text-normal font-[500] text-col5">Learn about PERFTRAKA</div>
             <header class="font-[700] text-header max-mobile:text-[2em] text-col3 text-center">
                 <span class="px-1 pb-2 relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:h-[8px] after:w-full after:bg-[#E63026] after:rounded-[4px]">About Us</span>
             </header>
-            <div class="py-[1em] flex flex-row max-mobile:flex-col">
+            <div class="pt-[1em] flex flex-row max-mobile:flex-col">
                 <div class="pt-[5%] text-size1 font-normal">
                     <p>
                     At PERFTRAKA, we specialize in providing cutting-edge Location Capture, 
@@ -88,16 +88,16 @@
                         your unique requirements.
                     </p>
                     <p>
-                        Say goodbye to manual tracking methods and inefficiencies – with [Company Name], 
+                        Say goodbye to manual tracking methods and inefficiencies – with PERFTRAKA, 
                         you can centralize your operations and gain full visibility into all activities, empowering you to make informed decisions 
                         and drive business success.Experience the power of streamlined operations and enhanced security with PERFTRAKA.
                     </p>
                 </div>
-                <img src="/assets/landing_images/mobile3.png" class="w-[26.5em] h-[29.2em]  max-mobile:h-[23em] ml-[2em] max-mobile:ml-0" alt="perfraka mobile">
+                <img src="/assets/landing_images/mobile3.png" class="mobile:mt-[3.5em] w-[26em] h-[29.2em] max-mobile:h-[23em] ml-[5em] max-mobile:ml-0" alt="perfraka mobile">
             </div>
         </section>  
 
-        <section  class="py-[5%] px-[15%]  max-mobile:px-[5%]">
+        <section id="getInTouch"  class="py-[5%] px-[15%]  max-mobile:px-[5%]">
             <header class="font-[800] text-[2.25em] text-center">Get In touch with us</header>
             <div class="text-center font-normal text-[#667085]">We’d love to hear from you. Please fill out this form.</div>
 
@@ -159,10 +159,10 @@
             </form>
         </section>
 
-        <footer class="flex flex-row  max-mobile:flex-col items-center bg-col3 px-[15%]  max-mobile:px-[5%] pt-[3%] max-mobile:py-[10%] pb-[3.5%] text-[#fff]">
+        <footer class="flex flex-row  max-mobile:flex-col items-end bg-col3 px-[15%]  max-mobile:px-[5%] pt-[3%] max-mobile:py-[10%] pb-[3.5%] text-[#fff]">
             <div class="w-[19em] max-mobile:w-full">
             <div class="flex flex-row items-center">
-            <img src="/assets/landing_images/logo2.png" class="w-[40px] h-[54px] mr-1" alt="perfraka logo">
+            <img src="/assets/landing_images/white_logo.svg" class="w-[40px] h-[54px] mr-1" alt="perfraka logo">
             <img src="/assets/landing_images/logo_name2.png" class="w-[103px] h-[11px]" alt="perfraka logo_name">
             </div>
             <div class="font-normal text-[#fff] text-normal">
@@ -173,18 +173,32 @@
             <div class="w-[23em]  max-mobile:w-full mx-20 max-mobile:mx-0  max-mobile:my-10">
                 <header class="text-center font-bigger text-size1">Quick Links</header>
                 <div class="flex flex-row justify-around  max-mobile:justify-between py-1 font-normal text-size1">
+                    <a href="{{route('welcome')}}">
                     <span>Home</span>
+                    </a>
+                    <a href="{{route('about')}}">
                     <span>About us</span>
+                    </a>
+                    <a href="{{route('faq')}}">
                     <span>FAQ</span>
+                    </a>
+                    <a href="#getInTouch">
                     <span>Contact us</span>
+                    </a>
                 </div>
             </div>
-            <div class="w-[6.5em]">
+            <div class="w-[6.5em] max-mobile:w-[10em] max-mobile:mx-auto">
                 <header class="text-center font-bigger text-size1">Our socials</header>
                 <div class="flex flex-row justify-around py-1 font-normal text-size1">
+                    <a href="#" class="">
                     <img src="/assets/landing_images/linkedin.png" class="" alt="linkedin"> 
+                    </a>
+                    <a href="#" class="">
                     <img src="/assets/landing_images/facebook.png" class="" alt="facebook"> 
+                    </a>
+                    <a href="#" class="">
                     <img src="/assets/landing_images/twitter.png" class="w-[18px] h-[18px]" alt="twitter"> 
+                    </a>
                 </div>
             </div>
         </footer>
