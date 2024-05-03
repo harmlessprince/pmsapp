@@ -48,15 +48,15 @@
             </button>
             </div>
             <div class="items-center justify-between hidden w-full md:flex md:w-auto md:order-1" id="navbar-sticky">
-            <ul class="flex flex-col p-4 md:p-0 mt-4 font-medium border border-gray-100 rounded-lg bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
+            <ul class="flex flex-col p-4 md:p-0 mt-4 font-medium border border-gray-100 rounded-lg bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-white">
                 <li>
-                    <a href="{{route('welcome')}}" class="block py-2 px-3 text-gray-900 rounded md:bg-transparent md:text-size1 md:text-col1 md:hover:text-col3 md:p-0 font-normal">Home</a>
+                    <a href="{{route('welcome')}}" class="block py-2 px-3 text-gray-900 rounded md:bg-transparent md:text-size1 md:text-col1 md:hover:text-col3 md:p-2  font-normal">Home</a>
                 </li>
                 <li>
-                <a href="{{route('about')}}" class="block py-2 px-3 text-gray-900 rounded md:bg-transparent md:text-size1 md:text-col1 md:hover:text-col3 md:p-0 font-normal">About us</a>
+                <a href="{{route('about')}}" class="block py-2 px-3 text-gray-900 rounded md:bg-transparent md:text-size1 md:text-col1 md:hover:text-col3 md:p-2  font-normal">About us</a>
                 </li>
                 <li>
-                    <a href="{{route('faq')}}" class="block py-2 px-3 text-gray-900 rounded md:bg-transparent md:text-size1 md:text-col1 md:hover:text-col3 md:p-0 font-normal">FAQ</a>
+                    <a href="{{route('faq')}}" class="block py-2 px-3 text-gray-900 rounded md:bg-transparent md:text-size1 md:text-col1 md:hover:text-col3 md:p-2 font-normal">FAQ</a>
                 </li>
             </ul>
             </div>
@@ -97,6 +97,7 @@
             </div>
         </section>
 
+        {{-- get in touch --}}
         <section id="getInTouch"  class="py-[5%] px-[15%]  max-mobile:px-[5%]">
             <header class="font-[800] text-[2.25em] text-center">Get In touch with us</header>
             <div class="text-center font-normal text-[#667085]">We’d love to hear from you. Please fill out this form.</div>
@@ -112,7 +113,7 @@
                         focus:outline-none focus:border-primary_color focus:ring-1 focus:ring-background_color
                         focus:invalid:error focus:invalid:error
                         "
-                            placeholder="First name" name="email" value=""/>
+                            placeholder="First name" name="first_name" value=""/>
                         {{-- <x-input-error :messages="$errors->get('email')" class="mt-2"/> --}}
                     </div>
                     <div class="w-[48%]">
@@ -124,7 +125,7 @@
                         focus:outline-none focus:border-primary_color focus:ring-1 focus:ring-background_color
                         focus:invalid:error focus:invalid:error
                         "
-                            placeholder="Last name" name="email" value=""/>
+                            placeholder="Last name" name="last_name" value=""/>
                         {{-- <x-input-error :messages="$errors->get('email')" class="mt-2"/> --}}
                     </div>
                 </div>
@@ -154,7 +155,7 @@
                     </div>
                 </div>
 
-                <button class="bg-[#C52216] w-full h-[60px] rounded-[10px] text-size1 font-[600] text-[#ffffff]">Submit</button>
+                <button type="submit" class="bg-[#C52216] w-full h-[60px] rounded-[10px] text-size1 font-[600] text-[#ffffff]">Submit</button>
 
             </form>
         </section>
@@ -162,7 +163,7 @@
         <footer class="flex flex-row  max-mobile:flex-col items-end bg-col3 px-[15%]  max-mobile:px-[5%] pt-[3%] max-mobile:py-[10%] pb-[3.5%] text-[#fff]">
             <div class="w-[19em] max-mobile:w-full">
             <div class="flex flex-row items-center">
-            <img src="/assets/landing_images/white_logo.svg" class="w-[40px] h-[54px] mr-1" alt="perfraka logo">
+            <img src="/assets/landing_images/logo2.svg" class="w-[40px] h-[54px] mr-1" alt="perfraka logo">
             <img src="/assets/landing_images/logo_name2.png" class="w-[103px] h-[11px]" alt="perfraka logo_name">
             </div>
             <div class="font-normal text-[#fff] text-normal">
