@@ -11,21 +11,22 @@
             Manage FAQ
         </a>
     </div>
-    <form class="mt-[2%] w-[100%]" action="{{route('admin.faqs.store')}}" method="POST"
+    <form class="mt-[2%] w-[100%]" action="{{route('admin.faqs.update', ['faq' => $faq])}}" method="POST"
           enctype="multipart/form-data">
         @csrf
+        @method('PATCH')
         <div class="grid gap-6 mb-6">
 
             <div class="flex flex-col">
                 <x-input-label for="question" :value="__('Question')"/>
                 <x-text-input id="question" class="block mt-1 w-full" type="text" name="question"
-                              :value="old('question')"
+                              :value="$faq->question"
                               required/>
                 <x-input-error :messages="$errors->get('question')" class="mt-2"/>
             </div>
             <div class="flex flex-col">
                 <x-input-label for="answer" :value="__('Answer')"/>
-                <x-text-area-input name="answer" :value="old('answer')" required id="answer"></x-text-area-input>
+                <x-text-area-input name="answer" :value="$faq->answer" required id="answer">{{$faq->answer}}</x-text-area-input>
                 <x-input-error :messages="$errors->get('answer')" class="mt-2"/>
             </div>
         </div>
@@ -38,7 +39,7 @@
 
 
 
-        <button class="mt-[1%] w-[60px] h-[40px] bg-primary_color rounded-lg text-normal text-natural font-big">Add
+        <button class="mt-[1%] w-[60px] h-[40px] bg-primary_color rounded-lg text-normal text-natural font-big">Update
         </button>
     </form>
 

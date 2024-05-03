@@ -1,6 +1,6 @@
 @extends('layouts.app')
-@section('title', 'Site Management')
-@section('page', 'Site Management')
+@section('title', 'FAQ Management')
+@section('page', 'FAQ Management')
 
 @push('header-scripts')
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"
