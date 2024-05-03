@@ -87,19 +87,19 @@
                 </button>
             </div>
             <div class="items-center justify-between hidden w-full md:flex md:w-auto md:order-1" id="navbar-sticky">
-                <ul class="flex flex-col p-4 md:p-0 mt-4 font-medium border border-gray-100 rounded-lg bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
+                <ul class="flex flex-col p-4 md:p-0 mt-4 font-medium border border-gray-100 rounded-lg bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-white">
                     <li>
                         <a href="{{route('welcome')}}"
-                           class="block py-2 px-3 text-gray-900 rounded md:bg-transparent md:text-size1 md:text-col1 md:hover:text-col3 md:p-0 font-normal">Home</a>
+                           class="block py-2 px-3 text-gray-900 rounded md:bg-transparent md:text-size1 md:text-col1 md:hover:text-col3 md:p-2 font-normal">Home</a>
                     </li>
                     <li>
                         <a href="{{route('about')}}"
-                           class="block py-2 px-3 text-gray-900 rounded md:bg-transparent md:text-size1 md:text-col1 md:hover:text-col3 md:p-0 font-normal">About
+                           class="block py-2 px-3 text-gray-900 rounded md:bg-transparent md:text-size1 md:text-col1 md:hover:text-col3 md:p-2 font-normal">About
                             us</a>
                     </li>
                     <li>
                         <a href="{{route('faq')}}"
-                           class="block py-2 px-3 text-gray-900 rounded md:bg-transparent md:text-size1 md:text-col1 md:hover:text-col3 md:p-0 font-normal">FAQ</a>
+                           class="block py-2 px-3 text-gray-900 rounded md:bg-transparent md:text-size1 md:text-col1 md:hover:text-col3 md:p-2 font-normal">FAQ</a>
                     </li>
                 </ul>
             </div>
@@ -151,7 +151,7 @@
             {{-- <img src="/assets/landing_images/mobile.png" class="max-mobile:w-[80%] max-mobile:h-[205px] mobile:hidden" alt="mobile"> --}}
         </div>
         <div class="absolute -bottom-[12%] left-0 w-full flex flex-row justify-center mobile:hidden">
-            <img src="{{asset('/assets/landing_images/mobile1.png')}}" class="max-mobile:w-[19em] max-mobile:h-[160px]" alt="mobile">
+            <img src="{{asset('/assets/landing_images/mobile.png')}}" class="max-mobile:w-[19em] max-mobile:h-[160px]" alt="mobile">
         </div>
     </section>
     <section class="w-full h-[11em] max-mobile:h-[7.3em] bg-col3">
@@ -190,7 +190,7 @@
                 </p>
             </div>
             <img src="{{asset('/assets/landing_images/mobile3.png')}}"
-                 class="mt-[3.5em] w-[26em] h-[29.2em]  ml-[5em] max-mobile:ml-0" alt="perfraka mobile">
+                 class="mt-[3.5em] w-[26em] h-[29.2em] ml-[5em] max-mobile:ml-0" alt="perfraka mobile">
         </div>
     </section>
 
@@ -301,7 +301,9 @@
                     Control and manage all your operations from one convenient hub With &#160; PERFTRAKA
                 </div>
                 <div class="mt-5">
+                    <a href="#getInTouch">
                     <button class="h-[44px] px-3 bg-[#E63026] rounded-[8px] text-size1 font-big">Contact us</button>
+                    </a>
                 </div>
             </div>
             <div class="relative  max-mobile:px-[5%] m max-mobile:pb-5">
@@ -372,9 +374,8 @@
                 </div>
             </div>
 
-            <button class="bg-[#C52216] w-full h-[60px] rounded-[10px] text-size1 font-[600] text-[#ffffff]">Submit
+            <button type="submit" class="bg-[#C52216] w-full h-[60px] rounded-[10px] text-size1 font-[600] text-[#ffffff]">Submit
             </button>
-
         </form>
     </section>
 
@@ -382,15 +383,16 @@
     <section id="askedQuestions" class="bg-col4 py-[5%] px-[15%]  max-mobile:px-[5%]">
         <header class="font-bigger text-header text-center">Frequently Asked <span
                 class="text-[#C52216]">Questions</span></header>
-        <div class="relative w-full my-5">
+        <form class="relative w-full my-5">
             <input type="search" placeholder="Type your Questions"
                    class="w-full pr-[75px] bg-[#fff] text-eighteen font-big h-[3.75em] rounded-[10px] outline-none border border-[#838383]"
             />
-            <div
+            <button
+            type="submit"
                 class="flex flex-row items-center justify-center absolute top-[1px] right-0 bg-col3 w-[64px] h-[66px] rounded-tr-[10px] rounded-br-[10px]">
                 <span class="material-symbols-outlined mr-4 w-[18px] h-[18px] text-[#fff] ">Search</span>
-            </div>
-        </div>
+        </button>
+        </form>
         @foreach($faqs as $faq)
             <div class="group my-5">
                 <div id="{{$faq->id}}" class="questions faq">
@@ -402,24 +404,13 @@
                 </article>
             </div>
         @endforeach
-
-
-{{--        <div class="group my-5">--}}
-{{--            <summary id="" class="questions faq">--}}
-{{--                <span class="font-[500]">Can any business use it </span>--}}
-{{--                <span class="material-symbols-outlined mr-4 w-[18px] h-[18px] text-[#000]">expand_more</span>--}}
-{{--            </summary>--}}
-{{--            <article class="article hidden bg-[#fff] text-[#000] px-2 pt-5 pb-10 text-eighteen font-normal text-left">--}}
-{{--                Contact the team to get the app--}}
-{{--            </article>--}}
-{{--        </div>--}}
     </section>
 
     <footer
         class="flex flex-row  max-mobile:flex-col items-end bg-col3 px-[15%]  max-mobile:px-[5%] pt-[3%] max-mobile:py-[10%] pb-[3.5%] text-[#fff]">
         <div class="w-[19em] max-mobile:w-full">
             <div class="flex flex-row items-center">
-                <img src="{{asset('/assets/landing_images/white_logo.svg')}}" class="w-[40px] h-[54px] mr-1" alt="perfraka logo">
+                <img src="{{asset('/assets/landing_images/logo2.svg')}}" class="w-[40px] h-[54px] mr-1" alt="perfraka logo">
                 <img src="{{asset('/assets/landing_images/logo_name2.png')}}" class="w-[103px] h-[11px]" alt="perfraka logo_name">
             </div>
             <div class="font-normal text-[#fff] text-normal">
