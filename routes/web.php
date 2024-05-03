@@ -10,6 +10,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ScanAnalyticsController;
 use App\Http\Controllers\ScanController;
 use App\Http\Controllers\SiteCredentialController;
+use App\Models\FrequentlyAskedQuestion;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -24,7 +25,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    $faqs = FrequentlyAskedQuestion::query()->get();
+    return view('welcome', compact('faqs'));
 })->name('welcome');
 
 Route::get('/about', function () {
@@ -32,13 +34,12 @@ Route::get('/about', function () {
 })->name("about");
 
 Route::get('/faq', function () {
-    return view('faq');
+    $faqs = FrequentlyAskedQuestion::query()->get();
+    return view('faq', compact('faqs'));
 })->name('faq');
 
 
-
-
-Route::middleware(['auth'])->name('common.')->group(function (){
+Route::middleware(['auth'])->name('common.')->group(function () {
     Route::prefix('credentials')->name('credentials.')->group(function () {
         Route::patch('password/change/{site}', [SiteCredentialController::class, 'changeSitePassword'])->name('password.change');
         Route::patch('logout/pin/change/{site}', [SiteCredentialController::class, 'changeSiteLogoutPin'])->name('logout.pin.change');
@@ -46,13 +47,13 @@ Route::middleware(['auth'])->name('common.')->group(function (){
 });
 
 
-Route::prefix('company')->middleware(['auth', 'company_owner', 'is_banned'])->name('company.')->group(function (){
+Route::prefix('company')->middleware(['auth', 'company_owner', 'is_banned'])->name('company.')->group(function () {
     Route::get('dashboard', [DashboardController::class, 'company'])->name('dashboard');
-    Route::prefix('attendance')->name('attendance.')->group(function (){
+    Route::prefix('attendance')->name('attendance.')->group(function () {
         Route::get('analytics', AttendanceAnalyticsController::class)->name('analytics');
         Route::get('transactions', [AttendanceController::class, 'index'])->name('transactions');
     });
-    Route::prefix('scans')->name('scans.')->group(function (){
+    Route::prefix('scans')->name('scans.')->group(function () {
         Route::get('analytics', ScanAnalyticsController::class)->name('analytics');
         Route::get('transactions', [ScanController::class, 'index'])->name('transactions');
     });
@@ -69,4 +70,4 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';

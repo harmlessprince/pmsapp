@@ -30,9 +30,9 @@
         <main>
         <nav class="bg-white fixed w-full z-20 top-0 start-0 border-b border-gray-200">
             <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
-            <a href="https://flowbite.com/" class="flex items-center space-x-3 rtl:space-x-reverse md:ml-[5%]">
-                <img src="/assets/landing_images/logo.png" class="h-8" alt="perfraka logo">
-                <img src="/assets/landing_images/logo_name.png" class="" alt="perfraka logo_name">
+            <a href="{{config('app.url')}}" class="flex items-center space-x-3 rtl:space-x-reverse md:ml-[5%]">
+                <img src="{{asset('/assets/landing_images/logo.png')}}" class="h-8" alt="perfraka logo">
+                <img src="{{asset('/assets/landing_images/logo_name.png')}}" class="" alt="perfraka logo_name">
             </a>
             <div class="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
                 <a href="{{route('login')}}">
@@ -57,14 +57,14 @@
                 </li>
                 <li>
                     <a href="{{route('faq')}}" class="block py-2 px-3 text-gray-900 rounded md:bg-transparent md:text-size1 md:text-col1 md:hover:text-col3 md:p-0 font-normal">FAQ</a>
-                </li>       
+                </li>
             </ul>
             </div>
             </div>
         </nav>
 
         <div class="mt-[1.5em] h-[30vh] w-full flex flex-row items-center justify-center font-bigger text-[#fff] text-[3em] bg-col3"> ABOUT US</div>
-        
+
         <section class="pt-[5%] px-[15%] max-mobile:px-[5%] bg-col4">
             <div class="text-center text-normal font-[500] text-col5">Learn about PERFTRAKA</div>
             <header class="font-[700] text-header max-mobile:text-[2em] text-col3 text-center">
@@ -73,29 +73,29 @@
             <div class="pt-[1em] flex flex-row max-mobile:flex-col">
                 <div class="pt-[5%] text-size1 font-normal">
                     <p>
-                    At PERFTRAKA, we specialize in providing cutting-edge Location Capture, 
-                    Employee & Contractor Attendance Management Solutions tailored to meet the diverse needs of 
-                    businesses across various industries. 
-                    <p>Our innovative platform allows 
-                    businesses to seamlessly monitor and manage activities across multiple sites, 
+                    At PERFTRAKA, we specialize in providing cutting-edge Location Capture,
+                    Employee & Contractor Attendance Management Solutions tailored to meet the diverse needs of
+                    businesses across various industries.
+                    <p>Our innovative platform allows
+                    businesses to seamlessly monitor and manage activities across multiple sites,
                     ensuring optimal efficiency and security.
                     <p>
-                    </p> 
+                    </p>
                     <p class="py-[5%]">
-                        With our solution, businesses can easily track employee attendance, streamline visitor 
-                        registration processes, and capture crucial location data in real-time. Whether you're managing 
-                        a single location or multiple sites, our platform offers the flexibility and scalability to meet 
+                        With our solution, businesses can easily track employee attendance, streamline visitor
+                        registration processes, and capture crucial location data in real-time. Whether you're managing
+                        a single location or multiple sites, our platform offers the flexibility and scalability to meet
                         your unique requirements.
                     </p>
                     <p>
-                        Say goodbye to manual tracking methods and inefficiencies – with PERFTRAKA, 
-                        you can centralize your operations and gain full visibility into all activities, empowering you to make informed decisions 
+                        Say goodbye to manual tracking methods and inefficiencies – with PERFTRAKA,
+                        you can centralize your operations and gain full visibility into all activities, empowering you to make informed decisions
                         and drive business success.Experience the power of streamlined operations and enhanced security with PERFTRAKA.
                     </p>
                 </div>
                 <img src="/assets/landing_images/mobile3.png" class="mobile:mt-[3.5em] w-[26em] h-[29.2em] max-mobile:h-[23em] ml-[5em] max-mobile:ml-0" alt="perfraka mobile">
             </div>
-        </section>  
+        </section>
 
         <section id="getInTouch"  class="py-[5%] px-[15%]  max-mobile:px-[5%]">
             <header class="font-[800] text-[2.25em] text-center">Get In touch with us</header>
@@ -147,8 +147,8 @@
                 <div class="mb-5">
                     <div class="w-full">
                         <label class="block text-[#344054] font-big text-normal">Message</label>
-                        <textarea id="message" rows="5" 
-                        class="outline-none block bg-transparent px-2 py-1 w-full text-[#667085] font-normal text-normal placeholder-color rounded-lg border border-[#D0D5DD] 
+                        <textarea id="message" rows="5"
+                        class="outline-none block bg-transparent px-2 py-1 w-full text-[#667085] font-normal text-normal placeholder-color rounded-lg border border-[#D0D5DD]
                         focus:outline-none focus:border-primary_color focus:ring-1 focus:ring-background_color
                         "></textarea>
                     </div>
@@ -166,7 +166,7 @@
             <img src="/assets/landing_images/logo_name2.png" class="w-[103px] h-[11px]" alt="perfraka logo_name">
             </div>
             <div class="font-normal text-[#fff] text-normal">
-            At PERFTRAKA, we specialize 
+            At PERFTRAKA, we specialize
             in providing cutting-edge Location Capture, Attendance.
             </div>
             </div>
@@ -191,19 +191,19 @@
                 <header class="text-center font-bigger text-size1">Our socials</header>
                 <div class="flex flex-row justify-around py-1 font-normal text-size1">
                     <a href="#" class="">
-                    <img src="/assets/landing_images/linkedin.png" class="" alt="linkedin"> 
+                    <img src="{{asset('/assets/landing_images/linkedin.png')}}" class="" alt="linkedin">
                     </a>
                     <a href="#" class="">
-                    <img src="/assets/landing_images/facebook.png" class="" alt="facebook"> 
+                    <img src="{{asset('/assets/landing_images/facebook.png')}}" class="" alt="facebook">
                     </a>
                     <a href="#" class="">
-                    <img src="/assets/landing_images/twitter.png" class="w-[18px] h-[18px]" alt="twitter"> 
+                    <img src="{{asset('/assets/landing_images/twitter.pn')}}g" class="w-[18px] h-[18px]" alt="twitter">
                     </a>
                 </div>
             </div>
         </footer>
         </main>
-  
+
         <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>
         </body>
     </html>

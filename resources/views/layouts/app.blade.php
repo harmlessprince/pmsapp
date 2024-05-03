@@ -337,7 +337,7 @@
         imageViewModalObject = new Flowbite.default.Modal(imageViewModalElement)
     });
 
-    document.getElementById("allBtn").addEventListener("click", function(){
+    document.getElementById("allBtn")?.addEventListener("click", function(){
         document.getElementById("allBtn").innerHTML = "seding..."
         document.getElementById("allBtn").disabled = true
      });

@@ -26,6 +26,7 @@
         @if(auth()->user()->isSuperAdmin())
             @include('partials.asides.desktop.admin.admin')
         @endif
+        @include('partials.asides.desktop.admin.faq')
 
     @endif
 
