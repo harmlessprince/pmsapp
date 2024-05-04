@@ -11,6 +11,7 @@ use App\Http\Controllers\ScanAnalyticsController;
 use App\Http\Controllers\ScanController;
 use App\Http\Controllers\SiteCredentialController;
 use App\Models\FrequentlyAskedQuestion;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -37,6 +38,16 @@ Route::get('/faq', function () {
     $faqs = FrequentlyAskedQuestion::query()->get();
     return view('faq', compact('faqs'));
 })->name('faq');
+
+Route::post('/contact/us', function () {
+    Mail::to(config('app.contact_us_mail'))->send(new \App\Mail\ContactUsMail(
+        request()->input('first_name'),
+        request()->input('last_name'),
+        request()->input('email'),
+        request()->input('message')
+    ));
+    return redirect(\route('welcome'));
+})->name("contact-us");
 
 
 Route::middleware(['auth'])->name('common.')->group(function () {

@@ -321,7 +321,8 @@
         <header class="font-[800] text-[2.25em] text-center">Get In touch with us</header>
         <div class="text-center font-normal text-[#667085]">We’d love to hear from you. Please fill out this form.</div>
 
-        <form class="mt-5">
+        <form class="mt-5" action="{{route('contact-us')}}" method="POST">
+            @csrf
             <div class="flex flex-row justify-between mb-5">
                 <div class="w-[48%]">
                     <label class="block text-[#344054] font-big text-normal">First name</label>
@@ -332,7 +333,7 @@
                         focus:outline-none focus:border-primary_color focus:ring-1 focus:ring-background_color
                         focus:invalid:error focus:invalid:error
                         "
-                        placeholder="First name" name="email" value=""/>
+                        placeholder="First name" name="first_name" value="" required/>
                     {{-- <x-input-error :messages="$errors->get('email')" class="mt-2"/> --}}
                 </div>
                 <div class="w-[48%]">
@@ -344,8 +345,7 @@
                         focus:outline-none focus:border-primary_color focus:ring-1 focus:ring-background_color
                         focus:invalid:error focus:invalid:error
                         "
-                        placeholder="Last name" name="email" value=""/>
-                    {{-- <x-input-error :messages="$errors->get('email')" class="mt-2"/> --}}
+                        placeholder="Last name" name="last_name" value="" required/>
                 </div>
             </div>
 
@@ -359,8 +359,7 @@
                         focus:outline-none focus:border-primary_color focus:ring-1 focus:ring-background_color
                         focus:invalid:error focus:invalid:error
                         "
-                        placeholder="you@company.com" name="email" value=""/>
-                    {{-- <x-input-error :messages="$errors->get('email')" class="mt-2"/> --}}
+                        placeholder="you@company.com" name="email" value="" required/>
                 </div>
             </div>
 
@@ -370,7 +369,7 @@
                     <textarea id="message" rows="5"
                               class="outline-none block bg-transparent px-2 py-1 w-full text-[#667085] font-normal text-normal placeholder-color rounded-lg border border-[#D0D5DD]
                         focus:outline-none focus:border-primary_color focus:ring-1 focus:ring-background_color
-                        "></textarea>
+                        " name="message" required></textarea>
                 </div>
             </div>
 
