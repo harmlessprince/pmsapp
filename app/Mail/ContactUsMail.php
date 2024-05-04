@@ -20,7 +20,7 @@ class ContactUsMail extends Mailable
     public function __construct(public readonly string $first_name,
                                 public readonly string $last_name,
                                 public readonly string $email,
-                                public readonly string $message
+                                public readonly string $messageBody
     )
     {
         //
@@ -42,11 +42,11 @@ class ContactUsMail extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'email.contact_us',
+            view: 'emails.contact_us',
             with: [
                 'first_name' => $this->first_name,
                 'last_name' => $this->last_name,
-                'message' => $this->message,
+                'messageBody' => $this->messageBody,
                 'email' => $this->email,
             ],
         );

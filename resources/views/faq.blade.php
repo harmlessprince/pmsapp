@@ -115,9 +115,11 @@
     <section class="bg-col4 py-[5%] px-[15%]  max-mobile:px-[5%]">
         <header class="font-bigger text-header text-center">Frequently Asked <span
                 class="text-[#C52216]">Questions</span>
-            <form class="relative w-full my-5">
+            <form class="relative w-full my-5" action="{{route('faq')}}" method="GET">
                 <input type="search" placeholder="Type your Questions"
                        class="w-full pr-[75px] bg-[#fff] text-eighteen font-big h-[3.75em] rounded-[10px] outline-none border border-[#838383]"
+                       value="{{request()->query('search')}}"
+                       name="search"
                 />
                 <button
                 type="submit"

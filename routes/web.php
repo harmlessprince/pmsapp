@@ -35,7 +35,12 @@ Route::get('/about', function () {
 })->name("about");
 
 Route::get('/faq', function () {
-    $faqs = FrequentlyAskedQuestion::query()->get();
+    $faqs = FrequentlyAskedQuestion::query()
+        ->when(request()->input('search'), function ($query, $search) {
+            $query->where('question', 'LIKE', '%' . $search . '%')
+                ->orWhere('answer', 'LIKE', '%' . $search . '%');
+        })
+        ->get();
     return view('faq', compact('faqs'));
 })->name('faq');
 
