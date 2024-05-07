@@ -65,7 +65,9 @@
         <span class="text-[#FEFFFE] text-normal" for="password">Remember</span>
         </div>
 
-        <span class="font-[500] text-primary_color text-normal">Forgot password?</span>
+        <a href="#">
+        <span class="font-[500] text-primary_color text-normal cursor-pointer">Forgot password?</span>
+         </a>
     </div>
        
 
