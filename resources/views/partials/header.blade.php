@@ -12,6 +12,9 @@
         <div>
             @auth
                 <div class="text-xl font-medium text-natural ">
+                    @if(auth()->user()->isCompanyOwner())
+                    @elseif(auth()->user()->isAdministrator())
+                    @endif
                     Welcome back, {{auth()->user()->first_name}}
                 </div>
             @endauth
@@ -26,7 +29,12 @@
 
             <img src="{{auth()->user()->profile_image ?? asset('assets/images/avatar.png')}}" alt="dashboard" class="mr-4 rounded-full w-[40px] h-[40px] "/>
             <img src="{{asset('assets/images/chevron.png')}}" alt="dashboard" class="w-[12px] h-[6px] mr-2"/>
-            <span class="text-sm">{{strtoupper(str_replace('_', ' ', auth()->user()->roles[0]->name))}}</span>
+            @if(auth()->user()->isCompanyOwner())
+                <span class="text-sm">{{strtoupper(str_replace('_', ' ', optional(auth()->user()->company)->name))}}</span>
+            @elseif(auth()->user()->isAdministrator())
+                <span class="text-sm">{{strtoupper(str_replace('_', ' ', auth()->user()->roles[0]->name))}}</span>
+            @endif
+
         </div>
         <form id="frm-logout" action="{{ route('logout') }}" style="display: none;">
             {{ csrf_field() }}
