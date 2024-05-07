@@ -146,10 +146,12 @@
             </a>
         </div>
 
-        <div class="absolute -bottom-[52%] left-0 w-full flex flex-row justify-center max-mobile:hidden">
+        {{-- desktop image --}}
+        <div class="absolute -bottom-[30%] left-0 w-full flex flex-row justify-center max-mobile:hidden">
             <img src="{{asset('/assets/landing_images/mobile2.png')}}" class="" alt="mobile">
             {{-- <img src="/assets/landing_images/mobile.png" class="max-mobile:w-[80%] max-mobile:h-[205px] mobile:hidden" alt="mobile"> --}}
         </div>
+        {{-- mobile view --}}
         <div class="absolute -bottom-[12%] left-0 w-full flex flex-row justify-center mobile:hidden">
             <img src="{{asset('/assets/landing_images/mobile.png')}}" class="max-mobile:w-[19em] max-mobile:h-[160px]" alt="mobile">
         </div>
@@ -306,11 +308,11 @@
                     </a>
                 </div>
             </div>
-            <div class="relative  max-mobile:px-[5%] m max-mobile:pb-5">
+            <div class="relative max-mobile:px-[5%] max-mobile:pb-5">
                 <img src="{{asset('/assets/landing_images/macbook.png')}}"
                      class="w-[31.3125em] max-mobile:w-[22.25em] h-[20.875em] max-mobile:h-[15.625em]" alt="mackbook">
                 <img src="{{asset('/assets/landing_images/mobile4.png')}}"
-                     class="absolute bottom-[5%]  max-mobile:bottom-[13%] left-0  max-mobile:left-[5%] w-[93px] max-mobile:w-[4.2em] h-[199px] max-mobile:h-[8.875em]"
+                     class="absolute bottom-0  max-mobile:bottom-[13%] left-0  max-mobile:left-[5%] w-[93px] max-mobile:w-[4.2em] h-[199px] max-mobile:h-[8.875em]"
                      alt="mobile4">
             </div>
         </div>
