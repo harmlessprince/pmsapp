@@ -3,9 +3,9 @@
 @section('content')
 
  <!-- tag section -->
- <section class="flex flex-row justify-between w-[100%] max-lg:flex-col max-lg:mt-[15%]">
+ <section class="grid grid-cols-4 gap-5 max-small:grid-cols-1 small:max-big:grid-cols-2 justify-between w-[100%] max-lg:mt-[3em]">
     <div
-    class="flex flex-row bg-background_color rounded-lg h-[111px] w-[270px] items-center px-[20px] max-lg:mx-auto">
+    class="flex flex-row bg-background_color rounded-lg h-[111px] w-full items-center px-[20px] max-lg:mx-auto">
     <div class="w-[44px] h-[44px] bg-primary_color rounded-lg flex flex-row items-center justify-center">
         {{-- <img src="{{asset('assets/images/site.png')}}" alt="dashboard"/> --}}
         <span class="material-symbols-outlined w-[24px] h-[24px] text-natural">account_balance</span>
@@ -17,7 +17,7 @@
 </div>
 
     <div
-        class="flex flex-row bg-background_color rounded-lg h-[111px] w-[270px] items-center px-[20px] max-lg:mx-auto">
+        class="flex flex-row bg-background_color rounded-lg h-[111px] w-full items-center px-[20px] max-lg:mx-auto">
         <div class="w-[44px] h-[44px] bg-site rounded-lg flex flex-row items-center justify-center">
             <img src="{{asset('assets/images/site.png')}}" alt="dashboard"/>
         </div>
@@ -28,7 +28,7 @@
     </div>
 
     <div
-        class="flex flex-row bg-background_color rounded-lg h-[111px] w-[270px] items-center px-[20px] max-lg:mt-[5%] max-lg:mx-auto">
+        class="flex flex-row bg-background_color rounded-lg h-[111px] w-full items-center px-[20px] max-lg:mx-auto">
         <div class="w-[44px] h-[44px] bg-tags rounded-lg flex flex-row items-center justify-center">
             <span class="material-symbols-outlined w-[24px] h-[24px] text-natural">sell</span>
         </div>
@@ -39,7 +39,7 @@
     </div>
 
     <div
-        class="flex flex-row bg-background_color rounded-lg h-[111px] w-[270px] items-center px-[20px] max-lg:mt-[5%] max-lg:mx-auto">
+        class="flex flex-row bg-background_color rounded-lg h-[111px] w-full items-center px-[20px] max-lg:mx-auto">
         <div class="w-[44px] h-[44px] bg-guards rounded-lg flex flex-row items-center justify-center">
             <span class="material-symbols-outlined w-[24px] h-[24px] text-natural">person</span>
         </div>
