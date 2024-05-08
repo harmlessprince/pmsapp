@@ -9,9 +9,9 @@
 @section('content')
 
     <section>
-        <section class="flex flex-row justify-between w-[100%] max-lg:mt-[15%]">
+        <section class="flex flex-row justify-start w-[100%] max-lg:mt-[3em]">
             <div
-                class="flex flex-row  bg-background_color rounded-lg h-[111px] w-[290px] items-center px-[20px] max-lg:mx-auto">
+                class="flex flex-row  bg-background_color rounded-lg h-[111px] w-[290px] max-small:w-full items-center px-[20px]">
                 <div class="w-[44px] h-[44px] bg-tags rounded-lg flex flex-row items-center justify-center">
                     <span class="material-symbols-outlined text-white">tag</span>
                 </div>
