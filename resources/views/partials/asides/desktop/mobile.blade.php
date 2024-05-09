@@ -1,6 +1,6 @@
 <!-- aside for mobile view -->
-<aside id="mobileAside" class="bg-background_color w-[100%] h-screen px-5% py-1% text-natural fixed border border-r-[0.5px]
-        border-l-[0] border-t-[0] border-b-[0] border-r-natural z-50 hidden lg:hidden z-[500] fixed top-0 left-0">
+<aside id="mobileAside" class="bg-background_color w-[100%] h-screen px-5% py-1% text-natural border border-r-[0.5px]
+        border-l-[0] border-t-[0] border-b-[0] border-r-natural hidden lg:hidden z-50 fixed top-0 left-0">
     @if(auth()->user()->isCompanyOwner())
         <div class="flex flex-row items-center mb-16">
             <img src="{{ asset('assets/images/logo-red-dot.png') }}" alt="dashboard" class="mr-2"/>

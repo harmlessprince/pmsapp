@@ -19,7 +19,7 @@ export default {
                 "xsmall": "400px",
                 "small": "600px",
                 "big": "1100px",
-                // 'mobile': '960px'
+                'mobile': '960px'
             },
 
             colors: {
