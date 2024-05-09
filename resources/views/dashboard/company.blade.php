@@ -3,9 +3,9 @@
 @section('content')
 
     <!-- tag section -->
-    <section class="flex flex-row justify-between w-[100%] max-lg:flex-col max-lg:mt-[15%]">
+    <section class="grid grid-cols-3 gap-10 max-small:grid-cols-1 small:max-big:grid-cols-2 justify-between w-[100%] max-lg:mt-[3em]">
         <div
-            class="flex flex-row bg-background_color rounded-lg h-[111px] w-[290px] items-center px-[20px] max-lg:mx-auto">
+            class="flex flex-row bg-background_color rounded-lg h-[111px] w-full items-center px-[20px]">
             <div class="w-[44px] h-[44px] bg-blue-500 rounded-lg flex flex-row items-center justify-center">
                 <span class="material-symbols-outlined text-white">home</span>
             </div>
@@ -16,7 +16,7 @@
         </div>
 
         <div
-            class="flex flex-row bg-background_color rounded-lg h-[111px] w-[290px] items-center px-[20px] max-lg:mt-[5%] max-lg:mx-auto">
+            class="flex flex-row bg-background_color rounded-lg h-[111px] w-full items-center px-[20px]">
             <div class="w-[44px] h-[44px] bg-tags rounded-lg flex flex-row items-center justify-center">
                 <span class="material-symbols-outlined text-white">tag</span>
             </div>
@@ -27,7 +27,7 @@
         </div>
 
         <div
-            class="flex flex-row bg-background_color rounded-lg h-[111px] w-[290px] items-center px-[20px] max-lg:mt-[5%] max-lg:mx-auto">
+            class="flex flex-row bg-background_color rounded-lg h-[111px] w-full items-center px-[20px]">
             <div class="w-[44px] h-[44px] bg-guards rounded-lg flex flex-row items-center justify-center">
                 <span class="material-symbols-outlined text-white">lock</span>
             </div>
