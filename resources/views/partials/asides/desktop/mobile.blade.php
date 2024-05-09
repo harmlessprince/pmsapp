@@ -6,7 +6,8 @@
             <img src="{{ asset('assets/images/logo-red-dot.png') }}" alt="dashboard" class="mr-2"/>
             <span class="text-lg font-medium text-primary_color">PERFTRAKA</span>
             <div class="flex-1"></div>
-            <img onclick="toggleSideBar()" width="22" height="22" src="https://img.icons8.com/ios/22/ffffff/cancel.png"
+            <img onclick="toggleSideBar()" width="22" height="22" 
+            src="https://img.icons8.com/ios/22/ffffff/cancel.png"
                  alt="cancel"/>
         </div>
         @include('partials.asides.desktop.dash')
