@@ -12,9 +12,9 @@
         <div>
             @auth
                 <div class="text-xl font-medium text-natural ">
-                    @if(auth()->user()->isCompanyOwner())
-                    @elseif(auth()->user()->isAdministrator())
-                    @endif
+{{--                    @if(auth()->user()->isCompanyOwner())--}}
+{{--                    @elseif(auth()->user()->isAdministrator())--}}
+{{--                    @endif--}}
                     Welcome back, {{auth()->user()->first_name}}
                 </div>
             @endauth
@@ -65,7 +65,6 @@
         width="18" height="18"
         src="https://img.icons8.com/ios/18/ffffff/menu--v1.png"
         alt="menu--v1"
-        onclick="toggleMObileSideBar()"
         class="lg:hidden"
     />
 </nav>
