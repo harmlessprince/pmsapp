@@ -65,7 +65,6 @@
         width="18" height="18"
         src="https://img.icons8.com/ios/18/ffffff/menu--v1.png"
         alt="menu--v1"
-        {{-- onclick="toggleMObileSideBar()" --}}
         class="lg:hidden"
     />
 </nav>
