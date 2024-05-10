@@ -77,6 +77,7 @@ class SiteController extends controller
                 'email' => $request->input('email'),
                 'password' => Hash::make($request->input('password')),
                 'username' => $request->input('email'),
+                'created_by' => $request->user()->id,
             ]);
 
             $site = $this->siteRepository->create([
@@ -95,6 +96,8 @@ class SiteController extends controller
                 'inspector_id' => $site_inspector->id,
                 'created_by' => $request->user()->id,
             ]);
+            $site_inspector->site_id = $site->id;
+            $site_inspector->save();
             $this->userService->associateUserToRole($site_inspector, RoleEnum::SITE_INSPECTOR->value);
             DB::commit();
         }catch (\Exception $exception){
