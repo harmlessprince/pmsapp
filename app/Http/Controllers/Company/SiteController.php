@@ -157,10 +157,6 @@ class SiteController extends Controller
             'photo' => $photoPath
         ]);
 
-        if ($site->wasChanged('status')){
-            dd('status changed');
-        }
-
 
 
         return redirect()->route('company.sites.index')->with('success', 'Site Updated Successfully');

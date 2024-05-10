@@ -16,6 +16,7 @@ use App\Repositories\Eloquent\Repository\CompanyRepository;
 use App\Repositories\Eloquent\Repository\SiteRepository;
 use App\Repositories\Eloquent\Repository\StateRepository;
 use App\Repositories\Eloquent\Repository\UserRepository;
+use App\Services\FileUploadService;
 use App\Services\UserService;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
@@ -24,14 +25,15 @@ class SiteController extends controller
 {
 
     public function __construct(
-        private readonly SiteRepository $siteRepository,
+        private readonly SiteRepository    $siteRepository,
         private readonly CompanyRepository $companyRepository,
-        private readonly UserService $userService,
-        private readonly StateRepository $stateRepository,
-        private readonly UserRepository $userRepository,
+        private readonly UserService       $userService,
+        private readonly StateRepository   $stateRepository,
+        private readonly UserRepository    $userRepository,
     )
     {
     }
+
     /**
      * Display a listing of the resource.
      */
@@ -46,7 +48,7 @@ class SiteController extends controller
             CompanyIdFilter::class
         ];
         $countOfSites = $this->siteRepository->modelQuery()->count();
-        $companies =  $this->companyRepository->all();
+        $companies = $this->companyRepository->all();
         $states = $this->stateRepository->fetchByCountryID();
         $siteQuery = $siteQuery->with(['inspector', 'state', 'state.country', 'company']);
         $siteQuery = constructPipes($siteQuery, $pipes);
@@ -70,7 +72,11 @@ class SiteController extends controller
      */
     public function store(StoreSiteRequest $request)
     {
-
+        $photoPath = null;
+        if ($request->hasfile('photo')) {
+            $response = FileUploadService::uploadToS3($request->file('photo'), 'sites');
+            $photoPath = $response->path;
+        }
         try {
             DB::beginTransaction();
             $site_inspector = $this->userRepository->create([
@@ -78,31 +84,32 @@ class SiteController extends controller
                 'password' => Hash::make($request->input('password')),
                 'username' => $request->input('email'),
                 'created_by' => $request->user()->id,
-                'company_id' =>  $request->input('company_id'),
-                'state_id' =>  $request->input('state'),
+                'state_id' => $request->input('state'),
             ]);
 
             $site = $this->siteRepository->create([
-                'company_id' =>  $request->input('company_id'),
-                'state_id' =>  $request->input('state'),
-                'longitude' =>  $request->input('longitude'),
-                'latitude' =>  $request->input('latitude'),
-                'logout_pin' => Hash::make( $request->input('logout_pin')),
-                'name' =>  $request->input('name'),
-                'address' =>  $request->input('address'),
-                'photo' =>  $request->input('photo'),
+                'company_id' => $request->input('company_id'),
+                'state_id' => $request->input('state'),
+                'longitude' => $request->input('longitude'),
+                'latitude' => $request->input('latitude'),
+                'logout_pin' => Hash::make($request->input('logout_pin')),
+                'name' => $request->input('name'),
+                'address' => $request->input('address'),
+                'photo' => $photoPath,
                 'shift_start_time' => $request->input('shift_start_time'),
                 'shift_end_time' => $request->input('shift_end_time'),
-                'number_of_tags' =>  $request->input('number_of_tags'),
-                'maximum_number_of_rounds' =>  $request->input('maximum_number_of_rounds'),
+                'number_of_tags' => $request->input('number_of_tags'),
+                'maximum_number_of_rounds' => $request->input('maximum_number_of_rounds'),
                 'inspector_id' => $site_inspector->id,
                 'created_by' => $request->user()->id,
+
             ]);
+            $site_inspector->company_id = $site->company_id;
             $site_inspector->site_id = $site->id;
             $site_inspector->save();
             $this->userService->associateUserToRole($site_inspector, RoleEnum::SITE_INSPECTOR->value);
             DB::commit();
-        }catch (\Exception $exception){
+        } catch (\Exception $exception) {
             DB::rollBack();
             throw $exception;
         }
@@ -132,7 +139,34 @@ class SiteController extends controller
      */
     public function update(UpdateSiteRequest $request, Site $site)
     {
-        //
+        $photoPath = null;
+        if ($request->hasfile('photo')) {
+            $response = FileUploadService::uploadToS3($request->file('photo'), 'sites');
+            $photoPath = $response->path;
+        }
+
+
+        $site->inspector()->update([
+            'email' => $request->input('email'),
+            'username' => $request->input('email'),
+            'company_id' => $request->input('company_id'),
+        ]);
+
+        $site->update([
+            'company_id' => $request->input('company_id'),
+            'name' => $request->input('name'),
+            'address' => $request->input('address'),
+            'state_id' => $request->input('state'),
+            'shift_start_time' => $request->input('shift_start_time'),
+            'shift_end_time' => $request->input('shift_end_time'),
+            'number_of_tags' => $request->input('number_of_tags'),
+            'maximum_number_of_rounds' => $request->input('maximum_number_of_rounds'),
+            'longitude' => $request->input('longitude'),
+            'latitude' => $request->input('latitude'),
+            'status' => $request->input('status'),
+            'photo' => $photoPath
+        ]);
+
     }
 
     /**

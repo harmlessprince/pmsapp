@@ -145,11 +145,6 @@
                 </x-select-input>
                 <x-input-error :messages="$errors->get('liveLocation')" class="mt-2"/>
             </div>
-            <div class="flex flex-col">
-                <x-input-label for="logout_pin" :value="__('Logout Pin')"/>
-                <x-text-input id="logout_pin" class="block mt-1 w-full" type="text" name="logout_pin" required/>
-                <x-input-error :messages="$errors->get('logout_pin')" :value="old('logout_pin')" class="mt-2"/>
-            </div>
         </div>
 
 
@@ -180,7 +175,7 @@
 
         <button class="mt-[1%] w-[60px] h-[40px] bg-primary_color rounded-lg text-normal text-natural font-big"
                 type="submit">
-            Add
+            Update
         </button>
     </form>
 
