@@ -172,12 +172,12 @@
     <script>
         $(document).ready(function () {
 
-            $('.shift_start_time_timepicker').timepicker({
-                listWidth: 1
-            });
-            $('.shift_end_time_timepicker').timepicker({
-                listWidth: 1
-            });
+            // $('.shift_start_time_timepicker').timepicker({
+            //     listWidth: 1
+            // });
+            // $('.shift_end_time_timepicker').timepicker({
+            //     listWidth: 1
+            // });
         });
     </script>
 @endpush

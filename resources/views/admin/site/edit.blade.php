@@ -105,14 +105,14 @@
         <div class="grid gap-6 mb-6 md:grid-cols-2">
             <div class="flex flex-col">
                 <x-input-label for="shift_start_time" :value="__('Shift start time')"/>
-                <x-text-input id="shift_start_time" class="block mt-1 w-full" type="text"
+                <x-text-input class="block mt-1 w-full" type="time"
                               :value="$site->shift_start_time" name="shift_start_time"
                               required/>
                 <x-input-error :messages="$errors->get('shift_start_time')" class="mt-2"/>
             </div>
             <div class="flex flex-col">
                 <x-input-label for="shift_end_time" :value="__('Shift end time')"/>
-                <x-text-input id="shift_end_time" class="block mt-1 w-full shift_end_time_timepicker" type="text"
+                <x-text-input  class="block mt-1 w-full shift_end_time_timepicker" type="text"
                               name="shift_end_time" :value="$site->shift_end_time" required/>
                 <x-input-error :messages="$errors->get('shift_end_time')" class="mt-2"/>
             </div>
