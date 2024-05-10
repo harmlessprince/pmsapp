@@ -38,7 +38,7 @@
     </div>
     <form class="mt-[2%] w-[100%]" action="{{route('admin.sites.update',  ['site' => $site])}}" method="POST"
           enctype='multipart/form-data'>
-        @csrf
+        @csrf @method('PATCH')
         <div class="grid gap-6 mb-6 md:grid-cols-2">
             <div class="flex flex-col">
                 <x-input-label for="company_id" :value="__('Select Company')"/>
