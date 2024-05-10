@@ -166,6 +166,7 @@ class SiteController extends controller
             'status' => $request->input('status'),
             'photo' => $photoPath
         ]);
+        return redirect()->route('admin.sites.index')->with('success', 'Site Updated Successfully');
 
     }
 
