@@ -78,6 +78,8 @@ class SiteController extends controller
                 'password' => Hash::make($request->input('password')),
                 'username' => $request->input('email'),
                 'created_by' => $request->user()->id,
+                'company_id' =>  $request->input('company_id'),
+                'state_id' =>  $request->input('state'),
             ]);
 
             $site = $this->siteRepository->create([
