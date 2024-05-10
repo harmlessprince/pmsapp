@@ -150,6 +150,7 @@ class SiteController extends controller
             'email' => $request->input('email'),
             'username' => $request->input('email'),
             'company_id' => $request->input('company_id'),
+            'site_id' => $site->id,
         ]);
 
         $site->update([
