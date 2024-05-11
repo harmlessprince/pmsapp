@@ -38,9 +38,9 @@ class DashboardController extends Controller
         $countOfTags = $this->tagRepository->modelQuery()->count();
         $countOfScans = $this->scanRepository->modelQuery()->count();
         $countOfAttendance = $this->attendanceRepository->modelQuery()->count();
-        $currentYear = (int)Carbon::now()->format('Y');
-        $countOfAttendanceByYearAndMonth = $this->attendanceRepository->attendanceByMonthYear($currentYear);
-        $countOfScanByYearAndMonth = $this->scanRepository->scanByMonthYear($currentYear);
+//        $currentYear = (int)Carbon::now()->format('Y');
+//        $countOfAttendanceByYearAndMonth = $this->attendanceRepository->attendanceByMonthYear($currentYear);
+//        $countOfScanByYearAndMonth = $this->scanRepository->scanByMonthYear($currentYear);
         $latestScans  = $this->scanRepository->modelQuery()->with(['tag', 'site'])->orderBy('scan_date_time', 'DESC')->limit(6)->get();
         $latestAttendance  = $this->attendanceRepository->modelQuery()->with(['site', 'user:id,first_name,last_name,profile_image'])->latest('attendance_date_time')->limit(6)->get();
 

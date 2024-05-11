@@ -132,9 +132,17 @@
                      <td class="text-normal font-normal px-smaller">{{$attendance->site->name}}</td>
                      <td class="text-normal font-normal px-smaller">{{$attendance->distance}} KM</td>
                      <td class="text-normal font-normal px-smaller">
-                         <img src="{{ $attendance->user->profile_image ?? asset('assets/images/tableImg.png')}}"
-                              alt="dashboard"
-                              class=" w-[60px] h-[60px]"/>
+                         @if($attendance->image)
+                             <img src="{{$attendance->image}}"
+                                  alt="dashboard"
+                                  class=" w-[60px] h-[60px]"
+                                  data-modal-target="imageViewModalElement"
+                                  data-modal-toggle="imageViewModalElement"
+                                  onclick='showImageModal("{{$attendance->image}}")'
+                             />
+                         @else
+                             No Image
+                         @endif
                      </td>
                      <td class="text-normal font-normal p-smaller">{{$attendance->proximity}}</td>
                  </tr>
