@@ -51,7 +51,7 @@
             <div class="w-[48%] max-lg:w-[100%]">
                 <x-input-label for="email" :value="__('Email')"/>
                 <x-text-input id="email" class="block mt-1 w-full" type="text" name="email"
-                              :value="$site->inspector->email"
+                              :value="optional($site->inspector)->email"
                               required/>
                 <x-input-error :messages="$errors->get('email')" class="mt-2"/>
             </div>

@@ -71,7 +71,7 @@
             </div>
             <div class="flex flex-col">
                 <x-input-label for="email" :value="__('Email')"/>
-                <x-text-input id="email" class="block mt-1 w-full" type="text" name="email" :value="$site->inspector->email "
+                <x-text-input id="email" class="block mt-1 w-full" type="text" name="email" :value="optional($site->inspector)->email "
                               required/>
                 <x-input-error :messages="$errors->get('email')" class="mt-2"/>
             </div>

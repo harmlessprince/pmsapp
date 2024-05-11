@@ -30,13 +30,13 @@
         <div class="grid gap-6 mb-6 md:grid-cols-2">
             <div class="flex flex-col">
                 <x-input-label for="first_name" :value="__('First Name')"/>
-                <x-text-input id="first_name" class="block mt-1 w-full" type="text" name="first_name" :value="$company->owner->first_name"
+                <x-text-input id="first_name" class="block mt-1 w-full" type="text" name="first_name" :value="optional($company->owner)->first_name"
                               required/>
                 <x-input-error :messages="$errors->get('first_name')" class="mt-2"/>
             </div>
             <div class="flex flex-col">
                 <x-input-label for="last_name" :value="__('Last Name')"/>
-                <x-text-input id="last_name" class="block mt-1 w-full" type="text" name="last_name" :value="$company->owner->last_name"
+                <x-text-input id="last_name" class="block mt-1 w-full" type="text" name="last_name" :value="optional($company->owner)->last_name"
                               required/>
                 <x-input-error :messages="$errors->get('last_name')" class="mt-2"/>
             </div>
@@ -48,7 +48,7 @@
             </div>
             <div class="flex flex-col">
                 <x-input-label for="email" :value="__('Email')"/>
-                <x-text-input id="email" class="block mt-1 w-full" type="text" name="email" :value="$company->owner->email"
+                <x-text-input id="email" class="block mt-1 w-full" type="text" name="email" :value="optional($company->owner)->email"
                               required/>
                 <x-input-error :messages="$errors->get('email')" class="mt-2"/>
             </div>
