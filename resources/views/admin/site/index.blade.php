@@ -109,7 +109,13 @@
                                     {{$site->address}}
                                 </td>
                                 <td class="px-smaller">
-                                    view image
+                                    <img src="{{ $site->photo ?? asset('assets/images/tableImg.png')}}"
+                                         alt="dashboard"
+                                         class=" w-[60px] h-[60px]"
+                                         data-modal-target="imageViewModalElement"
+                                         data-modal-toggle="imageViewModalElement"
+                                         onclick='showImageModal("{{$site->photo}}")'
+                                    />
                                 </td>
 
                                 <td class="px-smaller">
