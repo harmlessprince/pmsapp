@@ -30,7 +30,9 @@ class DashboardController extends Controller
     public function admin()
     {
 //        Gate::allowIf(fn (User $user) => $user->isAdministrator());
-        $countOfUsers = $this->userRepository->modelQuery()->count();
+        $countOfUsers = $this->userRepository->modelQuery()->whereHas('roles', function ($query) {
+            $query->where('name', RoleEnum::PERSONNEL->value);
+        })->count();
         $countOfCompanies = $this->companyRepository->modelQuery()->count();
         $countOfSites = $this->siteRepository->modelQuery()->count();
         $countOfTags = $this->tagRepository->modelQuery()->count();
