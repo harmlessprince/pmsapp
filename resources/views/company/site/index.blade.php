@@ -85,7 +85,7 @@
                                     {{$site->name}}
                                 </td>
                                 <td class="px-small">
-                                    {{$site->inspector->email}}
+                                    {{optional($site->inspector)->email}}
                                 </td>
                                 <td class="px-small">
                                     @if($site->photo)

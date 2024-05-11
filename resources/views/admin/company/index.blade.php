@@ -88,11 +88,11 @@
                                 </td>
 
                                 <td class="px-smaller">
-                                    {{$company->owner->email}}
+                                    {{optional($company->owner)->email}}
                                 </td>
 
                                 <td class="px-smaller">
-                                    {{$company->owner->first_name}} {{$company->owner->last_name}}
+                                    {{optional($company->owner)->first_name}} {{optional($company->owner)->last_name}}
                                 </td>
                                 <td class="px-smaller">
                                     {{$company->maximum_number_of_tags}}
