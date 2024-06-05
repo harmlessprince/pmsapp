@@ -327,7 +327,7 @@
 
     document.addEventListener("DOMContentLoaded", function (event) {
         initAutocomplete()
-        // imageViewModalObject = new Flowbite?.default?.Modal(imageViewModalElement)
+        imageViewModalObject = new Flowbite.default?.Modal(imageViewModalElement)
     });
 
     document.getElementById("allBtn")?.addEventListener("click", function () {
