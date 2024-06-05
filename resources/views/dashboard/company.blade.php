@@ -127,7 +127,7 @@
                         <td class="text-normal font-normal px-small">{{$attendance->site->name}}</td>
 {{--                        <td class="text-normal font-normal px-small">{{$attendance->distance}} KM</td>--}}
                         <td class="text-normal font-normal px-small">
-                            <img src="{{ $attendance->user->profile_image ?? asset('assets/images/tableImg.png')}}"
+                            <img src="{{ $attendance->image ?? asset('assets/images/tableImg.png')}}"
                                  alt="dashboard"
                                  class=" w-[60px] h-[60px]"
                                  data-modal-target="imageViewModalElement"
