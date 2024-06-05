@@ -153,7 +153,7 @@
                             <td class="px-smaller uppercase">
                                 @php
                                     $interval = \Carbon\CarbonInterval::seconds($attendance->check_in_to_checkout_duration)->cascade();
-                                    $output = sprintf('%sh %sm', $interval->totalHours, $interval->toArray()['minutes']);
+                                    $output = sprintf('%sh %sm', round($interval->totalHours), $interval->toArray()['minutes']);
                                 @endphp
                                 {{$output}}
                             </td>
