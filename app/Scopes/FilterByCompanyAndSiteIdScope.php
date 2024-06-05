@@ -19,7 +19,7 @@ class FilterByCompanyAndSiteIdScope implements Scope
         /** @var User $user */
         if (Auth::hasUser()) {
             $user = \auth()->user();
-            if ($user->hasRole(RoleEnum::SECURITY->value)) {
+            if ($user->hasRole(RoleEnum::PERSONNEL->value)) {
                 $builder->where('company_id', $user->company_id);
             }
         }

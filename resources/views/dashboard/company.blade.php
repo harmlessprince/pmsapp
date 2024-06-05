@@ -94,7 +94,7 @@
                     <th class="text-left text-small text-natural font-big  px-small py-smaller w-[15%]">Action Type</th>
                     {{--                    <th class="text-left text-small text-natural font-big px-small py-smaller">Tags</th>--}}
                     <th class="text-left text-small text-natural font-big px-small py-smaller w-[15%]">Site</th>
-                    <th class="text-left text-small text-natural font-big px-small py-smaller w-[10%]">Distance</th>
+{{--                    <th class="text-left text-small text-natural font-big px-small py-smaller w-[10%]">Distance</th>--}}
                     <th class="text-left text-small text-natural font-big px-small py-smaller w-[10%]">Image</th>
                     <th class="text-left text-small text-natural font-big px-small py-smaller w-[15%]">Proximity</th>
                 </tr>
@@ -125,7 +125,7 @@
 
                         </td>
                         <td class="text-normal font-normal px-small">{{$attendance->site->name}}</td>
-                        <td class="text-normal font-normal px-small">{{$attendance->distance}} KM</td>
+{{--                        <td class="text-normal font-normal px-small">{{$attendance->distance}} KM</td>--}}
                         <td class="text-normal font-normal px-small">
                             <img src="{{ $attendance->user->profile_image ?? asset('assets/images/tableImg.png')}}"
                                  alt="dashboard"
