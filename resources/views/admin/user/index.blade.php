@@ -16,7 +16,7 @@
                 </div>
                 <div class="ml-[5%]">
                     <h1 class="font-bold text-3xl text-guards">{{$usersCount}}</h1>
-                    <span class="font-normal text-sm text-guards">Personnels</span>
+                    <span class="font-normal text-sm text-guards">Personnel</span>
                 </div>
             </div>
         </section>
@@ -25,7 +25,7 @@
         <section class="pt-basic_padding">
             <!-- add user -->
             <div class="font-big text-big text-natural mb-2 flex flex-row justify-between">
-                <div>Added Personnels</div>
+                <div>Added Personnel</div>
                 <div
                     class="rounded-lg border border-primary_color flex flex-row items-center px-[16px] py-[10px] cursor-pointer">
                     {{-- <img src="{{asset('assets/images/plus.png')}}" class="w-[11px] h-[11px]" alt="plus"/> --}}

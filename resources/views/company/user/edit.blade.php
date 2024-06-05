@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('title', 'Dashboard')
-@section('page', 'User Management')
+@section('page', 'Personnel Management')
 @push('header-links')
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css">
     <link rel="stylesheet" href="{{asset('assets/timepicker/jquery.timepicker.min.css')}}">

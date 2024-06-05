@@ -13,7 +13,7 @@
         <a
             class="font-big text-normal text-primary_color rounded-lg border border-primary_color px-[16px] py-[10px] cursor-pointer bg-transparent"
             href="{{route('admin.users.index')}}">
-            Manage Users
+            Manage Personnel
         </a>
     </div>
     <form class="mt-[2%]" action="{{route('admin.users.update', ['user' => $user])}}" method="POST" enctype="multipart/form-data">
