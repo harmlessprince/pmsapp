@@ -29,7 +29,7 @@ class AttendanceAnalyticsController extends Controller
         $startMonthYear = $request->query('month_year', Carbon::now()->startOfMonth()->format('Y-m-d'));
         $endMonthYear = Carbon::parse($startMonthYear)->endOfMonth()->format('Y-m-d');
 
-        $defaultStartMonth = Carbon::now()->subMonths(1)->endOfMonth()->format('Y-m-d');
+        $defaultStartMonth = Carbon::now()->subMonths(1)->startOfMonth()->format('Y-m-d');
 
         $defaultEndMonth = Carbon::now()->endOfMonth()->format('Y-m-d');
         $pipes = [
