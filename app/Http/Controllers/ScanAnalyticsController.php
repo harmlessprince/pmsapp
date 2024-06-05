@@ -23,7 +23,7 @@ class ScanAnalyticsController extends Controller
     public function __invoke(Request $request)
     {
         $frequency = $request->query('frequency', 'daily');
-        $defaultStartMonth =  Carbon::now()->subMonths(1)->endOfMonth()->format('Y-m-d');
+        $defaultStartMonth =  Carbon::now()->subMonths(1)->startOfMonth()->format('Y-m-d');
         $defaultEndMonth =  Carbon::now()->endOfMonth()->format('Y-m-d');
         $pipes = [
             new DateFilter('scan_date', $defaultStartMonth, $defaultEndMonth),
