@@ -258,8 +258,8 @@
     const longitudeElm = document.getElementById("longitude")
     const latitudeElm = document.getElementById("latitude")
     const searchLocationMapElm = document.getElementById('searchLocationMap')
-    const imageViewModalElement = document.getElementById('imageViewModalElement');
-    var imageViewModalObject = null;
+    // const imageViewModalElement = document.getElementById('imageViewModalElement');
+    // var imageViewModalObject = null;
     let autocompleteSearchLocation = null;
     const searchLocation = {
         id: "",
@@ -327,7 +327,7 @@
 
     document.addEventListener("DOMContentLoaded", function (event) {
         initAutocomplete()
-        imageViewModalObject = new Flowbite.default?.Modal(imageViewModalElement)
+        // imageViewModalObject = new Flowbite.default?.Modal(imageViewModalElement)
     });
 
     document.getElementById("allBtn")?.addEventListener("click", function () {
