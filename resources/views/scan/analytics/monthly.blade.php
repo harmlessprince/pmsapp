@@ -44,7 +44,7 @@
 
         <!-- start of bar chart -->
         <div class="bg-background_color mt-[5%] max-lg:mt-[10%] rounded-lg overflow-x-auto">
-            <div class="text-natural font-normal text-normal p-[2%]">Monthly scan % by all sites</div>
+            <div class="text-natural font-normal text-normal p-[2%]">Monthly scan by all sites</div>
             <canvas id="allSitesChart" style="width: 100%; height: 50vh;"></canvas>
         </div>
         <!-- end bar chat -->
@@ -136,7 +136,7 @@
             options: {
                 title: {
                     display: true,
-                    text: "Monthly scan % by all sites combined",
+                    text: "Monthly scan by all sites combined",
                     fontSize: 14,
                     fontColor: "#FEFFFE",
                 },
