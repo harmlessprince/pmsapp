@@ -153,7 +153,7 @@ class SiteController extends Controller
             'maximum_number_of_rounds' => $request->input('maximum_number_of_rounds'),
             'longitude' => $request->input('longitude'),
             'latitude' => $request->input('latitude'),
-            'status' => $request->input('status'),
+            'status' => $request->input('status',  $site->status),
             'photo' => $photoPath
         ]);
 
