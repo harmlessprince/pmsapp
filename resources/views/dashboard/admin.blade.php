@@ -11,7 +11,7 @@
         <span class="material-symbols-outlined w-[24px] h-[24px] text-natural">account_balance</span>
     </div>
     <div class="ml-[5%]">
-        <h1 class="font-bold text-3xl text-primary_color">{{$countOfSites}}</h1>
+        <h1 class="font-bold text-3xl text-primary_color">{{$countOfCompanies}}</h1>
         <span class="font-normal text-sm text-primary_color">Companies</span>
     </div>
 </div>

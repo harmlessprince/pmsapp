@@ -1,6 +1,6 @@
 @extends('layouts.app')
-@section('title', 'Company')
-@section('page', 'Company')
+@section('title', 'Company Management')
+@section('page', 'Company Management')
 @push('header-scripts')
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"
             integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
