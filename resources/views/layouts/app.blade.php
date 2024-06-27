@@ -77,7 +77,7 @@
 </main>
 <script>
     const analyticsDropdown = document.querySelector('#dropdownAnalytics');
-    const mobileAnalyticsDropdown = document.querySelector('#mobileAnalytics');
+    const mobileAnalyticsDropdown = document.querySelector('#mobileTestAnalytics');
     const managementDropdown = document.querySelector("#dropdownManagements");
     const mobileManagementDropdown = document.querySelector("#mobileManagements");
     const transactionDropdown = document.querySelector("#dropdownTransaction");
@@ -86,13 +86,16 @@
     const mobileSideBar = document.querySelector("#mobileAside");
     const ajaxSpan = document.querySelector("#ajax_span");
     const ajaxLoader = document.querySelector("#ajax_loader");
-    // const allBtn = document.querySelector("#allBtn")
+   
+    let toggleScreen = "true"
 
     // allBtn.addEventListener("click", () => console.log('wetin dey happen'));
 
 
     const toggleSideBar = () => {
         mobileSideBar.classList.toggle("hidden")
+        toggleScreen = !toggleScreen
+        console.log(toggleScreen)
     }
 
     const toggledropdown = () => {
@@ -101,14 +104,16 @@
         analyticsDropdown.classList.toggle("hidden")
     }
     const toggleAnalytics = () => {
+        console.log("touched")
         managementDropdown.classList.add("hidden")
         transactionDropdown.classList.add('hidden')
         analyticsDropdown.classList.toggle("hidden")
     }
 
-    const toggleMobiledropdown = () => {
-        mobileManagementDropdown.classList.add("hidden")
-        mobileTransactionDropdown.classList.add('hidden')
+    const toggleMobileAnalytics = () => {
+        console.log("e dey work")
+        // mobileManagementDropdown.classList.add("hidden")
+        // mobileTransactionDropdown.classList.add('hidden')
         mobileAnalyticsDropdown.classList.toggle("hidden")
     }
 
