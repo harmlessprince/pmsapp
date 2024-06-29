@@ -19,6 +19,9 @@ export default {
                 "xsmall": "400px",
                 "small": "600px",
                 "big": "1100px",
+                // the about was used for the landing page only
+                "about": "1250px",
+                "bigger": "1400px",
                 'mobile': '960px'
             },
 

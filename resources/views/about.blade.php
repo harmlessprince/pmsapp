@@ -65,7 +65,7 @@
 
         <div class="mt-[1.5em] h-[30vh] w-full flex flex-row items-center justify-center font-bigger text-[#fff] text-[3em] bg-col3"> ABOUT US</div>
 
-        <section class="pt-[5%] px-[15%] max-mobile:px-[5%] bg-col4">
+        <section class="pt-[5%] px-[15%] max-about:px-[5%] about:max-bigger:px-[10%] bg-col4">
             <div class="text-center text-normal font-[500] text-col5">Learn about PERFTRAKA</div>
             <header class="font-[700] text-header max-mobile:text-[2em] text-col3 text-center">
                 <span class="px-1 pb-2 relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:h-[8px] after:w-full after:bg-[#E63026] after:rounded-[4px]">About Us</span>
@@ -109,7 +109,7 @@
         </section>
 
         {{-- get in touch --}}
-        <section id="getInTouch"  class="py-[5%] px-[15%]  max-mobile:px-[5%]">
+        <section id="getInTouch"  class="py-[5%] px-[15%]  max-about:px-[5%]">
             <header class="font-[800] text-[2.25em] text-center">Get In touch with us</header>
             <div class="text-center font-normal text-[#667085]">We’d love to hear from you. Please fill out this form.</div>
 
@@ -171,7 +171,7 @@
             </form>
         </section>
 
-        <footer class="flex flex-row  max-mobile:flex-col items-end bg-col3 px-[15%]  max-mobile:px-[5%] pt-[3%] max-mobile:py-[10%] pb-[3.5%] text-[#fff]">
+        <footer class="flex flex-row  max-mobile:flex-col items-end bg-col3 px-[15%]  max-about:px-[5%] pt-[3%] max-mobile:py-[10%] pb-[3.5%] text-[#fff]">
             <div class="w-[19em] max-mobile:w-full">
             <div class="flex flex-row items-center">
             <img src="/assets/landing_images/logo2.svg" class="w-[40px] h-[54px] mr-1" alt="perfraka logo">

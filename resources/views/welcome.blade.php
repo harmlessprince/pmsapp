@@ -160,7 +160,7 @@
     </section>
 
     {{-- about --}}
-    <section class="pt-[5%] px-[15%] max-mobile:px-[5%] bg-col4">
+    <section class="pt-[5%] px-[15%] max-about:px-[5%] bg-col4">
         <div class="text-center text-normal font-[500] text-col5">Learn about PERFTRAKA</div>
         <header class="font-[700] text-header max-mobile:text-[2em] text-col3 text-center">
             <span
@@ -192,14 +192,14 @@
                 </a>
             </div>
             <img src="{{asset('/assets/landing_images/mobile3.png')}}"
-                 class="mt-[3.5em] w-[26em] h-[29.2em] ml-[5em] max-mobile:ml-0" alt="perfraka mobile">
+                 class="mt-[3.5em] w-[26em] min-h-[29.2em] ml-[5em] max-mobile:ml-0" alt="perfraka mobile">
         </div>
 
        
     </section>
 
     {{-- features --}}
-    <section class="py-[5%] px-[15%] max-mobile:px-[5%]">
+    <section class="py-[5%] px-[15%] max-about:px-[5%]">
         <div class="text-center text-normal font-[500] text-col5">What’s special on our App</div>
         <header class="font-[700] text-header max-mobile:text-[2rem]  text-col3 text-center">
             <span
@@ -325,7 +325,7 @@
     </section>
 
     {{-- benefits --}}
-    <section class="pt-[1rem] pb-[5rem] px-[15%]  max-mobile:px-[5%] bg-col4">
+    <section class="pt-[1rem] pb-[5rem] px-[15%]  max-about:px-[5%] bg-col4">
         <div class="text-center text-normal font-[500] text-col5">Benefits you get</div>
         <header class="font-[700] text-header max-mobile:text-[1.97rem] text-col3 text-center">
             <span
@@ -378,7 +378,7 @@
     {{-- control and manage --}}
     <section class="bg-col4 w-full h-[23.5em] max-mobile:h-[100%] max-mobile:h-[100%]  max-mobile:pb-5">
         <div
-            class="w-full flex flex-row  max-mobile:flex-col justify-between pl-[15%]  max-mobile:pl-0  pr-[8%]  max-mobile:pr-0 bg-col3">
+            class="w-full flex flex-row  max-mobile:flex-col justify-between pl-[15%]  max-mobile:pl-0 mobile:max-about:pl-[5%] pr-[8%]  max-mobile:pr-0 bg-col3">
             <div class="w-[55%]  max-mobile:w-full  max-mobile:px-[5%] text-[#ffffff] py-[2em]">
                 <div class="font-bigger text-[2.25em]">
                     Control and manage all your operations from one convenient hub With &#160; PERFTRAKA
@@ -400,7 +400,7 @@
     </section>
 
     {{-- get in touch --}}
-    <section id="getInTouch" class="py-[5%] px-[15%]  max-mobile:px-[5%]">
+    <section id="getInTouch" class="py-[5%] px-[15%]  max-about:px-[5%]">
         <header class="font-[800] text-[2.25em] text-center">Get In touch with us</header>
         <div class="text-center font-normal text-[#667085]">We’d love to hear from you. Please fill out this form.</div>
 
@@ -462,7 +462,7 @@
     </section>
 
     {{-- frequently asked --}}
-    <section id="askedQuestions" class="bg-col4 py-[5%] px-[15%]  max-mobile:px-[5%]">
+    <section id="askedQuestions" class="bg-col4 py-[5%] px-[15%]  max-about:px-[5%]">
         <header class="font-bigger text-header text-center">Frequently Asked <span
                 class="text-[#C52216]">Questions</span></header>
         <form class="relative w-full my-5" action="{{route('faq')}}" method="GET">
@@ -491,7 +491,7 @@
     </section>
 
     <footer
-        class="flex flex-row  max-mobile:flex-col items-end bg-col3 px-[15%]  max-mobile:px-[5%] pt-[3%] max-mobile:py-[10%] pb-[3.5%] text-[#fff]">
+        class="flex flex-row  max-mobile:flex-col items-end bg-col3 px-[15%]  max-about:px-[5%] pt-[3%] max-mobile:py-[10%] pb-[3.5%] text-[#fff]">
         <div class="w-[19em] max-mobile:w-full">
             <div class="flex flex-row items-center">
                 <img src="{{asset('/assets/landing_images/logo2.svg')}}" class="w-[40px] h-[54px] mr-1" alt="perfraka logo">
