@@ -169,73 +169,82 @@
         <div class="pt-[1em] flex flex-row max-mobile:flex-col">
             <div class="pt-[5%] text-size1 font-normal">
                 <p>
-                    At PERFTRAKA, we specialize in providing cutting-edge Location Capture,
-                    Employee & Contractor Attendance Management Solutions tailored to meet the diverse needs of
-                    businesses across various industries.
-                <p>Our innovative platform allows
-                    businesses to seamlessly monitor and manage activities across multiple sites,
-                    ensuring optimal efficiency and security.
-                <p>
+                    PERFTRAKA is a cloud based technology that provides cutting-edge Location Capture, 
+                    Security Patrol Monitoring and Employee & Contractor Attendance Management solutions 
+                    tailored to meet the diverse needs of businesses across various industries.
                 </p>
                 <p class="py-[5%]">
-                    With our solution, businesses can easily track employee attendance, streamline visitor
-                    registration processes, and capture crucial location data in real-time. Whether you're managing
-                    a single location or multiple sites, our platform offers the flexibility and scalability to meet
-                    your unique requirements.
+                    Using our innovative platform, security agencies and businesses can easily track security patrol, employee and contractor 
+                    attendance in real-time. Whether you are managing a single location or multiple sites, our platform offers the flexibility 
+                    and scalability to meet your unique requirements.
                 </p>
                 <p>
-                    Say goodbye to manual tracking methods and inefficiencies – with PERFTRAKA,
-                    you can centralize your operations and gain full visibility into all activities, empowering you to
-                    make informed decisions
-                    and drive business success.Experience the power of streamlined operations and enhanced security with
-                    PERFTRAKA.
+                    With QR codes installed at respective location sites or simply by pre-configuring 
+                    the longitudinal and latitudinal co-ordinates of locations on the application, 
+                    data is captured and written to the cloud where the administrator/supervisor/HR 
+                    can monitor all security patrols and employee & contractor attendance in real time.
                 </p>
+                <a href="{{route('about')}}">
+                    <button
+                        class="cursor-pointer rounded-[8px] px-4 py-1 border border-[#E63026] mt-[1em] h-[2.75em] text-[#E63026] text-size1 font-[600]">
+                        Read more
+                    </button>
+                </a>
             </div>
             <img src="{{asset('/assets/landing_images/mobile3.png')}}"
                  class="mt-[3.5em] w-[26em] h-[29.2em] ml-[5em] max-mobile:ml-0" alt="perfraka mobile">
         </div>
+
+       
     </section>
 
     {{-- features --}}
-    <section class="py-[5%] px-[15%]  max-mobile:px-[5%]">
+    <section class="py-[5%] px-[15%] max-mobile:px-[5%]">
         <div class="text-center text-normal font-[500] text-col5">What’s special on our App</div>
-        <header class="font-[700] text-header text-col3 text-center">
+        <header class="font-[700] text-header max-mobile:text-[2rem]  text-col3 text-center">
             <span
                 class="px-1 pb-2 relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:h-[8px] after:w-full after:bg-[#E63026] after:rounded-[4px]">Features </span>
         </header>
-        <div class="flex flex-row  max-mobile:flex-col py-[2em]">
-            <div class='w-[48%] relative max-mobile:hidden'>
-                <div class="absolute w-full text-center bottom-[20%] left-0 flex flex-row justify-center z-10">
-                    <img src="{{asset('/assets/landing_images/mobile4.png')}}" class="z-5 w-[18.375em] h-[39.625em]" alt="mobile">
-                </div>
-                <div class="h-[25em] w-full bg-col3 absolute bottom-0 left-0 -z-10"></div>
-            </div>
 
-            <div class="ml-[1px]  max-mobile:ml-0 w-[48%] w-full">
-                <div class="flex flex-row  max-mobile:flex-col justify-end w-full">
-                    <div class="w-[21em]  max-mobile:w-full h-[25em] py-5 px-3 rounded-[8px] border border-[#E7E8E7]">
+            <div class="ml-[1px] max-mobile:ml-0 w-full py-[2em]">
+                <div class="flex flex-row max-mobile:flex-col justify-between w-full">
+                    <div class="max-w-[49%] max-mobile:max-w-full m-h-[26.5em] py-5 px-3 rounded-[8px] border border-[#E7E8E7]">
                         <div class="rounded-full w-[50px] h-[50px] bg-col3 flex flex-row items-center justify-center">
                             <span class="material-symbols-outlined text-[#fff] w-[24px] h-[24px]">phone_iphone</span>
                         </div>
 
                         <div class="text-eighteen font-bigger mt-1 mb-2">
-                            {{-- Scan QR Code --}}
-                            Mobile Applications for Security Personnels
+                            Mobile Application for Performance Management
                         </div>
 
                         <div class="text-normal font-normal text-[#8C8C8C]">
-                            Security personnel can manage attendance, assignments, and stay in touch
-                            using the mobile app while out in the field, which boosts productivity and
-                            responsiveness by helping security teams work more effectively and stay connected in
-                            real-time.
-                            The Mobile app also has a QR code scanning feature that allows security personnel to verify
-                            patrol routes and control access points quickly and accurately, which ensures that security
-                            personnel cover the right areas, enhancing accountability and accuracy in their work.
+                            <p>
+                                With PERFTRAKA you have real time reports of patrols by your security personnel and of the 
+                                attendance of your employees and contractors i.e., 
+                                field sales executives, cleaners, cooks, drivers,
+                                 etcetera at all location sites regardless of geographical location.
+                            </p>
+
+                            <p class="pt-[1em]">
+                                Whilst the QR code scanning feature ensures that security personnel patrol the assigned beats as required,
+                                 it also verifies patrol routes and control access points quickly and accurately, 
+                                 enhancing accountability and accuracy in their work.
+                            </p>
+
+                            <p class="pt-[1em]">
+                                The attendance monitoring feature ensures that employees and contractors 
+                                hired for specific tasks are available at the assigned locations sites at 
+                                agreed times and actually worked for the length of time assigned.
+                            </p>
+
+                            <p class="pt-[1em]">
+                                All these features enhances higher productivity and work performance.
+                            </p>
                         </div>
                     </div>
 
                     <div
-                        class="w-[21em]  max-mobile:w-full h-[25em] py-5 px-3 rounded-[8px] border border-[#E7E8E7] ml-4  max-mobile:ml-0  max-mobile:mt-5">
+                        class="max-w-[49%]  max-mobile:max-w-full min-h-[26.5em] py-5 px-3 rounded-[8px] border border-[#E7E8E7] ml-4  max-mobile:ml-0  max-mobile:mt-5">
                         <div class="rounded-full w-[50px] h-[50px] bg-col3 flex flex-row items-center justify-center">
                             <span class="material-symbols-outlined text-[#fff] w-[24px] h-[24px]">monitoring</span>
                         </div>
@@ -245,36 +254,48 @@
                         </div>
 
                         <div class="text-normal font-normal text-[#8C8C8C]">
-                            Robust reporting tools and dashboard provides insights on patrol frequency,
-                            response times, and incident trends through comprehensive reports. And also
-                            visualizes trend analysis and evaluates the performance of security measures,
-                            which allows Businesses to make data-driven decisions to optimize security
-                            operations and spot patterns and areas for improvement,and also helping to
-                            fine-tune security strategy for better outcomes.
+                            <p>
+                                Our robust reporting tools and dashboard provide insights on security patrol and employee attendance frequencies, gaps,
+                                 lateness at work, response times, incident trends and many more through clear and easy to understand tabular and graphical reports.
+                            </p>
+
+                            <p class="pt-[1em]">
+                                These insights help identify patterns and areas for improvement. 
+                                They enable data-driven decisions to optimize security operations and work performance.
+                            </p>
+
+                            <p class="pt-[1em]">
+                                Our reports are easily exportable to an excel file for storage and further distribution to other parties for better decision making.
+                            </p>
                         </div>
                     </div>
                 </div>
 
                 {{-- flex2 --}}
-                <div class="flex flex-row  max-mobile:flex-col justify-end w-full mt-4  max-mobile:mt-5">
-                    <div class="w-[21em]  max-mobile:w-full h-[25em] py-5 px-3 rounded-[8px] border border-[#E7E8E7]">
+                <div class="flex flex-row max-mobile:flex-col justify-between w-full mt-4  max-mobile:mt-5">
+                    <div class="max-w-[49%] max-mobile:max-w-full min-h-[26.5em] py-5 px-3 rounded-[8px] border border-[#E7E8E7]">
                         <div class="rounded-full w-[50px] h-[50px] bg-col3 flex flex-row items-center justify-center">
                             <span class="material-symbols-outlined text-[#fff] w-[24px] h-[24px]">sell</span>
                         </div>
 
                         <div class="text-eighteen font-bigger mt-1 mb-2">
-                            Tags Management
+                            Admin management 
                         </div>
 
                         <div class="text-normal font-normal text-[#8C8C8C]">
-                            Unique and encrypted QR codes for each location help manage
-                            access and track activities efficiently which provides an extra
-                            layer of security and ensures accurate categorization and control at each tagged location.
+                            <p>
+                                Unique and encrypted QR codes for each location or beat help manage access and track activities of security personnel efficiently.
+                            </p>
+
+                            <p class="pt-[1em]">
+                                By capturing location and other information through the scanning of the QR code tags in real-time,
+                                 the administrator/supervisor/HR can monitor all security patrols and employee attendance effectively. 
+                            </p>
                         </div>
                     </div>
 
                     <div
-                        class="w-[21em] max-mobile:w-full h-[25em] py-5 px-3 rounded-[8px] border border-[#E7E8E7] ml-4 max-mobile:ml-0 max-mobile:mt-5">
+                        class="max-w-[49%] max-mobile:max-w-full min-h-[26.5em] py-5 px-3 rounded-[8px] border border-[#E7E8E7] ml-4 max-mobile:ml-0 max-mobile:mt-5">
                         <div class="rounded-full w-[50px] h-[50px] bg-col3 flex flex-row items-center justify-center">
                             <span class="material-symbols-outlined text-[#fff] w-[24px] h-[24px]">wifi_off</span>
                         </div>
@@ -284,14 +305,74 @@
                         </div>
 
                         <div class="text-normal font-normal text-[#8C8C8C]">
-                            The mobile app works offline so security personnel can keep recording data even without
-                            internet access which ensures that
-                            security operations continue uninterrupted, even in areas with poor connectivity.
+                            <p>
+                                The mobile app works offline and this enables security patrol, 
+                                employee and contractor attendance monitoring to continue without internet connectivity.
+                            </p>
+
+                            <p class="pt-[1em]">
+                                All data and activities are stored on the mobile phone and these are synced into the cloud 
+                                based databases once the internet comes back up. 
+                            </p>
+
+                            <p class="pt-[1em]">
+                                This functionality is crucial in areas with poor connectivity.  
+                            </p>
                         </div>
                     </div>
                 </div>
             </div>
+    </section>
+
+    {{-- benefits --}}
+    <section class="pt-[1rem] pb-[5rem] px-[15%]  max-mobile:px-[5%] bg-col4">
+        <div class="text-center text-normal font-[500] text-col5">Benefits you get</div>
+        <header class="font-[700] text-header max-mobile:text-[1.97rem] text-col3 text-center">
+            <span
+                class="px-1 pb-2 relative after:content-[''] after:absolute after:bottom-0 after:left-[25%] after:h-[8px] after:w-[50%] after:bg-[#E63026] after:rounded-[4px]">PERFTRAKA Benefits</span>
+        </header>
+
+        <div class="flex flex-row max-mobile:flex-col justify-between items-center mt-[4em]">
+            <div class="max-w-[29%] max-mobile:max-w-full min-h-[40rem] border border-[#1A544D] rounded-[10px]">
+            <div class="text-center w-full min-h-[20rem] justify-center pt-[3em] px-1 border border-[#647270] border-x-0 border-b-1 border-t-0 ">
+                <img src="{{asset('/assets/landing_images/support.png')}}" class="w-[5.625] mx-auto" alt="24/7">    
+                <div class="text-[28px] text-[#1A544D] font-[500]">
+                    Security patrol, employee & contractor attendance monitoring
+                </div>
+            </div>
+            <div class="text-center w-full min-h-[20rem] justify-center pt-[3em]">
+                <img src="{{asset('/assets/landing_images/no-fee.png')}}" class="w-[5.625] mx-auto" alt="24/7">
+                <div class="text-[28px] text-[#1A544D] font-[500]">
+                    Cloud based with no additional cost of infrastructure
+                </div>
+            </div>
+            </div>
+
+            <div class="w-[40%] h-[47rem] max-mobile:hidden">
+                <img src="{{asset('/assets/landing_images/benefit_phone.png')}}" class="w-full h-[100%]" alt="24/7">
+            </div>
+
+            <div class="max-w-[29%] max-mobile:max-w-full min-h-[40rem] border border-[#1A544D] rounded-[10px]">
+                <div class="text-center w-full min-h-[20rem] justify-center pt-[3em] px-1 border border-[#647270] border-x-0 border-b-1 border-t-0 ">
+                    <img src="{{asset('/assets/landing_images/use.png')}}" class="w-[5.625] mx-auto" alt="24/7">
+                    <div class="text-[28px] text-[#1A544D] font-[500]">
+                        Affordable, simple & Easy to install in 5Min.
+                    </div>
+                </div>
+                <div class="text-center w-full min-h-[20rem] justify-center pt-[3em] px-1">
+                    <img src="{{asset('/assets/landing_images/trial.png')}}" class="w-[5.625] mx-auto" alt="24/7">
+                    <div class="text-[28px] text-[#1A544D] font-[500]">
+                        1Month free trial
+                    </div>
+                </div>
+                </div>
+            </div>
         </div>
+
+        <div class="max-w-[28.5rem] max-mobile:hidden max-h-[20px] bg-[#DCDCDC] rounded-[50%] mx-auto text-col4 mt-[2rem]">
+        .
+        </div>
+            
     </section>
 
     {{-- control and manage --}}

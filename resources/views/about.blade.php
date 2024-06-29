@@ -73,27 +73,38 @@
             <div class="pt-[1em] flex flex-row max-mobile:flex-col">
                 <div class="pt-[5%] text-size1 font-normal">
                     <p>
-                    At PERFTRAKA, we specialize in providing cutting-edge Location Capture,
-                    Employee & Contractor Attendance Management Solutions tailored to meet the diverse needs of
-                    businesses across various industries.
-                    <p>Our innovative platform allows
-                    businesses to seamlessly monitor and manage activities across multiple sites,
-                    ensuring optimal efficiency and security.
-                    <p>
+                        PERFTRAKA is a cloud based technology that provides cutting-edge Location Capture, 
+                        Security Patrol Monitoring and Employee & 
+                        Contractor Attendance Management solutions tailored to meet the diverse needs of businesses across various industries.
                     </p>
-                    <p class="py-[5%]">
-                        With our solution, businesses can easily track employee attendance, streamline visitor
-                        registration processes, and capture crucial location data in real-time. Whether you're managing
-                        a single location or multiple sites, our platform offers the flexibility and scalability to meet
-                        your unique requirements.
+                    <p class="pt-[1em]">
+                        Using our innovative platform, security agencies and businesses can easily track security patrol, 
+                        employee and contractor attendance in real-time. Whether you are managing a 
+                        single location or multiple sites, our platform offers the flexibility and 
+                        scalability to meet your unique requirements.
                     </p>
-                    <p>
-                        Say goodbye to manual tracking methods and inefficiencies – with PERFTRAKA,
-                        you can centralize your operations and gain full visibility into all activities, empowering you to make informed decisions
-                        and drive business success.Experience the power of streamlined operations and enhanced security with PERFTRAKA.
+                    <p class="pt-[1em]">
+                        With QR codes installed at respective location sites or simply by pre-configuring the 
+                        longitudinal and latitudinal co-ordinates of locations on the application, data is captured and 
+                        written to the cloud where 
+                        the administrator/supervisor/HR can monitor all security patrols and employee & contractor attendance in real time.
                     </p>
+
+                    <p class="pt-[1em]">
+                        PERFTRAKA provide you with real time reports of patrols by your security personnel and the attendance of your 
+                        employees and contractors i.e.,
+                         field sales executives, cleaners, cooks, drivers, etcetera at all location sites regardless of their geographical 
+                         location.
+                    </p>
+
+                    <p class="pt-[1em]">
+                        So say goodbye to manual tracking methods and inefficiencies – with PERFTRAKA, 
+                        you can centralize your operations and gain full visibility into all activities, 
+                        empowering you to make informed decisions and drive business success.
+                    </p>
+
                 </div>
-                <img src="/assets/landing_images/mobile3.png" class="mobile:mt-[3.5em] w-[26em] h-[29.2em] max-mobile:h-[23em] ml-[5em] max-mobile:ml-0" alt="perfraka mobile">
+                <img src="/assets/landing_images/mobile3.png" class="mobile:mt-[3.5em] w-[26em] min-h-[29.2em] max-mobile:h-[23em] ml-[5em] max-mobile:ml-0" alt="perfraka mobile">
             </div>
         </section>
 
