@@ -58,10 +58,11 @@ class AttendanceController extends Controller
 
 
         $alreadyCheckedIn = $this->attendanceRepository->modelQuery()
-            ->latest('attendance_date_time')
             ->where('attendance_date', $request->input('attendance_date'))
             ->where('user_id', $request->input('security_guard_id'))
-            ->where('action_type', AttendanceActionTypeEnum::CHECK_IN->value)->latest('attendance_date_time')->first();
+            ->where('action_type', AttendanceActionTypeEnum::CHECK_IN->value)->oldest('attendance_date_time')->first();
+
+
 
 //        if ($alreadyCheckedIn && $request->input('action_type') == AttendanceActionTypeEnum::CHECK_IN->value) {
 //            return sendError("Personnel already checked in for today", 400);
@@ -113,8 +114,11 @@ class AttendanceController extends Controller
             $data['check_in_to_checkout_duration'] = Carbon::parse($alreadyCheckedIn->attendance_time)->diffInSeconds(Carbon::parse($request->input('attendance_time')));
         }
 
-
+//        dd($data, secondsToHoursMinutes($data['check_in_to_checkout_duration']));
         $attendance = $this->attendanceRepository->create($data);
+
+
+
         return sendSuccess(['attendances' => $attendance], 'Attendance taken successfully');
     }
 }

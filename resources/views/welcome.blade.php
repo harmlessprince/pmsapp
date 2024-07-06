@@ -169,19 +169,19 @@
         <div class="pt-[1em] flex flex-row max-mobile:flex-col">
             <div class="pt-[5%] text-size1 font-normal">
                 <p>
-                    PERFTRAKA is a cloud based technology that provides cutting-edge Location Capture, 
-                    Security Patrol Monitoring and Employee & Contractor Attendance Management solutions 
+                    PERFTRAKA is a cloud based technology that provides cutting-edge Location Capture,
+                    Security Patrol Monitoring and Employee & Contractor Attendance Management solutions
                     tailored to meet the diverse needs of businesses across various industries.
                 </p>
                 <p class="py-[5%]">
-                    Using our innovative platform, security agencies and businesses can easily track security patrol, employee and contractor 
-                    attendance in real-time. Whether you are managing a single location or multiple sites, our platform offers the flexibility 
+                    Using our innovative platform, security agencies and businesses can easily track security patrol, employee and contractor
+                    attendance in real-time. Whether you are managing a single location or multiple sites, our platform offers the flexibility
                     and scalability to meet your unique requirements.
                 </p>
                 <p>
-                    With QR codes installed at respective location sites or simply by pre-configuring 
-                    the longitudinal and latitudinal co-ordinates of locations on the application, 
-                    data is captured and written to the cloud where the administrator/supervisor/HR 
+                    With QR codes installed at respective location sites or simply by pre-configuring
+                    the longitudinal and latitudinal co-ordinates of locations on the application,
+                    data is captured and written to the cloud where the administrator/supervisor/HR
                     can monitor all security patrols and employee & contractor attendance in real time.
                 </p>
                 <a href="{{route('about')}}">
@@ -195,7 +195,7 @@
                  class="mt-[3.5em] w-[26em] min-h-[29.2em] ml-[5em] max-mobile:ml-0" alt="perfraka mobile">
         </div>
 
-       
+
     </section>
 
     {{-- features --}}
@@ -219,21 +219,21 @@
 
                         <div class="text-normal font-normal text-[#8C8C8C]">
                             <p>
-                                With PERFTRAKA you have real time reports of patrols by your security personnel and of the 
-                                attendance of your employees and contractors i.e., 
+                                With PERFTRAKA you have real time reports of patrols by your security personnel and of the
+                                attendance of your employees and contractors i.e.,
                                 field sales executives, cleaners, cooks, drivers,
                                  etcetera at all location sites regardless of geographical location.
                             </p>
 
                             <p class="pt-[1em]">
                                 Whilst the QR code scanning feature ensures that security personnel patrol the assigned beats as required,
-                                 it also verifies patrol routes and control access points quickly and accurately, 
+                                 it also verifies patrol routes and control access points quickly and accurately,
                                  enhancing accountability and accuracy in their work.
                             </p>
 
                             <p class="pt-[1em]">
-                                The attendance monitoring feature ensures that employees and contractors 
-                                hired for specific tasks are available at the assigned locations sites at 
+                                The attendance monitoring feature ensures that employees and contractors
+                                hired for specific tasks are available at the assigned locations sites at
                                 agreed times and actually worked for the length of time assigned.
                             </p>
 
@@ -260,7 +260,7 @@
                             </p>
 
                             <p class="pt-[1em]">
-                                These insights help identify patterns and areas for improvement. 
+                                These insights help identify patterns and areas for improvement.
                                 They enable data-driven decisions to optimize security operations and work performance.
                             </p>
 
@@ -279,7 +279,7 @@
                         </div>
 
                         <div class="text-eighteen font-bigger mt-1 mb-2">
-                            Admin management 
+                            QR Code management
                         </div>
 
                         <div class="text-normal font-normal text-[#8C8C8C]">
@@ -289,7 +289,7 @@
 
                             <p class="pt-[1em]">
                                 By capturing location and other information through the scanning of the QR code tags in real-time,
-                                 the administrator/supervisor/HR can monitor all security patrols and employee attendance effectively. 
+                                 the administrator/supervisor/HR can monitor all security patrols and employee attendance effectively.
                             </p>
                         </div>
                     </div>
@@ -306,17 +306,17 @@
 
                         <div class="text-normal font-normal text-[#8C8C8C]">
                             <p>
-                                The mobile app works offline and this enables security patrol, 
+                                The mobile app works offline and this enables security patrol,
                                 employee and contractor attendance monitoring to continue without internet connectivity.
                             </p>
 
                             <p class="pt-[1em]">
-                                All data and activities are stored on the mobile phone and these are synced into the cloud 
-                                based databases once the internet comes back up. 
+                                All data and activities are stored on the mobile phone and these are synced into the cloud
+                                based databases once the internet comes back up.
                             </p>
 
                             <p class="pt-[1em]">
-                                This functionality is crucial in areas with poor connectivity.  
+                                This functionality is crucial in areas with poor connectivity.
                             </p>
                         </div>
                     </div>
@@ -335,7 +335,7 @@
         <div class="flex flex-row max-mobile:flex-col justify-between items-center mt-[4em]">
             <div class="max-w-[29%] max-mobile:max-w-full min-h-[40rem] border border-[#1A544D] rounded-[10px]">
             <div class="text-center w-full min-h-[20rem] justify-center pt-[3em] px-1 border border-[#647270] border-x-0 border-b-1 border-t-0 ">
-                <img src="{{asset('/assets/landing_images/support.png')}}" class="w-[5.625] mx-auto" alt="24/7">    
+                <img src="{{asset('/assets/landing_images/support.png')}}" class="w-[5.625] mx-auto" alt="24/7">
                 <div class="text-[28px] text-[#1A544D] font-[500]">
                     Security patrol, employee & contractor attendance monitoring
                 </div>
@@ -372,7 +372,7 @@
         <div class="max-w-[28.5rem] max-mobile:hidden max-h-[20px] bg-[#DCDCDC] rounded-[50%] mx-auto text-col4 mt-[2rem]">
         .
         </div>
-            
+
     </section>
 
     {{-- control and manage --}}

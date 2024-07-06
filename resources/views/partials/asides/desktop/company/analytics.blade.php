@@ -29,6 +29,5 @@
         </ul>
     </div>
 </div>
-
 {{-- for mobile --}}
 </div>
