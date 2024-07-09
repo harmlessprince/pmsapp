@@ -17,7 +17,7 @@ class AttendanceAnalyticsService
                 DB::raw('MAX(attendance_date_time) as check_out_time'),
                 DB::raw('MAX(check_in_to_checkout_duration) as check_in_to_checkout_duration'),
                 DB::raw('COUNT(*) as total_attendance'),
-            )->groupBy('user_id', 'attendance_date');
+            )->groupBy('user_id', 'attendance_date')->orderBy('check_in_time', 'DESC');
     }
 
 
@@ -34,7 +34,7 @@ class AttendanceAnalyticsService
 //                DB::raw("DATE_TRUNC('year', attendance_date_time) AS year"),
 //                DB::raw("DATE_TRUNC('month', attendance_date_time) as month"),
                 DB::raw('COUNT(*) as total_attendance'),
-            )->groupBy('user_id', DB::raw("DATE_TRUNC('month', attendance_date)"), DB::raw("DATE_TRUNC('year', attendance_date)"));
+            )->groupBy('user_id', DB::raw("DATE_TRUNC('month', attendance_date)"), DB::raw("DATE_TRUNC('year', attendance_date)"))->orderBy('check_in_time', 'DESC');
     }
 
 }
