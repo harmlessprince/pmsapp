@@ -14,6 +14,7 @@ use App\Services\FileUploadService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Log;
 
 class AttendanceController extends Controller
 {
@@ -58,14 +59,11 @@ class AttendanceController extends Controller
 
 
         $alreadyCheckedIn = $this->attendanceRepository->modelQuery()
-            ->latest('attendance_date_time')
             ->where('attendance_date', $request->input('attendance_date'))
             ->where('user_id', $request->input('security_guard_id'))
-            ->where('action_type', AttendanceActionTypeEnum::CHECK_IN->value)->latest('attendance_date_time')->first();
+            ->where('action_type', AttendanceActionTypeEnum::CHECK_IN->value)->oldest('attendance_date_time')->first();
 
-//        if ($alreadyCheckedIn && $request->input('action_type') == AttendanceActionTypeEnum::CHECK_IN->value) {
-//            return sendError("Personnel already checked in for today", 400);
-//        }
+
 
         $alreadyCheckedOut = $this->attendanceRepository->modelQuery()
             ->where('attendance_date', $request->input('attendance_date'))
@@ -85,36 +83,43 @@ class AttendanceController extends Controller
         }
 
         $image = null;
-        if ($request->hasFile('image')) {
-            $response = FileUploadService::uploadToS3($request->file('image'), 'profile_images');
-            $image = $response->path;
+
+        try {
+            if ($request->hasFile('image')) {
+                $response = FileUploadService::uploadToS3($request->file('image'), 'profile_images');
+                $image = $response->path;
+            }
+            $data = [
+                'action_type' => $request->input('action_type'),
+                'image' => $image,
+                'attendance_date' => $request->input('attendance_date'),
+                'attendance_date_time' => $request->input('attendance_date_time'),
+                'attendance_time' => $request->input('attendance_time'),
+                'comment' => $request->input('comment'),
+                'longitude' => $longitude,
+                'latitude' => $latitude,
+                'user_id' => $request->input('security_guard_id'),
+                'site_id' => $user->site_id,
+                'company_id' => $user->company_id,
+                'distance' => $distance,
+                'proximity' => $proximity,
+            ];
+
+            if ($request->input('action_type') == AttendanceActionTypeEnum::CHECK_OUT->value && !$alreadyCheckedIn) {
+                return sendError("Personnel can't checkout without checking in");
+            }
+
+            if ($request->input('action_type') == AttendanceActionTypeEnum::CHECK_OUT->value && $alreadyCheckedIn) {
+                $data['check_in_to_checkout_duration'] = Carbon::parse($alreadyCheckedIn->attendance_time)->diffInSeconds(Carbon::parse($request->input('attendance_time')));
+            }
+
+            $attendance = $this->attendanceRepository->create($data);
+        }catch (\Exception $e){
+            Log::error($e);
+            throw new CustomException('Attendance could not be processed.');
         }
-        $data = [
-            'action_type' => $request->input('action_type'),
-            'image' => $image,
-            'attendance_date' => $request->input('attendance_date'),
-            'attendance_date_time' => $request->input('attendance_date_time'),
-            'attendance_time' => $request->input('attendance_time'),
-            'comment' => $request->input('comment'),
-            'longitude' => $longitude,
-            'latitude' => $latitude,
-            'user_id' => $request->input('security_guard_id'),
-            'site_id' => $user->site_id,
-            'company_id' => $user->company_id,
-            'distance' => $distance,
-            'proximity' => $proximity,
-        ];
-
-        if ($request->input('action_type') == AttendanceActionTypeEnum::CHECK_OUT->value && !$alreadyCheckedIn) {
-            return sendError("Personnel can't checkout without checking in");
-        }
-
-        if ($request->input('action_type') == AttendanceActionTypeEnum::CHECK_OUT->value && $alreadyCheckedIn) {
-            $data['check_in_to_checkout_duration'] = Carbon::parse($alreadyCheckedIn->attendance_time)->diffInSeconds(Carbon::parse($request->input('attendance_time')));
-        }
 
 
-        $attendance = $this->attendanceRepository->create($data);
         return sendSuccess(['attendances' => $attendance], 'Attendance taken successfully');
     }
 }
