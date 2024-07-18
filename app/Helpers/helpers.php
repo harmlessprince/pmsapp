@@ -117,3 +117,64 @@ function secondsToHoursMinutes($seconds)
     return sprintf('%sh %sm', $hours, $minutes);
 
 }
+
+
+function numberToOrdinal($number)
+{
+    // Check if the number is a valid integer
+    if (!is_int($number)) {
+        return false;
+    }
+
+    // Handle special cases for 11th, 12th, and 13th
+    if ($number % 100 >= 11 && $number % 100 <= 13) {
+        return $number . 'th';
+    }
+
+    // Determine the suffix based on the last digit
+    switch ($number % 10) {
+        case 1:
+            return $number . 'st';
+        case 2:
+            return $number . 'nd';
+        case 3:
+            return $number . 'rd';
+        default:
+            return $number . 'th';
+    }
+}
+
+function numberToOrdinalWord($number)
+{
+    // Arrays of words for units and tens
+    $units = ["", "first", "second", "third", "fourth", "fifth", "sixth", "seventh", "eighth", "ninth"];
+    $teens = ["", "eleventh", "twelfth", "thirteenth", "fourteenth", "fifteenth", "sixteenth", "seventeenth", "eighteenth", "nineteenth"];
+    $tens = ["", "tenth", "twentieth", "thirtieth", "fortieth", "fiftieth", "sixtieth", "seventieth", "eightieth", "ninetieth"];
+    $tens_words = ["", "ten", "twenty", "thirty", "forty", "fifty", "sixty", "seventy", "eighty", "ninety"];
+
+    // Convert the number to words and determine the suffix
+    if ($number < 10) {
+        return $units[$number];
+    } elseif ($number < 20) {
+        if ($number == 10) return $tens[1];
+        return $teens[$number - 10];
+    } elseif ($number < 100) {
+        $unit = $number % 10;
+        $ten = (int)($number / 10);
+        return $tens_words[$ten] . ($unit ? "-" . $units[$unit] : "");
+    } else {
+        return "Number too large";
+    }
+}
+
+
+
+// Examples
+//echo numberToOrdinal(1); // Output: 1st
+//echo numberToOrdinal(2); // Output: 2nd
+//echo numberToOrdinal(3); // Output: 3rd
+//echo numberToOrdinal(4); // Output: 4th
+//echo numberToOrdinal(11); // Output: 11th
+//echo numberToOrdinal(21); // Output: 21st
+//echo numberToOrdinal(112); // Output: 112th
+
