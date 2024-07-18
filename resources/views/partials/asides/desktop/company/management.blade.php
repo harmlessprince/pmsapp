@@ -22,12 +22,12 @@
             </li>
             <li>
                 <a href="{{route('company.tags.index')}}"
-                   class="block pl-[16%] pt-2 text-natural font-headerWeight text-normal hover:text-primary_color {{ $isTagManagement ? 'text-primary_color' : 'text-natural'}}">Tags
+                   class="block pl-[16%] pt-2 text-natural font-headerWeight text-normal hover:text-primary_color {{ $isTagManagement ? 'text-primary_color' : 'text-natural'}}">Tag
                     Management</a>
             </li>
             <li>
                 <a href="{{route('company.sites.index')}}"
-                   class="block pl-[16%] pt-2 text-natural font-headerWeight text-normal hover:text-primary_color {{ $isSiteManagement ? 'text-primary_color' : 'text-natural'}}">Sites
+                   class="block pl-[16%] pt-2 text-natural font-headerWeight text-normal hover:text-primary_color {{ $isSiteManagement ? 'text-primary_color' : 'text-natural'}}">Site
                     Management</a>
             </li>
         </ul>
