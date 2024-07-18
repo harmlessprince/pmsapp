@@ -103,18 +103,20 @@
         transactionDropdown.classList.add('hidden')
         analyticsDropdown.classList.toggle("hidden")
     }
+
+    const toggleMobileAnalytics = () => {
+        mobileAnalyticsDropdown.classList.toggle("hidden")
+        console.log("e dey work")
+        // mobileManagementDropdown.classList.add("hidden")
+        // mobileTransactionDropdown.classList.add('hidden')
+       
+    }
+    
     const toggleAnalytics = () => {
         console.log("touched")
         managementDropdown.classList.add("hidden")
         transactionDropdown.classList.add('hidden')
         analyticsDropdown.classList.toggle("hidden")
-    }
-
-    const toggleMobileAnalytics = () => {
-        console.log("e dey work")
-        // mobileManagementDropdown.classList.add("hidden")
-        // mobileTransactionDropdown.classList.add('hidden')
-        mobileAnalyticsDropdown.classList.toggle("hidden")
     }
 
     const toggleManagement = () => {

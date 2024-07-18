@@ -128,10 +128,10 @@
         </div>
         <div
             class="font-bigger text-[3em] max-mobile:text-[2.25em] text-col1 pt-[2em] w-[60%] max-mobile:w-[90%] mx-auto">
-            Take Control of Security Management with <span class="text-col3">PERFTRAKA</span>
+            Take Control of Performance Management with <span class="text-col3">PERFTRAKA</span>
         </div>
         <div class="w-[32em] max-mobile:w-[90%] mx-auto text-[1.125em] text-[#54576F] font-normal">
-            Manage security tasks seamlessly, from record-keeping to attendance tracking.
+            Monitor security patrols and personnel attendance seamlessly and with ease.
         </div>
 
         <div class="relative mt-5 z-10">

@@ -5,9 +5,9 @@
 
 @endphp
 <div>
-{{-- for desktop --}}
-{{-- <div class="mb-8 cursor-pointer">
-    <div onclick="toggleAnalytics()"  class="flex flex-row relative max-lg:hidden"  id="dropdownNavbarLink" >
+{{-- for desktop" --}} 
+<div class="mb-8 cursor-pointer">
+    <div onclick="toggleAnalytics()" class="flex flex-row relative z-[500]"  id="dropdownNavbarLink" >
 
         <span class="material-symbols-outlined mr-4 w-[24px] h-[24px] {{ $isAnalytics == true ? 'text-primary_color' : 'text-natural'}}">equalizer</span>
         <span class="{{ $isAnalytics == true ? 'text-primary_color' : 'text-natural'}} text-base font-medium">Analytics</span>
@@ -28,11 +28,11 @@
             </li>
         </ul>
     </div>
-</div> --}}
+</div>
 
 {{-- for mobile --}}
-<div class="mb-8 cursor-pointer lg:hidden">
-    <div onclick="toggleMobileAnalytics()"  class="flex flex-row relative"  id="" >
+{{-- <div class="mb-8 lg:hidden" >
+    <div class="flex flex-row relative" id="dropdownNavbarLink" onclick="toggleMobileAnalytics()" >
 
         <span class="material-symbols-outlined mr-4 w-[24px] h-[24px] {{ $isAnalytics == true ? 'text-primary_color' : 'text-natural'}}">equalizer</span>
         <span class="{{ $isAnalytics == true ? 'text-primary_color' : 'text-natural'}} text-base font-medium">Analytics</span>
@@ -53,5 +53,5 @@
             </li>
         </ul>
     </div>
-</div>
+</div> --}}
 </div>
