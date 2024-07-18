@@ -106,22 +106,24 @@
                 <table class="table-auto w-[100%] max-lg:w-[1000px] bg-background_color">
                     <thead>
                     <tr class="">
-                        <th class="text-left text-small text-natural font-big  px-smaller py-smaller w-[15%]">
+                        <th class="text-left text-small text-natural font-big  px-smaller py-smaller w-[12%]">
                             Name
                         </th>
-                        <th class="text-left text-small text-natural font-big  px-smaller py-smaller w-[10%]">
+                        <th class="text-left text-small text-natural font-big  px-smaller py-smaller w-[9%]">
                             Time/Date
                         </th>
-                        <th class="text-left text-small text-natural font-big  px-smaller py-smaller w-[15%]">Action
+                        <th class="text-left text-small text-natural font-big  px-smaller py-smaller w-[12%]">Action
                             Type
                         </th>
-                        <th class="text-left text-small text-natural font-big  px-smaller py-smaller w-[10%]">Hours
+                        <th class="text-left text-small text-natural font-big  px-smaller py-smaller w-[9%]">Hours
                             Worked
                         </th>
-                        <th class="text-left text-small text-natural font-big px-smaller py-smaller w-[10%]">Site</th>
+                        <th class="text-left text-small text-natural font-big px-smaller py-smaller w-[9%]">Site</th>
                         {{--                        <th class="text-left text-small text-natural font-big px-smaller py-smaller w-[9%]">Distance</th>--}}
-                        <th class="text-left text-small text-natural font-big px-smaller py-smaller w-[10%]">Image</th>
-                        <th class="text-left text-small text-natural font-big px-smaller py-smaller w-[15%]">Proximity
+                        <th class="text-left text-small text-natural font-big px-smaller py-smaller w-[8%]">Image</th>
+                        <th class="text-left text-small text-natural font-big px-smaller py-smaller w-[12%]">Proximity
+                        </th>
+                        <th class="text-left text-small text-natural font-big px-smaller py-smaller w-[12%]">Comment
                         </th>
                     </tr>
                     </thead>
@@ -169,6 +171,7 @@
                                 />
                             </td>
                             <td class="text-normal font-normal px-smaller">{{$attendance->proximity}}</td>
+                            <td class="text-normal font-normal px-smaller">write a comment here</td>
                         </tr>
                     @empty
 
