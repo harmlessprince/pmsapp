@@ -171,7 +171,7 @@
                                 />
                             </td>
                             <td class="text-normal font-normal px-smaller">{{$attendance->proximity}}</td>
-                            <td class="text-normal font-normal px-smaller">write a comment here</td>
+                            <td class="text-normal font-normal px-smaller">{{$attendance->comment ?? 'n/a'}}</td>
                         </tr>
                     @empty
 
