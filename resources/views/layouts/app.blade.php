@@ -86,7 +86,7 @@
     const mobileSideBar = document.querySelector("#mobileAside");
     const ajaxSpan = document.querySelector("#ajax_span");
     const ajaxLoader = document.querySelector("#ajax_loader");
-   
+
     let toggleScreen = "true"
 
     // allBtn.addEventListener("click", () => console.log('wetin dey happen'));
@@ -98,50 +98,66 @@
         console.log(toggleScreen)
     }
 
-    const toggledropdown = () => {
-        managementDropdown.classList.add("hidden")
-        transactionDropdown.classList.add('hidden')
-        analyticsDropdown.classList.toggle("hidden")
+    // const toggledropdown = () => {
+    //     managementDropdown.classList.add("hidden")
+    //     transactionDropdown.classList.add('hidden')
+    //     analyticsDropdown.classList.toggle("hidden")
+    // }
+
+    const toggleSidebarDropdown = (menuId) => {
+        console.log(menuId)
+        const menuDropDowns = document.getElementsByClassName("dropdownMenuContent")
+        for (let i = 0; i < menuDropDowns.length; i++) {
+            currentMenuDropdown = menuDropDowns[i]
+            if (currentMenuDropdown.id == menuId){
+                console.log(currentMenuDropdown)
+                    currentMenuDropdown.classList.toggle("hidden")
+            }else {
+                currentMenuDropdown.classList.add("hidden")
+            }
+        }
+
     }
 
-    const toggleMobileAnalytics = () => {
-        mobileAnalyticsDropdown.classList.toggle("hidden")
-        console.log("e dey work")
-        // mobileManagementDropdown.classList.add("hidden")
-        // mobileTransactionDropdown.classList.add('hidden')
-       
-    }
-    
-    const toggleAnalytics = () => {
-        console.log("touched")
-        managementDropdown.classList.add("hidden")
-        transactionDropdown.classList.add('hidden')
-        analyticsDropdown.classList.toggle("hidden")
-    }
+    // const toggleMobileAnalytics = () => {
+    //     mobileAnalyticsDropdown.classList.toggle("hidden")
+    //     console.log("e dey work")
+    //     // mobileManagementDropdown.classList.add("hidden")
+    //     // mobileTransactionDropdown.classList.add('hidden')
+    //
+    // }
 
-    const toggleManagement = () => {
-        analyticsDropdown.classList.add('hidden')
-        transactionDropdown.classList.add('hidden')
-        managementDropdown.classList.toggle("hidden")
-    }
 
-    const toggleMobileManagement = () => {
-        mobileManagementDropdown.classList.toggle("hidden")
-        mobileTransactionDropdown.classList.add('hidden')
-        mobileAnalyticsDropdown.classList.add("hidden")
-    }
-
-    const toggleTransaction = () => {
-        managementDropdown.classList.add("hidden")
-        analyticsDropdown.classList.add('hidden')
-        transactionDropdown.classList.toggle("hidden")
-    }
-
-    const toggleMobileTransaction = () => {
-        mobileManagementDropdown.classList.add("hidden")
-        mobileTransactionDropdown.classList.toggle('hidden')
-        mobileAnalyticsDropdown.classList.add("hidden")
-    }
+    // const toggleAnalytics = () => {
+    //     console.log("touched")
+    //     managementDropdown.classList.add("hidden")
+    //     transactionDropdown.classList.add('hidden')
+    //     analyticsDropdown.classList.toggle("hidden")
+    // }
+    //
+    // const toggleManagement = () => {
+    //     analyticsDropdown.classList.add('hidden')
+    //     transactionDropdown.classList.add('hidden')
+    //     managementDropdown.classList.toggle("hidden")
+    // }
+    //
+    // const toggleMobileManagement = () => {
+    //     mobileManagementDropdown.classList.toggle("hidden")
+    //     mobileTransactionDropdown.classList.add('hidden')
+    //     mobileAnalyticsDropdown.classList.add("hidden")
+    // }
+    //
+    // const toggleTransaction = () => {
+    //     managementDropdown.classList.add("hidden")
+    //     analyticsDropdown.classList.add('hidden')
+    //     transactionDropdown.classList.toggle("hidden")
+    // }
+    //
+    // const toggleMobileTransaction = () => {
+    //     mobileManagementDropdown.classList.add("hidden")
+    //     mobileTransactionDropdown.classList.toggle('hidden')
+    //     mobileAnalyticsDropdown.classList.add("hidden")
+    // }
 
     const toggleProfile = () => {
         profileDropdown.classList.toggle("hidden")

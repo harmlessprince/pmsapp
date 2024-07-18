@@ -7,14 +7,14 @@
 <div>
 {{-- for desktop --}}
 <div class="mb-8 cursor-pointer">
-    <div onclick="toggleAnalytics()" class="flex flex-row relative" id="dropdownNavbarLink" >
+    <div onclick="toggleSidebarDropdown('dropdownAnalytics')" class="flex flex-row relative" id="dropdownNavbarLink" >
 
         <span class="material-symbols-outlined mr-4 w-[24px] h-[24px] {{ $isAnalytics == true ? 'text-primary_color' : 'text-natural'}}">equalizer</span>
         <span class="{{ $isAnalytics == true ? 'text-primary_color' : 'text-natural'}} text-base font-medium">Analytics</span>
         <img src="{{asset('assets/images/dropdown.png')}}" alt="dashboard"
              class="mr-4 w-3 h-1.5 absolute right-0 bottom-2"/>
     </div>
-    <div id="dropdownAnalytics" class="hidden">
+    <div id="dropdownAnalytics" class="hidden dropdownMenuContent">
         <ul class="">
             <li>
                 <a href="{{route('company.scans.analytics')}}"
