@@ -7,8 +7,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-            href="https://fonts.googleapis.com/css2?family=Cabin:ital,wght@0,500;0,600;0,700;1,400&family=Inter:wght@400;500;600;700&display=swap"
-            rel="stylesheet">
+        href="https://fonts.googleapis.com/css2?family=Cabin:ital,wght@0,500;0,600;0,700;1,400&family=Inter:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet"
           href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0"/>
 
@@ -95,69 +95,24 @@
     const toggleSideBar = () => {
         mobileSideBar.classList.toggle("hidden")
         toggleScreen = !toggleScreen
-        console.log(toggleScreen)
-    }
 
-    // const toggledropdown = () => {
-    //     managementDropdown.classList.add("hidden")
-    //     transactionDropdown.classList.add('hidden')
-    //     analyticsDropdown.classList.toggle("hidden")
-    // }
+    }
 
     const toggleSidebarDropdown = (menuId) => {
         console.log(menuId)
         const menuDropDowns = document.getElementsByClassName("dropdownMenuContent")
         for (let i = 0; i < menuDropDowns.length; i++) {
             currentMenuDropdown = menuDropDowns[i]
-            if (currentMenuDropdown.id == menuId){
-                console.log(currentMenuDropdown)
-                    currentMenuDropdown.classList.toggle("hidden")
-            }else {
+            if (currentMenuDropdown.id === menuId) {
+
+                currentMenuDropdown.classList.toggle("hidden")
+            } else {
                 currentMenuDropdown.classList.add("hidden")
             }
         }
 
     }
 
-    // const toggleMobileAnalytics = () => {
-    //     mobileAnalyticsDropdown.classList.toggle("hidden")
-    //     console.log("e dey work")
-    //     // mobileManagementDropdown.classList.add("hidden")
-    //     // mobileTransactionDropdown.classList.add('hidden')
-    //
-    // }
-
-
-    // const toggleAnalytics = () => {
-    //     console.log("touched")
-    //     managementDropdown.classList.add("hidden")
-    //     transactionDropdown.classList.add('hidden')
-    //     analyticsDropdown.classList.toggle("hidden")
-    // }
-    //
-    // const toggleManagement = () => {
-    //     analyticsDropdown.classList.add('hidden')
-    //     transactionDropdown.classList.add('hidden')
-    //     managementDropdown.classList.toggle("hidden")
-    // }
-    //
-    // const toggleMobileManagement = () => {
-    //     mobileManagementDropdown.classList.toggle("hidden")
-    //     mobileTransactionDropdown.classList.add('hidden')
-    //     mobileAnalyticsDropdown.classList.add("hidden")
-    // }
-    //
-    // const toggleTransaction = () => {
-    //     managementDropdown.classList.add("hidden")
-    //     analyticsDropdown.classList.add('hidden')
-    //     transactionDropdown.classList.toggle("hidden")
-    // }
-    //
-    // const toggleMobileTransaction = () => {
-    //     mobileManagementDropdown.classList.add("hidden")
-    //     mobileTransactionDropdown.classList.toggle('hidden')
-    //     mobileAnalyticsDropdown.classList.add("hidden")
-    // }
 
     const toggleProfile = () => {
         profileDropdown.classList.toggle("hidden")
@@ -273,8 +228,8 @@
 </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>
 <script
-        src="https://maps.googleapis.com/maps/api/js?key={{ env('GOOGLE_MAP_KEY') }}&libraries=places,geometry&callback=initAutocomplete"
-        defer></script>
+    src="https://maps.googleapis.com/maps/api/js?key={{ env('GOOGLE_MAP_KEY') }}&libraries=places,geometry&callback=initAutocomplete"
+    defer></script>
 <script defer>
 
     const searchLocationElm = document.getElementById("location");
