@@ -7,7 +7,7 @@
 <div>
 {{-- for desktop --}}
 <div class="mb-8 cursor-pointer">
-    <div onclick="toggleAnalytics()"  class="flex flex-row relative max-lg:hidden"  id="dropdownNavbarLink" >
+    <div onclick="toggleAnalytics()" class="flex flex-row relative" id="dropdownNavbarLink" >
 
         <span class="material-symbols-outlined mr-4 w-[24px] h-[24px] {{ $isAnalytics == true ? 'text-primary_color' : 'text-natural'}}">equalizer</span>
         <span class="{{ $isAnalytics == true ? 'text-primary_color' : 'text-natural'}} text-base font-medium">Analytics</span>

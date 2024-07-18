@@ -18,17 +18,17 @@
             <li>
                 <a href="{{route('company.users.index')}}"
                    class="block pl-[16%] pt-2 text-natural font-headerWeight text-normal hover:text-primary_color {{ $isUserManagement ? 'text-primary_color' : 'text-natural'}}">Personnel
-                    management</a>
+                    Management</a>
             </li>
             <li>
                 <a href="{{route('company.tags.index')}}"
                    class="block pl-[16%] pt-2 text-natural font-headerWeight text-normal hover:text-primary_color {{ $isTagManagement ? 'text-primary_color' : 'text-natural'}}">Tags
-                    management</a>
+                    Management</a>
             </li>
             <li>
                 <a href="{{route('company.sites.index')}}"
                    class="block pl-[16%] pt-2 text-natural font-headerWeight text-normal hover:text-primary_color {{ $isSiteManagement ? 'text-primary_color' : 'text-natural'}}">Sites
-                    management</a>
+                    Management</a>
             </li>
         </ul>
     </div>
