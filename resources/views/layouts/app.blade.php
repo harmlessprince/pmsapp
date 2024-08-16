@@ -318,7 +318,12 @@
         imageElement.src = imageUrl
     }
 
-
+    function deleteItem(event, item, message = "Do you want to delete this item ?") {
+        event.preventDefault();
+        if (confirm(message)) {
+            document.getElementById(`frm-delete-item-${item}`).submit();
+        }
+    }
 </script>
 @stack('scripts')
 

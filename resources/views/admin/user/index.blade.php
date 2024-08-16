@@ -104,13 +104,24 @@
                                 </td>
 
                                 <td class="px-smaller">
-                                    <div class="flex flex-row justify-center">
+                                    <div class="flex flex-row justify-between gap-1">
                                         <a href="{{route('admin.users.edit', ['user' => $user->id])}}">
 
                                                 <span
                                                     class="material-symbols-outlined w-[16px] h-[16px] ml-3 cursor-pointer text-natural">edit_square</span>
                                         </a>
+                                        <form id="frm-delete-item-{{$user->id}}"
+                                              action="{{ route('admin.users.destroy', ['user' => $user]) }}"
+                                              style="display: none;" method="POST">
+                                            @csrf
+                                            @method('delete')
 
+                                        </form>
+                                        <a href=""
+                                           onclick='deleteItem(event, {{"$user->id"}}, "Are you sure you want to delete this user, all related attendance will be deleted")'>
+                                            <span
+                                                class="material-symbols-outlined mr-4 w-[24px] h-[24px] text-red-500 cursor-pointer">delete</span>
+                                        </a>
                                     </div>
                                 </td>
                             </tr>

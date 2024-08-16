@@ -117,12 +117,25 @@
                                 </td>
 
                                 <td class="px-small text-right">
-                                    <div class="">
+                                    <div class="flex flex-row justify-between gap-1">
                                         <a href="{{route('admin.companies.edit', ['company' => $company->id])}}">
 
                                         <span
                                             class="material-symbols-outlined w-[16px] h-[16px] ml-3 cursor-pointer text-natural">edit_square</span>
                                         </a>
+
+                                        <a href=""
+                                           onclick='deleteItem(event, {{"$company->id"}}, "Are you sure you want to delete this site, all related scans, attendances, tags, personnel&#39;s and sites will be deleted as well")' class="flex">
+                                            <span
+                                                class="material-symbols-outlined mr-4 w-[24px] h-[24px] text-red-500 cursor-pointer">delete</span>
+                                        </a>
+                                        <form id="frm-delete-item-{{$company->id}}"
+                                              action="{{ route('admin.companies.destroy', ['company' => $company]) }}"
+                                              style="display: none;" method="POST">
+                                            @csrf
+                                            @method('delete')
+
+                                        </form>
 
                                     </div>
                                 </td>

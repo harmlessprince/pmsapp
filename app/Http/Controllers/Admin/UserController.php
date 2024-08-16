@@ -6,6 +6,7 @@ use App\Enums\RoleEnum;
 use App\Exceptions\CustomException;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreUserRequest;
+use App\Models\Attendance;
 use App\Models\User;
 use App\QueryFilters\CompanyIdFilter;
 use App\QueryFilters\CreatedAtFilter;
@@ -137,6 +138,8 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
-        //
+       Attendance::query()->where('user_id', $user->id)->delete();
+       $user->delete();
+       return redirect(route('admin.users.index'))->with('success', 'User deleted successfully');
     }
 }

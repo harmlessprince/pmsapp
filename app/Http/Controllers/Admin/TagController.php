@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Requests\StoreTagRequest;
 use App\Http\Requests\UpdateTagRequest;
 use App\Http\Controllers\Controller;
+use App\Models\Scan;
 use App\Models\Tag;
 use App\QueryFilters\CompanyIdFilter;
 use App\QueryFilters\CreatedAtFilter;
@@ -15,11 +16,12 @@ use App\Repositories\Eloquent\Repository\TagRepository;
 class TagController extends controller
 {
     public function __construct(
-        private readonly TagRepository $tagRepository,
+        private readonly TagRepository     $tagRepository,
         private readonly CompanyRepository $companyRepository
     )
     {
     }
+
     /**
      * Display a listing of the resource.
      */
@@ -30,7 +32,7 @@ class TagController extends controller
             CompanyIdFilter::class,
             SiteIdFilter::class,
         ];
-        $companies =  $this->companyRepository->all();
+        $companies = $this->companyRepository->all();
         $tagQuery = $this->tagRepository->modelQuery()->search();
         $tagCount = $this->tagRepository->modelQuery()->count();
         $tagQuery = constructPipes($tagQuery, $pipes);
@@ -43,7 +45,7 @@ class TagController extends controller
      */
     public function create()
     {
-        $companies =  $this->companyRepository->all();
+        $companies = $this->companyRepository->all();
         return view('admin.tag.create', compact('companies'));
     }
 
@@ -87,7 +89,7 @@ class TagController extends controller
      */
     public function edit(Tag $tag)
     {
-        $companies =  $this->companyRepository->all();
+        $companies = $this->companyRepository->all();
         return view('admin.tag.edit', compact('tag', 'companies'));
     }
 
@@ -118,6 +120,8 @@ class TagController extends controller
      */
     public function destroy(Tag $tag)
     {
-        //
+        Scan::query()->where('tag_id', $tag->id)->delete();
+        $tag->delete();
+        return redirect(route('admin.tags.index'))->with('success', 'Tag deleted successfully');
     }
 }

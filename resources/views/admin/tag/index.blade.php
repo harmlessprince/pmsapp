@@ -104,6 +104,22 @@
 
                                     </div>
                                 </td>
+                                <td class="px-small">
+                                    <div class="flex flex-row justify-end">
+                                        <form id="frm-delete-item-{{$tag->id}}"
+                                              action="{{ route('admin.tags.destroy', ['tag' => $tag]) }}"
+                                              style="display: none;" method="POST">
+                                            @csrf
+                                            @method('delete')
+
+                                        </form>
+                                        <a href=""
+                                           onclick='deleteItem(event, {{"$tag->id"}}, "Are you sure you want to delete this tag, all related scans will be deleted as well")'>
+                                            <span
+                                                class="material-symbols-outlined mr-4 w-[24px] h-[24px] text-red-500 cursor-pointer">delete</span>
+                                        </a>
+                                    </div>
+                                </td>
                             </tr>
                         @empty
                             <tr class="text-normal font-normal border border-table border-collapse text-natural hover:bg-db">

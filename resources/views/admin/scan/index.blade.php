@@ -123,6 +123,7 @@
 {{--                        <th class="text-left text-small text-natural font-big px-smaller py-smaller">Distance</th>--}}
                         <th class="text-left text-small text-natural font-big px-smaller py-smaller w-[18%]">Proximity
                         </th>
+                        <th class="text-center text-small text-natural font-big px-smaller py-smaller">Action</th>
                         {{--                        <th class="text-left text-small text-natural font-big px-small py-smaller">Gap</th>--}}
                     </tr>
                     </thead>
@@ -141,6 +142,22 @@
                             <td class="text-left text-normal font-normal px-smaller">{{$scan->longitude ?? '-'}}</td>
 {{--                            <td class="text-left text-normal font-normal px-smaller">{{round($scan->distance)}} km</td>--}}
                             <td class="text-left text-normal font-normal px-smaller">{{$scan->proximity}}</td>
+                            <td class="px-small">
+                                <div class="flex flex-row justify-end">
+                                    <form id="frm-delete-item-{{$scan->id}}"
+                                          action="{{ route('admin.scan.destroy', ['scan' => $scan]) }}"
+                                          style="display: none;" method="POST">
+                                        @csrf
+                                        @method('delete')
+
+                                    </form>
+                                    <a href=""
+                                       onclick='deleteItem(event, {{"$scan->id"}})'>
+                                            <span
+                                                class="material-symbols-outlined mr-4 w-[24px] h-[24px] text-red-500 cursor-pointer">delete</span>
+                                    </a>
+                                </div>
+                            </td>
                         </tr>
                     @empty
                         <tr class="border border-table border-x-0 text-natural hover:bg-db">

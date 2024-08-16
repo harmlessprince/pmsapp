@@ -123,6 +123,7 @@
 {{--                        <th class="text-left text-small text-natural font-big px-smaller py-smaller">Distance</th>--}}
                         <th class="text-left text-small text-natural font-big px-smaller py-smaller">Image</th>
                         <th class="text-left text-small text-natural font-big px-smaller py-smaller w-[13%]">Proximity</th>
+                        <th class="text-center text-small text-natural font-big px-smaller py-smaller">Action</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -163,6 +164,22 @@
                                 />
                             </td>
                             <td class="text-normal font-normal p-smaller">{{$attendance->proximity}}</td>
+                            <td class="px-small">
+                                <div class="flex flex-row justify-end">
+                                    <form id="frm-delete-item-{{$attendance->id}}"
+                                          action="{{ route('admin.attendance.destroy', ['attendance' => $attendance]) }}"
+                                          style="display: none;" method="POST">
+                                        @csrf
+                                        @method('delete')
+
+                                    </form>
+                                    <a href=""
+                                       onclick='deleteItem(event, {{"$attendance->id"}})'>
+                                            <span
+                                                class="material-symbols-outlined mr-4 w-[24px] h-[24px] text-red-500 cursor-pointer">delete</span>
+                                    </a>
+                                </div>
+                            </td>
                         </tr>
                     @empty
 

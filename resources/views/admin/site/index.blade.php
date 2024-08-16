@@ -87,7 +87,7 @@
                             <th class="px-smaller py-[1%]  w-[25%]">Address</th>
                             <th class="px-smaller py-[1%]">Photo</th>
                             <th class="px-smaller py-[1%]">Status</th>
-                            <th class="px-smaller py-[1%] text-right w-[5%]">Action</th>
+                            <th class="px-smaller py-[1%] text-center">Action</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -140,15 +140,26 @@
                                     @endif
                                 </td>
 
-                                <td class="px-small text-right">
+                                <td class="px-small text-center">
 
-                                    <div class="flex flex-row justify-center">
-                                        <a href="{{route('admin.sites.edit', ['site' => $site->id])}}">
+                                    <div class="flex flex-row justify-between gap-1">
+                                        <a href="{{route('admin.sites.edit', ['site' => $site->id])}}" class="flex">
 
                                                 <span
                                                     class="material-symbols-outlined w-[16px] h-[16px] ml-3 cursor-pointer text-natural">edit_square</span>
                                         </a>
+                                        <a href=""
+                                           onclick='deleteItem(event, {{"$site->id"}}, "Are you sure you want to delete this site, all related scans, attendances, tags, personnel&#39;s will be deleted as well")' class="flex">
+                                            <span
+                                                class="material-symbols-outlined mr-4 w-[24px] h-[24px] text-red-500 cursor-pointer">delete</span>
+                                        </a>
+                                        <form id="frm-delete-item-{{$site->id}}"
+                                              action="{{ route('admin.sites.destroy', ['site' => $site]) }}"
+                                              style="display: none;" method="POST">
+                                            @csrf
+                                            @method('delete')
 
+                                        </form>
                                     </div>
                                 </td>
                             </tr>

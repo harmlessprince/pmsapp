@@ -6,7 +6,11 @@ use App\Enums\RoleEnum;
 use App\Http\Requests\StoreSiteRequest;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UpdateSiteRequest;
+use App\Models\Attendance;
+use App\Models\Scan;
 use App\Models\Site;
+use App\Models\Tag;
+use App\Models\User;
 use App\QueryFilters\CompanyIdFilter;
 use App\QueryFilters\CreatedAtFilter;
 use App\QueryFilters\SiteIdFilter;
@@ -20,6 +24,7 @@ use App\Services\FileUploadService;
 use App\Services\UserService;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Log;
 
 class SiteController extends controller
 {
@@ -176,6 +181,20 @@ class SiteController extends controller
      */
     public function destroy(Site $site)
     {
-        //
+        try {
+            DB::beginTransaction();
+            Scan::query()->where('site_id', $site->id)->delete();
+            Attendance::query()->where('site_id', $site->id)->delete();
+            Tag::query()->where('site_id', $site->id)->delete();
+            User::query()->where('site_id', $site->id)->where('id', '<>', $site->inspector_id)->delete();
+            $site->delete();
+            User::query()->where('id', $site->inspector_id)->delete();
+            DB::commit();
+        }catch (\Exception $exception){
+            DB::rollBack();
+            Log::error($exception);
+            return redirect(route('admin.sites.index'))->with('error', 'Site could not be deleted, try again later');
+        }
+        return redirect(route('admin.sites.index'))->with('success', 'Site and all related resource deleted successfully');
     }
 }

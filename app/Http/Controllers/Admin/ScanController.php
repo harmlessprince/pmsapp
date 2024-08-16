@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Exports\ScansExport;
 use App\Http\Controllers\Controller;
+use App\Models\Scan;
 use App\QueryFilters\CompanyIdFilter;
 use App\QueryFilters\DateFilter;
 use App\QueryFilters\SiteIdFilter;
@@ -89,8 +90,9 @@ class ScanController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Scan $scan)
     {
-        //
+        $scan->delete();
+        return redirect(route('admin.scan.index'))->with('success', 'Scan deleted successfully');
     }
 }

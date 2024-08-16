@@ -15,7 +15,7 @@ class UserTypeFilter extends BaseFilter
 
     protected function getFilterValueDefault(): ?string
     {
-        return User::USER_TYPE_ARTISAN;
+        return '';
     }
 
 }

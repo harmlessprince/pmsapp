@@ -6,7 +6,12 @@ use App\Enums\RoleEnum;
 use App\Http\Requests\StoreCompanyRequest;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UpdateCompanyRequest;
+use App\Models\Attendance;
 use App\Models\Company;
+use App\Models\Scan;
+use App\Models\Site;
+use App\Models\Tag;
+use App\Models\User;
 use App\QueryFilters\CreatedAtFilter;
 use App\QueryFilters\IndustryIdFilter;
 use App\QueryFilters\PhoneNumberFilter;
@@ -20,6 +25,7 @@ use App\Repositories\Eloquent\Repository\UserRepository;
 use App\Services\UserService;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Log;
 
 class CompanyController extends Controller
 {
@@ -165,7 +171,30 @@ class CompanyController extends Controller
      */
     public function destroy(Company $company)
     {
-        $company->delete();
-        return redirect('company.index');
+        try {
+            DB::beginTransaction();
+            Scan::query()->where('company_id', $company->id)->delete();
+            Attendance::query()->where('company_id', $company->id)->delete();
+            Tag::query()->where('company_id', $company->id)->delete();
+            User::query()->where('company_id', $company->id)
+                ->whereDoesntHave('roles', fn($query) => $query->where('name', RoleEnum::COMPANY_OWNER->value))
+                ->whereDoesntHave('roles', fn($query) => $query->where('name', RoleEnum::SITE_INSPECTOR->value))
+                ->delete();
+            Site::query()->where('company_id', $company->id)->delete();
+            User::query()->where('company_id', $company->id)
+                ->whereHas('roles', fn($query) => $query->where('name', RoleEnum::SITE_INSPECTOR->value))
+                ->delete();
+            $company->delete();
+            User::query()->where('company_id', $company->id)
+                ->whereHas('roles', fn($query) => $query->where('name', RoleEnum::COMPANY_OWNER->value))
+                ->delete();
+            DB::commit();
+        }catch (\Exception $exception){
+            DB::rollBack();
+            Log::error($exception);
+            return redirect(route('admin.companies.index'))->with('error', 'Company could not be deleted, try again later');
+        }
+
+        return redirect(route('admin.companies.index'))->with('success', 'Company and related resource deleted successfully');
     }
 }

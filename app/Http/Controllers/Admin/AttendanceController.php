@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Exports\AttendanceExport;
 use App\Http\Controllers\Controller;
+use App\Models\Attendance;
 use App\QueryFilters\AttendanceActionTypeFilter;
 use App\QueryFilters\CompanyIdFilter;
 use App\QueryFilters\DateFilter;
@@ -91,8 +92,9 @@ class AttendanceController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Attendance $attendance)
     {
-        //
+        $attendance->delete();
+        return redirect(route('admin.attendance.index'))->with('success', 'Attendance deleted successfully');
     }
 }
