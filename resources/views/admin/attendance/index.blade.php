@@ -174,7 +174,7 @@
 
                                     </form>
                                     <a href=""
-                                       onclick='deleteItem(event, {{"$attendance->id"}})'>
+                                       onclick='deleteItem(event, {{"$attendance->id"}})' title="Delete a personnel attendance">
                                             <span
                                                 class="material-symbols-outlined mr-4 w-[24px] h-[24px] text-red-500 cursor-pointer">delete</span>
                                     </a>

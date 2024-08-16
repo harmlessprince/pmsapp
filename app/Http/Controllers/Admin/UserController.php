@@ -140,6 +140,6 @@ class UserController extends Controller
     {
        Attendance::query()->where('user_id', $user->id)->delete();
        $user->delete();
-       return redirect(route('admin.users.index'))->with('success', 'User deleted successfully');
+       return redirect(route('admin.users.index'))->with('success', 'Personal deleted successfully');
     }
 }

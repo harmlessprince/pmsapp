@@ -118,7 +118,7 @@
 
                                         </form>
                                         <a href=""
-                                           onclick='deleteItem(event, {{"$user->id"}}, "Are you sure you want to delete this user, all related attendance will be deleted")'>
+                                           onclick='deleteItem(event, {{"$user->id"}}, "Are you sure you want to delete this Personal? all related attendance will be deleted")'>
                                             <span
                                                 class="material-symbols-outlined mr-4 w-[24px] h-[24px] text-red-500 cursor-pointer">delete</span>
                                         </a>
