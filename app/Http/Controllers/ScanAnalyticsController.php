@@ -24,7 +24,7 @@ class ScanAnalyticsController extends Controller
     {
         $frequency = $request->query('frequency', 'daily');
         $defaultStartMonth =  Carbon::now()->subMonths(1)->startOfMonth()->format('Y-m-d');
-        $defaultEndMonth =  Carbon::now()->endOfMonth()->format('Y-m-d');
+        $defaultEndMonth =  Carbon::now()->addWeeks(7)->format('Y-m-d');
         $pipes = [
             new DateFilter('scan_date', $defaultStartMonth, $defaultEndMonth),
             CompanyIdFilter::class,
