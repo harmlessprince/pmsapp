@@ -166,54 +166,6 @@
             return { labels, datasets };
         }
 
-        function convertDataForExpectedAndActualChartChart(chartData) {
-            const labels = chartData.labels;
-            const actual_scan = chartData?.data?.actual_scan
-            const expected_scan = chartData?.data?.expected_scan
-            const actual_scan_datasets = Object.keys(actual_scan).map((key, index) => {
-                const actual_value = actual_scan[key];
-                // Initialize an array of zeros based on the length of the labels
-                const dataArray = new Array(labels.length).fill(0);
-                // Populate data from the site's data object into the correct positions
-                Object.keys(actual_scan).forEach((index) => {
-                    dataArray[parseInt(index)] = actual_scan[index];
-                });
-
-                return {
-                    label: "Actual scan",
-                    backgroundColor: "#3DC9B7",
-                    color: "#FEFFFE",
-                    barThickness: 10,
-                    borderRadius: 15,
-                    data: dataArray
-                };
-            });
-            const expected_scan_datasets = Object.keys(expected_scan).map((key, index) => {
-                const actual_value = expected_scan[key];
-                // Initialize an array of zeros based on the length of the labels
-                const dataArray = new Array(labels.length).fill(0);
-                // Populate data from the site's data object into the correct positions
-                Object.keys(expected_scan).forEach((index) => {
-                    dataArray[parseInt(index)] = expected_scan[index];
-                });
-
-                return {
-                    responsive: true,
-                    label: "Expected scan",
-                    backgroundColor: "#3DC9B7",
-                    color: "#FEFFFE",
-                    barThickness: 10,
-                    borderRadius: 15,
-                    data: dataArray
-                };
-            });
-            return {
-                expected_scan_datasets,
-                actual_scan_datasets,
-                labels
-            }
-        }
-
         const barColors = "#3DC9B7";
         const allSitesPercentage = @json($analytics['siteDataDaily']);
         const allSitesPercentageDataSets = convertDataForSiteDataDailyChart(allSitesPercentage);
@@ -247,7 +199,6 @@
         });
         const actualVSExpected = @json($analytics['dailyScanCountActualVSExpected']);
 
-        // convertedActualVSExpected = convertDataForExpectedAndActualChartChart(actualVSExpected)
         let barColor2 = "#3DC9B7";
         let barColor1 = "#E4D794"
 

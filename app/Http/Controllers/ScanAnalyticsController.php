@@ -50,6 +50,10 @@ class ScanAnalyticsController extends Controller
             default:
                 $fromDate = request()->query('scan_date_from_date', $defaultStartMonth);
                 $toDate = request()->query('scan_date_to_date', $defaultEndMonth);
+                if (Carbon::parse($fromDate)->diffInWeeks(Carbon::parse($toDate)) > 4) {
+                    $toDate =  Carbon::parse($fromDate)->addWeeks(4)->format('Y-m-d');
+                    request()->session()->flash('error', "You can not filter more than 4 weeks(1 month)");
+                }
                 $analytics = $this->scanAnalyticsService->dailyAnalytics($scanQuery, $fromDate, $toDate);
 //                dd($analytics);
                 $view = view('scan.analytics.daily', compact('frequencies', 'analytics',  'defaultEndMonth', 'defaultStartMonth'));
