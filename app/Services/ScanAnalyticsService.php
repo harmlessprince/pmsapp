@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Models\Site;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 
@@ -19,15 +20,14 @@ class ScanAnalyticsService
     private function dailyScanCountActualVSExpected($scanQuery,$startDate, $endDate): array
     {
 
-        $siteIdsWithScans = (clone $scanQuery)
-            ->join('sites', 'scans.site_id', '=', 'sites.id')
-            ->select('sites.id')
-            ->distinct()
-            ->pluck('sites.id');
+//        $siteIdsWithScans = (clone $scanQuery)
+//            ->join('sites', 'scans.site_id', '=', 'sites.id')
+//            ->select('sites.id')
+//            ->distinct()
+//            ->pluck('sites.id');
 
         // Step 2: Calculate the total expected scans only for the sites involved in the scans
-        $totalExpectedScans = DB::table('sites')
-            ->whereIn('sites.id', $siteIdsWithScans) // Only consider the relevant sites
+        $totalExpectedScans = Site::query()
             ->select(DB::raw('SUM(sites.maximum_number_of_rounds * sites.number_of_tags) as total_expected_scan'))
             ->first()->total_expected_scan;
 
@@ -187,10 +187,16 @@ class ScanAnalyticsService
 
     private function monthlyScanCountActualVSExpected($scanQuery)
     {
+
+
+        // Step 2: Calculate the total expected scans only for the sites involved in the scans
+        $totalExpectedScans = Site::query()
+            ->select(DB::raw('SUM(sites.maximum_number_of_rounds * sites.number_of_tags) as total_expected_scan'))
+            ->first()->total_expected_scan;
+
         $scanCountsMonthlyPerSite = $scanQuery
             ->join('sites', 'scans.site_id', '=', 'sites.id')
             ->select(
-                DB::raw('SUM(sites.maximum_number_of_rounds * sites.number_of_tags) as expected_scan'),
                 DB::raw("TO_CHAR(scan_date, 'YYYY-MM') as month"),
                 DB::raw('COUNT(scans.id) as actual_scan')
             )
@@ -202,7 +208,7 @@ class ScanAnalyticsService
         foreach ($scanCountsMonthlyPerSite as $item) {
             $month = Carbon::parse($item->month . "-01")->endOfMonth();
             $labels[] = $month->format('F-Y');
-            $data['expected_scan'][] = $item->expected_scan;
+            $data['expected_scan'][] = $totalExpectedScans;
             $data['actual_scan'][] = $item->actual_scan;
         }
         return ['labels' => $labels, 'data' => $data];
