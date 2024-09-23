@@ -90,15 +90,21 @@ class ScanAnalyticsService
 
     private function dailyScanCountPerSiteAndActualVsExpected($scanQuery)
     {
+        $totalExpectedScans = Site::query()
+            ->select(DB::raw('SUM(sites.maximum_number_of_rounds * sites.number_of_tags) as total_expected_scan'))
+            ->first()->total_expected_scan;
         $scanCountsDailyPerSitePerActualExpected = $scanQuery
             ->join('sites', 'scans.site_id', '=', 'sites.id')
             ->select(
-                DB::raw('sites.maximum_number_of_rounds * sites.number_of_tags as expected_scan'),
+                'site_id',
                 'sites.name as site_name', DB::raw('DATE(scan_date) as date'),
                 DB::raw('COUNT(*) as actual_scan')
             )
-            ->groupBy('sites.maximum_number_of_rounds', 'sites.name', DB::raw('DATE(scan_date)'), 'sites.number_of_tags')
+            ->groupBy('sites.name', 'site_id', DB::raw('DATE(scan_date)'))
             ->orderBy('scan_date')->get();
+        foreach ($scanCountsDailyPerSitePerActualExpected as $item) {
+            $item->expected_scan = $totalExpectedScans;
+        }
         return $scanCountsDailyPerSitePerActualExpected->groupBy('site_name');
     }
 
