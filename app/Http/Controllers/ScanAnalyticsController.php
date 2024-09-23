@@ -23,8 +23,15 @@ class ScanAnalyticsController extends Controller
     public function __invoke(Request $request)
     {
         $frequency = $request->query('frequency', 'daily');
-        $defaultStartMonth =  Carbon::now()->subMonths(1)->startOfMonth()->format('Y-m-d');
-        $defaultEndMonth =  Carbon::now()->addWeeks(7)->format('Y-m-d');
+        if (request()->query('frequency', 'daily') == 'daily'){
+            $defaultStartMonth =  Carbon::now()->subWeeks(4)->format('Y-m-d');
+            $defaultEndMonth =  Carbon::now()->format('Y-m-d');
+        }else{
+            $defaultStartMonth =  Carbon::now()->subMonths(4)->format('Y-m-d');
+            $defaultEndMonth =  Carbon::now()->format('Y-m-d');
+        }
+
+
         $pipes = [
             new DateFilter('scan_date', $defaultStartMonth, $defaultEndMonth),
             CompanyIdFilter::class,
@@ -34,7 +41,6 @@ class ScanAnalyticsController extends Controller
         $frequencies = [AnalyticsFrequencyEnum::DAILY->value, AnalyticsFrequencyEnum::MONTHLY->value];
         $scanQuery = $this->scanRepository->modelQuery();
         $scanQuery = constructPipes($scanQuery, $pipes);
-
         switch ($frequency) {
             case AnalyticsFrequencyEnum::MONTHLY->value:
                 $analytics = $this->scanAnalyticsService->monthlyAnalytics($scanQuery);
@@ -42,8 +48,10 @@ class ScanAnalyticsController extends Controller
                 $view = view('scan.analytics.monthly', compact('frequencies', 'analytics', 'months', 'defaultEndMonth', 'defaultStartMonth'));
                 break;
             default:
-
-                $analytics = $this->scanAnalyticsService->dailyAnalytics($scanQuery);
+                $fromDate = request()->query('scan_date_from_date', $defaultStartMonth);
+                $toDate = request()->query('scan_date_to_date', $defaultEndMonth);
+                $analytics = $this->scanAnalyticsService->dailyAnalytics($scanQuery, $fromDate, $toDate);
+//                dd($analytics);
                 $view = view('scan.analytics.daily', compact('frequencies', 'analytics',  'defaultEndMonth', 'defaultStartMonth'));
         }
         return $view;

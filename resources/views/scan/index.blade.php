@@ -40,7 +40,7 @@
                         type="text"
                         datepicker
                         datepicker-autohide
-                        datepicker-format="dd-mm-yyyy"
+                        datepicker-format="yyyy-mm-dd"
                         type="text"
                         placeholder="Select start date"
                         name="scan_date_from_date"
@@ -64,7 +64,7 @@
                         type="text"
                         datepicker
                         datepicker-autohide
-                        datepicker-format="dd-mm-yyyy"
+                        datepicker-format="yyyy-mm-dd"
                         type="text"
                         placeholder="Select start date"
                         name="scan_date_to_date"
@@ -115,7 +115,7 @@
                     @forelse($scans as $scan)
                         <tr class="border border-table border-x-0 text-natural hover:bg-db">
                             <td class="text-normal font-normal px-smaller">
-                                <div>{{$scan->scan_date->format('d/m/Y')}}</div>
+                                <div>{{$scan->scan_date->format('Y/m/d')}}</div>
                                 <div>{{Carbon\Carbon::parse($scan->scan_time)->format('g:i A')}}</div>
                             </td>
                             {{--                            <td class="text-normal font-normal px-small">--}}
@@ -151,7 +151,10 @@
         const selectSite = document.getElementById("site_id");
         const selectTag = document.getElementById("tag_id");
 
+
+
         $(document).ready(function () {
+
             $('.select-2-sites').select2({
                 placeholder: "Select a site",
                 allowClear: true

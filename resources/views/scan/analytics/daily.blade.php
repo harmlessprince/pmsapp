@@ -137,26 +137,92 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.1/datepicker.min.js"></script>
     <script src="{{asset('assets/js/transaction.js')}}"></script>
     <script>
+        function convertDataForSiteDataDailyChart(chartData) {
+            const labels = chartData.labels;
+            const datasets = Object.keys(chartData.items).map((key, index) => {
+                const site = chartData.items[key];
 
+                // Initialize an array of zeros based on the length of the labels
+                const dataArray = new Array(labels.length).fill(0);
+
+                // Populate data from the site's data object into the correct positions
+                Object.keys(site.data).forEach((index) => {
+                    dataArray[parseInt(index)] = site.data[index];
+                });
+
+                // Return each site as a dataset with label and data array
+                return {
+                    label: site.label,
+                    data: dataArray,
+                    color: "#FEFFFE",
+                    barThickness: 10,
+                    borderRadius: 15,
+                    backgroundColor: "#" + Math.floor(Math.random() * 16777215).toString(16),
+                    // borderColor: `rgb(${255 - index * 20}, ${99 + index * 20}, ${132 + index * 10})`,
+                    borderWidth: 1
+                };
+            });
+
+            return { labels, datasets };
+        }
+
+        function convertDataForExpectedAndActualChartChart(chartData) {
+            const labels = chartData.labels;
+            const actual_scan = chartData?.data?.actual_scan
+            const expected_scan = chartData?.data?.expected_scan
+            const actual_scan_datasets = Object.keys(actual_scan).map((key, index) => {
+                const actual_value = actual_scan[key];
+                // Initialize an array of zeros based on the length of the labels
+                const dataArray = new Array(labels.length).fill(0);
+                // Populate data from the site's data object into the correct positions
+                Object.keys(actual_scan).forEach((index) => {
+                    dataArray[parseInt(index)] = actual_scan[index];
+                });
+
+                return {
+                    label: "Actual scan",
+                    backgroundColor: "#3DC9B7",
+                    color: "#FEFFFE",
+                    barThickness: 10,
+                    borderRadius: 15,
+                    data: dataArray
+                };
+            });
+            const expected_scan_datasets = Object.keys(expected_scan).map((key, index) => {
+                const actual_value = expected_scan[key];
+                // Initialize an array of zeros based on the length of the labels
+                const dataArray = new Array(labels.length).fill(0);
+                // Populate data from the site's data object into the correct positions
+                Object.keys(expected_scan).forEach((index) => {
+                    dataArray[parseInt(index)] = expected_scan[index];
+                });
+
+                return {
+                    responsive: true,
+                    label: "Expected scan",
+                    backgroundColor: "#3DC9B7",
+                    color: "#FEFFFE",
+                    barThickness: 10,
+                    borderRadius: 15,
+                    data: dataArray
+                };
+            });
+            return {
+                expected_scan_datasets,
+                actual_scan_datasets,
+                labels
+            }
+        }
 
         const barColors = "#3DC9B7";
         const allSitesPercentage = @json($analytics['siteDataDaily']);
-        const allSitesPercentageDataSets = allSitesPercentage.items.map(function (item) {
-            return {
-                label: item.label,
-                backgroundColor: "#" + Math.floor(Math.random() * 16777215).toString(16),
-                color: "#FEFFFE",
-                barThickness: 10,
-                borderRadius: 15,
-                data: item.data
-            }
-        });
+        const allSitesPercentageDataSets = convertDataForSiteDataDailyChart(allSitesPercentage);
 
         new Chart("allSitesChart", {
             type: "bar",
             data: {
-                labels: Object.values(allSitesPercentage.labels),
-                datasets: allSitesPercentageDataSets
+                labels: allSitesPercentageDataSets.labels,
+                datasets: allSitesPercentageDataSets.datasets
             },
             options: {
                 title: {
@@ -180,8 +246,12 @@
             }
         });
         const actualVSExpected = @json($analytics['dailyScanCountActualVSExpected']);
+
+        // convertedActualVSExpected = convertDataForExpectedAndActualChartChart(actualVSExpected)
         let barColor2 = "#3DC9B7";
         let barColor1 = "#E4D794"
+
+
         new Chart("expectedAndActualChart", {
             type: "bar",
             data: {
@@ -192,14 +262,14 @@
                     color: "#FEFFFE",
                     barThickness: 10,
                     borderRadius: 15,
-                    data: actualVSExpected?.data?.expected_scan ?? []
+                    data: actualVSExpected?.expected_scan ?? []
                 }, {
                     label: "Actual scan",
                     backgroundColor: barColor2,
                     color: "#FEFFFE",
                     barThickness: 10,
                     borderRadius: 15,
-                    data: actualVSExpected?.data?.actual_scan ?? []
+                    data: actualVSExpected?.actual_scan ?? []
                 }]
             },
             options: {
