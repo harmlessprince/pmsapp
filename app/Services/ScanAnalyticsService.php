@@ -18,10 +18,22 @@ class ScanAnalyticsService
 
     private function dailyScanCountActualVSExpected($scanQuery,$startDate, $endDate): array
     {
+
+        $siteIdsWithScans = (clone $scanQuery)
+            ->join('sites', 'scans.site_id', '=', 'sites.id')
+            ->select('sites.id')
+            ->distinct()
+            ->pluck('sites.id');
+
+        // Step 2: Calculate the total expected scans only for the sites involved in the scans
+        $totalExpectedScans = DB::table('sites')
+            ->whereIn('sites.id', $siteIdsWithScans) // Only consider the relevant sites
+            ->select(DB::raw('SUM(sites.maximum_number_of_rounds * sites.number_of_tags) as total_expected_scan'))
+            ->first()->total_expected_scan;
+
         $scanCountsDailyPerSite = $scanQuery
             ->join('sites', 'scans.site_id', '=', 'sites.id')
             ->select(
-                DB::raw('SUM(sites.maximum_number_of_rounds * sites.number_of_tags) as expected_scan'),
                 DB::raw('DATE(scans.scan_date) as date'),
                 DB::raw('COUNT(scans.id) as actual_scan')
             )
@@ -31,13 +43,13 @@ class ScanAnalyticsService
 
         $labels = $this->generateDateRange($startDate, $endDate);
         $data = [
-            'expected_scan' => array_fill(0, count($labels), 0),
+            'expected_scan' => array_fill(0, count($labels), $totalExpectedScans),
             'actual_scan' => array_fill(0, count($labels), 0),
         ];
         foreach ($scanCountsDailyPerSite as $item) {
             $dateIndex = array_search($item->date, $labels);
             if ($dateIndex !== false) {
-                $data['expected_scan'][$dateIndex] = $item->expected_scan;
+                $data['expected_scan'][$dateIndex] = $totalExpectedScans;
                 $data['actual_scan'][$dateIndex] = $item->actual_scan;
             }
         }
