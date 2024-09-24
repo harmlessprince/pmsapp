@@ -90,21 +90,16 @@ class ScanAnalyticsService
 
     private function dailyScanCountPerSiteAndActualVsExpected($scanQuery)
     {
-        $totalExpectedScans = Site::query()
-            ->select(DB::raw('SUM(sites.maximum_number_of_rounds * sites.number_of_tags) as total_expected_scan'))
-            ->first()->total_expected_scan;
         $scanCountsDailyPerSitePerActualExpected = $scanQuery
             ->join('sites', 'scans.site_id', '=', 'sites.id')
             ->select(
                 'site_id',
                 'sites.name as site_name', DB::raw('DATE(scan_date) as date'),
-                DB::raw('COUNT(*) as actual_scan')
+                DB::raw('COUNT(*) as actual_scan'),
+                DB::raw('(sites.maximum_number_of_rounds * sites.number_of_tags) as expected_scan')
             )
-            ->groupBy('sites.name', 'site_id', DB::raw('DATE(scan_date)'))
+            ->groupBy('sites.name', 'site_id', DB::raw('DATE(scan_date)'), 'sites.maximum_number_of_rounds', 'sites.number_of_tags')
             ->orderBy('scan_date')->get();
-        foreach ($scanCountsDailyPerSitePerActualExpected as $item) {
-            $item->expected_scan = $totalExpectedScans;
-        }
         return $scanCountsDailyPerSitePerActualExpected->groupBy('site_name');
     }
 
@@ -122,7 +117,7 @@ class ScanAnalyticsService
     {
         $scanCountsDailyPerSite = $scanQuery
             ->join('sites', 'scans.site_id', '=', 'sites.id')
-            ->select('sites.name as site_name','site_id', DB::raw("TO_CHAR(scan_date, 'YYYY-MM') as month"), DB::raw('COUNT(*) as scan_count'))
+            ->select('sites.name as site_name', 'site_id', DB::raw("TO_CHAR(scan_date, 'YYYY-MM') as month"), DB::raw('COUNT(*) as scan_count'))
             ->orderByRaw('month')
             ->groupBy('sites.name', 'site_id', DB::raw("TO_CHAR(scan_date, 'YYYY-MM')"))
             ->get();
@@ -176,7 +171,7 @@ class ScanAnalyticsService
         foreach ($scanCountsMonthlyPerSite as $item) {
             $month = Carbon::parse($item->month . "-01")->endOfMonth();
             $labels[] = $month->format('F-Y');
-            $data['expected_scan'][] = $totalExpectedScans  * $month->daysInMonth;
+            $data['expected_scan'][] = $totalExpectedScans * $month->daysInMonth;
             $data['actual_scan'][] = $item->actual_scan;
         }
         return ['labels' => $labels, 'data' => $data];
