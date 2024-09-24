@@ -32,7 +32,9 @@ class ScansExport implements FromQuery, WithHeadings, WithMapping
             'Tag Name',
             'Site Name',
             'Gap',
-            'Round'
+            'Round',
+            'Latitude',
+            'Longitude',
         ];
     }
 
@@ -44,7 +46,9 @@ class ScansExport implements FromQuery, WithHeadings, WithMapping
             $row->tag->name,
             $row->site->name,
             secondsToHoursMinutes($row->gap_duration),
-            $row->round
+            $row->round,
+            $row->latitude,
+            $row->longitude,
         ];
     }
 
