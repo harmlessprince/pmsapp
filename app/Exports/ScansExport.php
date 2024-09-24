@@ -30,7 +30,6 @@ class ScansExport implements FromQuery, WithHeadings, WithMapping
             'Date',
             'Time',
             'Tag Name',
-            'Tag Code',
             'Site Name',
             'Gap',
             'Round'
@@ -43,7 +42,6 @@ class ScansExport implements FromQuery, WithHeadings, WithMapping
             Carbon::parse($row->scan_date)->format('d-m-Y'),
             Carbon::parse($row->scan_time)->format('g:i A'),
             $row->tag->name,
-            $row->tag->code,
             $row->site->name,
             secondsToHoursMinutes($row->gap_duration),
             $row->round
