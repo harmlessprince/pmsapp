@@ -179,21 +179,22 @@ class ScanAnalyticsService
 
     private function monthlyScanCountPerSiteAndActualVsExpected($scanQuery)
     {
-        $totalExpectedScans = Site::query()
-            ->select(DB::raw('SUM(sites.maximum_number_of_rounds * sites.number_of_tags) as total_expected_scan'))
-            ->first()->total_expected_scan;
+//        $totalExpectedScans = Site::query()
+//            ->select(DB::raw('SUM(sites.maximum_number_of_rounds * sites.number_of_tags) as total_expected_scan'))
+//            ->first()->total_expected_scan;
         $scanCountsMonthlyPerSitePerActualExpected = $scanQuery
             ->join('sites', 'scans.site_id', '=', 'sites.id')
             ->select(
                 'sites.name as site_name',
                 'site_id',
                 DB::raw("TO_CHAR(scan_date, 'YYYY-MM') as month"),
-                DB::raw('COUNT(scans.id) as actual_scan')
-            )->groupBy('sites.name', 'site_id', DB::raw("TO_CHAR(scan_date, 'YYYY-MM')"))
+                DB::raw('COUNT(scans.id) as actual_scan'),
+                DB::raw('(sites.maximum_number_of_rounds * sites.number_of_tags) as expected_scan')
+            )->groupBy('sites.name', 'site_id', DB::raw("TO_CHAR(scan_date, 'YYYY-MM')"), 'sites.maximum_number_of_rounds', 'sites.number_of_tags')
             ->orderByRaw('month')->get();
         foreach ($scanCountsMonthlyPerSitePerActualExpected as $item) {
             $month = Carbon::parse($item->month . "-01")->endOfMonth();
-            $item->expected_scan = $totalExpectedScans * $month->daysInMonth;
+            $item->expected_scan = $item->expected_scan * $month->daysInMonth;
         }
         return $scanCountsMonthlyPerSitePerActualExpected->groupBy('site_name');
     }
