@@ -166,6 +166,7 @@ class ScanAnalyticsService
             ->groupBy("month")
             ->orderBy('month')
             ->get();
+
         $data = [];
         $labels = [];
         foreach ($scanCountsMonthlyPerSite as $item) {
