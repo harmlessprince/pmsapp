@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AttendanceAnalyticsController;
+use App\Http\Controllers\Company\RegionController;
 use App\Http\Controllers\Company\SiteController;
 use App\Http\Controllers\Company\TagController;
 use App\Http\Controllers\Company\UserController;
@@ -84,7 +85,7 @@ Route::prefix('company')->middleware(['auth', 'company_owner', 'is_banned'])->na
     Route::resource('users', UserController::class);
     Route::resource('tags', TagController::class);
     Route::resource('sites', SiteController::class);
-
+    Route::resource('regions', RegionController::class);
 });
 
 

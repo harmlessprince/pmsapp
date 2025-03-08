@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Scopes\FilterByCompanyIdScope;
 use App\Traits\SearchableTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -37,6 +38,12 @@ class Region extends Model
     public function sites(): HasMany
     {
         return $this->hasMany(Site::class, 'region_id');
+    }
+
+    protected static function booted(): void
+    {
+        parent::boot();
+        static::addGlobalScope(new FilterByCompanyIdScope());
     }
 
 }

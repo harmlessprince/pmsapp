@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Company;
 
 use App\Enums\RoleEnum;
 use App\Http\Controllers\Controller;
@@ -38,12 +38,6 @@ class RegionController extends Controller
         $pipes = [
             CompanyIdFilter::class,
         ];
-//        if ($request->query('export') == 'export') {
-//            $name = 'scan_report_' . Carbon::now()->format('d-m-Y') . '.xlsx';
-//            session()->flash('success', 'Scan exported successfully');
-//            return (new ScansExport($this->scanRepository))->download($name);
-//        }
-
         $regionQuery = $this->regionRepository->modelQuery()
             ->with(['supervisor:id,first_name,last_name,email', 'company:id,name'])
             ->withCount('sites')
@@ -51,8 +45,8 @@ class RegionController extends Controller
         $regionQuery = constructPipes($regionQuery, $pipes);
         $regionsCount = $regionQuery->count();
         $regions = $regionQuery->latest()->paginate(request('per_page', 15));
-        $companies = $this->companyRepository->all();
-        return view('admin.regions.index', compact('regions', 'regionsCount', 'companies'));
+        $sites = $this->siteRepository->modelQuery()->get();
+        return view('company.regions.index', compact('regions', 'regionsCount', 'sites'));
     }
 
 
@@ -61,8 +55,8 @@ class RegionController extends Controller
      */
     public function create()
     {
-        $companies = $this->companyRepository->all();
-        return view('admin.regions.create', compact('companies'));
+        $sites = $this->siteRepository->modelQuery()->get();
+        return view('company.regions.create', compact('sites'));
     }
 
     /**
@@ -70,7 +64,7 @@ class RegionController extends Controller
      */
     public function store(StoreRegionRequest $request)
     {
-        Gate::allowIf(fn(User $user) => $user->isSuperAdmin());
+        $authUser = auth()->user();
 
         try {
             DB::beginTransaction();
@@ -80,13 +74,13 @@ class RegionController extends Controller
                 'email' => $request->input('email'),
                 'password' => Hash::make($request->input('password')),
                 'username' => $request->input('email'),
-                'company_id' => $request->input('company_id'),
                 'status' => $request->input('status'),
+                'company_id' => $authUser->company_id,
             ]);
             $this->userService->associateUserToRole($user, RoleEnum::SUPERVISOR->value);
             $region = $this->regionRepository->create([
                 'name' => $request->input('region_name'),
-                'company_id' => $request->input('company_id'),
+                'company_id' => $authUser->company_id,
                 'status' => $request->input('status'),
                 'created_by' => $request->user()->id,
                 'supervisor_id' => $user->id,
@@ -95,7 +89,7 @@ class RegionController extends Controller
             $user->region_id = $region->id;
             $user->save();
             Site::query()
-                ->where('company_id', $request->input('company_id'))
+                ->where('company_id', $authUser->company_id)
                 ->whereIn('id', $request->input('sites'))
                 ->update(["region_id" => $region->id]);
             DB::commit();
@@ -103,7 +97,7 @@ class RegionController extends Controller
             DB::rollBack();
             throw $exception;
         }
-        return redirect()->route('admin.admin.index')->with('success', 'Region Created Successfully');
+        return redirect()->route('company.regions.index')->with('success', 'Region Created Successfully');
     }
 
     /**
@@ -122,7 +116,7 @@ class RegionController extends Controller
         $region->load('sites', 'supervisor:id,first_name,last_name,email', 'company:id,name');
         $companies = $this->companyRepository->all();
         $selectedSites = $region->sites()->pluck('id')->toArray();
-        return view('admin.regions.edit', compact('region', 'companies', 'selectedSites'));
+        return view('company.regions.edit', compact('region', 'companies', 'selectedSites'));
     }
 
     /**
@@ -162,7 +156,7 @@ class RegionController extends Controller
             ->whereIn('id', $submittedSiteIds)
             ->update(['region_id' => $region->id]);
 
-        return redirect()->route('admin.regions.edit', ['region' => $region])->with('success', 'Region updated successfully');
+        return redirect()->route('company.regions.edit', ['region' => $region])->with('success', 'Region updated successfully');
     }
 
     /**
