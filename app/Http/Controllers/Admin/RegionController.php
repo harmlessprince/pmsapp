@@ -43,11 +43,17 @@ class RegionController extends Controller
 //            session()->flash('success', 'Scan exported successfully');
 //            return (new ScansExport($this->scanRepository))->download($name);
 //        }
+        $siteId = $request->query('site_id', null);
 
         $regionQuery = $this->regionRepository->modelQuery()
             ->with(['supervisor:id,first_name,last_name,email', 'company:id,name'])
             ->withCount('sites')
             ->search();
+        if ($siteId !== null) {
+            $regionQuery = $regionQuery->whereHas('sites', function ($query) use ($siteId) {
+                $query->where('id', $siteId);
+            });
+        }
         $regionQuery = constructPipes($regionQuery, $pipes);
         $regionsCount = $regionQuery->count();
         $regions = $regionQuery->latest()->paginate(request('per_page', 15));
