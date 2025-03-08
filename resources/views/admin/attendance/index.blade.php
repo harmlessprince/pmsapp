@@ -18,7 +18,7 @@
     <!-- Dashboard content -->
     <section class="">
         <x-filter-card :actionUrl="route('admin.attendance.index')" :canSearch="true"
-                       :searchPlaceholder="'Search by name'" :canExport="true">
+                       :searchPlaceholder="'Search by name'" :canExport="true" :canDelete="true">
             <input value="yes" name="date" hidden/>
             <div class="flex flex-col">
                 <div class="relative">
@@ -89,11 +89,11 @@
                     <option class="" value="">Select a site</option>
                 </x-select-input>
             </div>
-            <div class="flex flex-col">
+            <div class="flex flex-col" id="attendance_action_type_container">
                 <x-input-label for="attendance_action_type" :value="__('Action type')"/>
                 <x-select-input id="attendance_action_type" class="block mt-1 w-full"
                                 name="attendance_action_type">
-                    <option value="">Select Action</option>
+                    <option value="">Select Action Type</option>
                     <option
                         value="check_in" {{ request()->query('attendance_action_type') == 'check_in' ? "selected" : '' }}>
                         Check In
@@ -201,13 +201,16 @@
         const selectSite = document.getElementById("site_id");
         const selectCompany = document.getElementById("company_id");
         $(document).ready(function () {
+            // $('.select-2-sites').select2({
+            //     placeholder: "Select a site",
+            //     allowClear: true
+            // });
             selectSite.disabled = true;
             const companyParamValue = getQueryParamValue('company_id');
-            // const siteParamValue = getQueryParamValue('site_id');
+            console.log(companyParamValue)
             if (companyParamValue != null) {
                 getCompanySites(companyParamValue)
             }
-
 
         });
 

@@ -7,6 +7,8 @@ use App\Enums\RoleEnum;
 use App\Exceptions\CustomException;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreAttendanceRequest;
+use App\Models\Region;
+use App\Models\Site;
 use App\QueryFilters\DateFilter;
 use App\Repositories\Eloquent\Repository\AttendanceRepository;
 use App\Repositories\Eloquent\Repository\UserRepository;
@@ -32,11 +34,19 @@ class AttendanceController extends Controller
             new DateFilter('attendance_date'),
         ];
         $attendanceQuery = constructPipes($this->attendanceRepository->modelQuery(), $pipes);
+
+        if ($user->hasRole(RoleEnum::SUPERVISOR->value)) {
+            $region = Region::query()->where("id", $user->region_id)->first();
+            $sites = Site::query()->where("region_id", $region->id)->get()->pluck("id")->toArray();
+            $attendanceQuery = $attendanceQuery->whereIn('attendances.site_id', $sites);
+        } else {
+            $attendanceQuery = $attendanceQuery->where('attendances.site_id', $user->site_id);
+        }
+
         $attendances = $attendanceQuery
             ->select(['id', 'site_id', 'company_id', 'attendance_time', 'attendance_date', 'attendance_date_time', 'image', 'action_type', 'user_id'])
             ->with(['site:id,name', 'company:id,name', 'user:id,first_name,last_name,profile_image'])
             ->where('company_id', $user->company_id)
-            ->where('site_id', $user->site_id)
             ->latest('attendance_date_time')
             ->paginate($request->query('per_page', 15));
 

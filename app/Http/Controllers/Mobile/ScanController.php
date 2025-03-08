@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers\Mobile;
 
+use App\Enums\RoleEnum;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreAttendanceRequest;
 use App\Http\Requests\StoreScanRequest;
+use App\Models\Region;
+use App\Models\Site;
 use App\QueryFilters\DateFilter;
 use App\Repositories\Eloquent\Repository\ScanRepository;
 use App\Repositories\Eloquent\Repository\TagRepository;
@@ -23,12 +26,22 @@ class ScanController extends Controller
 
     public function index(Request $request): JsonResponse
     {
-        $user =  $request->user();
+        $user = $request->user();
         $pipes = [
             new DateFilter('scan_date'),
         ];
-        $scanQuery = $this->scanRepository->modelQuery()->where('scans.site_id', $user->site_id)
+
+        $scanQuery = $this->scanRepository->modelQuery()
             ->search();
+            if ($user->hasRole(RoleEnum::SUPERVISOR->value)) {
+                $region = Region::query()->where("id", $user->region_id)->first();
+                $sites = Site::query()->where("region_id", $region->id)->get()->pluck("id")->toArray();
+
+                $scanQuery = $scanQuery->whereIn('scans.site_id', $sites);
+            } else {
+                $scanQuery = $scanQuery->where('scans.site_id', $user->site_id);
+            }
+//
 
         $scanQuery = constructPipes($scanQuery, $pipes);
         $scans = $scanQuery
@@ -45,6 +58,7 @@ class ScanController extends Controller
         $tag = $this->tagRepository->modelQuery()
             ->where('code', $request->input('tag_code'))
             ->first();
+
         if (!$tag) {
             return sendError("Tag does not exist", 404);
         }

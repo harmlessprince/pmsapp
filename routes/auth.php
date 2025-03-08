@@ -53,6 +53,8 @@ Route::middleware('auth')->group(function () {
     Route::post('confirm-password', [ConfirmablePasswordController::class, 'store']);
 
     Route::put('password', [PasswordController::class, 'update'])->name('password.update');
+    Route::patch('user/{user}/password', [PasswordController::class, 'chnageUserPassword'])->name('user.password.update');
+    Route::patch('logout/pin/{user}', [\App\Http\Controllers\LogoutPinController::class, 'update'])->name('logout.pin.update');
 
     Route::get('logout', [AuthenticatedSessionController::class, 'destroy'])
                 ->name('logout');

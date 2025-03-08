@@ -75,6 +75,11 @@
         </section>
     </section>
 </main>
+<script src="{{asset('assets/js/toggle.js')}}"></script>
+<script src="{{asset('assets/js/loader.js')}}"></script>
+<script src="{{asset('assets/js/api.js')}}"></script>
+<script src="{{asset('assets/js/address.js')}}"></script>
+<script src="{{asset('assets/js/action.js')}}"></script>
 <script>
     const analyticsDropdown = document.querySelector('#dropdownAnalytics');
     const mobileAnalyticsDropdown = document.querySelector('#mobileTestAnalytics');
@@ -87,36 +92,12 @@
     const ajaxSpan = document.querySelector("#ajax_span");
     const ajaxLoader = document.querySelector("#ajax_loader");
 
-    let toggleScreen = "true"
+
 
     // allBtn.addEventListener("click", () => console.log('wetin dey happen'));
 
 
-    const toggleSideBar = () => {
-        mobileSideBar.classList.toggle("hidden")
-        toggleScreen = !toggleScreen
 
-    }
-
-    const toggleSidebarDropdown = (menuId) => {
-        console.log(menuId)
-        const menuDropDowns = document.getElementsByClassName("dropdownMenuContent")
-        for (let i = 0; i < menuDropDowns.length; i++) {
-            currentMenuDropdown = menuDropDowns[i]
-            if (currentMenuDropdown.id === menuId) {
-
-                currentMenuDropdown.classList.toggle("hidden")
-            } else {
-                currentMenuDropdown.classList.add("hidden")
-            }
-        }
-
-    }
-
-
-    const toggleProfile = () => {
-        profileDropdown.classList.toggle("hidden")
-    }
 
     function getQueryParamValue(param) {
         const queryString = window.location.search;
@@ -124,105 +105,7 @@
         return urlParams.get(param);
     }
 
-    const exportCheckbox = document.getElementById('export_checkbox')
-    if (exportCheckbox != null) {
-        exportCheckbox.value = 'filter'
-        const exportButton = document.getElementById('filter_button')
-        exportCheckbox.addEventListener('change', function () {
 
-            if (this.checked) {
-                exportCheckbox.value = 'export'
-                exportButton.innerText = 'Export Data'
-            } else {
-                exportCheckbox.value = 'filter'
-                exportButton.innerText = 'Apply Filters'
-            }
-            // Add a class to trigger the transition
-            exportButton.classList.add('button-transition');
-            // Remove the class after a short delay to allow the transition to complete
-            setTimeout(() => {
-                exportButton.classList.remove('button-transition');
-            }, 300); // Adjust the delay time as needed
-        })
-    }
-
-    function createOption(displayMember, valueMember, isSelected) {
-        const newOption = document.createElement("option");
-        newOption.value = valueMember;
-        newOption.text = displayMember;
-        if (isSelected) {
-            newOption.selected = true;
-        }
-        return newOption;
-    }
-
-    function showLoader(loaderId = 'ajax_loader') {
-        const loaderElement = document.getElementById(loaderId);
-        if (loaderElement) {
-            loaderElement.classList.remove('hidden')
-        }
-
-    }
-
-    function hideLoader(loaderId = 'ajax_loader') {
-        const loaderElement = document.getElementById(loaderId);
-        if (loaderElement) {
-            loaderElement.classList.add('hidden')
-        }
-    }
-
-
-    function getCompanySites(company_id, selectedSite = null) {
-        if (isNaN(company_id) || company_id == "") {
-            selectSite.innerHTML = "";
-            selectSite.append(createOption("Select a company", ""));
-            return
-        }
-        showLoader()
-        const currentBaseUrl = window.location.origin;
-        fetch(`${currentBaseUrl}/api/company/${company_id}/sites`)
-            .then(response => response.json())  // convert to json
-            .then(function (json) {
-                selectSite.innerHTML = "";
-                selectSite.append(createOption("Select Site", ""));
-
-                sites = json.data?.sites ?? []
-                const selectedSiteId = selectedSite ?? getQueryParamValue('site_id')
-                sites.forEach((site) => {
-                    const isSelected = selectedSiteId && site.id === parseInt(selectedSiteId, 10);
-                    selectSite.append(createOption(site.name, site.id, isSelected));
-                });
-                selectSite.disabled = false;
-                hideLoader()
-            })    //print data to console
-            .catch(err => console.log('Request Failed', err));
-    }
-
-    function getSiteTags(site_id, loaderId = 'ajax_loader_tag') {
-        if (isNaN(site_id) || site_id == "") {
-            selectTag.innerHTML = "";
-            selectTag.append(createOption("Select a site", ""));
-            return
-        }
-        showLoader(loaderId)
-        const currentBaseUrl = window.location.origin;
-        fetch(`${currentBaseUrl}/api/sites/${site_id}/tags`)
-            .then(response => response.json())  // convert to json
-            .then(function (json) {
-                selectTag.innerHTML = "";
-                selectTag.append(createOption("Select tag", ""));
-                tags = json.data?.tags ?? []
-                const selectedTagId = getQueryParamValue('tag_id')
-                tags.forEach((tag) => {
-                    const isSelected = selectedTagId && tag.id === parseInt(selectedTagId, 10);
-                    selectTag.append(createOption(tag.name, tag.id, isSelected));
-                });
-                selectTag.disabled = false;
-                hideLoader(loaderId)
-            })    //print data to console
-            .catch(err => console.log('Request Failed', err));
-
-    }
 
 
 </script>
@@ -232,81 +115,9 @@
     defer></script>
 <script defer>
 
-    const searchLocationElm = document.getElementById("location");
-    const longitudeElm = document.getElementById("longitude")
-    const latitudeElm = document.getElementById("latitude")
-    const searchLocationMapElm = document.getElementById('searchLocationMap')
-    // const imageViewModalElement = document.getElementById('imageViewModalElement');
-    // var imageViewModalObject = null;
-    let autocompleteSearchLocation = null;
-    const searchLocation = {
-        id: "",
-        name: "",
-        address: "",
-        latitude: 0,
-        longitude: 0,
-    };
-
-    function initAutocomplete() {
-        const options = {
-            componentRestrictions: {
-                country: "NG"
-            }
-        }
-        if (searchLocationElm) {
-            autocompleteSearchLocation = new google.maps.places.Autocomplete(searchLocationElm, options);
-            autocompleteSearchLocation.addListener("place_changed", onSearchLocationAddressChange)
-        }
-        if (searchLocationMapElm) {
-            let lat = !isNaN(parseFloat(latitudeElm?.value)) ? parseFloat(latitudeElm?.value) : 0
-            let long = !isNaN(parseFloat(longitudeElm?.value)) ? parseFloat(longitudeElm?.value) : 0
-            var initialLatLng = {lat: lat, lng: long};
-            // console.log(initialLatLng)
-            // Create a map object and specify the DOM element for display.
-            map = new google.maps.Map(searchLocationMapElm, {
-                center: initialLatLng,
-                zoom: 18
-            });
-
-            // Create an empty marker
-            marker = new google.maps.Marker({
-                map: map,
-                position: initialLatLng,
-                title: 'Your Location'
-            });
-        }
 
 
-    }
 
-    function onSearchLocationAddressChange() {
-        const place = autocompleteSearchLocation.getPlace();
-        searchLocation.address = place.formatted_address;
-        searchLocation.latitude = place.geometry.location.lat();
-        searchLocation.longitude = place.geometry.location.lng();
-        searchLocation.name = place.name;
-        searchLocation.id = place.place_id;
-        const setSearchLocationAddressEvent = new CustomEvent('set-search-location-address-event', {
-            detail: searchLocation.address
-        });
-        window.dispatchEvent(setSearchLocationAddressEvent);
-        if (longitudeElm && latitudeElm) {
-            longitudeElm.value = searchLocation.longitude
-            latitudeElm.value = searchLocation.latitude
-            if (searchLocationMapElm) {
-                var newLatLng = new google.maps.LatLng(searchLocation.latitude, searchLocation.longitude);
-                marker.setPosition(newLatLng);
-                map.setCenter(newLatLng);
-            }
-
-        }
-
-    }
-
-    document.addEventListener("DOMContentLoaded", function (event) {
-        initAutocomplete()
-        // imageViewModalObject = new Flowbite.default?.Modal(imageViewModalElement)
-    });
 
     document.getElementById("allBtn")?.addEventListener("click", function () {
         document.getElementById("allBtn").innerHTML = "seding..."

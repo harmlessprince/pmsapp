@@ -44,3 +44,4 @@ Route::middleware('auth:sanctum')->group(function (){
 
 Route::get('company/{company}/sites', [CompanySiteController::class, 'show']);
 Route::get('sites/{site}/tags', [SiteTagController::class, 'show']);
+Route::get('sites/{company}', [SiteTagController::class, 'show']);

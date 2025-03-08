@@ -12,4 +12,6 @@ enum RoleEnum: string
     case COMPANY_OWNER = 'company_owner';
     case PERSONNEL = 'personnel';
 
+    case SUPERVISOR = 'supervisor';
+
 }

@@ -1,20 +1,18 @@
 <?php
 
 
-use App\Http\Controllers\Admin\CompanyController;
+use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\AttendanceController;
+use App\Http\Controllers\Admin\CompanyController;
+use App\Http\Controllers\Admin\RegionController;
 use App\Http\Controllers\Admin\ScanController;
-use App\Http\Controllers\AdminPasswordChangeController;
-use App\Http\Controllers\CompanyCredentialController;
-use App\Http\Controllers\CompanySiteController;
-use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Admin\SiteController;
-use App\Http\Controllers\FrequentlyAskedQuestionController;
-use App\Http\Controllers\SiteTagController;
-use App\Http\Controllers\StateController;
 use App\Http\Controllers\Admin\TagController;
 use App\Http\Controllers\Admin\UserController;
-use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\AdminPasswordChangeController;
+use App\Http\Controllers\CompanyCredentialController;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\FrequentlyAskedQuestionController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -35,5 +33,6 @@ Route::name('admin.')->middleware(['auth', 'administrator', 'is_banned'])->group
     });
     Route::resource('faqs', FrequentlyAskedQuestionController::class)->except('show', 'destroy');
     Route::get('delete/faqs/{faq}', [FrequentlyAskedQuestionController::class, 'destroy'])->name('delete.faq');
+    Route::resource('regions', RegionController::class);
 });
 

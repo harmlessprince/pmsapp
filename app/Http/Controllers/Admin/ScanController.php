@@ -35,14 +35,19 @@ class ScanController extends Controller
             SiteIdFilter::class,
             TagIdFilter::class,
         ];
-        if ($request->query('export') == 'export') {
+        $scanQuery = $this->scanRepository->modelQuery()->search();
+        $scanQuery = constructPipes($scanQuery, $pipes);
+        if ($request->query('action') == 'export') {
             $name = 'scan_report_' . Carbon::now()->format('d-m-Y') . '.xlsx';
             session()->flash('success', 'Scan exported successfully');
             return (new ScansExport($this->scanRepository))->download($name);
         }
+        if ($request->query('action') == 'delete') {
+            session()->flash('success', 'Attendances deleted successfully');
+            $scanQuery->delete();
+        }
         $companies =  $this->companyRepository->all();
-        $scanQuery = $this->scanRepository->modelQuery()->search();
-        $scanQuery = constructPipes($scanQuery, $pipes);
+
         $scans = $scanQuery->with(['company', 'site', 'tag'])->latest('scan_date_time')->paginate(request('per_page', 15));
         return view('admin.scan.index', compact('scans', 'companies'));
     }

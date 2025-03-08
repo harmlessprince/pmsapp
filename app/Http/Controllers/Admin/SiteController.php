@@ -13,10 +13,12 @@ use App\Models\Tag;
 use App\Models\User;
 use App\QueryFilters\CompanyIdFilter;
 use App\QueryFilters\CreatedAtFilter;
+use App\QueryFilters\RegionIdFilter;
 use App\QueryFilters\SiteIdFilter;
 use App\QueryFilters\StateIdFilter;
 use App\QueryFilters\StatusFilter;
 use App\Repositories\Eloquent\Repository\CompanyRepository;
+use App\Repositories\Eloquent\Repository\RegionRepository;
 use App\Repositories\Eloquent\Repository\SiteRepository;
 use App\Repositories\Eloquent\Repository\StateRepository;
 use App\Repositories\Eloquent\Repository\UserRepository;
@@ -35,6 +37,7 @@ class SiteController extends controller
         private readonly UserService       $userService,
         private readonly StateRepository   $stateRepository,
         private readonly UserRepository    $userRepository,
+        private readonly RegionRepository    $regionRepository,
     )
     {
     }
@@ -50,15 +53,17 @@ class SiteController extends controller
             CreatedAtFilter::class,
             StatusFilter::class,
             StateIdFilter::class,
-            CompanyIdFilter::class
+            CompanyIdFilter::class,
+            RegionIdFilter::class,
         ];
         $countOfSites = $this->siteRepository->modelQuery()->count();
         $companies = $this->companyRepository->all();
+        $regions = $this->regionRepository->all();
         $states = $this->stateRepository->fetchByCountryID();
         $siteQuery = $siteQuery->with(['inspector', 'state', 'state.country', 'company']);
         $siteQuery = constructPipes($siteQuery, $pipes);
         $sites = $siteQuery->latest()->paginate(\request('per_page', 15));
-        return view('admin.site.index', compact('sites', 'countOfSites', 'states', 'companies'));
+        return view('admin.site.index', compact('sites', 'countOfSites', 'states', 'companies', 'regions'));
     }
 
     /**

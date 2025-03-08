@@ -62,6 +62,13 @@ Route::middleware(['auth'])->name('common.')->group(function () {
     });
 });
 
+Route::middleware(['auth'])->name('common.')->group(function () {
+    Route::prefix('credentials')->name('credentials.')->group(function () {
+        Route::patch('password/change/{site}', [SiteCredentialController::class, 'changeSitePassword'])->name('password.change');
+        Route::patch('logout/pin/change/{site}', [SiteCredentialController::class, 'changeSiteLogoutPin'])->name('logout.pin.change');
+    });
+});
+
 
 Route::prefix('company')->middleware(['auth', 'company_owner', 'is_banned'])->name('company.')->group(function () {
     Route::get('dashboard', [DashboardController::class, 'company'])->name('dashboard');
@@ -79,6 +86,9 @@ Route::prefix('company')->middleware(['auth', 'company_owner', 'is_banned'])->na
     Route::resource('sites', SiteController::class);
 
 });
+
+
+
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
