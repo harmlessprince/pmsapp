@@ -40,6 +40,11 @@ Route::middleware('auth:sanctum')->group(function (){
 
     Route::get('guards', [SecurityGuardController::class, 'index']);
     Route::post('guards', [SecurityGuardController::class, 'store']);
+
+    Route::get('incidents', [\App\Http\Controllers\Mobile\IncidentController::class, 'index']);
+    Route::post('incidents', [\App\Http\Controllers\Mobile\IncidentController::class, 'store']);
+
+    Route::get('regions/{region}/sites', [\App\Http\Controllers\RegionSiteController::class, 'show']);
 });
 
 Route::get('company/{company}/sites', [CompanySiteController::class, 'show']);
