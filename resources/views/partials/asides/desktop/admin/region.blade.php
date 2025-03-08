@@ -8,7 +8,7 @@
     <a
         class="flex flex-row relative" href="{{route('admin.regions.index')}}">
         <span
-            class="material-symbols-outlined mr-4 w-[24px] h-[24px] {{ $isAdminRegionPage == true ? 'text-primary_color' : 'text-natural'}}">pin_drop</span>
+            class="material-symbols-outlined mr-4 w-[24px] h-[24px] {{ $isAdminRegionPage == true ? 'text-primary_color' : 'text-natural'}}">screenshot_region</span>
         <span
             class="text-base font-medium {{ $isAdminRegionPage == true ? 'text-primary_color' : 'text-natural'}}">Regions</span>
     </a>

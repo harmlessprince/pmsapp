@@ -66,7 +66,6 @@ class DashboardController extends Controller
             ->with(['site:id,name','company:id,name', 'user:id,first_name,last_name,profile_image'])
             ->latest('attendance_date_time')->limit(10)->get();
         $latestScans = $scanQuery->select(['id', 'site_id', 'company_id', 'scan_time', 'scan_date', 'scan_date_time', 'tag_id'])
-            ->where('site_id', $user->site_id)
             ->where('company_id', $user->company_id)
             ->with(['site:id,name', 'company:id,name', 'tag:id,name,code'])
             ->latest('scan_date_time')->limit(10)->get();
