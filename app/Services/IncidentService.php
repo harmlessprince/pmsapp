@@ -3,12 +3,18 @@
 namespace App\Services;
 
 use App\Enums\RoleEnum;
+use App\Exports\AttendanceExport;
 use App\Models\Region;
 use App\Models\Site;
+use App\QueryFilters\CompanyIdFilter;
+use App\QueryFilters\DateFilter;
+use App\QueryFilters\SiteIdFilter;
+use App\QueryFilters\StatusFilter;
 use App\Repositories\Eloquent\Repository\IncidentRepository;
 use App\Repositories\Eloquent\Repository\SiteRepository;
 use App\Repositories\Eloquent\Repository\StateRepository;
 use App\Repositories\Eloquent\Repository\UserRepository;
+use Carbon\Carbon;
 
 class IncidentService
 {
@@ -21,18 +27,40 @@ class IncidentService
     {
     }
 
-    public function getAll($authUser, $perPage = 10)
+    public function getAll($authUser, $perPage = 15)
     {
-        $incidentQuery = $this->incidentRepository->modelQuery();
+        $action = request()->query('action');
+        $pipes = [
+            new DateFilter(),
+            CompanyIdFilter::class,
+            SiteIdFilter::class,
+            StatusFilter::class,
+        ];
+        $incidentQuery = $this->incidentRepository->modelQuery()->with(['user', 'site']);
+        $incidentQuery = constructPipes($incidentQuery, $pipes);
+        if (request()->query('type')) {
+            $incidentQuery = $incidentQuery->where('type', request()->query('mode'));
+        }
         if ($authUser->hasRole(RoleEnum::SUPERVISOR->value)) {
             $region = Region::query()->where("id", $authUser->region_id)->first();
             $sites = Site::query()->where("region_id", $region->id)->get()->pluck("id")->toArray();
-
             $incidentQuery = $incidentQuery->whereIn('incidents.site_id', $sites);
-        } else {
+        } else if ($authUser->hasRole(RoleEnum::SITE_INSPECTOR->value)) {
             $incidentQuery = $incidentQuery->where('incidents.site_id', $authUser->site_id);
         }
-        return $incidentQuery->paginate($perPage);
+
+//        if ($action == 'export') {
+//            $name = 'incident_report_' . Carbon::now()->format('d-m-Y') . '.xlsx';
+//            session()->flash('success', 'Attendance exported successfully');
+//            return (new AttendanceExport($incidentQuery))->download($name);
+//        }
+
+        if ($action == 'delete') {
+            session()->flash('success', 'Attendances deleted successfully');
+            $incidentQuery->delete();
+        }
+
+        return $incidentQuery->latest()->paginate($perPage);
     }
 
     public function getById(int $id)

@@ -88,6 +88,10 @@ Route::prefix('company')->middleware(['auth', 'company_owner', 'is_banned'])->na
     Route::resource('regions', RegionController::class);
 });
 
+Route::middleware(['auth', 'is_banned'])->group(function () {
+    Route::resource('incidents', \App\Http\Controllers\IncidentController::class);
+});
+
 
 
 

@@ -25,6 +25,7 @@
         @include('partials.asides.desktop.admin.scan')
         @include('partials.asides.desktop.admin.attendance')
         @include('partials.asides.desktop.admin.region')
+        @include('partials.asides.desktop.admin.incident')
         @if(auth()->user()->isSuperAdmin())
             @include('partials.asides.desktop.admin.admin')
 
