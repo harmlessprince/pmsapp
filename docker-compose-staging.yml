@@ -16,7 +16,7 @@ services:
       SERVICE_TAGS: dev
     working_dir: /var/www
     volumes:
-      - ./staging:/var/www
+      - ./:/var/www
       - ./docker-compose/php/local.ini:/usr/local/etc/php/conf.d/local.ini
     networks:
       - pmsapp-api-network-staging
@@ -29,7 +29,7 @@ services:
     ports:
       - "5455:80"  # Staging uses a different port
     volumes:
-      - ./staging:/var/www
+      - ./:/var/www
       - ./docker-compose/nginx/conf.d/app-staging.conf:/etc/nginx/conf.d/
     networks:
       - pmsapp-api-network-staging
