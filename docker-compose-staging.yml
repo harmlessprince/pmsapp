@@ -30,7 +30,7 @@ services:
       - "5455:80"  # Staging uses a different port
     volumes:
       - ./staging:/var/www
-      - ./docker-compose/nginx/conf.d/app-staging.conf:/etc/nginx/conf.d/default.conf
+      - ./docker-compose/nginx/conf.d/app-staging.conf:/etc/nginx/conf.d/
     networks:
       - pmsapp-api-network-staging
 
