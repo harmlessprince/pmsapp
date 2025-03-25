@@ -24,20 +24,20 @@
             data-modal-target="changePasswordModal"
             data-modal-toggle="changePasswordModal"
         >
-            Change Site Password
+            Change Region Password
         </button>
         <button
             class="font-big text-normal text-white rounded-lg px-[16px] py-[10px] cursor-pointer bg-yellow-500"
             data-modal-target="changeLogoutModal"
             data-modal-toggle="changeLogoutModal"
         >
-            Change Site Logout Pin
+            Change Region Logout Pin
         </button>
         <a
             class="font-big text-normal text-primary_color rounded-lg border border-primary_color px-[16px] py-[10px] cursor-pointer bg-transparent"
-            href="{{route('company.sites.index')}}"
+            href="{{route('admin.regions.index')}}"
         >
-            Manage Sites
+            Manage Regions
         </a>
     </div>
 
