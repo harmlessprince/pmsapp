@@ -38,12 +38,23 @@ class IncidentService
         ];
         $incidentQuery = $this->incidentRepository->modelQuery()->with(['user', 'site']);
         $incidentQuery = constructPipes($incidentQuery, $pipes);
+        $sites = \request()->query('sites', '');
+        if ($sites != '') {
+            $sites = explode(',', $sites);
+        } else {
+            $sites = [];
+        }
+
+
         if (request()->query('type')) {
             $incidentQuery = $incidentQuery->where('type', request()->query('mode'));
         }
         if ($authUser->hasRole(RoleEnum::SUPERVISOR->value)) {
             $region = Region::query()->where("id", $authUser->region_id)->first();
-            $sites = Site::query()->where("region_id", $region->id)->get()->pluck("id")->toArray();
+            $sites = Site::query()->where("region_id", $region->id)
+                ->when(count($sites) > 0, function ($query) use ($sites) {
+                    $query->whereIn("id", $sites);
+                })->get()->pluck("id")->toArray();
             $incidentQuery = $incidentQuery->whereIn('incidents.site_id', $sites);
         } else if ($authUser->hasRole(RoleEnum::SITE_INSPECTOR->value)) {
             $incidentQuery = $incidentQuery->where('incidents.site_id', $authUser->site_id);

@@ -34,10 +34,18 @@ class AttendanceController extends Controller
             new DateFilter('attendance_date'),
         ];
         $attendanceQuery = constructPipes($this->attendanceRepository->modelQuery(), $pipes);
-
+        $sites = \request()->query('sites', '');
+        if ($sites != '') {
+            $sites = explode(',', $sites);
+        } else {
+            $sites = [];
+        }
         if ($user->hasRole(RoleEnum::SUPERVISOR->value)) {
             $region = Region::query()->where("id", $user->region_id)->first();
-            $sites = Site::query()->where("region_id", $region->id)->get()->pluck("id")->toArray();
+            $sites = Site::query()->where("region_id", $region->id)
+                ->when(count($sites) > 0, function ($query) use ($sites) {
+                    $query->whereIn("id", $sites);
+                })->get()->pluck("id")->toArray();
             $attendanceQuery = $attendanceQuery->whereIn('attendances.site_id', $sites);
         } else {
             $attendanceQuery = $attendanceQuery->where('attendances.site_id', $user->site_id);

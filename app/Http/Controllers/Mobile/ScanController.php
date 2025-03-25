@@ -9,6 +9,7 @@ use App\Http\Requests\StoreScanRequest;
 use App\Models\Region;
 use App\Models\Site;
 use App\QueryFilters\DateFilter;
+use App\QueryFilters\SiteIdFilter;
 use App\Repositories\Eloquent\Repository\ScanRepository;
 use App\Repositories\Eloquent\Repository\TagRepository;
 use Illuminate\Http\JsonResponse;
@@ -30,13 +31,20 @@ class ScanController extends Controller
         $pipes = [
             new DateFilter('scan_date'),
         ];
-
+        $sites = \request()->query('sites', '');
+        if ($sites != '') {
+            $sites = explode(',', $sites);
+        } else {
+            $sites = [];
+        }
         $scanQuery = $this->scanRepository->modelQuery()
             ->search();
             if ($user->hasRole(RoleEnum::SUPERVISOR->value)) {
                 $region = Region::query()->where("id", $user->region_id)->first();
-                $sites = Site::query()->where("region_id", $region->id)->get()->pluck("id")->toArray();
-
+                $sites = Site::query()->where("region_id", $region->id)
+                    ->when(count($sites) > 0, function ($query) use ($sites) {
+                        $query->whereIn("id", $sites);
+                    })->get()->pluck("id")->toArray();
                 $scanQuery = $scanQuery->whereIn('scans.site_id', $sites);
             } else {
                 $scanQuery = $scanQuery->where('scans.site_id', $user->site_id);
