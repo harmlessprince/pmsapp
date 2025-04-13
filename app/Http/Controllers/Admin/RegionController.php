@@ -88,6 +88,7 @@ class RegionController extends Controller
                 'username' => $request->input('email'),
                 'company_id' => $request->input('company_id'),
                 'status' => $request->input('status'),
+                'logout_pin' => Hash::make($request->input('logout_pin')),
             ]);
             $this->userService->associateUserToRole($user, RoleEnum::SUPERVISOR->value);
             $region = $this->regionRepository->create([

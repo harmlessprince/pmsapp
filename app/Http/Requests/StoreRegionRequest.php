@@ -27,6 +27,7 @@ class StoreRegionRequest extends FormRequest
             'status' => ['required', 'boolean'],
             'region_name' => ['required', 'string', 'max:200'],
             'sites' => ['required', 'array'],
+            'logout_pin' => ['required', 'string'],
         ];
         if (request()->user()->isCompanyOwner()) {
             return $data;
