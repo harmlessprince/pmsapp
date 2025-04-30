@@ -46,13 +46,18 @@ Route::get('/faq', function () {
 })->name('faq');
 
 Route::post('/contact/us', function () {
-    Mail::to(config('app.contact_us_mail'))->send(new \App\Mail\ContactUsMail(
-        request()->input('first_name'),
-        request()->input('last_name'),
-        request()->input('email'),
-        request()->input('message')
-    ));
-    return redirect(\route('welcome'));
+    try {
+        Mail::to(config('app.contact_us_mail'))->send(new \App\Mail\ContactUsMail(
+            request()->input('first_name'),
+            request()->input('last_name'),
+            request()->input('email'),
+            request()->input('message')
+        ));
+    }catch (\Exception $exception){
+        logger($exception);
+    }
+
+    return redirect(\route('welcome'))->with('success', 'We have received your message and we will get back to you as soon as possible.');
 })->name("contact-us");
 
 

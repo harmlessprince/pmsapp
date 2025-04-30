@@ -73,33 +73,33 @@
             <div class="pt-[1em] flex flex-row max-mobile:flex-col">
                 <div class="pt-[5%] text-size1 font-normal">
                     <p>
-                        PERFTRAKA is a cloud based technology that provides cutting-edge Location Capture, 
-                        Security Patrol Monitoring and Employee & 
+                        PERFTRAKA is a cloud based technology that provides cutting-edge Location Capture,
+                        Security Patrol Monitoring and Employee &
                         Contractor Attendance Management solutions tailored to meet the diverse needs of businesses across various industries.
                     </p>
                     <p class="pt-[1em]">
-                        Using our innovative platform, security agencies and businesses can easily track security patrol, 
-                        employee and contractor attendance in real-time. Whether you are managing a 
-                        single location or multiple sites, our platform offers the flexibility and 
+                        Using our innovative platform, security agencies and businesses can easily track security patrol,
+                        employee and contractor attendance in real-time. Whether you are managing a
+                        single location or multiple sites, our platform offers the flexibility and
                         scalability to meet your unique requirements.
                     </p>
                     <p class="pt-[1em]">
-                        With QR codes installed at respective location sites or simply by pre-configuring the 
-                        longitudinal and latitudinal co-ordinates of locations on the application, data is captured and 
-                        written to the cloud where 
+                        With QR codes installed at respective location sites or simply by pre-configuring the
+                        longitudinal and latitudinal co-ordinates of locations on the application, data is captured and
+                        written to the cloud where
                         the administrator/supervisor/HR can monitor all security patrols and employee & contractor attendance in real time.
                     </p>
 
                     <p class="pt-[1em]">
-                        PERFTRAKA provide you with real time reports of patrols by your security personnel and the attendance of your 
+                        PERFTRAKA provide you with real time reports of patrols by your security personnel and the attendance of your
                         employees and contractors i.e.,
-                         field sales executives, cleaners, cooks, drivers, etcetera at all location sites regardless of their geographical 
+                         field sales executives, cleaners, cooks, drivers, etcetera at all location sites regardless of their geographical
                          location.
                     </p>
 
                     <p class="pt-[1em]">
-                        So say goodbye to manual tracking methods and inefficiencies – with PERFTRAKA, 
-                        you can centralize your operations and gain full visibility into all activities, 
+                        So say goodbye to manual tracking methods and inefficiencies – with PERFTRAKA,
+                        you can centralize your operations and gain full visibility into all activities,
                         empowering you to make informed decisions and drive business success.
                     </p>
 
@@ -112,63 +112,7 @@
         <section id="getInTouch"  class="py-[5%] px-[15%]  max-about:px-[5%]">
             <header class="font-[800] text-[2.25em] text-center">Get In touch with us</header>
             <div class="text-center font-normal text-[#667085]">We’d love to hear from you. Please fill out this form.</div>
-
-            <form class="mt-5">
-                <div class="flex flex-row justify-between mb-5">
-                    <div class="w-[48%]">
-                        <label class="block text-[#344054] font-big text-normal">First name</label>
-                        <input
-                            type="text"
-                            class="outline-none w-full border border-[#D0D5DD] bg-transparent h-[3em] px-2 py-1 rounded-lg text-[#667085]
-                        placeholder-color font-normal text-normal
-                        focus:outline-none focus:border-primary_color focus:ring-1 focus:ring-background_color
-                        focus:invalid:error focus:invalid:error
-                        "
-                            placeholder="First name" name="first_name" value=""/>
-                        {{-- <x-input-error :messages="$errors->get('email')" class="mt-2"/> --}}
-                    </div>
-                    <div class="w-[48%]">
-                        <label class="block text-[#344054] font-big text-normal">Last name</label>
-                        <input
-                            type="text"
-                            class="outline-none w-full border border-[#D0D5DD] bg-transparent h-[3em] px-2 py-1 rounded-lg text-[#667085]
-                        placeholder-color font-normal text-normal
-                        focus:outline-none focus:border-primary_color focus:ring-1 focus:ring-background_color
-                        focus:invalid:error focus:invalid:error
-                        "
-                            placeholder="Last name" name="last_name" value=""/>
-                        {{-- <x-input-error :messages="$errors->get('email')" class="mt-2"/> --}}
-                    </div>
-                </div>
-
-                <div class="mb-5">
-                    <div class="w-full">
-                        <label class="block text-[#344054] font-big text-normal">Email</label>
-                        <input
-                            type="email"
-                            class="outline-none w-full border border-[#D0D5DD] bg-transparent h-[3em] px-2 py-1 rounded-lg text-[#667085]
-                        placeholder-color font-normal text-normal
-                        focus:outline-none focus:border-primary_color focus:ring-1 focus:ring-background_color
-                        focus:invalid:error focus:invalid:error
-                        "
-                            placeholder="you@company.com" name="email" value=""/>
-                        {{-- <x-input-error :messages="$errors->get('email')" class="mt-2"/> --}}
-                    </div>
-                </div>
-
-                <div class="mb-5">
-                    <div class="w-full">
-                        <label class="block text-[#344054] font-big text-normal">Message</label>
-                        <textarea id="message" rows="5"
-                        class="outline-none block bg-transparent px-2 py-1 w-full text-[#667085] font-normal text-normal placeholder-color rounded-lg border border-[#D0D5DD]
-                        focus:outline-none focus:border-primary_color focus:ring-1 focus:ring-background_color
-                        "></textarea>
-                    </div>
-                </div>
-
-                <button type="submit" class="bg-[#C52216] w-full h-[60px] rounded-[10px] text-size1 font-[600] text-[#ffffff]">Submit</button>
-
-            </form>
+            @include('contact-us-form')
         </section>
 
         <footer class="flex flex-row  max-mobile:flex-col items-end bg-col3 px-[15%]  max-about:px-[5%] pt-[3%] max-mobile:py-[10%] pb-[3.5%] text-[#fff]">
@@ -217,5 +161,14 @@
         </main>
 
         <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>
-        </body>
+        <script>
+            document.getElementById('contactForm').addEventListener('submit', function () {
+                const contactusButton = document.getElementById("contactUsButton")
+                contactusButton.disabled = true;
+                contactusButton.innerText = 'Getting In touch...';
+                contactusButton.style.backgroundColor = 'rgba(197, 34, 22, 0.8)';
+            });
+        </script>
+
+    </body>
     </html>
