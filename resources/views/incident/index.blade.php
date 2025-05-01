@@ -96,7 +96,7 @@
             @else
                 <div class="flex flex-col">
                     <x-input-label for="site_id" :value="__('Site')" class="text-white"/>
-                    <x-select-input id="msite_id" class="block w-full" name="site_id">
+                    <x-select-input id="site_id" class="block w-full" name="site_id">
                         <option class="" value="">All site</option>
                         @foreach($sites as $item)
                             <option
@@ -113,11 +113,11 @@
                     <option value="">Select Type</option>
                     <option
                         value="storage" {{ request()->query('type') == 'storage' ? "selected" : '' }}>
-                        Storage
+                        Storage Purpose
                     </option>
                     <option
                         value="rapid" {{ request()->query('type') == 'rapid' ? "selected" : '' }}>
-                        Rapid
+                        Rapid Response
                     </option>
                 </x-select-input>
             </div>
@@ -162,13 +162,13 @@
                                         class="bg-checkin  px-2 py-1 me-2 rounded-full flex flex-row items-center justify-between">
                                         <img src="{{asset('assets/images/green_dot.png')}}" alt="dashboard"
                                              class="mr-2"/>
-                                        <span class="text-checkout font-big text-small">Storage</span>
+                                        <span class="text-checkout font-big text-small">Storage Purpose</span>
                                     </button>
                                 @endif
                                 @if($item->type == 'rapid')
                                     <button
                                         class="bg-red-200  px-2 py-1 me-2 rounded-full flex flex-row items-center justify-between">
-                                        <span class="text-red-500 font-big text-small">Rapid</span>
+                                        <span class="text-red-500 font-big text-small">Rapid Response</span>
                                     </button>
                                 @endif
                             </td>

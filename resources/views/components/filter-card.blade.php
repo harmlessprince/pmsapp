@@ -55,13 +55,13 @@
                                         <option class=""
                                                 value="export" {{ request()->query('action') == 'export' ? "selected" : '' }}
                                         >
-                                            EXPORT
+                                            Export
                                         </option>
                                     @endif
                                     @if($canExport)
                                         <option class=""
                                                 value="delete" {{ request()->query('action') == 'delete' ? "selected" : '' }}>
-                                            DELETE
+                                            Delete
                                         </option>
                                     @endif
 
