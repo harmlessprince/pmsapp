@@ -43,7 +43,7 @@
                 <div class="mt-3  w-full">
                     <div class="w-full flex justify-between items-center py-3 ">
                         @if($canExport || $canDelete)
-                            <div class="flex flex-col">
+                            <div class="flex flex-col w-80">
                                 <x-input-label for="action" :value="__('Action')"/>
                                 <x-select-input id="action" class="block w-full" name="action">
                                     <option

@@ -26,8 +26,8 @@
         </div>
     </div>
 
-    <div class="mb-5">
-        <div class="w-full">
+    <div class="flex flex-row justify-between mb-5">
+        <div class="w-[48%]">
             <label class="block text-[#344054] font-big text-normal">Email</label>
             <input
                 type="email"
@@ -37,6 +37,17 @@
                         focus:invalid:error focus:invalid:error
                         "
                 placeholder="you@company.com" name="email" value="" required/>
+        </div>
+        <div class="w-[48%]">
+            <label class="block text-[#344054] font-big text-normal">Whatsapp/Phone Number</label>
+            <input
+                type="text"
+                class="outline-none w-full border border-[#D0D5DD] bg-transparent h-[3em] px-2 py-1 rounded-lg text-[#667085]
+                        placeholder-color font-normal text-normal
+                        focus:outline-none focus:border-primary_color focus:ring-1 focus:ring-background_color
+                        focus:invalid:error focus:invalid:error
+                        "
+                placeholder="" name="phone_number" value="" required/>
         </div>
     </div>
 

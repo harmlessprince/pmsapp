@@ -51,7 +51,8 @@ Route::post('/contact/us', function () {
             request()->input('first_name'),
             request()->input('last_name'),
             request()->input('email'),
-            request()->input('message')
+            request()->input('message'),
+            request()->input('phone_number')
         ));
     }catch (\Exception $exception){
         logger($exception);
