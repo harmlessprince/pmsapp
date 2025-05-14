@@ -46,6 +46,7 @@ class IncidentService
         }
 
 
+
         if (request()->query('type')) {
             $incidentQuery = $incidentQuery->where('type', request()->query('mode'));
         }

@@ -24,7 +24,7 @@ class IncidentController extends Controller
     {
         $user = request()->user()->load('site');
         $incidents = $this->incidentService->getAll($user, request()->query('per_page', 15));
-        return sendSuccess(['incidents' => $incidents], 'All attendance retrieved');
+        return sendSuccess(['incidents' => $incidents], 'All incidents retrieved');
     }
 
     public function store(StoreIncidentRequest $request)
