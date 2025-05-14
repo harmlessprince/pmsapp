@@ -15,7 +15,7 @@ use App\Services\IncidentService;
 class IncidentController extends Controller
 {
     public function __construct(
-        private readonly IncidentService    $incidentService,
+        private readonly IncidentService $incidentService,
     )
     {
     }

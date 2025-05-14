@@ -23,6 +23,7 @@ class StoreIncidentRequest extends FormRequest
     {
         return [
             'site_id' => 'required|exists:sites,id',
+            'reported_by' => 'required|exists:users,id',
             'type' => 'required|string|in:rapid,storage',
             'image' => ['required', 'image'],
             'comment' => 'required|string|min:3',
