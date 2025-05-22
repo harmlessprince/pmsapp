@@ -7,6 +7,7 @@ use App\Exports\AttendanceExport;
 use App\Models\Region;
 use App\Models\Site;
 use App\QueryFilters\CompanyIdFilter;
+use App\QueryFilters\CreatedAtFilter;
 use App\QueryFilters\DateFilter;
 use App\QueryFilters\SiteIdFilter;
 use App\QueryFilters\StatusFilter;
@@ -31,7 +32,7 @@ class IncidentService
     {
         $action = request()->query('action');
         $pipes = [
-            new DateFilter(),
+            new CreatedAtFilter(),
             CompanyIdFilter::class,
             SiteIdFilter::class,
             StatusFilter::class,
