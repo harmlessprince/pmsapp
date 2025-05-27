@@ -170,14 +170,14 @@
         <div class="w-[6.5em] max-mobile:w-[10em] max-mobile:mx-auto">
             <header class="text-center font-bigger text-size1">Our socials</header>
             <div class="flex flex-row justify-around py-1 font-normal text-size1">
-                <a href="#" class="">
+                <a href="https://www.linkedin.com/company/perftraka/" target="_blank" class="">
                     <img src="{{asset('/assets/landing_images/linkedin.png')}}" class="" alt="linkedin">
                 </a>
-                <a href="#" class="">
+                <a href="https://www.facebook.com/share/1EJwoCg6b7/" target="_blank" class="">
                     <img src="{{asset('/assets/landing_images/facebook.png')}}" class="" alt="facebook">
                 </a>
-                <a href="#" class="">
-                    <img src="{{asset('/assets/landing_images/twitter.pn')}}g" class="w-[18px] h-[18px]" alt="twitter">
+                <a href="https://x.com/PerfTraka" target="_blank" class="">
+                    <img src="{{asset('/assets/landing_images/twitter.png')}}" class="w-[18px] h-[18px]" alt="twitter">
                 </a>
             </div>
         </div>

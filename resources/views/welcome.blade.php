@@ -475,7 +475,7 @@
                 <a href="https://www.linkedin.com/company/perftraka/" target="_blank" class="">
                     <img src="{{asset('/assets/landing_images/linkedin.png')}}" class="" alt="linkedin">
                 </a>
-                <a href="#" target="_blank" class="">
+                <a href="https://www.facebook.com/share/1EJwoCg6b7/" target="_blank" class="">
                     <img src="{{asset('/assets/landing_images/facebook.png')}}" class="" alt="facebook">
                 </a>
                 <a href="https://x.com/PerfTraka" target="_blank" class="">
