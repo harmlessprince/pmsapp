@@ -14,6 +14,7 @@ use App\Http\Controllers\SiteCredentialController;
 use App\Models\FrequentlyAskedQuestion;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
+use Lunaweb\RecaptchaV3\Facades\RecaptchaV3;
 
 /*
 |--------------------------------------------------------------------------
@@ -47,14 +48,20 @@ Route::get('/faq', function () {
 
 Route::post('/contact/us', function () {
     try {
-        Mail::to(config('app.contact_us_mail'))->send(new \App\Mail\ContactUsMail(
-            request()->input('first_name'),
-            request()->input('last_name'),
-            request()->input('email'),
-            request()->input('message'),
-            request()->input('phone_number')
-        ));
-    }catch (\Exception $exception){
+        $score = RecaptchaV3::verify(request()->get('g-recaptcha-response'), 'register');
+        if ($score > 0.7) {
+            Mail::to(config('app.contact_us_mail'))->send(new \App\Mail\ContactUsMail(
+                request()->input('first_name'),
+                request()->input('last_name'),
+                request()->input('email'),
+                request()->input('message'),
+                request()->input('phone_number')
+            ));
+        } else {
+            return redirect(\route('welcome'))->with('error', 'You are most likely a bot');
+        }
+
+    } catch (\Exception $exception) {
         logger($exception);
     }
 
@@ -97,8 +104,6 @@ Route::prefix('company')->middleware(['auth', 'company_owner', 'is_banned'])->na
 Route::middleware(['auth', 'is_banned'])->group(function () {
     Route::resource('incidents', \App\Http\Controllers\IncidentController::class);
 });
-
-
 
 
 Route::middleware('auth')->group(function () {

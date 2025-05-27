@@ -1,5 +1,5 @@
-<form class="mt-5" action="{{route('contact-us')}}" method="POST" id="contactForm">
-    @csrf
+<form class="mt-5" action="<?php echo e(route('contact-us')); ?>" method="POST" id="contactForm">
+    <?php echo csrf_field(); ?>
     <div class="flex flex-row justify-between mb-5">
         <div class="w-[48%]">
             <label class="block text-[#344054] font-big text-normal">First name</label>
@@ -11,7 +11,7 @@
                         focus:invalid:error focus:invalid:error
                         "
                 placeholder="First name" name="first_name" value="" required/>
-            {{-- <x-input-error :messages="$errors->get('email')" class="mt-2"/> --}}
+            
         </div>
         <div class="w-[48%]">
             <label class="block text-[#344054] font-big text-normal">Last name</label>
@@ -60,7 +60,8 @@
                         " name="message" required></textarea>
         </div>
     </div>
-    {!! RecaptchaV3::field('register') !!}
+    <?php echo RecaptchaV3::field('register'); ?>
+
 
     <button type="submit" class="bg-[#C52216] w-full h-[60px] rounded-[10px] text-size1 font-[600] text-[#ffffff] "
             id="contactUsButton"
@@ -69,3 +70,4 @@
 </form>
 
 
+<?php /**PATH /Users/harmlessprince/webprojects/laravel/pmsapp/resources/views/contact-us-form.blade.php ENDPATH**/ ?>

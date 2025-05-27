@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="scroll-smooth">
+<html lang="<?php echo e(str_replace('_', '-', app()->getLocale())); ?>" class="scroll-smooth">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -18,11 +18,12 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Cabin:ital,wght@0,500;0,600;0,700;1,400&family=Inter:wght@400;500;600;700;800&display=swap"
         rel="stylesheet">
-    <link rel="apple-touch-icon" sizes="180x180" href="{{asset('assets/images/favicon_io/apple-touch-icon.png')}}">
-    <link rel="icon" type="image/png" sizes="32x32" href="{{asset('assets/images/favicon_io/favicon-32x32.png')}}">
-    <link rel="icon" type="image/png" sizes="16x16" href="{{asset('assets/images/favicon_io/favicon-16x16.png')}}">
-    <link rel="manifest" href="{{asset('assets/images/favicon_io/site.webmanifest')}}">
-    {!! RecaptchaV3::initJs() !!}
+    <link rel="apple-touch-icon" sizes="180x180" href="<?php echo e(asset('assets/images/favicon_io/apple-touch-icon.png')); ?>">
+    <link rel="icon" type="image/png" sizes="32x32" href="<?php echo e(asset('assets/images/favicon_io/favicon-32x32.png')); ?>">
+    <link rel="icon" type="image/png" sizes="16x16" href="<?php echo e(asset('assets/images/favicon_io/favicon-16x16.png')); ?>">
+    <link rel="manifest" href="<?php echo e(asset('assets/images/favicon_io/site.webmanifest')); ?>">
+    <?php echo RecaptchaV3::initJs(); ?>
+
     <style>
         /* this style is for the frequently used summary tag */
         .questions {
@@ -59,21 +60,21 @@
     </style>
 
     <!-- Scripts -->
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
+    <?php echo app('Illuminate\Foundation\Vite')(['resources/css/app.css', 'resources/js/app.js']); ?>
 </head>
 <body class="font-primary">
 <main>
     <section class="z-500 mt-[80px]">
-        @include('flash-message')
+        <?php echo $__env->make('flash-message', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
     </section>
     <nav class="bg-white fixed w-full z-20 top-0 start-0 border-b border-gray-200">
         <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
-            <a href="{{config('app.url')}}" class="flex items-center space-x-3 rtl:space-x-reverse md:ml-[5%]">
-                <img src="{{asset('/assets/landing_images/logo.png')}}" class="h-8" alt="perfraka logo">
-                <img src="{{asset('/assets/landing_images/logo_name.png')}}" class="" alt="perfraka logo_name">
+            <a href="<?php echo e(config('app.url')); ?>" class="flex items-center space-x-3 rtl:space-x-reverse md:ml-[5%]">
+                <img src="<?php echo e(asset('/assets/landing_images/logo.png')); ?>" class="h-8" alt="perfraka logo">
+                <img src="<?php echo e(asset('/assets/landing_images/logo_name.png')); ?>" class="" alt="perfraka logo_name">
             </a>
             <div class="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
-                <a href="{{route('login')}}">
+                <a href="<?php echo e(route('login')); ?>">
                     <button type="button"
                             class="text-[#ffffff] bg-col2 outline-none focus:outline-none font-normal rounded-lg text-size1 px-5 py-2 text-center">
                         Login
@@ -93,16 +94,16 @@
             <div class="items-center justify-between hidden w-full md:flex md:w-auto md:order-1" id="navbar-sticky">
                 <ul class="flex flex-col p-4 md:p-0 mt-4 font-medium border border-gray-100 rounded-lg bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-white">
                     <li>
-                        <a href="{{route('welcome')}}"
+                        <a href="<?php echo e(route('welcome')); ?>"
                            class="block py-2 px-3 text-gray-900 rounded md:bg-transparent md:text-size1 md:text-col1 md:hover:text-col3 md:p-2 font-normal">Home</a>
                     </li>
                     <li>
-                        <a href="{{route('about')}}"
+                        <a href="<?php echo e(route('about')); ?>"
                            class="block py-2 px-3 text-gray-900 rounded md:bg-transparent md:text-size1 md:text-col1 md:hover:text-col3 md:p-2 font-normal">About
                             us</a>
                     </li>
                     <li>
-                        <a href="{{route('faq')}}"
+                        <a href="<?php echo e(route('faq')); ?>"
                            class="block py-2 px-3 text-gray-900 rounded md:bg-transparent md:text-size1 md:text-col1 md:hover:text-col3 md:p-2 font-normal">FAQ</a>
                     </li>
                 </ul>
@@ -121,13 +122,13 @@
         <div class="h-[13px] w-[13px] rounded-full bg-[#26E6A1] absolute bottom-[200px] right-[26%]"></div>
 
         <div class="absolute bottom-[100px] right-[15%] w-[70%] flex flex-row justify-between max-mobile:hidden">
-            <img src="{{asset('/assets/landing_images/plan1.png')}}" class="w-[227px] h-[269px]" alt="plan1">
-            <img src="{{asset('/assets/landing_images/plan2.png')}}" class="w-[227px] h-[269px]" alt="plan1">
+            <img src="<?php echo e(asset('/assets/landing_images/plan1.png')); ?>" class="w-[227px] h-[269px]" alt="plan1">
+            <img src="<?php echo e(asset('/assets/landing_images/plan2.png')); ?>" class="w-[227px] h-[269px]" alt="plan1">
         </div>
 
-        {{-- circle --}}
+        
         <div class="absolute top-[45px] max-mobile:top-[40%] left-0 w-full">
-            <img src="{{asset('/assets/landing_images/round.png')}}"
+            <img src="<?php echo e(asset('/assets/landing_images/round.png')); ?>"
                  class="mx-auto w-[31em] h-[31em] max-mobile:w-[20.25em] max-mobile:h-[20.25em]" alt="perfraka logo">
         </div>
         <div
@@ -150,20 +151,20 @@
             </a>
         </div>
 
-        {{-- desktop image --}}
+        
         <div class="absolute -bottom-[30%] left-0 w-full flex flex-row justify-center max-mobile:hidden">
-            <img src="{{asset('/assets/landing_images/mobile2.png')}}" class="" alt="mobile">
-            {{-- <img src="/assets/landing_images/mobile.png" class="max-mobile:w-[80%] max-mobile:h-[205px] mobile:hidden" alt="mobile"> --}}
+            <img src="<?php echo e(asset('/assets/landing_images/mobile2.png')); ?>" class="" alt="mobile">
+            
         </div>
-        {{-- mobile view --}}
+        
         <div class="absolute -bottom-[12%] left-0 w-full flex flex-row justify-center mobile:hidden">
-            <img src="{{asset('/assets/landing_images/mobile.png')}}" class="max-mobile:w-[19em] max-mobile:h-[160px]" alt="mobile">
+            <img src="<?php echo e(asset('/assets/landing_images/mobile.png')); ?>" class="max-mobile:w-[19em] max-mobile:h-[160px]" alt="mobile">
         </div>
     </section>
     <section class="w-full h-[11em] max-mobile:h-[7.3em] bg-col3">
     </section>
 
-    {{-- about --}}
+    
     <section class="pt-[5%] px-[15%] max-about:px-[5%] bg-col4">
         <div class="text-center text-normal font-[500] text-col5">Learn about PERFTRAKA</div>
         <header class="font-[700] text-header max-mobile:text-[2em] text-col3 text-center">
@@ -188,21 +189,21 @@
                     data is captured and written to the cloud where the administrator/supervisor/HR
                     can monitor all security patrols and employee & contractor attendance in real time.
                 </p>
-                <a href="{{route('about')}}">
+                <a href="<?php echo e(route('about')); ?>">
                     <button
                         class="cursor-pointer rounded-[8px] px-4 py-1 border border-[#E63026] mt-[1em] h-[2.75em] text-[#E63026] text-size1 font-[600]">
                         Read more
                     </button>
                 </a>
             </div>
-            <img src="{{asset('/assets/landing_images/mobile3.png')}}"
+            <img src="<?php echo e(asset('/assets/landing_images/mobile3.png')); ?>"
                  class="mt-[3.5em] w-[26em] min-h-[29.2em] ml-[5em] max-mobile:ml-0" alt="perfraka mobile">
         </div>
 
 
     </section>
 
-    {{-- features --}}
+    
     <section class="py-[5%] px-[15%] max-about:px-[5%]">
         <div class="text-center text-normal font-[500] text-col5">What’s special on our App</div>
         <header class="font-[700] text-header max-mobile:text-[2rem]  text-col3 text-center">
@@ -275,7 +276,7 @@
                     </div>
                 </div>
 
-                {{-- flex2 --}}
+                
                 <div class="flex flex-row max-mobile:flex-col justify-between w-full mt-4  max-mobile:mt-5">
                     <div class="max-w-[49%] max-mobile:max-w-full min-h-[26.5em] py-5 px-3 rounded-[8px] border border-[#E7E8E7]">
                         <div class="rounded-full w-[50px] h-[50px] bg-col3 flex flex-row items-center justify-center">
@@ -328,7 +329,7 @@
             </div>
     </section>
 
-    {{-- benefits --}}
+    
     <section class="pt-[1rem] pb-[5rem] px-[15%]  max-about:px-[5%] bg-col4">
         <div class="text-center text-normal font-[500] text-col5">Benefits you get</div>
         <header class="font-[700] text-header max-mobile:text-[1.97rem] text-col3 text-center">
@@ -339,13 +340,13 @@
         <div class="flex flex-row max-mobile:flex-col justify-between items-center mt-[4em]">
             <div class="max-w-[29%] max-mobile:max-w-full min-h-[40rem] border border-[#1A544D] rounded-[10px]">
             <div class="text-center w-full min-h-[20rem] justify-center pt-[3em] px-1 border border-[#647270] border-x-0 border-b-1 border-t-0 ">
-                <img src="{{asset('/assets/landing_images/support.png')}}" class="w-[5.625] mx-auto" alt="24/7">
+                <img src="<?php echo e(asset('/assets/landing_images/support.png')); ?>" class="w-[5.625] mx-auto" alt="24/7">
                 <div class="text-[28px] text-[#1A544D] font-[500]">
                     Security patrol, employee & contractor attendance monitoring
                 </div>
             </div>
             <div class="text-center w-full min-h-[20rem] justify-center pt-[3em]">
-                <img src="{{asset('/assets/landing_images/no-fee.png')}}" class="w-[5.625] mx-auto" alt="24/7">
+                <img src="<?php echo e(asset('/assets/landing_images/no-fee.png')); ?>" class="w-[5.625] mx-auto" alt="24/7">
                 <div class="text-[28px] text-[#1A544D] font-[500]">
                     Cloud based with no additional cost of infrastructure
                 </div>
@@ -353,18 +354,18 @@
             </div>
 
             <div class="w-[40%] h-[47rem] max-mobile:hidden">
-                <img src="{{asset('/assets/landing_images/benefit_phone.png')}}" class="w-full h-[100%]" alt="24/7">
+                <img src="<?php echo e(asset('/assets/landing_images/benefit_phone.png')); ?>" class="w-full h-[100%]" alt="24/7">
             </div>
 
             <div class="max-w-[29%] max-mobile:max-w-full min-h-[40rem] border border-[#1A544D] rounded-[10px]">
                 <div class="text-center w-full min-h-[20rem] justify-center pt-[3em] px-1 border border-[#647270] border-x-0 border-b-1 border-t-0 ">
-                    <img src="{{asset('/assets/landing_images/use.png')}}" class="w-[5.625] mx-auto" alt="24/7">
+                    <img src="<?php echo e(asset('/assets/landing_images/use.png')); ?>" class="w-[5.625] mx-auto" alt="24/7">
                     <div class="text-[28px] text-[#1A544D] font-[500]">
                         Affordable, simple & Easy to install in 5Min.
                     </div>
                 </div>
                 <div class="text-center w-full min-h-[20rem] justify-center pt-[3em] px-1">
-                    <img src="{{asset('/assets/landing_images/trial.png')}}" class="w-[5.625] mx-auto" alt="24/7">
+                    <img src="<?php echo e(asset('/assets/landing_images/trial.png')); ?>" class="w-[5.625] mx-auto" alt="24/7">
                     <div class="text-[28px] text-[#1A544D] font-[500]">
                         1Month free trial
                     </div>
@@ -379,7 +380,7 @@
 
     </section>
 
-    {{-- control and manage --}}
+    
     <section class="bg-col4 w-full h-[23.5em] max-mobile:h-[100%] max-mobile:h-[100%]  max-mobile:pb-5">
         <div
             class="w-full flex flex-row  max-mobile:flex-col justify-between pl-[15%]  max-mobile:pl-0 mobile:max-about:pl-[5%] pr-[8%]  max-mobile:pr-0 bg-col3">
@@ -394,32 +395,32 @@
                 </div>
             </div>
             <div class="relative max-mobile:px-[5%] max-mobile:pb-5">
-                <img src="{{asset('/assets/landing_images/macbook.png')}}"
+                <img src="<?php echo e(asset('/assets/landing_images/macbook.png')); ?>"
                      class="w-[31.3125em] max-mobile:w-[22.25em] h-[20.875em] max-mobile:h-[15.625em]" alt="mackbook">
-                <img src="{{asset('/assets/landing_images/mobile4.png')}}"
+                <img src="<?php echo e(asset('/assets/landing_images/mobile4.png')); ?>"
                      class="absolute bottom-0  max-mobile:bottom-[13%] left-0  max-mobile:left-[5%] w-[93px] max-mobile:w-[4.2em] h-[199px] max-mobile:h-[8.875em]"
                      alt="mobile4">
             </div>
         </div>
     </section>
 
-    {{-- get in touch --}}
+    
     <section id="getInTouch" class="py-[5%] px-[15%]  max-about:px-[5%]">
         <header class="font-[800] text-[2.25em] text-center">Get In touch with us</header>
         <div class="text-center font-normal text-[#667085]">We’d love to hear from you. Please fill out this form.</div>
 
-        @include('contact-us-form')
+        <?php echo $__env->make('contact-us-form', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
     </section>
 
-    {{-- frequently asked --}}
+    
     <section id="askedQuestions" class="bg-col4 py-[5%] px-[15%]  max-about:px-[5%]">
         <header class="font-bigger text-header text-center">Frequently Asked <span
                 class="text-[#C52216]">Questions</span></header>
-        <form class="relative w-full my-5" action="{{route('faq')}}" method="GET">
+        <form class="relative w-full my-5" action="<?php echo e(route('faq')); ?>" method="GET">
             <input type="search" placeholder="Type your Questions"
                    class="w-full pr-[75px] bg-[#fff] text-eighteen font-big h-[3.75em] rounded-[10px] outline-none border border-[#838383]"
                    name="search"
-                   value="{{request()->query('search')}}"
+                   value="<?php echo e(request()->query('search')); ?>"
             />
             <button
             type="submit"
@@ -427,25 +428,26 @@
                 <span class="material-symbols-outlined mr-4 w-[18px] h-[18px] text-[#fff] ">Search</span>
         </button>
         </form>
-        @foreach($faqs as $faq)
+        <?php $__currentLoopData = $faqs; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $faq): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
             <div class="group my-5">
-                <div id="{{$faq->id}}" class="questions faq">
-                    <span class="font-[500]">{{$faq->question}}</span>
+                <div id="<?php echo e($faq->id); ?>" class="questions faq">
+                    <span class="font-[500]"><?php echo e($faq->question); ?></span>
                     <span class="material-symbols-outlined mr-4 w-[18px] h-[18px] text-[#000]">expand_more</span>
                 </div>
                 <article class="article hidden bg-[#fff] text-[#000] px-2 pt-5 pb-10 text-eighteen font-normal text-left">
-                   {{$faq->answer}}
+                   <?php echo e($faq->answer); ?>
+
                 </article>
             </div>
-        @endforeach
+        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
     </section>
 
     <footer
         class="flex flex-row  max-mobile:flex-col items-end bg-col3 px-[15%]  max-about:px-[5%] pt-[3%] max-mobile:py-[10%] pb-[3.5%] text-[#fff]">
         <div class="w-[19em] max-mobile:w-full">
             <div class="flex flex-row items-center">
-                <img src="{{asset('/assets/landing_images/logo2.svg')}}" class="w-[40px] h-[54px] mr-1" alt="perfraka logo">
-                <img src="{{asset('/assets/landing_images/logo_name2.png')}}" class="w-[103px] h-[11px]" alt="perfraka logo_name">
+                <img src="<?php echo e(asset('/assets/landing_images/logo2.svg')); ?>" class="w-[40px] h-[54px] mr-1" alt="perfraka logo">
+                <img src="<?php echo e(asset('/assets/landing_images/logo_name2.png')); ?>" class="w-[103px] h-[11px]" alt="perfraka logo_name">
             </div>
             <div class="font-normal text-[#fff] text-normal">
                 At PERFTRAKA, we specialize
@@ -455,13 +457,13 @@
         <div class="w-[23em]  max-mobile:w-full mx-20 max-mobile:mx-0  max-mobile:my-10">
             <header class="text-center font-bigger text-size1">Quick Links</header>
             <div class="flex flex-row justify-around  max-mobile:justify-between py-1 font-normal text-size1">
-                <a href="{{route('welcome')}}">
+                <a href="<?php echo e(route('welcome')); ?>">
                     <span>Home</span>
                 </a>
-                <a href="{{route('about')}}">
+                <a href="<?php echo e(route('about')); ?>">
                     <span>About us</span>
                 </a>
-                <a href="{{route('faq')}}">
+                <a href="<?php echo e(route('faq')); ?>">
                     <span>FAQ</span>
                 </a>
                 <a href="#getInTouch">
@@ -473,13 +475,13 @@
             <header class="text-center font-bigger text-size1">Our socials</header>
             <div class="flex flex-row justify-around py-1 font-normal text-size1">
                 <a href="https://www.linkedin.com/company/perftraka/" target="_blank" class="">
-                    <img src="{{asset('/assets/landing_images/linkedin.png')}}" class="" alt="linkedin">
+                    <img src="<?php echo e(asset('/assets/landing_images/linkedin.png')); ?>" class="" alt="linkedin">
                 </a>
                 <a href="#" target="_blank" class="">
-                    <img src="{{asset('/assets/landing_images/facebook.png')}}" class="" alt="facebook">
+                    <img src="<?php echo e(asset('/assets/landing_images/facebook.png')); ?>" class="" alt="facebook">
                 </a>
                 <a href="https://x.com/PerfTraka" target="_blank" class="">
-                    <img src="{{asset('/assets/landing_images/twitter.png')}}" class="w-[18px] h-[18px]" alt="twitter">
+                    <img src="<?php echo e(asset('/assets/landing_images/twitter.png')); ?>" class="w-[18px] h-[18px]" alt="twitter">
                 </a>
             </div>
         </div>
@@ -528,3 +530,4 @@
 </script>
 </body>
 </html>
+<?php /**PATH /Users/harmlessprince/webprojects/laravel/pmsapp/resources/views/welcome.blade.php ENDPATH**/ ?>

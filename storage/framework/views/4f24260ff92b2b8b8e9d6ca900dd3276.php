@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="scroll-smooth">
+<html lang="<?php echo e(str_replace('_', '-', app()->getLocale())); ?>" class="scroll-smooth">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -18,13 +18,14 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Cabin:ital,wght@0,500;0,600;0,700;1,400&family=Inter:wght@400;500;600;700&display=swap"
         rel="stylesheet">
-    <link rel="apple-touch-icon" sizes="180x180" href="{{asset('assets/images/favicon_io/apple-touch-icon.png')}}">
-    <link rel="icon" type="image/png" sizes="32x32" href="{{asset('assets/images/favicon_io/favicon-32x32.png')}}">
-    <link rel="icon" type="image/png" sizes="16x16" href="{{asset('assets/images/favicon_io/favicon-16x16.png')}}">
-    <link rel="manifest" href="{{asset('assets/images/favicon_io/site.webmanifest')}}">
-    {!! RecaptchaV3::initJs() !!}
+    <link rel="apple-touch-icon" sizes="180x180" href="<?php echo e(asset('assets/images/favicon_io/apple-touch-icon.png')); ?>">
+    <link rel="icon" type="image/png" sizes="32x32" href="<?php echo e(asset('assets/images/favicon_io/favicon-32x32.png')); ?>">
+    <link rel="icon" type="image/png" sizes="16x16" href="<?php echo e(asset('assets/images/favicon_io/favicon-16x16.png')); ?>">
+    <link rel="manifest" href="<?php echo e(asset('assets/images/favicon_io/site.webmanifest')); ?>">
+    <?php echo RecaptchaV3::initJs(); ?>
+
     <!-- Scripts -->
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
+    <?php echo app('Illuminate\Foundation\Vite')(['resources/css/app.css', 'resources/js/app.js']); ?>
 
     <style>
         .grecaptcha-badge { visibility: hidden !important; }
@@ -34,12 +35,12 @@
 <main>
     <nav class="bg-white fixed w-full z-20 top-0 start-0 border-b border-gray-200">
         <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
-            <a href="{{config('app.url')}}" class="flex items-center space-x-3 rtl:space-x-reverse md:ml-[5%]">
-                <img src="{{asset('/assets/landing_images/logo.png')}}" class="h-8" alt="perfraka logo">
-                <img src="{{asset('/assets/landing_images/logo_name.png')}}" class="" alt="perfraka logo_name">
+            <a href="<?php echo e(config('app.url')); ?>" class="flex items-center space-x-3 rtl:space-x-reverse md:ml-[5%]">
+                <img src="<?php echo e(asset('/assets/landing_images/logo.png')); ?>" class="h-8" alt="perfraka logo">
+                <img src="<?php echo e(asset('/assets/landing_images/logo_name.png')); ?>" class="" alt="perfraka logo_name">
             </a>
             <div class="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
-                <a href="{{route('login')}}">
+                <a href="<?php echo e(route('login')); ?>">
                     <button type="button"
                             class="text-[#ffffff] bg-col2 outline-none focus:outline-none font-normal rounded-lg text-size1 px-5 py-2 text-center">
                         Login
@@ -59,16 +60,16 @@
             <div class="items-center justify-between hidden w-full md:flex md:w-auto md:order-1" id="navbar-sticky">
                 <ul class="flex flex-col p-4 md:p-0 mt-4 font-medium border border-gray-100 rounded-lg bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-white">
                     <li>
-                        <a href="{{route('welcome')}}"
+                        <a href="<?php echo e(route('welcome')); ?>"
                            class="block py-2 px-3 text-gray-900 rounded md:bg-transparent md:text-size1 md:text-col1 md:hover:text-col3 md:p-2  font-normal">Home</a>
                     </li>
                     <li>
-                        <a href="{{route('about')}}"
+                        <a href="<?php echo e(route('about')); ?>"
                            class="block py-2 px-3 text-gray-900 rounded md:bg-transparent md:text-size1 md:text-col1 md:hover:text-col3 md:p-2  font-normal">About
                             us</a>
                     </li>
                     <li>
-                        <a href="{{route('faq')}}"
+                        <a href="<?php echo e(route('faq')); ?>"
                            class="block py-2 px-3 text-gray-900 rounded md:bg-transparent md:text-size1 md:text-col1 md:hover:text-col3 md:p-2 font-normal">FAQ</a>
                     </li>
                 </ul>
@@ -131,11 +132,11 @@
         </div>
     </section>
 
-    {{-- get in touch --}}
+    
     <section id="getInTouch" class="py-[5%] px-[15%]  max-about:px-[5%]">
         <header class="font-[800] text-[2.25em] text-center">Get In touch with us</header>
         <div class="text-center font-normal text-[#667085]">We’d love to hear from you. Please fill out this form.</div>
-        @include('contact-us-form')
+        <?php echo $__env->make('contact-us-form', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
     </section>
 
     <footer
@@ -153,13 +154,13 @@
         <div class="w-[23em]  max-mobile:w-full mx-20 max-mobile:mx-0  max-mobile:my-10">
             <header class="text-center font-bigger text-size1">Quick Links</header>
             <div class="flex flex-row justify-around  max-mobile:justify-between py-1 font-normal text-size1">
-                <a href="{{route('welcome')}}">
+                <a href="<?php echo e(route('welcome')); ?>">
                     <span>Home</span>
                 </a>
-                <a href="{{route('about')}}">
+                <a href="<?php echo e(route('about')); ?>">
                     <span>About us</span>
                 </a>
-                <a href="{{route('faq')}}">
+                <a href="<?php echo e(route('faq')); ?>">
                     <span>FAQ</span>
                 </a>
                 <a href="#getInTouch">
@@ -171,13 +172,13 @@
             <header class="text-center font-bigger text-size1">Our socials</header>
             <div class="flex flex-row justify-around py-1 font-normal text-size1">
                 <a href="#" class="">
-                    <img src="{{asset('/assets/landing_images/linkedin.png')}}" class="" alt="linkedin">
+                    <img src="<?php echo e(asset('/assets/landing_images/linkedin.png')); ?>" class="" alt="linkedin">
                 </a>
                 <a href="#" class="">
-                    <img src="{{asset('/assets/landing_images/facebook.png')}}" class="" alt="facebook">
+                    <img src="<?php echo e(asset('/assets/landing_images/facebook.png')); ?>" class="" alt="facebook">
                 </a>
                 <a href="#" class="">
-                    <img src="{{asset('/assets/landing_images/twitter.pn')}}g" class="w-[18px] h-[18px]" alt="twitter">
+                    <img src="<?php echo e(asset('/assets/landing_images/twitter.pn')); ?>g" class="w-[18px] h-[18px]" alt="twitter">
                 </a>
             </div>
         </div>
@@ -196,3 +197,4 @@
 
 </body>
 </html>
+<?php /**PATH /Users/harmlessprince/webprojects/laravel/pmsapp/resources/views/about.blade.php ENDPATH**/ ?>
