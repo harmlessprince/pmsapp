@@ -1,3 +1,7 @@
+@php
+    $isAdmin =  auth()->user()->hasAnyRole(['super_admin', 'admin']);
+
+@endphp
 @extends('layouts.app')
 @section('title', 'Incident')
 @section('page')
@@ -21,7 +25,7 @@
     @include('image-view-modal')
     <section class="">
         <x-filter-card :actionUrl="route('incidents.index')" :canSearch="true"
-                       :searchPlaceholder="'Search by name'" :canExport="true">
+                       :searchPlaceholder="'Search by name'" :canExport="true" :canDelete="$isAdmin">
             <input value="yes" name="date" hidden/>
             <div class="flex flex-col">
                 <div class="relative">
@@ -72,7 +76,7 @@
                 </div>
             </div>
 
-            @if(auth()->user()->hasAnyRole(['super_admin', 'admin']))
+            @if($isAdmin)
                 <div class="flex flex-col">
                     <x-input-label for="company_id" :value="__('Select Company')"/>
                     <x-select-input id="company_id" class="block mt-1 w-full" name="company_id">
@@ -183,7 +187,7 @@
                             </td>
                             <td class="text-normal font-normal px-smaller">{{$item->comment ?? 'n/a'}}</td>
                             <td class="px-smaller">
-
+                                @if($isAdmin)
                                     <form id="frm-delete-item-{{$item->id}}"
                                           action="{{ route('incidents.destroy', ['incident' => $item]) }}"
                                           style="display: none;" method="POST">
@@ -196,7 +200,7 @@
                                             <span
                                                 class="material-symbols-outlined mr-4 w-[24px] h-[24px] text-red-500 cursor-pointer">delete</span>
                                     </a>
-
+                                @endif
                             </td>
                         </tr>
                     @empty
@@ -222,18 +226,19 @@
             //     placeholder: "Select a site",
             //     allowClear: true
             // });
-            selectSite.disabled = true;
+            if (selectSite) selectSite.disabled = true;
             const companyParamValue = getQueryParamValue('company_id');
-            console.log(companyParamValue)
             if (companyParamValue != null) {
                 getCompanySites(companyParamValue)
             }
 
         });
+        if (selectCompany) {
+            selectCompany.addEventListener("change", function (e) {
+                getCompanySites(e.target.value)
+            });
+        }
 
-        selectCompany.addEventListener("change", function (e) {
-            getCompanySites(e.target.value)
-        });
 
         function resetForm() {
             $(".select-2-sites").val('').trigger('change')

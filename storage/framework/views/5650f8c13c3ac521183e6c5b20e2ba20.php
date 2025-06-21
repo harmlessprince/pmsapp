@@ -1,3 +1,8 @@
+<?php
+    $isAdmin =  auth()->user()->hasAnyRole(['super_admin', 'admin']);
+
+?>
+
 <?php $__env->startSection('title', 'Incident'); ?>
 <?php $__env->startSection('page'); ?>
     <h2>Incident Reports</h2>
@@ -21,7 +26,7 @@
     <section class="">
         <?php if (isset($component)) { $__componentOriginalfc1e1378a12e46deb97ece02ae9d4c8d = $component; } ?>
 <?php if (isset($attributes)) { $__attributesOriginalfc1e1378a12e46deb97ece02ae9d4c8d = $attributes; } ?>
-<?php $component = App\View\Components\FilterCard::resolve(['actionUrl' => route('incidents.index'),'canSearch' => true,'searchPlaceholder' => 'Search by name','canExport' => true] + (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag ? (array) $attributes->getIterator() : [])); ?>
+<?php $component = App\View\Components\FilterCard::resolve(['actionUrl' => route('incidents.index'),'canSearch' => true,'searchPlaceholder' => 'Search by name','canExport' => true,'canDelete' => $isAdmin] + (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag ? (array) $attributes->getIterator() : [])); ?>
 <?php $component->withName('filter-card'); ?>
 <?php if ($component->shouldRender()): ?>
 <?php $__env->startComponent($component->resolveView(), $component->data()); ?>
@@ -133,7 +138,7 @@
                 </div>
             </div>
 
-            <?php if(auth()->user()->hasAnyRole(['super_admin', 'admin'])): ?>
+            <?php if($isAdmin): ?>
                 <div class="flex flex-col">
                     <?php if (isset($component)) { $__componentOriginale3da9d84bb64e4bc2eeebaafabfb2581 = $component; } ?>
 <?php if (isset($attributes)) { $__attributesOriginale3da9d84bb64e4bc2eeebaafabfb2581 = $attributes; } ?>
@@ -419,7 +424,7 @@
                             </td>
                             <td class="text-normal font-normal px-smaller"><?php echo e($item->comment ?? 'n/a'); ?></td>
                             <td class="px-smaller">
-
+                                <?php if($isAdmin): ?>
                                     <form id="frm-delete-item-<?php echo e($item->id); ?>"
                                           action="<?php echo e(route('incidents.destroy', ['incident' => $item])); ?>"
                                           style="display: none;" method="POST">
@@ -432,7 +437,7 @@
                                             <span
                                                 class="material-symbols-outlined mr-4 w-[24px] h-[24px] text-red-500 cursor-pointer">delete</span>
                                     </a>
-
+                                <?php endif; ?>
                             </td>
                         </tr>
                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); if ($__empty_1): ?>
@@ -459,18 +464,19 @@
             //     placeholder: "Select a site",
             //     allowClear: true
             // });
-            selectSite.disabled = true;
+            if (selectSite) selectSite.disabled = true;
             const companyParamValue = getQueryParamValue('company_id');
-            console.log(companyParamValue)
             if (companyParamValue != null) {
                 getCompanySites(companyParamValue)
             }
 
         });
+        if (selectCompany) {
+            selectCompany.addEventListener("change", function (e) {
+                getCompanySites(e.target.value)
+            });
+        }
 
-        selectCompany.addEventListener("change", function (e) {
-            getCompanySites(e.target.value)
-        });
 
         function resetForm() {
             $(".select-2-sites").val('').trigger('change')

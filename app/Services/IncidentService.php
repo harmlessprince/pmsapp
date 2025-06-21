@@ -37,7 +37,7 @@ class IncidentService
             SiteIdFilter::class,
             StatusFilter::class,
         ];
-        $incidentQuery = $this->incidentRepository->modelQuery()->with(['user', 'site', 'reportedBy']);
+        $incidentQuery = $this->incidentRepository->modelQuery()->search()->with(['user', 'site', 'reportedBy']);
         $incidentQuery = constructPipes($incidentQuery, $pipes);
         $sites = \request()->query('sites', '');
         if ($sites != '') {
