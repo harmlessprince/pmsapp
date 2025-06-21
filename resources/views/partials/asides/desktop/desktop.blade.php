@@ -11,7 +11,6 @@
         @include('partials.asides.desktop.company.analytics')
         @include('partials.asides.desktop.company.transactions')
         @include('partials.asides.desktop.company.management')
-        @include('partials.asides.desktop.company.region')
     @elseif(auth()->user()->isAdministrator())
         <a class="flex flex-row items-center mb-16" href="{{route('admin.dashboard')}}">
             <img src="{{ asset('assets/images/logo-red-dot.png') }}" alt="dashboard" class="mr-2"/>

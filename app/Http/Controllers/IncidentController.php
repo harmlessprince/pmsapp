@@ -32,13 +32,15 @@ class IncidentController extends Controller
     public function index()
     {
         $user = auth()->user();
-        $companies =  $this->companyRepository->all();
+
         $incidents =  $this->incidentService->getAll(\request()->user(), request()->query('per_page', 15));
         $sites =  [];
+        $companies = [];
         if ($user->hasRole(RoleEnum::COMPANY_OWNER)) {
             $sites = $this->siteRepository->all();
+        }else{
+            $companies =  $this->companyRepository->all();
         }
-
 
         return view('incident.index', compact('incidents', 'companies', 'sites'));
     }

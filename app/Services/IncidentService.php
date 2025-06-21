@@ -49,7 +49,7 @@ class IncidentService
 
 
         if (request()->query('type')) {
-            $incidentQuery = $incidentQuery->where('type', request()->query('mode'));
+            $incidentQuery = $incidentQuery->where('type', request()->query('type'));
         }
         if ($authUser->hasRole(RoleEnum::SUPERVISOR->value)) {
             $region = Region::query()->where("id", $authUser->region_id)->first();

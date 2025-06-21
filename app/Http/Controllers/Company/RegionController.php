@@ -121,9 +121,10 @@ class RegionController extends Controller
     public function edit(Region $region)
     {
         $region->load('sites', 'supervisor:id,first_name,last_name,email', 'company:id,name');
-        $companies = $this->companyRepository->all();
+        $companyId = $region->company->id;
+//        $companies = $this->companyRepository->all();
         $selectedSites = $region->sites()->pluck('id')->toArray();
-        return view('company.regions.edit', compact('region', 'companies', 'selectedSites'));
+        return view('company.regions.edit', compact('region', 'selectedSites', 'companyId'));
     }
 
     /**

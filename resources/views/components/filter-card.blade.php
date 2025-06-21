@@ -58,7 +58,7 @@
                                             Export
                                         </option>
                                     @endif
-                                    @if($canExport)
+                                    @if($canDelete)
                                         <option class=""
                                                 value="delete" {{ request()->query('action') == 'delete' ? "selected" : '' }}>
                                             Delete
@@ -85,7 +85,7 @@
                             </x-primary-button>
                         </div> --}}
                         <div class="flex flex-col justify-between w-full sm:flex-row sm:justify-end sm:space-x-4">
-                            @if($canExport)
+                            @if($canDelete)
                                 <x-primary-button class=" py-3 sm:px-8 mb-2 sm:mb-0 bg-red-500 hidden" type="submit"
                                                   id="delete_button" onClick="deleteData(event, '{{$formId}}')">
                                     Delete Data

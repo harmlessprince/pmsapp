@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Scopes\FilterByCompanyIdScope;
+use App\Traits\SearchableTrait;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -11,9 +12,11 @@ use Illuminate\Support\Facades\Storage;
 
 class Incident extends Model
 {
-    use HasFactory;
+    use HasFactory , SearchableTrait;
 
     protected $guarded = [];
+
+    public array $searchable = ['reportedBy.first_name', 'reportedBy.last_name', 'comment'];
 
     protected function Image(): Attribute
     {

@@ -35,15 +35,17 @@
         </button>
         <a
             class="font-big text-normal text-primary_color rounded-lg border border-primary_color px-[16px] py-[10px] cursor-pointer bg-transparent"
-            href="{{route('company.sites.index')}}"
+            href="{{route('company.regions.index')}}"
         >
-            Manage Sites
+            Manage Regions
         </a>
     </div>
 
     <form class="mt-[2%] w-[100%]" action="{{route('company.regions.update', ['region' => $region])}}" method="POST">
         @csrf
         @method('PATCH')
+
+        <input value="{{$companyId}}"  id="company_id" hidden/>
 
         <div class="grid gap-6 mb-6 md:grid-cols-2">
             <div class="flex flex-col">
@@ -93,34 +95,6 @@
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <script>
 
-
-        $('#company_id').on('change', function () {
-            let companyId = $(this).val();
-            const currentBaseUrl = window.location.origin;
-            if (companyId) {
-                const url = `${currentBaseUrl}/api/company/${companyId}/sites`;
-                $('#siteSelect').empty();  // Clear previous sites
-                $('#siteSelect').select2({
-                    ajax: {
-                        delay: 250,
-                        url: url,  // Filter sites by company
-                        dataType: 'json',
-                        processResults: function (data) {
-                            const sites = data.data?.sites ?? []
-                            return {
-                                results: sites.map(item => ({
-                                    id: item.id,
-                                    text: item.name
-                                }))
-                            };
-                            jd
-                        }
-                    },
-                    multiple: true,
-                });
-            }
-        });
-
         const companyDropdown = document.querySelector('#company_id');
         const companyId = companyDropdown.value
 
@@ -141,7 +115,6 @@
                 const sites = data.data?.sites ?? []
                 let options = [];
                 sites.forEach(site => {
-                    console.log(site)
                     if (selectedSites.includes(site.id)) {
                         options.push(new Option(site.name, site.id, true, true));
                     }

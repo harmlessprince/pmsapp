@@ -96,7 +96,7 @@
             @else
                 <div class="flex flex-col">
                     <x-input-label for="site_id" :value="__('Site')" class="text-white"/>
-                    <x-select-input id="site_id" class="block w-full" name="site_id">
+                    <x-select-input id="site_ids" class="block w-full" name="site_id">
                         <option class="" value="">All site</option>
                         @foreach($sites as $item)
                             <option
@@ -131,7 +131,7 @@
                     <thead>
                     <tr class="">
                         <th class="text-left text-small text-natural font-big  px-smaller py-smaller w-[12%]">
-                            Reporter
+                            Name
                         </th>
                         <th class="text-left text-small text-natural font-big  px-smaller py-smaller w-[9%]">
                             Time/Date
@@ -151,7 +151,7 @@
                     <tbody>
                     @forelse($incidents as $item)
                         <tr class="border border-table border-x-0 text-natural hover:bg-db">
-                            <td class="text-normal font-normal px-smaller">{{$item->user->first_name}} {{$item->user->last_name}}</td>
+                            <td class="text-normal font-normal px-smaller">{{$item->reportedBy->first_name ?? 'N/A'}} {{$item->reportedBy->last_name ?? ''}}</td>
                             <td class="text-normal font-normal px-smaller">
                                 <div>{{$item->created_at->format('d/m/Y')}}</div>
                                 <div>{{Carbon\Carbon::parse($item->created_at)->format('g:i A')}}</div>
@@ -160,15 +160,13 @@
                                 @if($item->type == 'storage')
                                     <button
                                         class="bg-checkin  px-2 py-1 me-2 rounded-full flex flex-row items-center justify-between">
-                                        <img src="{{asset('assets/images/green_dot.png')}}" alt="dashboard"
-                                             class="mr-2"/>
-                                        <span class="text-checkout font-big text-small">Storage Purpose</span>
+                                        <span class="text-checkInText font-bold text-small">Storage Purpose</span>
                                     </button>
                                 @endif
                                 @if($item->type == 'rapid')
                                     <button
                                         class="bg-red-200  px-2 py-1 me-2 rounded-full flex flex-row items-center justify-between">
-                                        <span class="text-red-500 font-big text-small">Rapid Response</span>
+                                        <span class="text-red-500 text-small font-bold">Rapid Response</span>
                                     </button>
                                 @endif
                             </td>

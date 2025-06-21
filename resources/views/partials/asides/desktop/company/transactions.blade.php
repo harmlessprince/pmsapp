@@ -1,7 +1,8 @@
 @php
     $isScanTransaction =  strpos(Route::currentRouteName(), 'company.scans.transactions') === 0;
     $isAttendanceTransaction =  strpos(Route::currentRouteName(), 'company.attendance.transactions') === 0;
-    $isTransaction = $isScanTransaction || $isAttendanceTransaction;
+    $isIncidentManagement = strpos(Route::currentRouteName(), 'company.incidents.index') === 0;
+    $isTransaction = $isScanTransaction || $isAttendanceTransaction || $isIncidentManagement;
 
 @endphp
 <div class="mb-8 cursor-pointer">
@@ -21,6 +22,11 @@
             <li>
                 <a  href="{{route('company.attendance.transactions')}}"
                    class="block  pl-[16%] pt-2 {{ $isAttendanceTransaction ? 'text-primary_color' : 'text-natural'}}  font-headerWeight text-normal hover:text-primary_color">Attendance
+                    Transactions</a>
+            </li>
+            <li>
+                <a href="{{route('incidents.index')}}"
+                   class="block pl-[16%] pt-2 text-natural font-headerWeight text-normal hover:text-primary_color {{ $isIncidentManagement ? 'text-primary_color' : 'text-natural'}}">Incident
                     Transactions</a>
             </li>
         </ul>

@@ -2,8 +2,8 @@
     $isTagManagement =  strpos(Route::currentRouteName(), 'company.tags.index') === 0;
     $isUserManagement =  strpos(Route::currentRouteName(), 'company.users.index') === 0;
     $isSiteManagement = strpos(Route::currentRouteName(), 'company.sites.index') === 0;
-    $isIncidentManagement = strpos(Route::currentRouteName(), 'company.incidents.index') === 0;
-    $isManagement = $isTagManagement || $isUserManagement || $isSiteManagement || $isIncidentManagement;
+    $isRegionManagement =  strpos(Route::currentRouteName(), 'company.regions.index') === 0;
+    $isManagement = $isTagManagement || $isUserManagement || $isSiteManagement || $isRegionManagement;
 
 @endphp
 <div class="mb-8 cursor-pointer">
@@ -32,8 +32,8 @@
                     Management</a>
             </li>
             <li>
-                <a href="{{route('incidents.index')}}"
-                   class="block pl-[16%] pt-2 text-natural font-headerWeight text-normal hover:text-primary_color {{ $isIncidentManagement ? 'text-primary_color' : 'text-natural'}}">Incident
+                <a href="{{route('company.regions.index')}}"
+                   class="block pl-[16%] pt-2 text-natural font-headerWeight text-normal hover:text-primary_color {{ $isRegionManagement ? 'text-primary_color' : 'text-natural'}}">Region
                     Management</a>
             </li>
         </ul>
