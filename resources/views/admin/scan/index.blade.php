@@ -20,7 +20,7 @@
     <!-- Dashboard content -->
     <section class="">
         <!-- filter searches -->
-        <x-filter-card :actionUrl="route('admin.scan.index')" :canExport="true">
+        <x-filter-card :actionUrl="route('admin.scan.index')" :canExport="true" :canDelete="true">
             <input value="yes" name="date" hidden/>
 
 

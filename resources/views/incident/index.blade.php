@@ -148,8 +148,10 @@
                         <th class="text-left text-small text-natural font-big px-smaller py-smaller w-[8%]">Image</th>
                         <th class="text-left text-small text-natural font-big px-smaller py-smaller w-[12%]">Comment
                         </th>
-                        <th class="text-left text-small text-natural font-big px-smaller py-smaller w-[12%]">Action
-                        </th>
+                        @if($isAdmin)
+                            <th class="text-left text-small text-natural font-big px-smaller py-smaller w-[12%]">Action
+                            </th>
+                        @endif
                     </tr>
                     </thead>
                     <tbody>
@@ -186,8 +188,9 @@
                                 />
                             </td>
                             <td class="text-normal font-normal px-smaller">{{$item->comment ?? 'n/a'}}</td>
-                            <td class="px-smaller">
-                                @if($isAdmin)
+
+                            @if($isAdmin)
+                                <td class="px-smaller">
                                     <form id="frm-delete-item-{{$item->id}}"
                                           action="{{ route('incidents.destroy', ['incident' => $item]) }}"
                                           style="display: none;" method="POST">
@@ -200,8 +203,9 @@
                                             <span
                                                 class="material-symbols-outlined mr-4 w-[24px] h-[24px] text-red-500 cursor-pointer">delete</span>
                                     </a>
-                                @endif
-                            </td>
+                                </td>
+                            @endif
+
                         </tr>
                     @empty
 
