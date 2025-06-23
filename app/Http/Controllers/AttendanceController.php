@@ -39,7 +39,7 @@ class AttendanceController extends Controller
             StatusFilter::class,
             AttendanceActionTypeFilter::class,
         ];
-        if ($request->query('export') == 'export') {
+        if ($request->query('action') == 'export') {
             $name = 'attendance_report_' . Carbon::now()->format('d-m-Y') . '.xlsx';
             session()->flash('success', 'Attendance exported successfully');
             return (new AttendanceExport($this->attendanceRepository))->download($name);

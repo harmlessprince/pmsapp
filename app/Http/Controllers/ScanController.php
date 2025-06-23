@@ -39,7 +39,7 @@ class ScanController extends Controller
             SiteIdFilter::class,
             TagIdFilter::class,
         ];
-        if ($request->query('export') == 'export') {
+        if ($request->query('action') == 'export') {
             $name = 'scan_report_' . Carbon::now()->format('d-m-Y') . '.xlsx';
             session()->flash('success', 'Scan exported successfully');
             return (new ScansExport($this->scanRepository))->download($name);
