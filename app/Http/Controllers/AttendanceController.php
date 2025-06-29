@@ -16,6 +16,7 @@ use App\Repositories\Eloquent\Repository\CompanyRepository;
 use App\Repositories\Eloquent\Repository\SiteRepository;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cookie;
 
 class AttendanceController extends Controller
 {
@@ -42,7 +43,7 @@ class AttendanceController extends Controller
         if ($request->query('action') == 'export') {
             $name = 'attendance_report_' . Carbon::now()->format('d-m-Y') . '.xlsx';
             session()->flash('success', 'Attendance exported successfully');
-            return (new AttendanceExport($this->attendanceRepository))->download($name);
+            return (new AttendanceExport($this->attendanceRepository))->download($name)->withCookie(cookie('attendance_exported', '1', 0.3));
         }
         $sites = $this->siteRepository->all();
         $attendanceQuery = $this->attendanceRepository->modelQuery()->search();
