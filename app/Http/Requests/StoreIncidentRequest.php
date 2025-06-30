@@ -22,12 +22,12 @@ class StoreIncidentRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'site_id' => 'required|exists:sites,id',
-            'reported_by' => 'required|exists:users,id',
-            'type' => 'required|string|in:rapid,storage',
+            'site_id' => ['required', 'integer', 'exists:sites,id'],
+            'reported_by' => ['required', 'integer', 'exists:users,id'],
+            'type' => ['required', 'string', 'in:rapid,storage'],
             'image' => ['required', 'image'],
-            'comment' => 'required|string|min:3',
-            'mobile_sync_id' => 'nullable|string|min:3',
+            'comment' => ['required', 'string', 'min:3'],
+            'mobile_sync_id' => ['nullable', 'string', 'min:3'],
         ];
 
     }

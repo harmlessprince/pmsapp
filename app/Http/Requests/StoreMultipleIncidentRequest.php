@@ -23,12 +23,12 @@ class StoreMultipleIncidentRequest extends FormRequest
     {
         return [
             'incidents' => 'required|array|min:1',
-            'incidents.*.site_id' => 'required|exists:sites,id',
-            'incidents.*.reported_by' => 'required|exists:users,id',
-            'incidents.*.type' => 'required|string|in:rapid,storage',
+            'incidents.*.site_id' =>  ['required', 'integer', 'exists:sites,id'],
+            'incidents.*.reported_by' =>  ['required', 'integer', 'exists:users,id'],
+            'incidents.*.type' => ['required', 'string', 'in:rapid,storage'],
             'incidents.*.image' => ['required', 'string'],
-            'incidents.*.comment' => 'required|string|min:3',
-            'incidents.*.mobile_sync_id' => 'nullable|string|min:3',
+            'incidents.*.comment' => ['required', 'string', 'min:3'],
+            'incidents.*.mobile_sync_id' => ['nullable', 'string', 'min:3'],
         ];
     }
 }
