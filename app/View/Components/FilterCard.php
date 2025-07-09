@@ -16,6 +16,7 @@ class FilterCard extends Component
         public string $formId = 'search-form',
         public bool   $canExport = false,
         public bool   $canSearch = false,
+        public bool   $canDelete = false,
         public string   $searchPlaceholder = "Search",
         public bool $hasTable = true,
     )

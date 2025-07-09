@@ -72,6 +72,16 @@
                         @endforeach
                     </x-select-input>
                 </div>
+                <div class="flex flex-col">
+                    <x-input-label for="region_id" :value="__('Select Region')"/>
+                    <x-select-input id="region_id" class="block mt-1 w-full" name="region_id">
+                        <option value="">Select Region</option>
+                        @foreach($regions as $item)
+                            <option
+                                value="{{$item->id}}" {{ request()->query('region_id') == $item->id ? "selected" : '' }}>{{$item->name}}</option>
+                        @endforeach
+                    </x-select-input>
+                </div>
             </x-filter-card>
 
 

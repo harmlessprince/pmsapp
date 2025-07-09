@@ -16,7 +16,11 @@ class CompanySiteController extends Controller
 
     public function show($company_id): JsonResponse
     {
-        $sites = $this->siteRepository->modelQuery()->where('company_id', $company_id)->get();
-        return sendSuccess(['sites' => $sites], 'Companies retrieved');
+        $search = \request()->query('q');
+        $query = $this->siteRepository->modelQuery()->where('company_id', $company_id);
+        if ($search) {
+            $query->where('name', 'ILIKE', "%{$search}%"); // Filter by name
+        }
+        return sendSuccess(['sites' => $query->get()], 'Company sites retrieved');
     }
 }

@@ -42,17 +42,41 @@
 
                 <div class="mt-3  w-full">
                     <div class="w-full flex justify-between items-center py-3 ">
-                        @if($canExport)
-                            <div>
-                                <label class="inline-flex items-center me-5 cursor-pointer">
-                                    <input type="checkbox" value="" class="sr-only peer" id="export_checkbox"
-                                           name="export">
-                                    <div
-                                        class="relative w-11 h-6 bg-gray-200 rounded-full peer dark:bg-gray-700 peer-focus:ring-4 peer-focus:ring-teal-300 dark:peer-focus:ring-teal-800 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-teal-600"></div>
-                                    <span
-                                        class="ms-3 text-sm font-medium text-white">Export</span>
-                                </label>
+                        @if($canExport || $canDelete)
+                            <div class="flex flex-col w-80">
+                                <x-input-label for="action" :value="__('Action')"/>
+                                <x-select-input id="action" class="block w-full" name="action">
+                                    <option
+                                        value="filter"
+                                    >
+                                        Apply Filters
+                                    </option>
+                                    @if($canExport)
+                                        <option class=""
+                                                value="export" {{ request()->query('action') == 'export' ? "selected" : '' }}
+                                        >
+                                            Export
+                                        </option>
+                                    @endif
+                                    @if($canDelete)
+                                        <option class=""
+                                                value="delete" {{ request()->query('action') == 'delete' ? "selected" : '' }}>
+                                            Delete
+                                        </option>
+                                    @endif
+
+                                </x-select-input>
                             </div>
+                            {{--                            <div>--}}
+                            {{--                                <label class="inline-flex items-center me-5 cursor-pointer">--}}
+                            {{--                                    <input type="checkbox" value="" class="sr-only peer" id="export_checkbox"--}}
+                            {{--                                           name="export">--}}
+                            {{--                                    <div--}}
+                            {{--                                        class="relative w-11 h-6 bg-gray-200 rounded-full peer dark:bg-gray-700 peer-focus:ring-4 peer-focus:ring-teal-300 dark:peer-focus:ring-teal-800 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-teal-600"></div>--}}
+                            {{--                                    <span--}}
+                            {{--                                        class="ms-3 text-sm font-medium text-white">Export</span>--}}
+                            {{--                                </label>--}}
+                            {{--                            </div>--}}
                         @endif
                         {{-- <div class="grid w-full grid-cols-1 justify-end space-x-4 md:flex">
                             <x-secondary-button type="reset" class="px-8 py-2 w-full" onclick="resetForm()">Reset
@@ -61,10 +85,17 @@
                             </x-primary-button>
                         </div> --}}
                         <div class="flex flex-col justify-between w-full sm:flex-row sm:justify-end sm:space-x-4">
+                            @if($canDelete)
+                                <x-primary-button class=" py-3 sm:px-8 mb-2 sm:mb-0 bg-red-500 hidden" type="submit"
+                                                  id="delete_button" onClick="deleteData(event, '{{$formId}}')">
+                                    Delete Data
+                                </x-primary-button>
+                            @endif
                             <x-primary-button class=" py-3 sm:px-8 mb-2 sm:mb-0" type="submit" id="filter_button">
-                                {{-- <x-loader> --}}
                                 Apply filters
                             </x-primary-button>
+
+
                             <x-secondary-button type="reset" class="sm:px-8 sm:py-2" onclick="resetForm()">Reset
                             </x-secondary-button>
                         </div>

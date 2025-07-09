@@ -31,21 +31,30 @@ class AttendanceController extends Controller
      */
     public function index(Request $request)
     {
+        $action = $request->query('action');
         $pipes = [
             new DateFilter('attendance_date'),
             CompanyIdFilter::class,
             SiteIdFilter::class,
             StatusFilter::class,
-            AttendanceActionTypeFilter::class,
         ];
-        if ($request->query('export') == 'export') {
+        if ($action != 'delete'){
+            $pipes[] = AttendanceActionTypeFilter::class;
+        }
+        $attendanceQuery = $this->attendanceRepository->modelQuery()->search();
+        $attendanceQuery = constructPipes($attendanceQuery, $pipes);
+        if ($request->query('action') == 'export') {
             $name = 'attendance_report_' . Carbon::now()->format('d-m-Y') . '.xlsx';
             session()->flash('success', 'Attendance exported successfully');
             return (new AttendanceExport($this->attendanceRepository))->download($name);
         }
+
+        if ($request->query('action') == 'delete') {
+            session()->flash('success', 'Attendances deleted successfully');
+            $attendanceQuery->delete();
+        }
         $companies =  $this->companyRepository->all();
-        $attendanceQuery = $this->attendanceRepository->modelQuery()->search();
-        $attendanceQuery = constructPipes($attendanceQuery, $pipes);
+
         $attendances = $attendanceQuery->latest('attendance_date_time')->with(['company', 'site', 'user'])->paginate(request('per_page', 15));
         return view('admin.attendance.index', compact('attendances', 'companies'));
     }

@@ -16,8 +16,12 @@
                 </button>
             </div>
 
-            <div class="flex items-center justify-center w-full">
+            <div class="flex items-center justify-center  w-full">
                 <img src="" id="image_view_in_modal" alt="View image">
+
+            </div>
+            <div id="modal_description" class="text-white p-2">
+
             </div>
             <div class="flex items-center p-6 space-x-2 border-t border-gray-200 rounded-b dark:border-gray-600">
                 <button type="button"

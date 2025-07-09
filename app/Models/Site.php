@@ -17,6 +17,9 @@ class Site extends Model
 
     public array $searchable = ['name', 'inspector.email'];
     protected  $guarded = [];
+    protected $hidden = [
+        'logout_pin'
+    ];
     public function company(): BelongsTo
     {
         return $this->belongsTo(Company::class);

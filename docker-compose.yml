@@ -32,7 +32,7 @@ services:
             - "5454:80"
         volumes:
             - ./:/var/www
-            - ./docker-compose/nginx/conf.d/:/etc/nginx/conf.d/
+            - ./docker-compose/nginx/conf.d/app.conf:/etc/nginx/conf.d/default.conf
         networks:
             - pmsapp-api-app-network
 #Docker Networks

@@ -35,6 +35,7 @@ class User extends Authenticatable
     protected $hidden = [
         'password',
         'remember_token',
+        'logout_pin'
     ];
 
     /**
@@ -60,6 +61,11 @@ class User extends Authenticatable
     public function site()
     {
         return $this->belongsTo(Site::class, 'site_id');
+    }
+
+    public function region()
+    {
+        return $this->belongsTo(Region::class, 'region_id');
     }
 
     public function state()

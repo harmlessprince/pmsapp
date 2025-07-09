@@ -12,6 +12,3 @@ class SiteIdFilter extends BaseFilter
         return $builder->where('site_id', request()->query($this->filterName()));
     }
 }
-{
-
-}

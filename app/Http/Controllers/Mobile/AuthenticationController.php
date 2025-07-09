@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers\Mobile;
 
+use App\Enums\RoleEnum;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\LoginRequest;
+use App\Models\Region;
+use App\Models\Site;
 use App\Models\User;
 use Error;
 use Illuminate\Http\JsonResponse;
@@ -20,7 +23,8 @@ class AuthenticationController extends Controller
     {
         try {
             /* @var User $user */
-            $user = User::query()->where('email', Str::lower($request->email))->with(['tenant', 'site'])->first();
+            $user = User::query()->where('email', Str::lower($request->email))->with(['tenant', 'site', 'region'])->first();
+
 //            dd($user);
             if (!$user || !Hash::check($request->input('password'), $user->password)) {
                 return sendError('The provided credentials are incorrect.', 401);
@@ -51,9 +55,18 @@ class AuthenticationController extends Controller
         $this->validate($request, [
             'pin' => ['required', 'string', 'max:4']
         ]);
-        $user = $request->user()->load('site');
-        if (!$user || !Hash::check($request->input('pin'), $user->site->logout_pin)) {
-            return sendError('The provided pin is incorrect.', 401);
+        $user = $request->user();
+
+        if ($user->hasRole(RoleEnum::SUPERVISOR->value)) {
+            $user = $request->user()->load('region');
+            if (!$user || !Hash::check($request->input('pin'), $user->logout_pin)) {
+                return sendError('The provided pin is incorrect.', 401);
+            }
+        } else {
+            $user = $request->user()->load('site');
+            if (!$user || !Hash::check($request->input('pin'), $user->site->logout_pin)) {
+                return sendError('The provided pin is incorrect.', 401);
+            }
         }
         $request->user()->tokens()->delete();
         return sendSuccess(null, 'Successfully logged out');

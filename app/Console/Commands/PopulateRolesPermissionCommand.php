@@ -28,10 +28,10 @@ class PopulateRolesPermissionCommand extends Command
      */
     public function handle()
     {
-        if (Role::query()->count() > 0){
-            $this->info('Roles Populated');
-            return Command::SUCCESS;
-        }
+//        if (Role::query()->count() > 0){
+//            $this->info('Roles Populated');
+//            return Command::SUCCESS;
+//        }
         $roles = [
             [
                 "name" => RoleEnum::SUPER_ADMIN->value,
@@ -57,6 +57,10 @@ class PopulateRolesPermissionCommand extends Command
             [
                 "name" => RoleEnum::PERSONNEL->value,
                 'status' => false,
+            ],
+            [
+                "name" => RoleEnum::SUPERVISOR->value,
+                'status' => true,
             ]
         ];
         foreach ($roles as $role){

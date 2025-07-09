@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CompanySiteController;
+use App\Http\Controllers\FileController;
 use App\Http\Controllers\Mobile\AttendanceController;
 use App\Http\Controllers\Mobile\AuthenticationController;
 use App\Http\Controllers\Mobile\DashboardController;
@@ -26,12 +27,12 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 
-Route::prefix('auth')->group(function (){
+Route::prefix('auth')->group(function () {
     Route::post('login', [AuthenticationController::class, 'login']);
     Route::post('logout', [AuthenticationController::class, 'logout'])->middleware('auth:sanctum');
 });
 
-Route::middleware('auth:sanctum')->group(function (){
+Route::middleware('auth:sanctum')->group(function () {
     Route::get('dashboard', [DashboardController::class, 'dashboard']);
     Route::get('scans', [ScanController::class, 'index']);
     Route::post('scans', [ScanController::class, 'store']);
@@ -40,7 +41,15 @@ Route::middleware('auth:sanctum')->group(function (){
 
     Route::get('guards', [SecurityGuardController::class, 'index']);
     Route::post('guards', [SecurityGuardController::class, 'store']);
+
+    Route::get('incidents', [\App\Http\Controllers\Mobile\IncidentController::class, 'index']);
+    Route::post('incidents', [\App\Http\Controllers\Mobile\IncidentController::class, 'store']);
+    Route::post('incidents/multiple', [\App\Http\Controllers\Mobile\IncidentController::class, 'storeMultiple']);
+    Route::post('upload', [FileController::class, 'upload']);
+
+    Route::get('regions/{region}/sites', [\App\Http\Controllers\RegionSiteController::class, 'show']);
 });
 
 Route::get('company/{company}/sites', [CompanySiteController::class, 'show']);
 Route::get('sites/{site}/tags', [SiteTagController::class, 'show']);
+Route::get('sites/{company}', [SiteTagController::class, 'show']);

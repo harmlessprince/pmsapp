@@ -22,7 +22,7 @@ class UpdateSiteLogoutPinRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'logout_pin' => ['required', 'string'],
+            'logout_pin' => ['required','min:4', 'string'],
             'confirm_logout_pin' => ['same:logout_pin']
         ];
     }

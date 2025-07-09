@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AttendanceAnalyticsController;
+use App\Http\Controllers\Company\RegionController;
 use App\Http\Controllers\Company\SiteController;
 use App\Http\Controllers\Company\TagController;
 use App\Http\Controllers\Company\UserController;
@@ -13,6 +14,7 @@ use App\Http\Controllers\SiteCredentialController;
 use App\Models\FrequentlyAskedQuestion;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
+use Lunaweb\RecaptchaV3\Facades\RecaptchaV3;
 
 /*
 |--------------------------------------------------------------------------
@@ -45,15 +47,34 @@ Route::get('/faq', function () {
 })->name('faq');
 
 Route::post('/contact/us', function () {
-    Mail::to(config('app.contact_us_mail'))->send(new \App\Mail\ContactUsMail(
-        request()->input('first_name'),
-        request()->input('last_name'),
-        request()->input('email'),
-        request()->input('message')
-    ));
-    return redirect(\route('welcome'));
+    try {
+        $score = RecaptchaV3::verify(request()->get('g-recaptcha-response'), 'register');
+        if ($score > 0.7) {
+            Mail::to(config('app.contact_us_mail'))->send(new \App\Mail\ContactUsMail(
+                request()->input('first_name'),
+                request()->input('last_name'),
+                request()->input('email'),
+                request()->input('message'),
+                request()->input('phone_number')
+            ));
+        } else {
+            return redirect(\route('welcome'))->with('error', 'You are most likely a bot');
+        }
+
+    } catch (\Exception $exception) {
+        logger($exception);
+    }
+
+    return redirect(\route('welcome'))->with('success', 'We have received your message and we will get back to you as soon as possible.');
 })->name("contact-us");
 
+
+Route::middleware(['auth'])->name('common.')->group(function () {
+    Route::prefix('credentials')->name('credentials.')->group(function () {
+        Route::patch('password/change/{site}', [SiteCredentialController::class, 'changeSitePassword'])->name('password.change');
+        Route::patch('logout/pin/change/{site}', [SiteCredentialController::class, 'changeSiteLogoutPin'])->name('logout.pin.change');
+    });
+});
 
 Route::middleware(['auth'])->name('common.')->group(function () {
     Route::prefix('credentials')->name('credentials.')->group(function () {
@@ -77,8 +98,13 @@ Route::prefix('company')->middleware(['auth', 'company_owner', 'is_banned'])->na
     Route::resource('users', UserController::class);
     Route::resource('tags', TagController::class);
     Route::resource('sites', SiteController::class);
-
+    Route::resource('regions', RegionController::class);
 });
+
+Route::middleware(['auth', 'is_banned'])->group(function () {
+    Route::resource('incidents', \App\Http\Controllers\IncidentController::class);
+});
+
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
