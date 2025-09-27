@@ -31,6 +31,7 @@ class Scan extends Model
     {
         return $this->belongsTo(Site::class);
     }
+
     public function tag(): BelongsTo
     {
         return $this->belongsTo(Tag::class);

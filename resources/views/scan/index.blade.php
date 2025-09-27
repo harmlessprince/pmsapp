@@ -101,6 +101,7 @@
                         <th class="text-left text-small text-natural font-big  px-smaller py-smaller w-[10%]">Scan Date/Time</th>
                         {{--                        <th class="text-left text-small text-natural font-big  px-small py-smaller">Scan Time</th>--}}
                         <th class="text-left text-small text-natural font-big px-smaller py-smaller w-[10%]">Tag</th>
+                        <th class="text-left text-small text-natural font-big px-smaller py-smaller w-[10%]">Region</th>
                         <th class="text-left text-small text-natural font-big px-smaller py-smaller w-[10%]">Site</th>
                         <th class="text-left text-small text-natural font-big px-smaller py-smaller w-[10%]">Longitude</th>
                         <th class="text-left text-small text-natural font-big px-smaller py-smaller w-[10%]">Latitude</th>
@@ -122,6 +123,7 @@
                             {{--                                <div>{{Carbon\Carbon::parse($scan->scan_time)->format('g:i A')}}</div>--}}
                             {{--                            </td>--}}
                             <td class="text-normal font-normal px-smaller">{{$scan->tag->name}}</td>
+                            <td class="text-normal font-normal px-smaller">{{$scan->site->region->name ?? 'N/A'}}</td>
                             <td class="text-normal font-normal px-smaller">{{$scan->site->name}}</td>
                             <td class="text-normal font-normal p-smaller">{{$scan->longitude ?? '-'}}</td>
                             <td class="text-normal font-normal px-smaller">{{$scan->latitude ?? '-'}}</td>

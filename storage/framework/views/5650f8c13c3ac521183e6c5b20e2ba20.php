@@ -385,8 +385,10 @@
                         <th class="text-left text-small text-natural font-big px-smaller py-smaller w-[8%]">Image</th>
                         <th class="text-left text-small text-natural font-big px-smaller py-smaller w-[12%]">Comment
                         </th>
-                        <th class="text-left text-small text-natural font-big px-smaller py-smaller w-[12%]">Action
-                        </th>
+                        <?php if($isAdmin): ?>
+                            <th class="text-left text-small text-natural font-big px-smaller py-smaller w-[12%]">Action
+                            </th>
+                        <?php endif; ?>
                     </tr>
                     </thead>
                     <tbody>
@@ -423,8 +425,9 @@
                                 />
                             </td>
                             <td class="text-normal font-normal px-smaller"><?php echo e($item->comment ?? 'n/a'); ?></td>
-                            <td class="px-smaller">
-                                <?php if($isAdmin): ?>
+
+                            <?php if($isAdmin): ?>
+                                <td class="px-smaller">
                                     <form id="frm-delete-item-<?php echo e($item->id); ?>"
                                           action="<?php echo e(route('incidents.destroy', ['incident' => $item])); ?>"
                                           style="display: none;" method="POST">
@@ -437,8 +440,9 @@
                                             <span
                                                 class="material-symbols-outlined mr-4 w-[24px] h-[24px] text-red-500 cursor-pointer">delete</span>
                                     </a>
-                                <?php endif; ?>
-                            </td>
+                                </td>
+                            <?php endif; ?>
+
                         </tr>
                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); if ($__empty_1): ?>
 

@@ -48,7 +48,7 @@ class ScanController extends Controller
         $sites =  $this->siteRepository->all();
         $scanQuery = $this->scanRepository->modelQuery()->search();
         $scanQuery = constructPipes($scanQuery, $pipes);
-        $scans = $scanQuery->with(['company', 'site', 'tag'])->latest('scan_date_time')->paginate(request('per_page', 15));
+        $scans = $scanQuery->with(['company', 'site', 'tag', 'site.region'])->latest('scan_date_time')->paginate(request('per_page', 15));
         return view('scan.index', compact('scans', 'sites'));
     }
 
