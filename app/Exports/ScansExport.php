@@ -62,7 +62,7 @@ class ScansExport implements FromQuery, WithHeadings, WithMapping
         ];
 
         $scanQuery = $this->scanRepository->modelQuery()->search();
-        $scanQuery = $scanQuery->with(['company', 'site', 'tag'])->latest('scan_date_time');
+        $scanQuery = $scanQuery->with(['company', 'site', 'tag', 'site.region'])->latest('scan_date_time');
         return constructPipes($scanQuery, $pipes);
     }
 }

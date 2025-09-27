@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Enums\RoleEnum;
 use App\Exports\AttendanceExport;
+use App\Exports\IncidentExport;
 use App\Models\Region;
 use App\Models\Site;
 use App\QueryFilters\CompanyIdFilter;
@@ -37,7 +38,7 @@ class IncidentService
             SiteIdFilter::class,
             StatusFilter::class,
         ];
-        $incidentQuery = $this->incidentRepository->modelQuery()->search()->with(['user', 'site', 'reportedBy']);
+        $incidentQuery = $this->incidentRepository->modelQuery()->search()->with(['user', 'site', 'reportedBy', 'site.region']);
         $incidentQuery = constructPipes($incidentQuery, $pipes);
         $sites = \request()->query('sites', '');
         if ($sites != '') {
@@ -62,11 +63,11 @@ class IncidentService
             $incidentQuery = $incidentQuery->where('incidents.site_id', $authUser->site_id);
         }
 
-//        if ($action == 'export') {
-//            $name = 'incident_report_' . Carbon::now()->format('d-m-Y') . '.xlsx';
-//            session()->flash('success', 'Attendance exported successfully');
-//            return (new AttendanceExport($incidentQuery))->download($name);
-//        }
+        if ($action == 'export') {
+            $name = 'incident_report_' . Carbon::now()->format('d-m-Y') . '.xlsx';
+            session()->flash('success', 'Incident exported successfully');
+            return (new IncidentExport($incidentQuery))->download($name);
+        }
 
         if ($action == 'delete') {
             session()->flash('success', 'Attendances deleted successfully');

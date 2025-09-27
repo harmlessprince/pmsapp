@@ -261,6 +261,7 @@
                         <th class="text-left text-small text-natural font-big  px-smaller py-smaller w-[9%]">Hours
                             Worked
                         </th>
+                        <th class="text-left text-small text-natural font-big px-smaller py-smaller w-[9%]">Region</th>
                         <th class="text-left text-small text-natural font-big px-smaller py-smaller w-[9%]">Site</th>
                         
                         <th class="text-left text-small text-natural font-big px-smaller py-smaller w-[8%]">Image</th>
@@ -303,6 +304,7 @@
                                 <?php echo e($output); ?>
 
                             </td>
+                            <td class="text-normal font-normal px-smaller"><?php echo e($attendance->site->region->name ?? 'N/A'); ?></td>
                             <td class="text-normal font-normal px-smaller"><?php echo e($attendance->site->name); ?></td>
                             
                             <td class="text-normal font-normal px-smaller">

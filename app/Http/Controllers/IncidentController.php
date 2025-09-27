@@ -32,8 +32,13 @@ class IncidentController extends Controller
     public function index()
     {
         $user = auth()->user();
+        $action = request()->query('action');
 
         $incidents =  $this->incidentService->getAll(\request()->user(), request()->query('per_page', 15));
+        if ($action == 'export')
+        {
+            return $incidents;
+        }
         $sites =  [];
         $companies = [];
         if ($user->hasRole(RoleEnum::COMPANY_OWNER)) {

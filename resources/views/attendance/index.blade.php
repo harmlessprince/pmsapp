@@ -118,6 +118,7 @@
                         <th class="text-left text-small text-natural font-big  px-smaller py-smaller w-[9%]">Hours
                             Worked
                         </th>
+                        <th class="text-left text-small text-natural font-big px-smaller py-smaller w-[9%]">Region</th>
                         <th class="text-left text-small text-natural font-big px-smaller py-smaller w-[9%]">Site</th>
                         {{--                        <th class="text-left text-small text-natural font-big px-smaller py-smaller w-[9%]">Distance</th>--}}
                         <th class="text-left text-small text-natural font-big px-smaller py-smaller w-[8%]">Image</th>
@@ -159,6 +160,7 @@
                                 @endphp
                                 {{$output}}
                             </td>
+                            <td class="text-normal font-normal px-smaller">{{$attendance->site->region->name ?? 'N/A'}}</td>
                             <td class="text-normal font-normal px-smaller">{{$attendance->site->name}}</td>
                             {{--                            <td class="text-normal font-normal px-smaller">{{round($attendance->distance, 2)}} KM</td>--}}
                             <td class="text-normal font-normal px-smaller">

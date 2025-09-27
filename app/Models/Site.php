@@ -16,10 +16,11 @@ class Site extends Model
     use HasFactory, SearchableTrait;
 
     public array $searchable = ['name', 'inspector.email'];
-    protected  $guarded = [];
+    protected $guarded = [];
     protected $hidden = [
         'logout_pin'
     ];
+
     public function company(): BelongsTo
     {
         return $this->belongsTo(Company::class);
@@ -29,19 +30,27 @@ class Site extends Model
     {
         return $this->belongsTo(State::class);
     }
+
     public function tags()
     {
         return $this->hasMany(Tag::class);
     }
+
     public function createdBy(): BelongsTo
     {
         return $this->belongsTo(User::class, 'created_by');
+    }
+
+    public function region(): BelongsTo
+    {
+        return $this->belongsTo(Region::class);
     }
 
     public function inspector()
     {
         return $this->belongsTo(User::class, 'inspector_id');
     }
+
     protected function photo(): Attribute
     {
         return Attribute::make(
@@ -53,6 +62,7 @@ class Site extends Model
             },
         );
     }
+
     protected static function booted(): void
     {
         parent::boot();

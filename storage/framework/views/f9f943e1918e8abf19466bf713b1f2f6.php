@@ -246,6 +246,7 @@
                         <th class="text-left text-small text-natural font-big  px-smaller py-smaller w-[10%]">Scan Date/Time</th>
                         
                         <th class="text-left text-small text-natural font-big px-smaller py-smaller w-[10%]">Tag</th>
+                        <th class="text-left text-small text-natural font-big px-smaller py-smaller w-[10%]">Region</th>
                         <th class="text-left text-small text-natural font-big px-smaller py-smaller w-[10%]">Site</th>
                         <th class="text-left text-small text-natural font-big px-smaller py-smaller w-[10%]">Longitude</th>
                         <th class="text-left text-small text-natural font-big px-smaller py-smaller w-[10%]">Latitude</th>
@@ -267,6 +268,7 @@
                             
                             
                             <td class="text-normal font-normal px-smaller"><?php echo e($scan->tag->name); ?></td>
+                            <td class="text-normal font-normal px-smaller"><?php echo e($scan->site->region->name ?? 'N/A'); ?></td>
                             <td class="text-normal font-normal px-smaller"><?php echo e($scan->site->name); ?></td>
                             <td class="text-normal font-normal p-smaller"><?php echo e($scan->longitude ?? '-'); ?></td>
                             <td class="text-normal font-normal px-smaller"><?php echo e($scan->latitude ?? '-'); ?></td>

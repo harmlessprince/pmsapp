@@ -43,12 +43,12 @@ class AttendanceController extends Controller
         if ($request->query('action') == 'export') {
             $name = 'attendance_report_' . Carbon::now()->format('d-m-Y') . '.xlsx';
             session()->flash('success', 'Attendance exported successfully');
-            return (new AttendanceExport($this->attendanceRepository))->download($name)->withCookie(cookie('attendance_exported', '1', 0.3));
+            return (new AttendanceExport($this->attendanceRepository))->download($name);
         }
         $sites = $this->siteRepository->all();
         $attendanceQuery = $this->attendanceRepository->modelQuery()->search();
         $attendanceQuery = constructPipes($attendanceQuery, $pipes);
-        $attendances = $attendanceQuery->latest('attendance_date_time')->with(['company', 'site', 'user'])->paginate(request('per_page', 15));
+        $attendances = $attendanceQuery->latest('attendance_date_time')->with(['company', 'site', 'user', 'site.region'])->paginate(request('per_page', 15));
         return view('attendance.index', compact('attendances', 'sites'));
     }
 
