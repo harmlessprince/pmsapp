@@ -380,6 +380,7 @@
                         <th class="text-left text-small text-natural font-big  px-smaller py-smaller w-[12%]">
                             Type
                         </th>
+                        <th class="text-left text-small text-natural font-big px-smaller py-smaller w-[9%]">Region</th>
                         <th class="text-left text-small text-natural font-big px-smaller py-smaller w-[9%]">Site</th>
                         
                         <th class="text-left text-small text-natural font-big px-smaller py-smaller w-[8%]">Image</th>
@@ -413,6 +414,7 @@
                                     </button>
                                 <?php endif; ?>
                             </td>
+                            <td class="text-normal font-normal px-smaller"><?php echo e($item->site->region->name ?? ''); ?></td>
                             <td class="text-normal font-normal px-smaller"><?php echo e($item->site->name ?? ''); ?></td>
 
                             <td class="text-normal font-normal px-small">
