@@ -30,6 +30,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::prefix('auth')->group(function () {
     Route::post('login', [AuthenticationController::class, 'login']);
     Route::post('logout', [AuthenticationController::class, 'logout'])->middleware('auth:sanctum');
+    Route::delete('account', [AuthenticationController::class, 'deleteAccount'])->middleware('auth:sanctum');
 });
 
 Route::middleware('auth:sanctum')->group(function () {

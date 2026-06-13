@@ -46,6 +46,10 @@ Route::get('/faq', function () {
     return view('faq', compact('faqs'));
 })->name('faq');
 
+Route::view('/privacy-policy', 'legal.privacy')->name('privacy-policy');
+Route::view('/terms-and-conditions', 'legal.terms')->name('terms-and-conditions');
+Route::redirect('/account-deletion', '/privacy-policy#account-deletion')->name('account-deletion');
+
 Route::post('/contact/us', function () {
     try {
         $score = RecaptchaV3::verify(request()->get('g-recaptcha-response'), 'register');
