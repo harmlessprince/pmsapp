@@ -72,6 +72,16 @@ class AuthenticationController extends Controller
         return sendSuccess(null, 'Successfully logged out');
     }
 
+    public function deleteAccount(Request $request): JsonResponse
+    {
+        $user = $request->user();
+
+        $user->tokens()->delete();
+        $user->delete();
+
+        return sendSuccess(null, 'Account deleted successfully');
+    }
+
     public function user(Request $request): JsonResponse
     {
         $user = $request->user()->load('company', 'site');
