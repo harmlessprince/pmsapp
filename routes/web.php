@@ -7,6 +7,7 @@ use App\Http\Controllers\Company\TagController;
 use App\Http\Controllers\Company\UserController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\AttendanceController;
+use App\Http\Controllers\DeleteAccountRequestController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ScanAnalyticsController;
 use App\Http\Controllers\ScanController;
@@ -48,7 +49,8 @@ Route::get('/faq', function () {
 
 Route::view('/privacy-policy', 'legal.privacy')->name('privacy-policy');
 Route::view('/terms-and-conditions', 'legal.terms')->name('terms-and-conditions');
-Route::redirect('/account-deletion', '/privacy-policy#account-deletion')->name('account-deletion');
+Route::get('/account-deletion', [DeleteAccountRequestController::class, 'create'])->name('account-deletion');
+Route::post('/account-deletion', [DeleteAccountRequestController::class, 'store'])->name('account-deletion.store');
 
 Route::post('/contact/us', function () {
     try {
